@@ -14,9 +14,9 @@
     
     <item>
       <title>Example Page 1</title>
-      <link>/courses/example/example1/</link>
+      <link>/courses/stat1010/example1/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>/courses/example/example1/</guid>
+      <guid>/courses/stat1010/example1/</guid>
       <description>&lt;p&gt;In this tutorial, I&#39;ll share my top 10 tips for getting started with Academic:&lt;/p&gt;
 &lt;h2 id=&#34;tip-1&#34;&gt;Tip 1&lt;/h2&gt;
 &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
@@ -34,10 +34,141 @@
     </item>
     
     <item>
-      <title>Example Page 2</title>
-      <link>/courses/example/example2/</link>
+      <title>Lab 1 - Loading data from SAS</title>
+      <link>/courses/stat2010/week1/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>/courses/example/example2/</guid>
+      <guid>/courses/stat2010/week1/</guid>
+      <description>&lt;h2 id=&#34;a-collection-of-datasets-for-this-course&#34;&gt;A collection of datasets for this course&lt;/h2&gt;
+&lt;p&gt;Bring up a web browser, and Enter the following address in the location box.
+&lt;a href=&#34;http://homepage.stat.uiowa.edu/~kcowles/Datasets/&#34;&gt;http://homepage.stat.uiowa.edu/~kcowles/Datasets/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Three types of files may be accessed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Files ending in .dat are data files for your use with the software package SAS.&lt;/li&gt;
+&lt;li&gt;Files ending in .info contain descriptive information about datasets.&lt;/li&gt;
+&lt;li&gt;Files ending in .txt are datasets for use in a different class with a different software package.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note that this list is case-sensitive, with all files with names beginning with capital letters appearing before all other files.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;If you are going to work with SAS on the Virtual Desktop, it is easiest to copy and paste the data from the web page directly into the SAS program. Simply left click the file name.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(optional) If you are running SAS on the computer at which you are sitting, it is preferable to download the dataset into a file and tell SAS where to find the file. To download a data file:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Right click the file name (use the right, not left, mouse button)&lt;/li&gt;
+&lt;li&gt;In the dialog box that opens, left click “Save target as” (use the left mouse button)&lt;/li&gt;
+&lt;li&gt;In the “save as” dialog box choose My ComputerLocal Disk, click “Save.”&lt;/li&gt;
+&lt;li&gt;(If you preferred to save the file on your own disk in, say, drive A: so that you could use it on a different computer later, you would move to drive A: in the dialog box before saving.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Left click the “billion.info” file to read a description of the “billion” dataset.&lt;/p&gt;
+&lt;h2 id=&#34;accessing-sas&#34;&gt;Accessing SAS&lt;/h2&gt;
+&lt;p&gt;If available, click on Start/All Programs/SAS/SAS 9-4. Alternatively, you can access SAS from on or off campus by using the ITC Virtual Desktop.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://virtualdesktop.uiowa.edu&#34;&gt;http://virtualdesktop.uiowa.edu&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Log in with your Hawkid and password. Single click SAS 9-4 and wait patiently. SAS will come up on your screen. (If you are using virtual desktop on your computer for the first time, you might encounter a screen that asks you to download and install the latest version of Citrix. Then you might also be asked to setup an account using your uiowa hawkmail, before you can launch SAS.)&lt;/p&gt;
+&lt;p&gt;You will get a screen that shows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a menu bar&lt;/li&gt;
+&lt;li&gt;a log window&lt;/li&gt;
+&lt;li&gt;a program editor window&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;entering-commands-and-programs&#34;&gt;Entering commands and programs&lt;/h2&gt;
+&lt;p&gt;Click in the program editor window. You may now type commands and programs in this window.&lt;/p&gt;
+&lt;h2 id=&#34;how-sas-programs-and-commands-are-organized&#34;&gt;How SAS programs and commands are organized&lt;/h2&gt;
+&lt;p&gt;Use a &lt;code&gt;DATA step&lt;/code&gt; to organize your data by creating a SAS dataset. Then use PROC steps or automated features to analyze your data. Once you have created a SAS dataset, you may apply any SAS procedures or automated features to it during the SAS session without recreating the dataset.&lt;/p&gt;
+&lt;p&gt;DATA and PROC steps consist of SAS statements. Each statement must end with a semi-colon. Most statements include one or more keywords that must be spelled exactly as shown.&lt;/p&gt;
+&lt;h2 id=&#34;the-data-step-creating-a-sas-dataset&#34;&gt;The DATA step: Creating a SAS dataset&lt;/h2&gt;
+&lt;p&gt;Before it can process data, SAS must read in the data in the form of a table with&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a row for each observation&lt;/li&gt;
+&lt;li&gt;a column for each variable&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You must choose a name for the entire dataset and a name for each variable. SAS has the following rules for names:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SAS names must begin with a letter or an underscore. The remaining characters in a SAS name can be letters, numbers, or underscores. There must be no embedded blanks.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;SAS distinguishes between two types of variables: numeric variables, which contain only digits and decimal points and with which arithmetic operations may be done, and character variables (all other kinds of data).&lt;/p&gt;
+&lt;h2 id=&#34;controlling-output-format&#34;&gt;Controlling output format&lt;/h2&gt;
+&lt;p&gt;In SAS 9-4, the default output is in html format. This can be changed in the menu bar on top of the window, by clicking Tools/Options/Preference, under the Results menu,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;When the box “Create listing” is checked, text output will be produced that are easier to copy and paste.&lt;/li&gt;
+&lt;li&gt;When the box “HTML” is checked, better looking graphs and tables are produced.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can check one or both of the boxes, depending on your need.&lt;/p&gt;
+&lt;h2 id=&#34;optional-reading-data-from-an-existing-datafile&#34;&gt;(Optional) Reading data from an existing datafile&lt;/h2&gt;
+&lt;p&gt;We mention how to read data from an existing datafile in this section. You have saved the file “billion.dat” in the “temp” directory. Use an “infile” statement to tell SAS to use it.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data billion ;                 # gives dataset a name for SAS ;
+infile ’c:\temp\billion.dat’ ; # tells SAS where the data is ;
+input wlth age region $ ;      # names the variables in each row ;
+                               # $ after region identifies character variable ;
+run ;                          # end of data step ;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you do this in virtual desktop, you need to find the file you saved in the Explorer located on the left side of SAS window. For instance, you saved &lt;code&gt;“billion.dat”&lt;/code&gt; in the desktop of local C drive, you may click This &lt;code&gt;PC - Local Disc (C) - Users - ShengWang - Desktop&lt;/code&gt;. Then right click billion.dat to see its properties, where we could find the path. You will likely find a path that is similar to the following one and use it in you infile statement instead.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\\Client\C\$\Users\ShengWang\Desktop\billion.dat
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;copying-data-directly-into-the-data-step&#34;&gt;Copying data directly into the data step&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Note that this method is always applicable, but inconvenient if the dataset is very big.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;In this alternative method to get data into SAS, do not use an “infile” statement. Instead use the “datalines” statement, and copy and paste the data in immediately following it. Put a semicolon all by itself on the line after the last line of data.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data billion ;            # gives dataset a name for SAS ;
+input wlth age region $ ; # names the variables in each row ;
+                          # $ after region identifies character variable;
+datalines ;
+37 50 M
+24 88 U
+14 64 A
+.
+.
+1 59 E
+1 . E
+1 . O
+;
+run ;                     # end of data step;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Type the above data steps into the program editor window. To make SAS run these statements and create the dataset, use the mouse to highlight the block of statements and then click on the icon of the running man. SAS will use the log window to tell you what it has done. Be sure to check the log window for any error messages. If any errors are reported, click in the program editor window to make it active. Correct the errors in the code and then rerun the block of code.&lt;/p&gt;
+&lt;h2 id=&#34;printing-and-saving-files&#34;&gt;Printing and Saving Files&lt;/h2&gt;
+&lt;p&gt;Copying output from SAS windows into Microsoft Word (or other text editors) will enable you to edit the SAS output and incorporate it into your homework writeups. You can then print from Word. Recall from section 6 that for tables, text output may be easier to copy and paste.&lt;/p&gt;
+&lt;p&gt;To save a file&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;If you’re running SAS on the Virtual Desktop and want to save a program for future use, an option is to copy and paste your SAS code into a text document on the computer on which you’re working, and save the text document. Then at your next SAS session, you can bring up the text document and copy and paste the code into the SAS program editor window.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If SAS is physically installed on the computer, you can (1) clicking in the window whose contents you want to save (2) go to the file menu and choose “Save as”. SAS will automatically give the file extension “.sas” to SAS commands and programs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;when-you-have-finished&#34;&gt;When you have finished&amp;hellip;&lt;/h2&gt;
+&lt;p&gt;Make sure to exit from SAS using the File menu, and to log out of the computer using the
+icon on the desktop.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Example Page 2</title>
+      <link>/courses/stat1010/example2/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/stat1010/example2/</guid>
+      <description>&lt;p&gt;Here are some more tips for getting started with Academic:&lt;/p&gt;
+&lt;h2 id=&#34;tip-3&#34;&gt;Tip 3&lt;/h2&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+&lt;h2 id=&#34;tip-4&#34;&gt;Tip 4&lt;/h2&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Example Page 2</title>
+      <link>/courses/stat2010/week2/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/courses/stat2010/week2/</guid>
       <description>&lt;p&gt;Here are some more tips for getting started with Academic:&lt;/p&gt;
 &lt;h2 id=&#34;tip-3&#34;&gt;Tip 3&lt;/h2&gt;
 &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;

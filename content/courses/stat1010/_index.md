@@ -2,13 +2,12 @@
 date: "2018-09-09T00:00:00Z"
 draft: false
 lastmod: "2018-09-09T00:00:00Z"
-linktitle: An Example Course
+linktitle: STAT:1010 - Statistics and Society
 menu:
-  example:
+  stat1010:
     name: Overview
     weight: 1
-summary: Learn how to use Academic's docs layout for publishing online courses, software
-  documentation, and tutorials.
+summary: Statistical ideas and their relevance to public policy, business, humanities, and the social, health, and physical sciences; focus on critical approach to statistical evidence.
 title: Overview
 toc: true
 type: docs

@@ -1,8 +1,7 @@
 ---
 authors:
 - admin
-bio: My research interests include distributed robotics, mobile computing and programmable
-  matter.
+bio: I believe anyone can learn anything with proper education process.
 education:
   courses:
   - course: MS in Actuarial Science
@@ -10,8 +9,9 @@ education:
   - course: BS in Statistics & Industrial Engineering
     institution: Sungkyunkwan University, 2012
 interests:
-- Insurance telematics data
-- Machine learning application in Actuarial Science
+- Pay-How-You-Drive insurance telematics data
+- Replacing nested monte calro simulation in insurance product valuation process.
+- Making compression portfoilo of insurance products
 email: ""
 name: Issac Lee
 organizations:
@@ -36,7 +36,6 @@ user_groups:
 - Researchers
 - Visitors
 ---
-
 
 <img width="400" height="400" src="https://raw.githubusercontent.com/issactoast/EnBlog/master/static/img/mycommute_route.gif" align="right">
 
