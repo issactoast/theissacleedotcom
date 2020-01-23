@@ -127,7 +127,16 @@ Type the above data steps into the program editor window. To make SAS run these 
 
 ## Printing and Saving Files
 
-Copying output from SAS windows into Microsoft Word (or other text editors) will enable you to edit the SAS output and incorporate it into your homework writeups. You can then print from Word. Recall from section 6 that for tables, text output may be easier to copy and paste.
+Copying output from SAS windows into Microsoft Word (or other text editors) will enable you to edit the SAS output and incorporate it into your homework writeups. You can then print from Word. In this case, text output may be easier to copy and paste.
+
+To print the output
+
+- Submit the following code into the SAS log by clicking the submit button. After you submit the code, the result will pop-up.
+
+```r
+proc print data=billion;
+run ;
+```
 
 To save a file
 
