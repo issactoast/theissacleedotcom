@@ -15,21 +15,35 @@ subtitle = ""
 # For available icons, see: https://sourcethemes.com/academic/docs/widgets/#icons
 
 [[feature]]
-  icon = "r-project"
-  icon_pack = "fab"
-  name = "R"
-  description = "90%"
-  
-[[feature]]
   icon = "chart-line"
   icon_pack = "fas"
-  name = "Statistics"
-  description = "100%"  
+  name = "Statistics & Act. Sci"
+  description = "Statistical Inference, Linear models, Bayesian statistics, Deep learning, Time series, Asymtotic statistics"
   
 [[feature]]
-  icon = "camera-retro"
+  icon = "file-code"
   icon_pack = "fas"
-  name = "Photography"
-  description = "10%"
+  name = "Programming"
+  description = "R, Python, SAS, VBA, TensorFlow, SQL"
+
+[[feature]]
+  icon = "file-signature"
+  icon_pack = "fas"
+  name = "Documentation"
+  description = "Latex, Markdown, Lyx"
+  
+[[feature]]
+  icon = "id-badge"
+  icon_pack = "fas"
+  name = "SOA"
+  description = "Exam P, FM, MFE, C, VEE"
+  
+
+
+[[feature]]
+  icon = "html5"
+  icon_pack = "fab"
+  name = "Web"
+  description = "HTML, R Shiny, Blogdown"
 
 +++
