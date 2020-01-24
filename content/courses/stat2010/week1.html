@@ -19,9 +19,9 @@ weight: 1
 <a href="http://homepage.stat.uiowa.edu/~kcowles/Datasets/" class="uri">http://homepage.stat.uiowa.edu/~kcowles/Datasets/</a></p>
 <p>Three types of files may be accessed:</p>
 <ul>
-<li>Files ending in .dat are data files for your use with the software package SAS.</li>
-<li>Files ending in .info contain descriptive information about datasets.</li>
-<li>Files ending in .txt are datasets for use in a different class with a different software package.</li>
+<li>Files ending in <code>.dat</code> are data files for your use with the software package SAS.</li>
+<li>Files ending in <code>.info</code> contain descriptive information about datasets.</li>
+<li>Files ending in <code>.txt</code> are datasets for use in a different class with a different software package.</li>
 </ul>
 <p>Note that this list is case-sensitive, with all files with names beginning with capital letters appearing before all other files.</p>
 <ul>
@@ -94,7 +94,7 @@ run ;                          * end of data step ;</code></pre>
 <h2>Copying data directly into the data step (This is what we do for this class)</h2>
 <p><strong>Note that this method is always applicable, but inconvenient if the dataset is very big.</strong></p>
 <p>In this alternative method to get data into SAS, do not use an “infile” statement. Instead use the <code>“datalines”</code> statement, and copy and paste the data in immediately following it. Put a semicolon all by itself on the line after the last line of data.</p>
-<pre class="sas"><code>data billion ;            * gives dataset a name for SAS ;
+<pre class="python"><code>data billion ;            * gives dataset a name for SAS ;
 input wlth age region $ ; * names the variables in each row ;
                           * $ after region identifies character variable;
 datalines ;

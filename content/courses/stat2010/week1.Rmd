@@ -18,9 +18,9 @@ http://homepage.stat.uiowa.edu/~kcowles/Datasets/
 
 Three types of files may be accessed:
 
-- Files ending in .dat are data files for your use with the software package SAS.
-- Files ending in .info contain descriptive information about datasets.
-- Files ending in .txt are datasets for use in a different class with a different software package.
+- Files ending in `.dat` are data files for your use with the software package SAS.
+- Files ending in `.info` contain descriptive information about datasets.
+- Files ending in `.txt` are datasets for use in a different class with a different software package.
 
 Note that this list is case-sensitive, with all files with names beginning with capital letters appearing before all other files.
 
@@ -105,7 +105,7 @@ If you do this in your desktop, you need to find the file you saved in the Explo
 
 In this alternative method to get data into SAS, do not use an “infile” statement. Instead use the `“datalines”` statement, and copy and paste the data in immediately following it. Put a semicolon all by itself on the line after the last line of data.
 
-```sas
+```python
 data billion ;            * gives dataset a name for SAS ;
 input wlth age region $ ; * names the variables in each row ;
                           * $ after region identifies character variable;
