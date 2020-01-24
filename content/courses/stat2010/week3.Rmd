@@ -7,7 +7,6 @@ menu:
     parent: Contents
     weight: 2
 title: Lab 3 - tests
-toc: true
 type: docs
 weight: 2
 ---
