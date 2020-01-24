@@ -7,7 +7,6 @@ menu:
     parent: Contents
     weight: 1
 title: Lab 1 - Loading data from SAS
-toc: true
 type: docs
 weight: 1
 ---
@@ -86,12 +85,12 @@ You can check one or both of the boxes, depending on your need.
 
 We mention how to read data from an existing datafile in this section. You have saved the file “billion.dat” in the “temp” directory. Use an “infile” statement to tell SAS to use it.
 
-```r
-data billion ;                 # gives dataset a name for SAS ;
-infile ’c:\temp\billion.dat’ ; # tells SAS where the data is ;
-input wlth age region $ ;      # names the variables in each row ;
-                               # $ after region identifies character variable ;
-run ;                          # end of data step ;
+```sas
+data billion ;                 * gives dataset a name for SAS ;
+infile ’c:\temp\billion.dat’ ; * tells SAS where the data is ;
+input wlth age region $ ;      * names the variables in each row ;
+                               * $ after region identifies character variable ;
+run ;                          * end of data step ;
 ```
 
 If you do this in your desktop, you need to find the file you saved in the Explorer located on the left side of SAS window. For instance, you saved `“billion.dat”` in the desktop of local C drive, you may click This `PC - Local Disc (C) - Users - IssacLee - Desktop`. Then right click billion.dat to see its properties, where we could find the path. You will likely find a path that is similar to the following one and use it in you infile statement instead.
@@ -106,7 +105,7 @@ If you do this in your desktop, you need to find the file you saved in the Explo
 
 In this alternative method to get data into SAS, do not use an “infile” statement. Instead use the `“datalines”` statement, and copy and paste the data in immediately following it. Put a semicolon all by itself on the line after the last line of data.
 
-```r
+```sas
 data billion ;            * gives dataset a name for SAS ;
 input wlth age region $ ; * names the variables in each row ;
                           * $ after region identifies character variable;
@@ -120,7 +119,7 @@ datalines ;
 1 . E
 1 . O
 ;
-run ;                     # end of data step;
+run ;                     * end of data step;
 ```
 
 Type the above data steps into the program editor window. To make SAS run these statements and create the dataset, use the mouse to highlight the block of statements and then click on the icon of the running man. SAS will use the log window to tell you what it has done. Be sure to check the log window for any error messages. If any errors are reported, click in the program editor window to make it active. Correct the errors in the code and then rerun the block of code.
@@ -133,7 +132,7 @@ To print the output
 
 - Submit the following code into the SAS log by clicking the submit button. After you submit the code, the result will pop-up.
 
-```r
+```sas
 proc print data=billion;
 run ;
 ```

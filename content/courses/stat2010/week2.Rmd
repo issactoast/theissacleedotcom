@@ -7,7 +7,6 @@ menu:
     parent: Contents
     weight: 2
 title: Lab 2 - Copying data directly into the data step
-toc: true
 type: docs
 weight: 2
 ---
@@ -18,7 +17,7 @@ may copy it directly into your data step.
 
 Here is the code for including the data in the data step.
 
-```r
+```sas
 data billion ;                     * gives dataset a name for SAS ;
 input wlth age region $ ;          * names the variables in each row ;
                                    * $ after region identifies character vbl;
@@ -42,23 +41,25 @@ Once the dataset is created, you may run SAS *procedures* to analyze it.
 
 To list the entire dataset:
 
-```r
+```sas
 proc print data = billion ;
 run ;
 ```
 
 To get a frequency distribution of the regions in which billionaires lived:
 
-```r
+```sas
 proc freq data = billion ;
-tables region ;               * tables is a keyword; region is the name of
-                              * the variable for which you want counts ;
+tables region ;
 run ;
 ```
 
+Note that `tables` is a keyword. `region` is the name of the variable for which you want counts.
+
+
 The output is:
 
-```r
+```sas
                               The FREQ Procedure
 
                                              Cumulative    Cumulative
@@ -84,7 +85,7 @@ following:
 - boxplots
 
 
-```r
+```sas
  proc univariate plot data = billion ;
  var wlth  ;
  run ;
@@ -92,7 +93,7 @@ following:
 
 The output is:
 
-```r
+```sas
 
                            The UNIVARIATE Procedure
                                 Variable:  wlth
@@ -153,7 +154,7 @@ The output is:
 
 ```
 
-```r
+```sas
                         Histogram                       #             Boxplot
       37+*                                              1                *
         .
@@ -181,26 +182,25 @@ The output is:
 
 ## Bar graphs and pie charts
 
-```r
-  goptions device = win ;
-      pattern v = solid color = gray ;
+```sas
+goptions device = win ;
+pattern v = solid color = gray ;
 
-  proc gchart  data = billion ;
-  vbar region ;
-  title 'Billionaires in 1992; Regions ' ;
-  run ;
+proc gchart data = billion ;
+vbar region ;
+title 'Billionaires in 1992; Regions ' ;
+run ;
 
-
-  proc gchart  data = billion ;
-  pie region ;
-  title 'Billionaires in 1992; Regions ' ;
-  run ;
+proc gchart data = billion ;
+pie region ;
+title 'Billionaires in 1992; Regions ' ;
+run ;
 ```
 
 ## Histograms for quantitative variables
 
-```r
-proc gchart  data = billion ;
+```sas
+proc gchart data = billion ;
 vbar wlth / space = 0 ;
 title 'Billionaires in 1992; Wealth in Billions ' ;
 run ;
@@ -214,7 +214,7 @@ block of text in the SAS output window in order to copy it, do not highlight all
 
 To save a file, click in the window whose contents you want to save. Go to the file menu and choose `Save as`. Navigate to where you wish to save the file.  Your H: drive is a good choice, since SAS can see it from the Virtual Desktop. SAS will automatically give the file extension  `.sas` to SAS commands and programs. For example, to name a SAS program `myprog`, you would type
 
-```r
+```sas
 myprog
 ```
 
