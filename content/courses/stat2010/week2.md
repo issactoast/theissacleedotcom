@@ -18,7 +18,7 @@ may copy it directly into your data step.
 
 Here is the code for including the data in the data step.
 
-```sas
+```r
 data billion ;                     * gives dataset a name for SAS ;
 input wlth age region $ ;          * names the variables in each row ;
                                    * $ after region identifies character vbl;
