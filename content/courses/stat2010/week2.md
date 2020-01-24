@@ -6,35 +6,216 @@ menu:
   stat2010:
     parent: Contents
     weight: 2
-title: Example Page 2
+title: Lab 2 - Copying data directly into the data step
 toc: true
 type: docs
 weight: 2
 ---
 
-Here are some more tips for getting started with Academic:
+We will work with the billionaire dataset again today.  You may
+either download it and read it in from the file on disk, or you
+may copy it directly into your data step.
 
-## Tip 3
+Here is the code for including the data in the data step.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.
+```r
+data billion ;                     * gives dataset a name for SAS ;
+input wlth age region $ ;          * names the variables in each row ;
+                                   * $ after region identifies character vbl;
+datalines ;
+37 50 M
+24 88 U
+14 64 A
+.
+.
+.
+1 59 E
+1 . E
+1 . O
+;
+run ;                              * end of data step;
+```
 
-Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.
+## Using SAS procedures to list and tabulate the dataset
 
-Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.
+Once the dataset is created, you may run SAS *procedures* to analyze it.
 
-Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.
+To list the entire dataset:
 
-Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.
+```r
+proc print data = billion ;
+run ;
+```
+
+To get a frequency distribution of the regions in which billionaires lived:
+
+```r
+proc freq data = billion ;
+tables region ;               * tables is a keyword; region is the name of
+                              * the variable for which you want counts ;
+run ;
+```
+
+The output is:
+
+```r
+                              The FREQ Procedure
+
+                                             Cumulative    Cumulative
+          region    Frequency     Percent     Frequency      Percent
+          -----------------------------------------------------------
+          A               38       16.31            38        16.31
+          E               80       34.33           118        50.64
+          M               22        9.44           140        60.09
+          O               29       12.45           169        72.53
+          U               64       27.47           233       100.00
+```
+
+## Proc univariate: SAS workhorse of descriptive statistics
+
+Use `proc univariate` for quantitative variables when you want the
+following:
+
+- means
+- medians
+- quartiles
+- 5-number summary
+- stem plots (for small datasets) or histograms (large datasets)
+- boxplots
 
 
-## Tip 4
+```r
+ proc univariate plot data = billion ;
+ var wlth  ;
+ run ;
+```
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.
+The output is:
 
-Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.
+```r
 
-Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.
+                           The UNIVARIATE Procedure
+                                Variable:  wlth
 
-Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.
+                                    Moments
 
-Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.
+        N                         233    Sum Weights                233
+        Mean               2.68154506    Sum Observations         624.8
+        Std Deviation      3.31884032    Variance            11.0147011
+        Skewness           6.57544276    Kurtosis            56.9655987
+        Uncorrected SS        4230.84    Corrected SS        2555.41064
+        Coeff Variation    123.765972    Std Error Mean      0.21742446
+
+                          Basic Statistical Measures
+
+                Location                    Variability
+
+            Mean     2.681545     Std Deviation            3.31884
+            Median   1.800000     Variance                11.01470
+            Mode     1.000000     Range                   36.00000
+                                  Interquartile Range      1.70000
+
+                          Tests for Location: Mu0=0
+
+               Test           -Statistic-    -----p Value------
+
+               Student's t    t  12.33323    Pr > |t|    <.0001
+               Sign           M     116.5    Pr >= |M|   <.0001
+               Signed Rank    S   13630.5    Pr >= |S|   <.0001
+
+                           Quantiles (Definition 5)
+
+                            Quantile      Estimate
+
+                            100% Max          37.0
+                            99%               14.0
+                            95%                6.2
+                            90%                4.5
+                            75% Q3             3.0
+                            50% Median         1.8
+                            25% Q1             1.3
+                            10%                1.1
+                            5%                 1.0
+                            1%                 1.0
+                            0% Min             1.0
+
+                             Extreme Observations
+
+                     ----Lowest----        ----Highest---
+
+                     Value      Obs        Value      Obs
+
+                         1      233           13        4
+                         1      232           13        5
+                         1      231           14        3
+                         1      230           24        2
+                         1      229           37        1
+
+```
+
+```r
+                        Histogram                       #             Boxplot
+      37+*                                              1                *
+        .
+        .
+        .
+        .
+        .
+        .*                                              1                *
+        .
+        .
+      19+
+        .
+        .*                                              1                *
+        .*                                              2                *
+        .*                                              2                *
+        .*                                              2                0
+        .*                                              3                0
+        .********                                      23                0
+        .************************                      72             +--+--+
+       1+******************************************   126             *-----*
+         ----+----+----+----+----+----+----+----+--
+         * may represent up to 3 counts
+                      -2        -1         0        +1        +2
+```
+
+## Bar graphs and pie charts
+
+```r
+  goptions device = win ;
+      pattern v = solid color = gray ;
+
+  proc gchart  data = billion ;
+  vbar region ;
+  title 'Billionaires in 1992; Regions ' ;
+  run ;
+
+
+  proc gchart  data = billion ;
+  pie region ;
+  title 'Billionaires in 1992; Regions ' ;
+  run ;
+```
+
+## Histograms for quantitative variables
+
+```r
+proc gchart  data = billion ;
+vbar wlth / space = 0 ;
+title 'Billionaires in 1992; Wealth in Billions ' ;
+run ;
+```
+
+
+## Printing and Saving Files
+
+Copying output from SAS windows into Microsoft  Word will enable you to edit the SAS output and incorporate it into your homework writeups. You can then print from Word. When you highlight a
+block of text in the SAS output window in order to copy it, do not highlight all the way to the right margin of the last line.  Due to a bug in SAS, that prevents the copy from working.
+
+To save a file, click in the window whose contents you want to save. Go to the file menu and choose `Save as`. Navigate to where you wish to save the file.  Your H: drive is a good choice, since SAS can see it from the Virtual Desktop. SAS will automatically give the file extension  `.sas` to SAS commands and programs. For example, to name a SAS program `myprog`, you would type
+
+```r
+myprog
+```
+
+in the box for the name of the file.
