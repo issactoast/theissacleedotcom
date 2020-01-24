@@ -27,11 +27,11 @@ weight: 1
 
 If you want to take different labs, please email me **in advance**.
 
-- Labs
+- Labs (Place: **41 SH**)
 
-  - Section A11: 10:30AM - 11:20AM Friday, 3  SH
-  - Section A12: 11:30AM - 12:20AM Friday, 60 SH
-  - Section A13: 12:30PM - 01:20PM Friday, 3  SH
+  - Section A11: 10:30AM - 11:20AM Friday, 
+  - Section A12: 11:30AM - 12:20AM Friday, 
+  - Section A13: 12:30PM - 01:20PM Friday, 
 
 - Textbook
 
