@@ -45,7 +45,7 @@ run ;                              * end of data step;
 
 You can also embed plots, for example:
 
-```{sas pressure, echo=FALSE}
+```{sas pressure, eval=FALSE}
 proc print data = billion ;
 run ;
 ```
