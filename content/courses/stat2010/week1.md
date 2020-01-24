@@ -56,9 +56,9 @@ Click in the program editor window. You may now type commands and programs in th
 
 ## How SAS programs and commands are organized
 
-Use a `DATA step` to organize your data by creating a SAS dataset. Then use PROC steps or automated features to analyze your data. Once you have created a SAS dataset, you may apply any SAS procedures or automated features to it during the SAS session without recreating the dataset.
+Use a `DATA` step to organize your data by creating a SAS dataset. Then use `PROC` steps or automated features to analyze your data. Once you have created a SAS dataset, you may apply any SAS procedures or automated features to it during the SAS session without recreating the dataset.
 
-DATA and PROC steps consist of SAS statements. Each statement must end with a semi-colon. Most statements include one or more keywords that must be spelled exactly as shown.
+DATA and PROC steps consist of SAS statements. **Each statement must end with a semi-colon**. Most statements include one or more keywords that must be spelled exactly as shown.
 
 ## The DATA step: Creating a SAS dataset
 
@@ -69,9 +69,9 @@ Before it can process data, SAS must read in the data in the form of a table wit
 
 You must choose a name for the entire dataset and a name for each variable. SAS has the following rules for names:
 
-- SAS names must begin with a letter or an underscore. The remaining characters in a SAS name can be letters, numbers, or underscores. There must be no embedded blanks.
+- SAS **names must begin with a letter or an underscore**. The remaining characters in a SAS name can be letters, numbers, or underscores. There must be no embedded blanks.
 
-SAS distinguishes between two types of variables: numeric variables, which contain only digits and decimal points and with which arithmetic operations may be done, and character variables (all other kinds of data).
+SAS distinguishes between two types of variables: `numeric` variables, which contain only digits and decimal points and with which arithmetic operations may be done, and `character` variables (all other kinds of data).
 
 ## Controlling output format
 
@@ -94,22 +94,22 @@ input wlth age region $ ;      # names the variables in each row ;
 run ;                          # end of data step ;
 ```
 
-If you do this in virtual desktop, you need to find the file you saved in the Explorer located on the left side of SAS window. For instance, you saved `“billion.dat”` in the desktop of local C drive, you may click This `PC - Local Disc (C) - Users - ShengWang - Desktop`. Then right click billion.dat to see its properties, where we could find the path. You will likely find a path that is similar to the following one and use it in you infile statement instead.
+If you do this in your desktop, you need to find the file you saved in the Explorer located on the left side of SAS window. For instance, you saved `“billion.dat”` in the desktop of local C drive, you may click This `PC - Local Disc (C) - Users - IssacLee - Desktop`. Then right click billion.dat to see its properties, where we could find the path. You will likely find a path that is similar to the following one and use it in you infile statement instead.
 
 ```bash
-\\Client\C\$\Users\ShengWang\Desktop\billion.dat
+\\Client\C\$\Users\Issaclee\Desktop\billion.dat
 ```
 
-## Copying data directly into the data step
+## Copying data directly into the data step (This is what we do for this class)
 
 **Note that this method is always applicable, but inconvenient if the dataset is very big.**
 
-In this alternative method to get data into SAS, do not use an “infile” statement. Instead use the “datalines” statement, and copy and paste the data in immediately following it. Put a semicolon all by itself on the line after the last line of data.
+In this alternative method to get data into SAS, do not use an “infile” statement. Instead use the `“datalines”` statement, and copy and paste the data in immediately following it. Put a semicolon all by itself on the line after the last line of data.
 
 ```r
-data billion ;            # gives dataset a name for SAS ;
-input wlth age region $ ; # names the variables in each row ;
-                          # $ after region identifies character variable;
+data billion ;            * gives dataset a name for SAS ;
+input wlth age region $ ; * names the variables in each row ;
+                          * $ after region identifies character variable;
 datalines ;
 37 50 M
 24 88 U
@@ -127,7 +127,16 @@ Type the above data steps into the program editor window. To make SAS run these 
 
 ## Printing and Saving Files
 
-Copying output from SAS windows into Microsoft Word (or other text editors) will enable you to edit the SAS output and incorporate it into your homework writeups. You can then print from Word. Recall from section 6 that for tables, text output may be easier to copy and paste.
+Copying output from SAS windows into Microsoft Word (or other text editors) will enable you to edit the SAS output and incorporate it into your homework writeups. You can then print from Word. In this case, text output may be easier to copy and paste.
+
+To print the output
+
+- Submit the following code into the SAS log by clicking the submit button. After you submit the code, the result will pop-up.
+
+```r
+proc print data=billion;
+run ;
+```
 
 To save a file
 
