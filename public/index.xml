@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Issac Lee</title>
-    <link>/</link>
-      <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://theissaclee.com/</link>
+      <atom:link href="https://theissaclee.com/index.xml" rel="self" type="application/rss+xml" />
     <description>Issac Lee</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>Issac Lee © 2020</copyright><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/portrait.jpg</url>
+      <url>https://theissaclee.com/img/portrait.jpg</url>
       <title>Issac Lee</title>
-      <link>/</link>
+      <link>https://theissaclee.com/</link>
     </image>
     
     <item>
       <title>Example Page 1</title>
-      <link>/courses/stat1010/example1/</link>
+      <link>https://theissaclee.com/courses/stat1010/example1/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>/courses/stat1010/example1/</guid>
+      <guid>https://theissaclee.com/courses/stat1010/example1/</guid>
       <description>&lt;p&gt;In this tutorial, I&#39;ll share my top 10 tips for getting started with Academic:&lt;/p&gt;
 &lt;h2 id=&#34;tip-1&#34;&gt;Tip 1&lt;/h2&gt;
 &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
@@ -35,9 +35,9 @@
     
     <item>
       <title>Lab 1 - Loading data from SAS</title>
-      <link>/courses/stat2010/week1/</link>
+      <link>https://theissaclee.com/courses/stat2010/week1/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>/courses/stat2010/week1/</guid>
+      <guid>https://theissaclee.com/courses/stat2010/week1/</guid>
       <description>&lt;h2 id=&#34;a-collection-of-datasets-for-this-course&#34;&gt;A collection of datasets for this course&lt;/h2&gt;
 &lt;p&gt;Bring up a web browser, and Enter the following address in the location box.
 &lt;a href=&#34;http://homepage.stat.uiowa.edu/~kcowles/Datasets/&#34;&gt;http://homepage.stat.uiowa.edu/~kcowles/Datasets/&lt;/a&gt;&lt;/p&gt;
@@ -76,8 +76,8 @@
 &lt;h2 id=&#34;entering-commands-and-programs&#34;&gt;Entering commands and programs&lt;/h2&gt;
 &lt;p&gt;Click in the program editor window. You may now type commands and programs in this window.&lt;/p&gt;
 &lt;h2 id=&#34;how-sas-programs-and-commands-are-organized&#34;&gt;How SAS programs and commands are organized&lt;/h2&gt;
-&lt;p&gt;Use a &lt;code&gt;DATA step&lt;/code&gt; to organize your data by creating a SAS dataset. Then use PROC steps or automated features to analyze your data. Once you have created a SAS dataset, you may apply any SAS procedures or automated features to it during the SAS session without recreating the dataset.&lt;/p&gt;
-&lt;p&gt;DATA and PROC steps consist of SAS statements. Each statement must end with a semi-colon. Most statements include one or more keywords that must be spelled exactly as shown.&lt;/p&gt;
+&lt;p&gt;Use a &lt;code&gt;DATA&lt;/code&gt; step to organize your data by creating a SAS dataset. Then use &lt;code&gt;PROC&lt;/code&gt; steps or automated features to analyze your data. Once you have created a SAS dataset, you may apply any SAS procedures or automated features to it during the SAS session without recreating the dataset.&lt;/p&gt;
+&lt;p&gt;DATA and PROC steps consist of SAS statements. &lt;strong&gt;Each statement must end with a semi-colon&lt;/strong&gt;. Most statements include one or more keywords that must be spelled exactly as shown.&lt;/p&gt;
 &lt;h2 id=&#34;the-data-step-creating-a-sas-dataset&#34;&gt;The DATA step: Creating a SAS dataset&lt;/h2&gt;
 &lt;p&gt;Before it can process data, SAS must read in the data in the form of a table with&lt;/p&gt;
 &lt;ul&gt;
@@ -86,9 +86,9 @@
 &lt;/ul&gt;
 &lt;p&gt;You must choose a name for the entire dataset and a name for each variable. SAS has the following rules for names:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;SAS names must begin with a letter or an underscore. The remaining characters in a SAS name can be letters, numbers, or underscores. There must be no embedded blanks.&lt;/li&gt;
+&lt;li&gt;SAS &lt;strong&gt;names must begin with a letter or an underscore&lt;/strong&gt;. The remaining characters in a SAS name can be letters, numbers, or underscores. There must be no embedded blanks.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;SAS distinguishes between two types of variables: numeric variables, which contain only digits and decimal points and with which arithmetic operations may be done, and character variables (all other kinds of data).&lt;/p&gt;
+&lt;p&gt;SAS distinguishes between two types of variables: &lt;code&gt;numeric&lt;/code&gt; variables, which contain only digits and decimal points and with which arithmetic operations may be done, and &lt;code&gt;character&lt;/code&gt; variables (all other kinds of data).&lt;/p&gt;
 &lt;h2 id=&#34;controlling-output-format&#34;&gt;Controlling output format&lt;/h2&gt;
 &lt;p&gt;In SAS 9-4, the default output is in html format. This can be changed in the menu bar on top of the window, by clicking Tools/Options/Preference, under the Results menu,&lt;/p&gt;
 &lt;ul&gt;
@@ -104,15 +104,15 @@ input wlth age region $ ;      # names the variables in each row ;
                                # $ after region identifies character variable ;
 run ;                          # end of data step ;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you do this in virtual desktop, you need to find the file you saved in the Explorer located on the left side of SAS window. For instance, you saved &lt;code&gt;“billion.dat”&lt;/code&gt; in the desktop of local C drive, you may click This &lt;code&gt;PC - Local Disc (C) - Users - ShengWang - Desktop&lt;/code&gt;. Then right click billion.dat to see its properties, where we could find the path. You will likely find a path that is similar to the following one and use it in you infile statement instead.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\\Client\C\$\Users\ShengWang\Desktop\billion.dat
+&lt;p&gt;If you do this in your desktop, you need to find the file you saved in the Explorer located on the left side of SAS window. For instance, you saved &lt;code&gt;“billion.dat”&lt;/code&gt; in the desktop of local C drive, you may click This &lt;code&gt;PC - Local Disc (C) - Users - IssacLee - Desktop&lt;/code&gt;. Then right click billion.dat to see its properties, where we could find the path. You will likely find a path that is similar to the following one and use it in you infile statement instead.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;\\Client\C\$\Users\Issaclee\Desktop\billion.dat
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;copying-data-directly-into-the-data-step&#34;&gt;Copying data directly into the data step&lt;/h2&gt;
+&lt;h2 id=&#34;copying-data-directly-into-the-data-step-this-is-what-we-do-for-this-class&#34;&gt;Copying data directly into the data step (This is what we do for this class)&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Note that this method is always applicable, but inconvenient if the dataset is very big.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In this alternative method to get data into SAS, do not use an “infile” statement. Instead use the “datalines” statement, and copy and paste the data in immediately following it. Put a semicolon all by itself on the line after the last line of data.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data billion ;            # gives dataset a name for SAS ;
-input wlth age region $ ; # names the variables in each row ;
-                          # $ after region identifies character variable;
+&lt;p&gt;In this alternative method to get data into SAS, do not use an “infile” statement. Instead use the &lt;code&gt;“datalines”&lt;/code&gt; statement, and copy and paste the data in immediately following it. Put a semicolon all by itself on the line after the last line of data.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data billion ;            * gives dataset a name for SAS ;
+input wlth age region $ ; * names the variables in each row ;
+                          * $ after region identifies character variable;
 datalines ;
 37 50 M
 24 88 U
@@ -127,7 +127,14 @@ run ;                     # end of data step;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Type the above data steps into the program editor window. To make SAS run these statements and create the dataset, use the mouse to highlight the block of statements and then click on the icon of the running man. SAS will use the log window to tell you what it has done. Be sure to check the log window for any error messages. If any errors are reported, click in the program editor window to make it active. Correct the errors in the code and then rerun the block of code.&lt;/p&gt;
 &lt;h2 id=&#34;printing-and-saving-files&#34;&gt;Printing and Saving Files&lt;/h2&gt;
-&lt;p&gt;Copying output from SAS windows into Microsoft Word (or other text editors) will enable you to edit the SAS output and incorporate it into your homework writeups. You can then print from Word. Recall from section 6 that for tables, text output may be easier to copy and paste.&lt;/p&gt;
+&lt;p&gt;Copying output from SAS windows into Microsoft Word (or other text editors) will enable you to edit the SAS output and incorporate it into your homework writeups. You can then print from Word. In this case, text output may be easier to copy and paste.&lt;/p&gt;
+&lt;p&gt;To print the output&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Submit the following code into the SAS log by clicking the submit button. After you submit the code, the result will pop-up.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;proc print data=billion;
+run ;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To save a file&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -144,10 +151,43 @@ icon on the desktop.&lt;/p&gt;
     </item>
     
     <item>
+      <title>Lab 3 - tests</title>
+      <link>https://theissaclee.com/courses/stat2010/week3/</link>
+      <pubDate>Sun, 05 Jan 2020 00:00:00 +0100</pubDate>
+      <guid>https://theissaclee.com/courses/stat2010/week3/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+true
+&lt;/div&gt;
+
+&lt;div id=&#34;r-markdown&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;R Markdown&lt;/h2&gt;
+&lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;When you click the &lt;strong&gt;Knit&lt;/strong&gt; button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(cars)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;including-plots&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Including Plots&lt;/h2&gt;
+&lt;p&gt;You can also embed plots, for example:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://theissaclee.com/courses/stat2010/week3_files/figure-html/pressure-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Note that the &lt;code&gt;echo = FALSE&lt;/code&gt; parameter was added to the code chunk to prevent printing of the R code that generated the plot.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Example Page 2</title>
-      <link>/courses/stat1010/example2/</link>
+      <link>https://theissaclee.com/courses/stat1010/example2/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>/courses/stat1010/example2/</guid>
+      <guid>https://theissaclee.com/courses/stat1010/example2/</guid>
       <description>&lt;p&gt;Here are some more tips for getting started with Academic:&lt;/p&gt;
 &lt;h2 id=&#34;tip-3&#34;&gt;Tip 3&lt;/h2&gt;
 &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
@@ -165,31 +205,189 @@ icon on the desktop.&lt;/p&gt;
     </item>
     
     <item>
-      <title>Example Page 2</title>
-      <link>/courses/stat2010/week2/</link>
+      <title>Lab 2 - Copying data directly into the data step</title>
+      <link>https://theissaclee.com/courses/stat2010/week2/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>/courses/stat2010/week2/</guid>
-      <description>&lt;p&gt;Here are some more tips for getting started with Academic:&lt;/p&gt;
-&lt;h2 id=&#34;tip-3&#34;&gt;Tip 3&lt;/h2&gt;
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
-&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
-&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
-&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
-&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
-&lt;h2 id=&#34;tip-4&#34;&gt;Tip 4&lt;/h2&gt;
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
-&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
-&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
-&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
-&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+      <guid>https://theissaclee.com/courses/stat2010/week2/</guid>
+      <description>&lt;p&gt;We will work with the billionaire dataset again today.  You may
+either download it and read it in from the file on disk, or you
+may copy it directly into your data step.&lt;/p&gt;
+&lt;p&gt;Here is the code for including the data in the data step.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data billion ;                     * gives dataset a name for SAS ;
+input wlth age region $ ;          * names the variables in each row ;
+                                   * $ after region identifies character vbl;
+datalines ;
+37 50 M
+24 88 U
+14 64 A
+.
+.
+.
+1 59 E
+1 . E
+1 . O
+;
+run ;                              * end of data step;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;using-sas-procedures-to-list-and-tabulate-the-dataset&#34;&gt;Using SAS procedures to list and tabulate the dataset&lt;/h2&gt;
+&lt;p&gt;Once the dataset is created, you may run SAS &lt;em&gt;procedures&lt;/em&gt; to analyze it.&lt;/p&gt;
+&lt;p&gt;To list the entire dataset:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;proc print data = billion ;
+run ;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To get a frequency distribution of the regions in which billionaires lived:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;proc freq data = billion ;
+tables region ;               * tables is a keyword; region is the name of
+                              * the variable for which you want counts ;
+run ;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The output is:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;                              The FREQ Procedure
+
+                                             Cumulative    Cumulative
+          region    Frequency     Percent     Frequency      Percent
+          -----------------------------------------------------------
+          A               38       16.31            38        16.31
+          E               80       34.33           118        50.64
+          M               22        9.44           140        60.09
+          O               29       12.45           169        72.53
+          U               64       27.47           233       100.00
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;proc-univariate-sas-workhorse-of-descriptive-statistics&#34;&gt;Proc univariate: SAS workhorse of descriptive statistics&lt;/h2&gt;
+&lt;p&gt;Use &lt;code&gt;proc univariate&lt;/code&gt; for quantitative variables when you want the
+following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;means&lt;/li&gt;
+&lt;li&gt;medians&lt;/li&gt;
+&lt;li&gt;quartiles&lt;/li&gt;
+&lt;li&gt;5-number summary&lt;/li&gt;
+&lt;li&gt;stem plots (for small datasets) or histograms (large datasets)&lt;/li&gt;
+&lt;li&gt;boxplots&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt; proc univariate plot data = billion ;
+ var wlth  ;
+ run ;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The output is:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;
+                           The UNIVARIATE Procedure
+                                Variable:  wlth
+
+                                    Moments
+
+        N                         233    Sum Weights                233
+        Mean               2.68154506    Sum Observations         624.8
+        Std Deviation      3.31884032    Variance            11.0147011
+        Skewness           6.57544276    Kurtosis            56.9655987
+        Uncorrected SS        4230.84    Corrected SS        2555.41064
+        Coeff Variation    123.765972    Std Error Mean      0.21742446
+
+                          Basic Statistical Measures
+
+                Location                    Variability
+
+            Mean     2.681545     Std Deviation            3.31884
+            Median   1.800000     Variance                11.01470
+            Mode     1.000000     Range                   36.00000
+                                  Interquartile Range      1.70000
+
+                          Tests for Location: Mu0=0
+
+               Test           -Statistic-    -----p Value------
+
+               Student&#39;s t    t  12.33323    Pr &amp;gt; |t|    &amp;lt;.0001
+               Sign           M     116.5    Pr &amp;gt;= |M|   &amp;lt;.0001
+               Signed Rank    S   13630.5    Pr &amp;gt;= |S|   &amp;lt;.0001
+
+                           Quantiles (Definition 5)
+
+                            Quantile      Estimate
+
+                            100% Max          37.0
+                            99%               14.0
+                            95%                6.2
+                            90%                4.5
+                            75% Q3             3.0
+                            50% Median         1.8
+                            25% Q1             1.3
+                            10%                1.1
+                            5%                 1.0
+                            1%                 1.0
+                            0% Min             1.0
+
+                             Extreme Observations
+
+                     ----Lowest----        ----Highest---
+
+                     Value      Obs        Value      Obs
+
+                         1      233           13        4
+                         1      232           13        5
+                         1      231           14        3
+                         1      230           24        2
+                         1      229           37        1
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;                        Histogram                       #             Boxplot
+      37+*                                              1                *
+        .
+        .
+        .
+        .
+        .
+        .*                                              1                *
+        .
+        .
+      19+
+        .
+        .*                                              1                *
+        .*                                              2                *
+        .*                                              2                *
+        .*                                              2                0
+        .*                                              3                0
+        .********                                      23                0
+        .************************                      72             +--+--+
+       1+******************************************   126             *-----*
+         ----+----+----+----+----+----+----+----+--
+         * may represent up to 3 counts
+                      -2        -1         0        +1        +2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;bar-graphs-and-pie-charts&#34;&gt;Bar graphs and pie charts&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;  goptions device = win ;
+      pattern v = solid color = gray ;
+
+  proc gchart  data = billion ;
+  vbar region ;
+  title &#39;Billionaires in 1992; Regions &#39; ;
+  run ;
+
+
+  proc gchart  data = billion ;
+  pie region ;
+  title &#39;Billionaires in 1992; Regions &#39; ;
+  run ;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;histograms-for-quantitative-variables&#34;&gt;Histograms for quantitative variables&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;proc gchart  data = billion ;
+vbar wlth / space = 0 ;
+title &#39;Billionaires in 1992; Wealth in Billions &#39; ;
+run ;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;printing-and-saving-files&#34;&gt;Printing and Saving Files&lt;/h2&gt;
+&lt;p&gt;Copying output from SAS windows into Microsoft  Word will enable you to edit the SAS output and incorporate it into your homework writeups. You can then print from Word. When you highlight a
+block of text in the SAS output window in order to copy it, do not highlight all the way to the right margin of the last line.  Due to a bug in SAS, that prevents the copy from working.&lt;/p&gt;
+&lt;p&gt;To save a file, click in the window whose contents you want to save. Go to the file menu and choose &lt;code&gt;Save as&lt;/code&gt;. Navigate to where you wish to save the file.  Your H: drive is a good choice, since SAS can see it from the Virtual Desktop. SAS will automatically give the file extension  &lt;code&gt;.sas&lt;/code&gt; to SAS commands and programs. For example, to name a SAS program &lt;code&gt;myprog&lt;/code&gt;, you would type&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;myprog
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;in the box for the name of the file.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Example Talk</title>
-      <link>/talk/example/</link>
+      <link>https://theissaclee.com/talk/example/</link>
       <pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate>
-      <guid>/talk/example/</guid>
+      <guid>https://theissaclee.com/talk/example/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
@@ -211,9 +409,9 @@ icon on the desktop.&lt;/p&gt;
     
     <item>
       <title>Writing technical content in Academic</title>
-      <link>/post/writing-technical-content/</link>
+      <link>https://theissaclee.com/post/writing-technical-content/</link>
       <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>/post/writing-technical-content/</guid>
+      <guid>https://theissaclee.com/post/writing-technical-content/</guid>
       <description>&lt;p&gt;Academic is designed to give technical content creators a seamless experience. You can focus on the content and Academic handles the rest.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Highlight your code snippets, take notes on math classes, and draw diagrams from textual representation.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;On this page, you&#39;ll find some examples of the types of technical content that can be rendered with Academic.&lt;/p&gt;
@@ -430,9 +628,9 @@ A Markdown aside is useful for displaying notices, hints, or definitions to your
     
     <item>
       <title>An example preprint / working paper</title>
-      <link>/publication/preprint/</link>
+      <link>https://theissaclee.com/publication/preprint/</link>
       <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>/publication/preprint/</guid>
+      <guid>https://theissaclee.com/publication/preprint/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&#39;s Markdown slides feature.
@@ -446,9 +644,9 @@ A Markdown aside is useful for displaying notices, hints, or definitions to your
     
     <item>
       <title>Display Jupyter Notebooks with Academic</title>
-      <link>/post/jupyter/</link>
+      <link>https://theissaclee.com/post/jupyter/</link>
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>/post/jupyter/</guid>
+      <guid>https://theissaclee.com/post/jupyter/</guid>
       <description>&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from IPython.core.display import Image
 Image(&#39;https://www.python.org/static/community_logos/python-logo-master-v3-TM-flattened.png&#39;)
 &lt;/code&gt;&lt;/pre&gt;
@@ -500,9 +698,9 @@ date: 2019-09-01
     
     <item>
       <title>Slides</title>
-      <link>/slides/example/</link>
+      <link>https://theissaclee.com/slides/example/</link>
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>/slides/example/</guid>
+      <guid>https://theissaclee.com/slides/example/</guid>
       <description>&lt;h1 id=&#34;create-slides-in-markdown-with-academic&#34;&gt;Create slides in Markdown with Academic&lt;/h1&gt;
 &lt;p&gt;
 &lt;a href=&#34;https://sourcethemes.com/academic/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Academic&lt;/a&gt;
@@ -637,36 +835,18 @@ Three
     </item>
     
     <item>
-      <title>Privacy Policy</title>
-      <link>/privacy/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
-      <guid>/privacy/</guid>
-      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Terms</title>
-      <link>/terms/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
-      <guid>/terms/</guid>
-      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>External Project</title>
-      <link>/project/external-project/</link>
+      <link>https://theissaclee.com/project/external-project/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>/project/external-project/</guid>
+      <guid>https://theissaclee.com/project/external-project/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Internal Project</title>
-      <link>/project/internal-project/</link>
+      <link>https://theissaclee.com/project/internal-project/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>/project/internal-project/</guid>
+      <guid>https://theissaclee.com/project/internal-project/</guid>
       <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
 &lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
 &lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
@@ -677,9 +857,9 @@ Three
     
     <item>
       <title>Academic: the website builder for Hugo</title>
-      <link>/post/getting-started/</link>
+      <link>https://theissaclee.com/post/getting-started/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>/post/getting-started/</guid>
+      <guid>https://theissaclee.com/post/getting-started/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Create a free website with Academic using Markdown, Jupyter, or RStudio. Choose a beautiful color theme and build anything with the Page Builder - over 40 &lt;em&gt;widgets&lt;/em&gt;, &lt;em&gt;themes&lt;/em&gt;, and &lt;em&gt;language packs&lt;/em&gt; included!&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;
 &lt;a href=&#34;https://academic-demo.netlify.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Check out the latest &lt;strong&gt;demo&lt;/strong&gt;&lt;/a&gt;
@@ -857,9 +1037,9 @@ Three
     
     <item>
       <title>An example journal article</title>
-      <link>/publication/journal-article/</link>
+      <link>https://theissaclee.com/publication/journal-article/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
-      <guid>/publication/journal-article/</guid>
+      <guid>https://theissaclee.com/publication/journal-article/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
@@ -878,9 +1058,9 @@ Three
     
     <item>
       <title>Hello R Markdown</title>
-      <link>/post/2015-07-23-r-rmarkdown/</link>
+      <link>https://theissaclee.com/post/2015-07-23-r-rmarkdown/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      <guid>/post/2015-07-23-r-rmarkdown/</guid>
+      <guid>https://theissaclee.com/post/2015-07-23-r-rmarkdown/</guid>
       <description>
 
 
@@ -917,7 +1097,7 @@ pie(
   init.angle = -50, border = NA
 )&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:pie&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
+&lt;img src=&#34;https://theissaclee.com/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;
 Figure 1: A fancy pie chart.
 &lt;/p&gt;
@@ -928,9 +1108,9 @@ Figure 1: A fancy pie chart.
     
     <item>
       <title>An example conference paper</title>
-      <link>/publication/conference-paper/</link>
+      <link>https://theissaclee.com/publication/conference-paper/</link>
       <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
-      <guid>/publication/conference-paper/</guid>
+      <guid>https://theissaclee.com/publication/conference-paper/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
