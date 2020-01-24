@@ -1,7 +1,7 @@
 ---
 date: "2019-05-05T00:00:00+01:00"
 draft: false
-linktitle: Week 2
+linktitle: Week 2 - Descriptive statistics
 menu:
   stat2010:
     parent: Contents
@@ -18,7 +18,7 @@ may copy it directly into your data step.
 
 Here is the code for including the data in the data step.
 
-```r
+```sas
 data billion ;                     * gives dataset a name for SAS ;
 input wlth age region $ ;          * names the variables in each row ;
                                    * $ after region identifies character vbl;
