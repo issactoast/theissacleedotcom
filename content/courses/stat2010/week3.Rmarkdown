@@ -9,9 +9,8 @@ menu:
 title: Lab 3 - tests
 type: docs
 weight: 2
----
-
 {{% toc %}}
+---
 
 
 ```{r setup, include=FALSE}
