@@ -1,5 +1,6 @@
 +++
 title = "1 article"
+linktitle = Week 3 - test
 date = 2020-01-21
 toc = true  # Show table of contents? true/false
 type = "docs"  # Do not modify.
