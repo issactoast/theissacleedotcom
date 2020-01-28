@@ -1,15 +1,10 @@
 ---
-abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
-  ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed
-  ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis
-  sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida
-  egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id
-  dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.
-  Vestibulum sit amet erat at nulla eleifend gravida.
+abstract:
+  Accessibility to telematics data has changed auto insurance pricing. Actuarial research has focused solely on the use of GPS based telematics data. Such data suffer from limited accuracy, slow updates, which could not accurately reflect the driving styles of drivers. Our focus is on the use of complementary data from the inertial measurement unit (IMU) sensors in the smartphone that are relevant to vehicle kinematics. Interestingly, such data require careful modeling as road conditions and driver behavior can easily bias them. In this paper, we discuss the preparation of IMU data, including necessary bias-corrections, for telematics analysis. Combining information from the two independent sensors via Kalman filter, we suggests a longitudinal-lateral acceleration density object, which is richer and more reliable object for driver profiling.
 authors:
 - admin
 #- Robert Ford (you can add nother other like this)
-date: "2013-07-01T00:00:00Z"
+date: "2019-08-15T13:30:00"
 doi: ""
 featured: true
 image: 
@@ -17,29 +12,28 @@ image:
   focal_point: ""
   preview_only: false
 links:
-- name: Custom Link
-  url: http://example.org
+- name: Event Link
+  url: https://www.math.purdue.edu/calendar/conferences/arc19/index.html
 projects:
 - internal-project
-publication: In *Source Themes Conference*
-publication_short: In *STC*
+publication: In *Actuarial Research Conference*
+publication_short: In *ARC*
 publication_types:
 - "1"
-publishDate: "2017-01-01T00:00:00Z"
+publishDate: "2019-08-15T13:30:00"
 slides: example
-summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
-  ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
+summary: Combining information from the two independent sensors via Kalman filter, we suggests a longitudinal-lateral acceleration density object, which is richer and more reliable object for driver profiling.
 tags:
 - Source Themes
 title: I Know How You Drive
-url_code: '#'
-url_dataset: '#'
-url_pdf: http://eprints.soton.ac.uk/352095/1/Cushen-IMV2013.pdf
-url_poster: '#'
-url_project: ""
-url_slides: ""
-url_source: '#'
-url_video: '#'
+# url_code: '#'
+# url_dataset: '#'
+url_pdf: "https://www.researchgate.net/publication/334749450_I_KNOW_HOW_YOU_DRIVE_DRIVING_STYLE_PROFILE_VIA_SMARTPHONE"
+# url_poster: '#'
+# url_project: ""
+url_slides: "https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/ARC2019_Presentation_telematics.pdf"
+# url_source: '#'
+url_video: 'https://youtu.be/5A7w36tSGWY'
 ---
 
 {{% alert note %}}
