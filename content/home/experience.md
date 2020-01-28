@@ -24,7 +24,7 @@ date_format = "Jan 2006"
   location = "Denver, CO"
   date_start = "2020-06-01"
   date_end = "2020-08-14"
-  description = "TBD"
+  description = """
   Responsibilities include:
   
   * Data Modelling
@@ -38,6 +38,6 @@ date_format = "Jan 2006"
   location = "Iowa City, IA"
   date_start = "2018-08-24"
   date_end = ""
-  description = "Leading four discussion sections (50 min) per a week. Answer questions and reinforce materials used in lecture. Explain the statistical methods by solving examples in the text book. Each class consists of 25 students.
+  description = """Leading four discussion sections (50 min) per a week. Answer questions and reinforce materials used in lecture. Explain the statistical methods by solving examples in the text book. Each class consists of 25 students."""
 
 +++
