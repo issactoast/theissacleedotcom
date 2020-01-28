@@ -39,9 +39,9 @@ url_video: 'https://youtu.be/5A7w36tSGWY'
 ---
 
 {{% alert note %}}
-Click the *Cite* button above to demo the feature to enable visitors to import publication metadata into their reference management software.
+Click the *Slides* button above to download the slides pdf.
 {{% /alert %}}
 
 {{% alert note %}}
-Click the *Slides* button above to demo Academic's Markdown slides feature.
+Click the *Video* button above to watch my presentation in ARC.
 {{% /alert %}}
