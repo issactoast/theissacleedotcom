@@ -18,27 +18,26 @@ date_format = "Jan 2006"
 #   Leave `date_end` empty if it's your current employer.
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 [[experience]]
-  title = "CEO"
-  company = "GenCoin"
-  company_url = ""
-  location = "California"
-  date_start = "2017-01-01"
-  date_end = ""
-  description = """
+  title = "Data Intern"
+  company = "transamerica"
+  company_url = "https://www.transamerica.com/"
+  location = "Denver, CO"
+  date_start = "2020-06-01"
+  date_end = "2020-08-14"
+  description = "TBD"
   Responsibilities include:
   
-  * Analysing
-  * Modelling
-  * Deploying
+  * Data Modelling
+  * TBD
   """
 
 [[experience]]
-  title = "Professor"
-  company = "University X"
-  company_url = ""
-  location = "California"
-  date_start = "2016-01-01"
-  date_end = "2016-12-31"
-  description = """Taught electronic engineering and researched semiconductor physics."""
+  title = "Teaching Assistant"
+  company = "University of Iowa"
+  company_url = "https://stat.uiowa.edu/"
+  location = "Iowa City, IA"
+  date_start = "2018-08-24"
+  date_end = ""
+  description = "Leading four discussion sections (50 min) per a week. Answer questions and reinforce materials used in lecture. Explain the statistical methods by solving examples in the text book. Each class consists of 25 students.
 
 +++
