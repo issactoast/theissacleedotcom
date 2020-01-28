@@ -12,26 +12,28 @@ image:
   focal_point: ""
   preview_only: false
 links:
+- name: Slides
+  url: https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/ARC2019_Presentation_telematics.pdf
 - name: Event Link
   url: https://www.math.purdue.edu/calendar/conferences/arc19/index.html
-projects:
-- internal-project
+# projects:
+# - internal-project
 publication: In *Actuarial Research Conference*
 publication_short: In *ARC*
 publication_types:
 - "1"
 publishDate: "2019-08-15T13:30:00"
-slides: example
+# slides: example
 summary: Combining information from the two independent sensors via Kalman filter, we suggests a longitudinal-lateral acceleration density object, which is richer and more reliable object for driver profiling.
 tags:
-- Source Themes
+- telematics
 title: I Know How You Drive
 # url_code: '#'
 # url_dataset: '#'
 url_pdf: "https://www.researchgate.net/publication/334749450_I_KNOW_HOW_YOU_DRIVE_DRIVING_STYLE_PROFILE_VIA_SMARTPHONE"
 # url_poster: '#'
 # url_project: ""
-url_slides: "https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/ARC2019_Presentation_telematics.pdf"
+# url_slides: ''
 # url_source: '#'
 url_video: 'https://youtu.be/5A7w36tSGWY'
 ---
@@ -43,6 +45,3 @@ Click the *Cite* button above to demo the feature to enable visitors to import p
 {{% alert note %}}
 Click the *Slides* button above to demo Academic's Markdown slides feature.
 {{% /alert %}}
-
-Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
-
