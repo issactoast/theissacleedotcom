@@ -27,7 +27,7 @@ publishDate: "2019-08-15T13:30:00"
 summary: Combining information from the two independent sensors via Kalman filter, we suggests a longitudinal-lateral acceleration density object, which is richer and more reliable object for driver profiling.
 tags:
 - telematics
-title: I Know How You Drive
+title: I KNOW HOW YOU DRIVE! DRIVING STYLE PROFILE VIA SMARTPHONE
 # url_code: '#'
 # url_dataset: '#'
 url_pdf: "https://www.researchgate.net/publication/334749450_I_KNOW_HOW_YOU_DRIVE_DRIVING_STYLE_PROFILE_VIA_SMARTPHONE"
