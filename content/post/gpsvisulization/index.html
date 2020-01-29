@@ -5,7 +5,7 @@ date: "2019-11-01T00:00:00Z"
 draft: false
 featured: false
 image:
-  caption: 'Image credit: [UIowaStat](https://stat.uiowa.edu/)'
+  caption: 'Image credit: [theissaclee](https://theissaclee.com/)'
   focal_point: ""
   placement: 2
   preview_only: true
@@ -11541,10 +11541,10 @@ speed
              title = &quot;Trip speed&quot;) +
         theme_bw()
 p</code></pre>
-<p><img src="/post/gpsvisulization/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/post/gpsvisulization/index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Thus, since we do not need redundant information, let us select the data for every 25 data points.</p>
 <pre class="r"><code>gpsdata &lt;- gpsdata[seq(1, length(gpsdata$Timestamp), by = 25),]</code></pre>
-<p><img src="/post/gpsvisulization/index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/post/gpsvisulization/index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Thus, the final data set for the GPS visualization is as follows;</p>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
 <table class="table" style="margin-left: auto; margin-right: auto;">
@@ -12280,19 +12280,18 @@ register_google(key = api)</code></pre>
 <pre class="r"><code>center_vec &lt;- colMeans(gpsdata[,2:3])
 map_obj &lt;- get_googlemap(center = as.numeric(center_vec),
                        maptype = &quot;hybrid&quot;,
-                       zoom = 17)</code></pre>
-<pre><code>## Source : https://maps.googleapis.com/maps/api/staticmap?center=41.662919,-91.535966&amp;zoom=17&amp;size=640x640&amp;scale=2&amp;maptype=hybrid&amp;key=xxx</code></pre>
-<pre class="r"><code>ggmap(map_obj)</code></pre>
-<p><img src="/post/gpsvisulization/index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+                       zoom = 17)
+ggmap(map_obj)</code></pre>
+<p><img src="/post/gpsvisulization/index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Once you made a map object as in the above code, you can display the map using <code>ggmap</code> function. Now, let us put the GPS data on the map. We can think <code>ggmap(map_obj)</code> as a ggplot object so that we can add the layer on it.</p>
 <pre class="r"><code>p &lt;- ggmap(map_obj) + 
   geom_path(data = gpsdata,
             aes(x = x, y = y),
-            size = 0.5, color = &quot;blue&quot;) +
+            size = 0.7, color = &quot;yellow&quot;) +
   geom_point(data = gpsdata,
             aes(x, y), col = &quot;red&quot;, size = 3)
 p</code></pre>
-<p><img src="/post/gpsvisulization/index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="/post/gpsvisulization/index_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Let us remove the labels for x and y axes so that we can see a plain map.</p>
 <pre class="r"><code>p &lt;- p + 
   labs(title = &quot;Telematics data tracking&quot;, x = &quot;&quot;, y = &quot;&quot;) +
@@ -12303,13 +12302,14 @@ p</code></pre>
         axis.ticks.x=element_blank(),
         axis.ticks.y=element_blank())
 p</code></pre>
-<p><img src="/post/gpsvisulization/index_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="/post/gpsvisulization/index_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 </div>
 <div id="gganimate" class="section level2">
 <h2>gganimate</h2>
-<p>Now finally, we are ready to use <code>gganimate</code> to make a cool plot. <code>transition_reveal</code> function reveals the path and the data points as the timestamp variable increase. For the smooth movement of the dot, I use the <code>ease_aes</code> function.</p>
-<pre class="r"><code>p + transition_reveal(Timestamp) +
-    ease_aes(&#39;linear&#39;)</code></pre>
-<pre><code>## NULL</code></pre>
+<p>Now finally, we are ready to use <code>gganimate</code> to make a cool plot. <code>transition_reveal</code> function reveals the path and the data points as the timestamp variable increase. For the smooth movement of the dot, I use the <code>ease_aes</code> function. The R code will save the result as</p>
+<pre class="r"><code>p &lt;- p + transition_reveal(Timestamp) +
+    ease_aes(&#39;linear&#39;)
+p</code></pre>
+<p><img src="myanimation.gif" /></p>
 <p>Hope you enjoy the reading! I am always open to your feedback to improve my code.</p>
 </div>

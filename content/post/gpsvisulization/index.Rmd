@@ -5,7 +5,7 @@ date: "2019-11-01T00:00:00Z"
 draft: false
 featured: false
 image:
-  caption: 'Image credit: [UIowaStat](https://stat.uiowa.edu/)'
+  caption: 'Image credit: [theissaclee](https://theissaclee.com/)'
   focal_point: ""
   placement: 2
   preview_only: true
@@ -22,6 +22,10 @@ tags:
   - gganimate
   - ggmap
 ---
+
+```{r eval=FALSE, echo=FALSE}
+# sudo apt-get install libudunits2-dev libgdal-dev libgeos-dev libproj-dev 
+```
 
 
 As an employee, I am trying to construct my portfolio these days. By sharing my research materials, I hope that my article makes you either become interested in me or the driving telematics topic itself! =]
@@ -164,7 +168,7 @@ register_google(key = api)
 
 Let's decide the size of the background. Since the `get_googlemap` function in `ggmap` package only provide the zoom parameter, we need to calculate the center of the whole trip.
 
-```{r}
+```{r message=FALSE}
 center_vec <- colMeans(gpsdata[,2:3])
 map_obj <- get_googlemap(center = as.numeric(center_vec),
                        maptype = "hybrid",
@@ -178,7 +182,7 @@ Once you made a map object as in the above code, you can display the map using `
 p <- ggmap(map_obj) + 
   geom_path(data = gpsdata,
             aes(x = x, y = y),
-            size = 0.5, color = "blue") +
+            size = 0.7, color = "yellow") +
   geom_point(data = gpsdata,
             aes(x, y), col = "red", size = 3)
 p
@@ -201,12 +205,22 @@ p
 
 ## gganimate
 
-Now finally, we are ready to use `gganimate` to make a cool plot. `transition_reveal` function reveals the path and the data points as the timestamp variable increase. For the smooth movement of the dot, I use the `ease_aes` function.
+Now finally, we are ready to use `gganimate` to make a cool plot. `transition_reveal` function reveals the path and the data points as the timestamp variable increase. For the smooth movement of the dot, I use the `ease_aes` function. The R code will save the result as
 
-```{r warning=FALSE, message=FALSE}
-p + transition_reveal(Timestamp) +
+```{r eval=FALSE, warning=FALSE, message=FALSE}
+p <- p + transition_reveal(Timestamp) +
     ease_aes('linear')
+p
 ```
+
+```{r eval=FALSE, echo=FALSE, warning=FALSE, message=FALSE}
+p <- p + transition_reveal(Timestamp) +
+    ease_aes('linear')
+anim <- animate(p)
+magick::image_write(anim, path="myanimation.gif")
+```
+
+![](./myanimation.gif)
 
 Hope you enjoy the reading! I am always open to your feedback to improve my code.
 
