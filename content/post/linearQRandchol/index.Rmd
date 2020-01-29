@@ -15,7 +15,7 @@ subtitle: 'gmp package, Cholesky and QR decomposition'
 summary: Calculate the coefficients of the linear regression as a solution of the Normal equation.
 title: 'The Coefficients of Linear Regression in R'
 categories:
-  - R
+  - r programming
   - machine learning
   - linear model
 tags:

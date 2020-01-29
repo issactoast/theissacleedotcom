@@ -15,7 +15,7 @@ subtitle: 'gmp package, Cholesky and QR decomposition'
 summary: Calculate the coefficients of the linear regression as a solution of the Normal equation.
 title: 'The Coefficients of Linear Regression in R'
 categories:
-  - R
+  - r programming
   - machine learning
   - linear model
 tags:
@@ -618,11 +618,11 @@ microbenchmark(
 )
 ## Unit: microseconds
 ##                                   expr   min     lq    mean median     uq
-##              forwardsolve(t(upper), b) 6.256 6.5055 6.76906 6.6150 6.7915
-##  backsolve(upper, b, transpose = TRUE) 3.723 3.8750 4.37811 3.9345 4.0310
+##              forwardsolve(t(upper), b) 6.086 6.3120 6.56689 6.4350 6.5635
+##  backsolve(upper, b, transpose = TRUE) 3.604 3.7555 4.24505 3.8185 3.9075
 ##     max neval
-##  17.658   100
-##  42.808   100
+##  17.904   100
+##  41.510   100
 
 
 z1 &lt;- forwardsolve( t(upper), b )
