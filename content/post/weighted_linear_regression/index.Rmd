@@ -28,9 +28,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Again, Least Squares Estimation
 
-In this article, I want to explain weighted least square estimation. Before I jump into weighted least square estimation, let us remind of our famous star, the least square estimation method again.
+In this article, I want to explain the weighted least square estimation. Before I jump into weighted least square estimation, let us remind of our famous star, the least square estimation method again.
 
-Let us consider a situation that we want to figure out the true weight of a mango that I bought from grocery store. Well, I saw its weight is 540g from a wallmart, I am the person who always dout about everything. So I decide to measure its weigths seven times using my scale; and I got those measurements for the mango.
+Let us consider a situation that we want to figure out the true weight of a mango that I bought from the grocery store. Well, I saw its weight is 540g from the grocery store. I am a person who always doubts about everything. So I decided to measure its weights seven times using my scale, and I got those measurements for the mango.
 
 ```{r echo=FALSE}
 set.seed(1234)
@@ -38,19 +38,19 @@ y <- rnorm(7, 539, 2)
 y
 ```
 
-Dang, I knew it! This savvy industry always lies to the customer. Let me confirm that the true weight of the mango with least square estimation method. I denote the true weight of mango as $\beta$. Then, I can think these seven values are the measurements with random noise $w$.
+Dang, I knew it! This savvy industry always lies to the customer. Let me confirm that the true weight of the mango with least square estimation method. I denote the true weight of mango by $\beta$. Then, I can think these seven values are the measurements with a random noise of $w$.
 
 $$
 y_k = \beta + w_k,
 $$
-where $k=1, ..., 7$. For, a random noise, I assume that its mean is zero, and its standard deviation is 2. In other words, if I check my scale without put anything on it, it will shows the values around zero, but it will vary around zero (a poor student bought a poor scale). 
+where $k=1, ..., 7$. For a random noise, I assume that its mean is zero, and its standard deviation is 2. In other words, if I check my scale without putting anything on it, it will show the values around zero, but it will vary around zero (a poor student bought a poor scale). 
 
-The least sqaure estimation for $\beta$, $\hat{\beta}$, can be determined by considering the following the summation of the residuals which is the function of $\beta$;
+The least square estimation for $\beta$, $\hat{\beta}$, can be determined by considering the following the summation of the residuals which is the function of $\beta$;
 
 $$
 L(\beta) = \left(y-\underline{1}\beta\right)^{T}\left(y-\underline{1}\beta\right)
 $$
-where $\underline{1}$ represents a vector of lenght 7 whose elements are all 1. The least square estimation finds the value of $\beta$ by setting the derivative of function $L$ with respect to $\beta$ is equal to zero.
+where $\underline{1}$ represents a vector of length 7 whose elements are all 1. The least square estimation finds the value of $\beta$ by setting the derivative of function $L$ with respect to $\beta$ to be equal to zero.
 
 $$
 \begin{align*}
@@ -76,9 +76,9 @@ mean(y_1)
 
 ## Weighted Least Squares Estimation
 
-Now, what if I got another scale which I belive it is more stable accurate than my first scale? Let us assume, this new scale has standard devidation 1 for its measurements which is a half of my original scale.
+Now, what if I got another scale which I believe it is more stable accurate than my first scale? Let us assume; this new scale has standard deviation 1 for its measurements, which is half of my original scale.
 
-Note that when we estimate the weight of my mango using least square method, we don't care about the noise variance of my scale, since all of them affected by same noise. In other word, to me all of them had same level of trust. However, after I got the following seven other measurements from my new scale, I have to think about the values I have;
+Note that when we estimate the weight of my mango using the least square method, we don't care about the noise variance of my scale since all of them affected by the same noise. In other words, to me, all of them had the same level of trust. However, after I got the following seven other measurements from my new scale, I have to think about the values I have;
 
 ```{r echo=FALSE}
 set.seed(4321)
@@ -86,9 +86,9 @@ y_2 <- rnorm(7, 539, 1)
 y_2
 ```
 
-So, for now, I have seven values from my original scale and seven values from my new scale. Should I treat these value equally? No, since I trust the values from the new scale, my estimation method should also consider this fact.
+So, for now, I have seven values from my original scale and seven values from my new scale. Should I treat these values equally? No, since I trust the values from the new scale, my estimation method should also consider this fact.
 
-Now, I define model as follows, my observation vector $y$ consists of two parts, a vector $y_1$ and vector $y_2$ whose elements came from scale 1 and 2 repectively. Each observation vector has a random noise source from each scale which can be represents $w_1$ and $w_2$.
+Now, I define a model as follows, my observation vector $y$ consists of two parts, a vector $y_1$ and vector $y_2$ whose elements came from scale 1 and 2, respectively. Each observation vector has a random noise source from each scale, which can represent $w_1$ and $w_2$.
 
 $$
 y=\left(\begin{array}{c}
@@ -100,7 +100,7 @@ y=\left(\begin{array}{c}
 \end{array}\right)
 $$
 
-Note that we assume the random noise independent each other, in statistics, we assume the following;
+Note that we assume the random noises are independent of each other; in statistics, we assume the following;
 
 $$
 \begin{align*}
@@ -110,13 +110,13 @@ var\left(w_{2i}\right) & =\sigma_{2i}^{2},\\
 cov\left(w_{ki},w_{kj}\right) & =0,\quad where\quad i\ne j
 \end{align*}
 $$
-for $i=1, ..., 7$, $j=1,...,7$ and $k=1,2$. All the information above can be expressed using one matrix called covariance matrix. In our case, the covarince matrix is a 14 by 14 diagonal matrix whose first half of the elements are $\sigma^2_1$ and the rest half are $\sigma_2^2$;
+for $i=1, ..., 7$, $j=1,...,7$ and $k=1,2$. All the information above can be expressed using one matrix called the covariance matrix. In our case, the covariance matrix is a 14 by 14 diagonal matrix whose first half of the elements are $\sigma^2_1$ and the rest half are $\sigma_2^2$;
 
 $$
 \Sigma=diag\left(\sigma_{1}^{2},...,\sigma_{1}^{2},\sigma_{2}^{2},...,\sigma_{2}^{2}\right)
 $$
 
-Thus, when I look at the residuals for each measurement, they are not all same. More specifically, I would put more weights on the residuals related to my new scale. Thus, befor I am summing all residuals, I would give the weights on the residual by didiving residuals with the corresponding variance of random noise. This can be written nicely as following;
+Thus, when I look at the residuals for each measurement, they are not all the same. More specifically, I would put more weights on the residuals related to my new scale. Thus, before I am summing all residuals, I would give the weights on the residual by dividing residuals with the corresponding variance of random noise. This can be written nicely as following;
 
 $$
 \begin{align*}
@@ -139,7 +139,7 @@ y_{2}-\underline{1}\beta
 \end{align*}
 $$
 
-Since we assume the new scale is more stable, meaning $\sigma^2_2 < \sigma^2_1$, the residuals for scale 2 has more weights than the residuals for scale 1. 
+Since we assume the new scale is more stable, meaning $\sigma^2_2 < \sigma^2_1$, the residuals for my new scale has more weights than the residuals for my original scale. 
 
 Now, we will do the same thing for estimating $\beta$; take derivative and set it as zero.
 
