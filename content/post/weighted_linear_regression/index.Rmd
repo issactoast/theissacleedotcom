@@ -11,8 +11,8 @@ image:
   preview_only: true
 lastmod: "2020-01-29T00:00:00Z"
 projects: [statistics]
-subtitle: 'Linear regression to recursive one'
-summary: This is a journey from linear regression to recursive regression
+subtitle: 'from linear regression to weighted linear regression'
+summary: This is a journey from linear regression to weighted linear regression
 title: 'Weighted Least Squares Estimation'
 categories:
   - r programming
