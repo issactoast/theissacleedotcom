@@ -1,8 +1,8 @@
 ---
 abstract: Multiple-life policies pay a benefit on the first death or the last death among the group of lives. In practice, the future lifetime random variable of policy holders has been considered to be independent, but it is more rational to take into account the correlations among the policy holders. In this paper, the Gaussian copula is applied to reflect the correlations among policy holders and then to diversify the common shock of the multiple life policies which follows an exponential distribution. Five case studies demonstrate its usefulness of using copula in calculating the premiums of the multiple-life policies including the common shock.
 authors:
-- admin
 - Doyoung Kim
+- admin
 - Hangsuck Lee
 date: "2014-05-01T00:00:00Z"
 doi: ""
@@ -16,8 +16,8 @@ publication: 'Korean Journal of Applied Statistics'
 publication_short: "KJAS"
 publication_types:
 - "2"
-publishDate: "2017-01-01T00:00:00Z"
-slides: example
+publishDate: "2014-05-01T00:00:00Z"
+# slides: example
 summary: The Gaussian copula is applied to reflect the correlations among policy holders and then to diversify the common shock of the multiple life policies which follows an exponential distribution.
 tags:
 - Life insurance
