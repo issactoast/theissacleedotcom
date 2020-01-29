@@ -5,10 +5,10 @@ date: "2020-01-29T00:00:00Z"
 draft: false
 featured: false
 image:
-  caption: ''
+  caption: 'Image credit: [**Godmother**](https://www.cleanpng.com/png-download-clip-art-yellow-delicious-mango-479812/)'
   focal_point: ""
   placement: 2
-  preview_only: true
+  preview_only: false
 lastmod: "2020-01-29T00:00:00Z"
 projects: [statistics]
 subtitle: 'from linear regression to weighted linear regression'
