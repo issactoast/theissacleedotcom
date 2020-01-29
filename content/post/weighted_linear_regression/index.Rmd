@@ -110,7 +110,11 @@ var\left(w_{2i}\right) & =\sigma_{2i}^{2},\\
 cov\left(w_{ki},w_{kj}\right) & =0,\quad where\quad i\ne j
 \end{align*}
 $$
-for $i=1, ..., 7$, $j=1,...,7$ and $k=1,2$. 
+for $i=1, ..., 7$, $j=1,...,7$ and $k=1,2$. All the information above can be expressed using one matrix called covariance matrix. In our case, the covarince matrix is a 14 by 14 diagonal matrix whose first half of the elements are $\sigma^2_1$ and the rest half are $\sigma_2^2$;
+
+$$
+\Sigma=diag\left(\sigma_{1}^{2},...,\sigma_{1}^{2},\sigma_{2}^{2},...,\sigma_{2}^{2}\right)
+$$
 
 Thus, when I look at the residuals for each measurement, they are not all same. More specifically, I would put more weights on the residuals related to my new scale. Thus, befor I am summing all residuals, I would give the weights on the residual by didiving residuals with the corresponding variance of random noise. This can be written nicely as following;
 
@@ -131,7 +135,7 @@ y_{2}-\underline{1}\beta
 y_{1}-\underline{1}\beta\\
 y_{2}-\underline{1}\beta
 \end{array}\right)\\
- & =\sum_i\frac{\left(y_{1i}-\beta\right)^{2}}{\sigma_{1}^{2}}+\sum_i\frac{\left(y_{2i}-\beta\right)^{2}}{\sigma_{2}^{2}}
+ & =\sum_i\frac{\left(y_{1i}-\beta\right)^{2}}{\sigma_{1}^{2}}+\sum_j\frac{\left(y_{2j}-\beta\right)^{2}}{\sigma_{2}^{2}}
 \end{align*}
 $$
 

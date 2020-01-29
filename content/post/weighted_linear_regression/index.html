@@ -81,7 +81,10 @@ var\left(w_{2i}\right) &amp; =\sigma_{2i}^{2},\\
 cov\left(w_{ki},w_{kj}\right) &amp; =0,\quad where\quad i\ne j
 \end{align*}
 \]</span>
-for <span class="math inline">\(i=1, ..., 7\)</span>, <span class="math inline">\(j=1,...,7\)</span> and <span class="math inline">\(k=1,2\)</span>.</p>
+for <span class="math inline">\(i=1, ..., 7\)</span>, <span class="math inline">\(j=1,...,7\)</span> and <span class="math inline">\(k=1,2\)</span>. All the information above can be expressed using one matrix called covariance matrix. In our case, the covarince matrix is a 14 by 14 diagonal matrix whose first half of the elements are <span class="math inline">\(\sigma^2_1\)</span> and the rest half are <span class="math inline">\(\sigma_2^2\)</span>;</p>
+<p><span class="math display">\[
+\Sigma=diag\left(\sigma_{1}^{2},...,\sigma_{1}^{2},\sigma_{2}^{2},...,\sigma_{2}^{2}\right)
+\]</span></p>
 <p>Thus, when I look at the residuals for each measurement, they are not all same. More specifically, I would put more weights on the residuals related to my new scale. Thus, befor I am summing all residuals, I would give the weights on the residual by didiving residuals with the corresponding variance of random noise. This can be written nicely as following;</p>
 <p><span class="math display">\[
 \begin{align*}
@@ -100,7 +103,7 @@ y_{2}-\underline{1}\beta
 y_{1}-\underline{1}\beta\\
 y_{2}-\underline{1}\beta
 \end{array}\right)\\
- &amp; =\sum_i\frac{\left(y_{1i}-\beta\right)^{2}}{\sigma_{1}^{2}}+\sum_i\frac{\left(y_{2i}-\beta\right)^{2}}{\sigma_{2}^{2}}
+ &amp; =\sum_i\frac{\left(y_{1i}-\beta\right)^{2}}{\sigma_{1}^{2}}+\sum_j\frac{\left(y_{2j}-\beta\right)^{2}}{\sigma_{2}^{2}}
 \end{align*}
 \]</span></p>
 <p>Since we assume the new scale is more stable, meaning <span class="math inline">\(\sigma^2_2 &lt; \sigma^2_1\)</span>, the residuals for scale 2 has more weights than the residuals for scale 1.</p>
