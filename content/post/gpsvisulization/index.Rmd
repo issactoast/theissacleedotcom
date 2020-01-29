@@ -1,0 +1,212 @@
+---
+authors:
+- admin
+date: "2019-11-01T00:00:00Z"
+draft: false
+featured: false
+image:
+  caption: 'Image credit: [UIowaStat](https://stat.uiowa.edu/)'
+  focal_point: ""
+  placement: 2
+  preview_only: true
+lastmod: "2019-11-01T00:00:00Z"
+projects: [statistics]
+subtitle: 'gganimate, ggmap'
+summary: I make a animation using GPS data.
+title: 'GPS data visualization'
+categories:
+  - r programming
+  - machine learning
+  - telematics
+tags:
+  - gganimate
+  - ggmap
+---
+
+
+As an employee, I am trying to construct my portfolio these days. By sharing my research materials, I hope that my article makes you either become interested in me or the driving telematics topic itself! =]
+
+I wrote all the code in this article to use them as a tool for my Ph.D. research. Thus, they are not efficient code and have much room for improvement, and also, it might have some typo or error. If you found any typo or error in my code, feel free to leave a comment or contact me. I would be delighted and appreciate your feedback.
+
+This article uses the following `R` packages.
+
+```{r message=FALSE, warning=FALSE}
+library(gganimate)
+library(ggmap)
+library(dplyr)
+library(magrittr)
+library(tibble)
+library(knitr)
+library(kableExtra)
+```
+
+## GPS data visualization
+
+GPS is probably the most popular data format, which has information about the position of the device. At the beginning of my research, I tried to use it to record my test route. To record the telematics data, I attached my phone to my vehicle and recorded the position of my vehicle per second using a smartphone sensor app.
+
+Here is the sample sensor data that contains the information of my commute route data.
+
+- [sampletrip.csv](https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/telematics/sampletrip.csv)
+
+```{r}
+mytelematics <- read.csv("https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/telematics/sampletrip.csv", header = TRUE, fill = TRUE)
+```
+
+### Selecting GPS data from raw telematics data
+
+```{r results = "asis"}
+kable(head(mytelematics, 100), format = "html") %>% 
+  kable_styling() %>% 
+  scroll_box(width = "100%", height = "300px")
+```
+
+Even though there are many variables related to other sensors and accuracy of GPS, let us choose only four variables as follows;
+
+```{r}
+gpsdata <- mytelematics %>% select(Timestamp, Long, Lat, Speed.m.s.)
+colnames(gpsdata) <- c("Timestamp", "x", "y", "speed")
+
+# convert speed unit (from m/s to mph)
+gpsdata$speed <- gpsdata$speed * 2.23694 
+```
+
+Thus, the GPS data we are working on in this article consists of time, longitude, latitude, and speed information. Note that I changed the unit of the speed from m/s to mph.
+
+```{r results = "asis"}
+kable(head(gpsdata, 100), format = "html") %>% 
+  kable_styling() %>% 
+  scroll_box(width = "100%", height = "300px")
+```
+
+### Converting Time variable
+
+As we can see in the above table, the `Timestamp` variable contains the information of the time, but it is string data. Since we want to use the data for the animated plot, we need to convert them into the relative time scale, whose starting value should be zero seconds.
+
+My solution is a little bit inefficient and possibly has an error if the recording time is around midnight (if this is the case then we need to think about the date too), but since my driving data mostly during the afternoon, I converted the time string into the data with unit second as follows;
+
+```{r}
+# seperate date and time
+temp_time <- as.character(gpsdata$Timestamp) %>% strsplit(" ") %>% unlist
+
+# select the time information and split into three part
+temp_time <- temp_time[seq(2, length(temp_time), by = 2)] %>% strsplit(":")
+
+# conversion formula for hh:mm:ss to seconds. 
+convert_time <- function(timelist){
+    timelist <- unlist(timelist)
+    hr <- as.numeric(timelist[1]) * 3600
+    min <- as.numeric(timelist[2]) * 60
+    sec <- as.numeric(timelist[3])
+    result <- hr + min + sec
+    result
+}
+
+# apply convert_time function to temp_time
+gpsdata$Timestamp <- lapply(temp_time, convert_time) %>% unlist()
+gpsdata$Timestamp <- gpsdata$Timestamp - gpsdata$Timestamp[1]
+```
+
+Now, the timestamp of the GPS data starts with zero as follows;
+
+```{r results = "asis"}
+kable(head(gpsdata, 50), format = "html") %>% 
+  kable_styling() %>% 
+  scroll_box(width = "100%", height = "300px")
+```
+
+### Frequency of GPS data
+
+One thing you may notice is that the frequency of our timestamp is higher than 1 Hz, which means the gap between each time point is less than 1 second. Even though GPS data has been recorded as 1 Hz, it is recorded with higher frequency, like 25 Hz in this case, since other recorded sensors use a higher frequency recording rate, so GPS data is also recorded at the same rate. However, the actual information about the position of a vehicle is changed every 1 second, which can be confirmed by drawing the time vs. speed graph as follows;
+
+```{r}
+p <- ggplot(data = gpsdata, aes(x = Timestamp, y = speed)) +
+        geom_line(alpha = 0.3) +
+        labs(x = "time (sec)", y = "speed (mph)",
+             title = "Trip speed") +
+        theme_bw()
+p
+```
+
+Thus, since we do not need redundant information, let us select the data for every 25 data points.
+
+```{r}
+gpsdata <- gpsdata[seq(1, length(gpsdata$Timestamp), by = 25),]
+```
+
+```{r echo=FALSE}
+p + geom_line(data = gpsdata, aes(x = Timestamp, y = speed))
+```
+
+Thus, the final data set for the GPS visualization is as follows;
+
+```{r results = "asis", echo = FALSE}
+kable(head(gpsdata, 50), format = "html",
+      row.names = FALSE) %>% 
+  kable_styling() %>% 
+  scroll_box(width = "100%", height = "300px")
+```
+
+## GPS data visualization with ggmap and gganimate
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# api from google map
+api <- "AIzaSyCzLbAEmXBeFEdQuzHWCxb4Kvz6ErdZ2m4"
+register_google(key = api)
+```
+
+I received the API key from the [Google Map registration page](https://cloud.google.com/maps-platform/#get-started) to access the google map via `ggmap` package. Once you obtained your API key, register the key as follows;
+
+```{r eval=FALSE}
+# api from google map
+api <- "your API code here"
+register_google(key = api)
+```
+
+Let's decide the size of the background. Since the `get_googlemap` function in `ggmap` package only provide the zoom parameter, we need to calculate the center of the whole trip.
+
+```{r}
+center_vec <- colMeans(gpsdata[,2:3])
+map_obj <- get_googlemap(center = as.numeric(center_vec),
+                       maptype = "hybrid",
+                       zoom = 17)
+ggmap(map_obj)
+```
+
+Once you made a map object as in the above code, you can display the map using `ggmap` function. Now, let us put the GPS data on the map. We can think `ggmap(map_obj)` as a ggplot object so that we can add the layer on it.
+
+```{r warning=FALSE}
+p <- ggmap(map_obj) + 
+  geom_path(data = gpsdata,
+            aes(x = x, y = y),
+            size = 0.5, color = "blue") +
+  geom_point(data = gpsdata,
+            aes(x, y), col = "red", size = 3)
+p
+```
+
+Let us remove the labels for x and y axes so that we can see a plain map.
+
+```{r warning=FALSE}
+p <- p + 
+  labs(title = "Telematics data tracking", x = "", y = "") +
+  guides(fill=FALSE) +
+  theme(axis.text = element_blank(),
+        axis.title = element_text(size = 15, face="bold"),
+        plot.margin = margin(0.2, 0.2, 0.2, 0.2, "cm"),
+        axis.ticks.x=element_blank(),
+        axis.ticks.y=element_blank())
+p
+```
+
+
+## gganimate
+
+Now finally, we are ready to use `gganimate` to make a cool plot. `transition_reveal` function reveals the path and the data points as the timestamp variable increase. For the smooth movement of the dot, I use the `ease_aes` function.
+
+```{r warning=FALSE, message=FALSE}
+p + transition_reveal(Timestamp) +
+    ease_aes('linear')
+```
+
+Hope you enjoy the reading! I am always open to your feedback to improve my code.
+
