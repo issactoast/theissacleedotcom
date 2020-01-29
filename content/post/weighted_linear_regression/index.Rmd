@@ -62,8 +62,10 @@ $$
 Thus, the least sqaure estimate of $\beta$ is,
 
 $$
+\begin{align*}
 \hat{\beta} & =\left(\underline{1}^{T}\underline{1}\right)^{-1}\underline{1}^{T}y\\
- & =\sum y_{i}
+ & =\sum_{i=1}^{7}y_{i}
+\end{align*}
 $$
 In my mango case, it was as follows;
 

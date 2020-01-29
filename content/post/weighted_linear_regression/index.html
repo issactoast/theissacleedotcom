@@ -46,8 +46,10 @@ where <span class="math inline">\(\underline{1}\)</span> represents a vector of 
 \]</span></p>
 <p>Thus, the least sqaure estimate of <span class="math inline">\(\beta\)</span> is,</p>
 <p><span class="math display">\[
+\begin{align*}
 \hat{\beta} &amp; =\left(\underline{1}^{T}\underline{1}\right)^{-1}\underline{1}^{T}y\\
- &amp; =\sum y_{i}
+ &amp; =\sum_{i=1}^{7}y_{i}
+\end{align*}
 \]</span>
 In my mango case, it was as follows;</p>
 <pre class="r"><code>y_1 &lt;- c(536.5859, 539.5549, 541.1689, 534.3086, 539.8582, 540.0121, 537.8505)
