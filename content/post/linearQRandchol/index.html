@@ -618,11 +618,11 @@ microbenchmark(
 )
 ## Unit: microseconds
 ##                                   expr   min     lq    mean median     uq
-##              forwardsolve(t(upper), b) 5.188 5.3375 5.88244 5.4255 5.5555
-##  backsolve(upper, b, transpose = TRUE) 3.149 3.2955 3.40016 3.3605 3.4460
+##              forwardsolve(t(upper), b) 4.943 5.1725 6.07928 5.2515 5.4125
+##  backsolve(upper, b, transpose = TRUE) 3.050 3.1925 3.33238 3.2580 3.3430
 ##     max neval
-##  38.077   100
-##   6.196   100
+##  36.769   100
+##   5.838   100
 
 
 z1 &lt;- forwardsolve( t(upper), b )
