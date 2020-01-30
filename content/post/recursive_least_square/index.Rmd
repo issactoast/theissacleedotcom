@@ -242,3 +242,7 @@ K_{k} & =\left(x_{k}P_{k-1}x_{k}^{T}+R_{k}\right)^{-1}P_{k-1}x_{k}^{T}\\
 $$
 
 Therefore, the recursive least square allows estimating the beta recursively. It will give us computational convenience, but we need to keep updating our P matrix and K matrix for each time $k$.
+
+## Reference
+
+1. Simon, D. (2006). Optimal state estimation: Kalman, H infinity, and nonlinear approaches. John Wiley & Sons.
