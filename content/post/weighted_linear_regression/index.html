@@ -25,19 +25,19 @@ tags:
 
 <div id="again-least-squares-estimation" class="section level2">
 <h2>Again, Least Squares Estimation</h2>
-<p>In this article, I want to explain weighted least square estimation. Before I jump into weighted least square estimation, let us remind of our famous star, the least square estimation method again.</p>
-<p>Let us consider a situation that we want to figure out the true weight of a mango that I bought from grocery store. Well, I saw its weight is 540g from a wallmart, I am the person who always dout about everything. So I decide to measure its weigths seven times using my scale; and I got those measurements for the mango.</p>
+<p>In this article, I want to explain the weighted least square estimation. Before I jump into weighted least square estimation, let us remind of our famous star, the least square estimation method again.</p>
+<p>Let us consider a situation that we want to figure out the true weight of a mango that I bought from the grocery store. Well, I saw its weight is 540g from the grocery store. I am a person who always doubts about everything. So I decided to measure its weights seven times using my scale, and I got those measurements for the mango.</p>
 <pre><code>## [1] 536.5859 539.5549 541.1689 534.3086 539.8582 540.0121 537.8505</code></pre>
-<p>Dang, I knew it! This savvy industry always lies to the customer. Let me confirm that the true weight of the mango with least square estimation method. I denote the true weight of mango as <span class="math inline">\(\beta\)</span>. Then, I can think these seven values are the measurements with random noise <span class="math inline">\(w\)</span>.</p>
+<p>Dang, I knew it! This savvy industry always lies to the customer. Let me confirm that the true weight of the mango with least square estimation method. I denote the true weight of mango by <span class="math inline">\(\beta\)</span>. Then, I can think these seven values are the measurements with a random noise of <span class="math inline">\(w\)</span>.</p>
 <p><span class="math display">\[
 y_k = \beta + w_k,
 \]</span>
-where <span class="math inline">\(k=1, ..., 7\)</span>. For, a random noise, I assume that its mean is zero, and its standard deviation is 2. In other words, if I check my scale without put anything on it, it will shows the values around zero, but it will vary around zero (a poor student bought a poor scale).</p>
-<p>The least sqaure estimation for <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\hat{\beta}\)</span>, can be determined by considering the following the summation of the residuals which is the function of <span class="math inline">\(\beta\)</span>;</p>
+where <span class="math inline">\(k=1, ..., 7\)</span>. For a random noise, I assume that its mean is zero, and its standard deviation is 2. In other words, if I check my scale without putting anything on it, it will show the values around zero, but it will vary around zero (a poor student bought a poor scale).</p>
+<p>The least square estimation for <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\hat{\beta}\)</span>, can be determined by considering the following the summation of the residuals which is the function of <span class="math inline">\(\beta\)</span>;</p>
 <p><span class="math display">\[
 L(\beta) = \left(y-\underline{1}\beta\right)^{T}\left(y-\underline{1}\beta\right)
 \]</span>
-where <span class="math inline">\(\underline{1}\)</span> represents a vector of lenght 7 whose elements are all 1. The least square estimation finds the value of <span class="math inline">\(\beta\)</span> by setting the derivative of function <span class="math inline">\(L\)</span> with respect to <span class="math inline">\(\beta\)</span> is equal to zero.</p>
+where <span class="math inline">\(\underline{1}\)</span> represents a vector of length 7 whose elements are all 1. The least square estimation finds the value of <span class="math inline">\(\beta\)</span> by setting the derivative of function <span class="math inline">\(L\)</span> with respect to <span class="math inline">\(\beta\)</span> to be equal to zero.</p>
 <p><span class="math display">\[
 \begin{align*}
 \frac{\partial}{\partial\beta}L\left(\beta\right) &amp; =\frac{\partial}{\partial\beta}\left(y^{T}y-y^{T}\underline{1}\beta-\beta\underline{1}^{T}y+\beta^{T}\underline{1}^{T}\underline{1}\beta\right)\\
@@ -58,11 +58,11 @@ mean(y_1)</code></pre>
 </div>
 <div id="weighted-least-squares-estimation" class="section level2">
 <h2>Weighted Least Squares Estimation</h2>
-<p>Now, what if I got another scale which I belive it is more stable accurate than my first scale? Let us assume, this new scale has standard devidation 1 for its measurements which is a half of my original scale.</p>
-<p>Note that when we estimate the weight of my mango using least square method, we don’t care about the noise variance of my scale, since all of them affected by same noise. In other word, to me all of them had same level of trust. However, after I got the following seven other measurements from my new scale, I have to think about the values I have;</p>
+<p>Now, what if I got another scale which I believe it is more stable accurate than my first scale? Let us assume; this new scale has standard deviation 1 for its measurements, which is half of my original scale.</p>
+<p>Note that when we estimate the weight of my mango using the least square method, we don’t care about the noise variance of my scale since all of them affected by the same noise. In other words, to me, all of them had the same level of trust. However, after I got the following seven other measurements from my new scale, I have to think about the values I have;</p>
 <pre><code>## [1] 538.5732 538.7764 539.7176 539.8414 538.8716 540.6093 538.7028</code></pre>
-<p>So, for now, I have seven values from my original scale and seven values from my new scale. Should I treat these value equally? No, since I trust the values from the new scale, my estimation method should also consider this fact.</p>
-<p>Now, I define model as follows, my observation vector <span class="math inline">\(y\)</span> consists of two parts, a vector <span class="math inline">\(y_1\)</span> and vector <span class="math inline">\(y_2\)</span> whose elements came from scale 1 and 2 repectively. Each observation vector has a random noise source from each scale which can be represents <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_2\)</span>.</p>
+<p>So, for now, I have seven values from my original scale and seven values from my new scale. Should I treat these values equally? No, since I trust the values from the new scale, my estimation method should also consider this fact.</p>
+<p>Now, I define a model as follows, my observation vector <span class="math inline">\(y\)</span> consists of two parts, a vector <span class="math inline">\(y_1\)</span> and vector <span class="math inline">\(y_2\)</span> whose elements came from scale 1 and 2, respectively. Each observation vector has a random noise source from each scale, which can represent <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_2\)</span>.</p>
 <p><span class="math display">\[
 y=\left(\begin{array}{c}
 \underline{y}_{1}\\
@@ -72,7 +72,7 @@ y=\left(\begin{array}{c}
 \underline{w}_{2}
 \end{array}\right)
 \]</span></p>
-<p>Note that we assume the random noise independent each other, in statistics, we assume the following;</p>
+<p>Note that we assume the random noises are independent of each other; in statistics, we assume the following;</p>
 <p><span class="math display">\[
 \begin{align*}
 \mathcal{E}\left[w_{1i}\right]=\mathcal{E}\left[w_{2i}\right] &amp; =0\\
@@ -81,11 +81,11 @@ var\left(w_{2i}\right) &amp; =\sigma_{2i}^{2},\\
 cov\left(w_{ki},w_{kj}\right) &amp; =0,\quad where\quad i\ne j
 \end{align*}
 \]</span>
-for <span class="math inline">\(i=1, ..., 7\)</span>, <span class="math inline">\(j=1,...,7\)</span> and <span class="math inline">\(k=1,2\)</span>. All the information above can be expressed using one matrix called covariance matrix. In our case, the covarince matrix is a 14 by 14 diagonal matrix whose first half of the elements are <span class="math inline">\(\sigma^2_1\)</span> and the rest half are <span class="math inline">\(\sigma_2^2\)</span>;</p>
+for <span class="math inline">\(i=1, ..., 7\)</span>, <span class="math inline">\(j=1,...,7\)</span> and <span class="math inline">\(k=1,2\)</span>. All the information above can be expressed using one matrix called the covariance matrix. In our case, the covariance matrix is a 14 by 14 diagonal matrix whose first half of the elements are <span class="math inline">\(\sigma^2_1\)</span> and the rest half are <span class="math inline">\(\sigma_2^2\)</span>;</p>
 <p><span class="math display">\[
 \Sigma=diag\left(\sigma_{1}^{2},...,\sigma_{1}^{2},\sigma_{2}^{2},...,\sigma_{2}^{2}\right)
 \]</span></p>
-<p>Thus, when I look at the residuals for each measurement, they are not all same. More specifically, I would put more weights on the residuals related to my new scale. Thus, befor I am summing all residuals, I would give the weights on the residual by didiving residuals with the corresponding variance of random noise. This can be written nicely as following;</p>
+<p>Thus, when I look at the residuals for each measurement, they are not all the same. More specifically, I would put more weights on the residuals related to my new scale. Thus, before I am summing all residuals, I would give the weights on the residual by dividing residuals with the corresponding variance of random noise. This can be written nicely as following;</p>
 <p><span class="math display">\[
 \begin{align*}
 L\left(\beta\right) &amp; =\left(y-\underline{1}\beta\right)^{T}\Sigma^{-1}\left(y-\underline{1}\beta\right)\\
@@ -106,7 +106,7 @@ y_{2}-\underline{1}\beta
  &amp; =\sum_i\frac{\left(y_{1i}-\beta\right)^{2}}{\sigma_{1}^{2}}+\sum_j\frac{\left(y_{2j}-\beta\right)^{2}}{\sigma_{2}^{2}}
 \end{align*}
 \]</span></p>
-<p>Since we assume the new scale is more stable, meaning <span class="math inline">\(\sigma^2_2 &lt; \sigma^2_1\)</span>, the residuals for scale 2 has more weights than the residuals for scale 1.</p>
+<p>Since we assume the new scale is more stable, meaning <span class="math inline">\(\sigma^2_2 &lt; \sigma^2_1\)</span>, the residuals for my new scale has more weights than the residuals for my original scale.</p>
 <p>Now, we will do the same thing for estimating <span class="math inline">\(\beta\)</span>; take derivative and set it as zero.</p>
 <p><span class="math display">\[
 \begin{align*}
