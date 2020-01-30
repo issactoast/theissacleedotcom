@@ -5,7 +5,7 @@ date: "2020-01-30T00:00:00Z"
 draft: false
 featured: false
 image:
-  caption: 'Image credit: [**Godmother**](https://www.cleanpng.com/png-download-clip-art-yellow-delicious-mango-479812/)'
+  caption: 'Image credit: [**vuejsdevelopers**](https://vuejsdevelopers.com/images/posts/recursive_components.jpg)'
   focal_point: ""
   placement: 2
   preview_only: false
