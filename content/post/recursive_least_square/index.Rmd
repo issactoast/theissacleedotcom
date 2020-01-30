@@ -28,9 +28,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Mango again
 
-In [the previous post](https://www.theissaclee.com/post/weighted_linear_regression/), I explained weighted least square estimation using the example of measuring weight of a mango. In this post, I will use the similar set up, but slightly different one.
+In [the previous post](https://www.theissaclee.com/post/weighted_linear_regression/), I explained the weighted least squares estimation using the example of measuring the weight of a mango. In this post, I will use a similar setup, but a slightly different one.
 
-I bought a mango from a grocery store and measured its weight using my scale. However, since my scale is cheap, it has its own bias and a random noise whose expectation is zero and the standard deviation is 1g. Every time I check the weight of mango, I have checked the values of the scale before I put mango on it, I got these values.
+I bought a mango from a grocery store and measured its weight using my scale. However, since my scale is cheap, it has its own bias, and a random noise whose expectation is zero and the standard deviation is 1g. Every time I check the weight of mango, I have checked the values of the scale before I put mango on it, I got these values.
 
 ```{r echo=FALSE}
 set.seed(1234)
@@ -38,14 +38,14 @@ bias <- rnorm(7, 0.5, 0.5)
 bias
 ```
 
-Note that these values include the bias of my scale and the random noises. After measuring the weight of mango seven times, I got these values again.
+Note that these values include the bias of my scale and the random noises. After measuring the weight of the mango seven times, I got these values again.
 
 ```{r}
 weight_mango <- c(536.5859, 539.5549, 541.1689, 534.3086, 539.8582, 540.0121, 537.8505)
 weight_mango
 ```
 
-Now, let us denote the two parameter the bias of my scale and weight of mango by $\beta_0$ and $\beta_1$.
+Next, let us denote the two parameters the bias of my scale and weight of mango by $\beta_0$ and $\beta_1$.
 
 $$
 \beta=\left(\begin{array}{c}
@@ -73,13 +73,13 @@ X <- cbind(rep(1, 14), c(rep(0, 7), rep(1, 7)))
 X
 ```
 
-We knows that ordinary least square estimation of the parameter vector $\beta$ can be calculated as,
+We know that ordinary least square estimation of the parameter vector $\beta$ can be calculated as,
 
 $$
 \hat{\beta}=\left(X^{T}X\right)^{-1}X^{T}y
 $$
 
-In R, we can obtain these using `lm` function.
+In `R`, we can obtain these using `lm` function.
 
 ```{r}
 beta_hat <- lm(y ~ X + 0)$coefficients
@@ -88,16 +88,16 @@ beta_hat
 
 ## Recursive least square estimation
 
-What is recursive least square estimation and why do we need it? The problem of calculating the estimation of beta in the previous section is that we have to calculate the inverse of whole data matrix $X^TX$. When we have more variables in the data set, this matrix will become more larger and larger since its dimension is $p \times p$ where $p$ is the number of variables we have. In this big data era, often we have a large $p$. So, what if we have one more observation $y_{new}$ and we want to embrace this new information to our beta estimation. Should we update the data matrix $X$ and redo the whole process of least square estimation again? It is quit reducdant when we think about the our `beta_hat` has the information of the past data already. Can we just update the little information to the information that we already have? This is when the recursive least square estimation comes into play.
+What is the recursive least square estimation, and why do we need it? The problem of calculating beta estimates in the previous section that we have to calculate the inverse of the whole data matrix $X^TX$. When we have more variables in the data set, this matrix will become larger and larger since its dimension is $p \times p$ where $p$ is the number of variables we have. In this big data era, we often have a large $p$. So, what if we have one more observation $y_{new}$ and we want to embrace this new information to our beta estimation. Should we update the data matrix $X$ and redo the whole process of the least square estimation again? It is redundant when we think about our `beta_hat` has the information of the past data already. Can we update the little information to the information that we already have? This is when the recursive least square estimation comes into play.
 
-When we say recursive, we are considering the situation that observe the sample again and again. Let us assume that I was doubt my estimation so I measured the weight of mango again.
+When we say recursive, we are considering the situation that observes the sample again and again. Let us assume that I doubted my estimation, so I measured the weight of mango again.
 
 ```{r}
 new_y <- 538.7267
 new_y
 ```
 
-Now, when I think about the information I have so far, I have `new_y` and my previous estimation of beta `beta_hat`. Can I estimate the beta again combining these two information? Using statistics notation, the situation can be expressed as follows;
+Now, when I think about the information I have so far, I have `new_y` and my previous estimation of beta `beta_hat`. Can I estimate the beta again combining this two information? With statistical notations, the situation can be expressed as follows;
 
 $$
 \begin{align*}
@@ -111,11 +111,11 @@ y_{new} & =\left(\begin{array}{cc}
 1 & 1\end{array}\right)\hat{\beta}_{old}\right)
 \end{align*}
 $$
-where $\hat{y}_{new}^{old}$ can be interpreted as the prediction value of our new observation, $y_{new}$, with old information of beta. Thus, using recursive least square method, **we want to update the estimation of beta by adding the prediction error value for the new observation with the weight of $K$**. So, how do we ditermine $K$? Why the recursive least square follow this specific update form?
+where $\hat{y}_{new}^{old}$ can be interpreted as the prediction value of our new observation, $y_{new}$, with old information of beta. Thus, using the recursive least square method, **we want to update the estimation of beta by adding the prediction error value for the new observation with the weight of $K$**. So, how do we determine $K$? Why the recursive least square follow this specific update form?
 
 ## Unbiasness
 
-First, if we use this form of update euqation, we can confirm that our update of the estimate of beta will be unbiased. Note, our $\hat{\beta_{old}}$ is the least square estimation of beta, which means we assume it is unbiased estimator as follows;
+First, if we use this form of update equation, we can confirm that our update of the estimate of the beta will be unbiased. Note, our $\hat{\beta_{old}}$ is the least square estimation of beta, which means we assume it is unbiased estimator as follows;
 
 $$
 \begin{align*}
@@ -156,7 +156,7 @@ $$
 P_{new}=\left(I-Kx\right)P_{old}\left(I-Kx\right)^{T}+KR_{new}K^{T}
 $$
 
-If we take a trace of the $P_{new}$, that is the summation of the variance of each estimator of the parameter $\beta_0$ and $\beta_1$. Thus, we can use this as a critera for finding optimal $K$. So the objective function $L(K)$ will be
+If we take a trace of the $P_{new}$, that is the summation of the variance of each estimator of $\beta_0$ and $\beta_1$. Thus, we can use this as a criterion for finding an optimal $K$. So the objective function $L(K)$ will be
 
 $$
 L\left(K\right)=tr\left(P_{new}\right),
@@ -193,7 +193,7 @@ where $\sigma^2$ is the variance of the random noise $w$. Thus, in our mango cas
 P_old <- 1 * solve(t(X) %*% X)
 P_old
 ```
-Note that we have already calcuate this `P_old` for estimating beta before. Thus, the $K$ can be calculated by the following;
+Note that we have already calculated this `P_old` for estimating beta before. Thus, the $K$ can be calculated by the following;
 
 ```{r}
 x <- matrix(c(1, 1), nrow = 1)
@@ -221,7 +221,7 @@ beta_hat_new = beta_hat + matK %*% (new_y - x %*% beta_hat)
 beta_hat_new
 ```
 
-Is this the same result of using the least square method? Yes
+Is this the same result of using the least square method? Yes.
 
 ```{r}
 y <- c(y, new_y)
@@ -231,7 +231,7 @@ solve(t(X) %*% X) %*% t(X) %*% y
 
 ## Recursive least square algorithm
 
-So far we use `old` and `new` notation, but now let us switch to general $k$ time points. When we have an estimator at time $k-1$, for time $k$, the recursive least square estimator updates is as follows;
+So far, we use `old` and `new` notation, but now let us switch to general $k$ time points. When we have an estimator at time $k-1$, for time $k$, the recursive least square estimator updates is as follows;
 
 $$
 \begin{align*}
@@ -241,4 +241,4 @@ K_{k} & =\left(x_{k}P_{k-1}x_{k}^{T}+R_{k}\right)^{-1}P_{k-1}x_{k}^{T}\\
 \end{align*}
 $$
 
-Therefore, the recursive least square allows to estimate the beta recursively. It will give us computational convinience, but we need to keep update our P matrix and K matrix for each time $k$.
+Therefore, the recursive least square allows estimating the beta recursively. It will give us computational convenience, but we need to keep updating our P matrix and K matrix for each time $k$.
