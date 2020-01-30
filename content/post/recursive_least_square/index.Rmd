@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Mango again
 
-In (the previous post)[https://www.theissaclee.com/post/weighted_linear_regression/], I explained weighted least square estimation using the example of measuring weight of a mango. In this post, I will use the similar set up, but slightly different one.
+In [the previous post](https://www.theissaclee.com/post/weighted_linear_regression/), I explained weighted least square estimation using the example of measuring weight of a mango. In this post, I will use the similar set up, but slightly different one.
 
 I bought a mango from a grocery store and measured its weight using my scale. However, since my scale is cheap, it has its own bias and a random noise whose expectation is zero and the standard deviation is 1g. Every time I check the weight of mango, I have checked the values of the scale before I put mango on it, I got these values.
 
