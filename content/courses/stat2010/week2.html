@@ -67,7 +67,9 @@ following:</p>
 <li>stem plots (for small datasets) or histograms (large datasets)</li>
 <li>boxplots</li>
 </ul>
-<pre class="sas"><code> proc univariate plot data = billion ;
+<pre class="sas"><code> * ods listing;
+ * ods graphics off ; Use these two if you don&#39;t see stem and leaf plot ;
+ proc univariate plot data = billion ;
  var wlth  ;
  run ;</code></pre>
 <p>The output is:</p>
