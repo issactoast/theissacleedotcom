@@ -86,6 +86,8 @@ following:
 
 
 ```sas
+ * ods listing;
+ * ods graphics off ; Use these two if you don't see stem and leaf plot ;
  proc univariate plot data = billion ;
  var wlth  ;
  run ;
