@@ -62,7 +62,8 @@ We have many variables in our data set. Let us pick `pch` and `pcgdp`.
 ```sas
 proc sgscatter data = OECD ;
 title "Scatter plot of pch and pcgdp";
-  plot pch * pcgdp;
+  plot pch * pcgdp /
+    datalabel = country ;
 run ;
 ```
 

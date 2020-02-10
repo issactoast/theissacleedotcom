@@ -49,7 +49,8 @@ RUN;</code></pre>
 <p>We have many variables in our data set. Let us pick <code>pch</code> and <code>pcgdp</code>.</p>
 <pre class="sas"><code>proc sgscatter data = OECD ;
 title &quot;Scatter plot of pch and pcgdp&quot;;
-  plot pch * pcgdp;
+  plot pch * pcgdp /
+    datalabel = country ;
 run ;</code></pre>
 </div>
 <div id="correlation-in-sas-1" class="section level3">
