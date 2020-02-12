@@ -14,7 +14,12 @@ type: docs
 weight: 1
 ---
 
-## Instructor
+
+![](stat2010.jpg)
+
+## Welcome to STAT:2010
+
+### Instructor
 
 - Name: Issac Lee
 - E-mail: sak-lee@uiowa.edu
@@ -23,7 +28,7 @@ weight: 1
   - Thursday 9:00 - 12:00 pm
   - Please feel free to make appointments to see me outside of office hours, and to send me questions by e-mail.
 
-## Class Infomation
+### Class Infomation
 
 If you want to take different labs, please email me **in advance**.
 

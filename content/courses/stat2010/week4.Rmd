@@ -1,12 +1,12 @@
 ---
 date: "2020-02-10T00:00:00+01:00"
 draft: false
-linktitle: Week 4 - Simulation
+linktitle: Week 4 - Normal distribution
 menu:
   stat2010:
     parent: Contents
     weight: 4
-title: Lab 4 - Simulation in SAS
+title: Lab 4 -  Normal distribution
 type: docs
 weight: 4    # related to next page to show
 ---
@@ -16,108 +16,211 @@ weight: 4    # related to next page to show
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Creating a simulated dataset in SAS
 
-The following code will create a simulated dataset with 1000 observations drawn from a normal distribution with mean $\mu$ = 2 and standard deviation $\sigma$ = 1.
+## Normal distribution
 
-```sas
-options linesize = 72 ;
+From the basic statistics course, we are already familiar with a bell-shape distribution called Normal distribution.
 
-data symm ;
-seed = 32542 ;
+Here are some characteristics of all Normal curves;
 
-do i = 1 to 1000 ;
-   y = 2 + rannor(seed) ;
-   output ;
-end ;
+    - Symmetric, Unimodal
+    - It can be specified by its mean and standard deviation.
+    - Mean is related to center of the distribution.
+    - Sd controls the spread of the distribution.
+    - All Normal distribution obey the 68-95-99.7 rule.
 
-drop seed ;
-run ;
+Our textbook use the following notation for refering a specific normal distribution;
+
+$$
+\mathcal{N}(\mu, \sigma)
+$$
+where $\mu$ represents the mean and $\sigma$ represents the standard deviation.
+
+Let us look at the impact of the mean and standard deviation on the shape of Normal distribtuions.
+
+```{r echo=FALSE}
+x <- seq(-5, 5, by= 0.1)
+plot(x, dnorm(x), type = "l",
+     xlim = c(-5, 5),
+     xlab = "", ylab = "",
+     main = "Impact of the mean on Normal distribution",
+     sub = "black: Normal(0, 1), red: Normal (2, 1)", axes = F)
+abline(h=0)
+points(x, dnorm(x, 2, sd = 1), type = "l", col = 2)
+axis(1, at = seq(-4, 4, by = 2), las = 1)
 ```
 
-We are going to treat this simulated dataset as a population – this is the complete set of items in which we are interested. To display just the first 10 records of this dataset,
 
-```sas
-proc print data = symm (obs=10) ;
-run ;
+```{r echo=FALSE}
+x <- seq(-5, 5, by= 0.1)
+plot(x, dnorm(x), type = "l",
+     xlim = c(-5, 5),
+     xlab = "", ylab = "",
+     main = "Impact of the std on Normal distribution",
+     sub = "black: Normal(0, 1), red: Normal (0, 2)", axes = F)
+abline(h=0)
+points(x, dnorm(x, 0, sd = 2), type = "l", col = 2)
+axis(1, at = seq(-4, 4, by = 2), las = 1)
 ```
 
-## Proc means
+## The 68-95-99.7 rule
 
-We can use `proc means` to get various summary statistics in a more compact format than `proc univariate` provides. The default statistics provided are
+The rule is as follows;
 
-- n = number of observations
-- mean
-- std dev = standard deviation
-- minimum
-- maximum
+    - Approx. 68% of the obs. fall within one std. range of the mean.
+    - Approx. 95% of the obs. fall within two std. range of the mean.
+    - Approx. 99.7% of the obs. fall within three std. range of the mean.
 
-```sas
-proc means data = symm ;
-var y ;
-run ;
+## The standard Normal distrbituion
+
+There is a very special Normal distribution among many Normal distribution. The standard Normal distribution is the Normal distribution with
+
+$$
+\mu = 0, \sigma = 1.
+$$
+
+The capital alphabet $Z$ is often used for a variable follows the standard Normal distribution. For this particular normal distribution, we will use the following notation:
+
+$$
+Z \sim \mathcal{N}\left(1, 0 \right)
+$$
+
+### Find prob. of $Z$ when the variable follows $\mathcal{N}\left(1, 0 \right)$
+
+If we knows that the variable $Z$ follows the standard Normal distribution, then we can find any probability (or proportion) using the standard Normal [table](https://www.macmillanlearning.com/studentresources/college/statistics/bps8e/bps8e_tables/bps8e_tables.pdf).
+
+#### Example (from our Lecture note)
+
+ Suppose we live in a particular Scandinavian city, where temperature is measured
+in Centigrade. Weather records kept for many years indicate that the temperature
+at 11:00 a.m. on Jan. 28 follows a standard normal distribution. What proportion of years we can expect the temperature at this time to be less than or equal to $-1.5$&deg;C?
+
+<details>
+<summary>
+<font color="red"> Answer </font>
+</summary>
+
+Since the temperature follows the standard Normal distribution, I can use $Z_{s. city}$ to represent the temperature of Scandinavian city. We can write the following:
+
+$$
+Z_{s. city} \sim \mathcal{N}(0, 1)
+$$
+
+Also the proportion that we want to find can be written as,
+
+$$
+P(Z_{s. city} \le -1.5)
+$$
+
+The above form corresponds to the table in p. 696 from the table pdf. From the first table, if we find $-1.5$ from the row names and $0.00$ from the coloum names, we can find the number $0.0668$ which is our answer.
+
+![](normaltable.png)
+
+Thus, we have the following:
+
+$$
+P(Z_{s. city} \le -1.5) = 0.0668
+$$
+
+
+</details>
+
+## Standardization: Convert Normal distrbituion to standard Normal distribution
+
+We have learned how to find a probability of proportions with a variable which follows standard Normal distribution in the previous section. Now, we are going to learn the method of convert a varible following an arbitrary Normal distribution to the one follwoing the standard Normal distribution.
+
+$$
+X \sim \mathcal{N}(\mu, \sigma) \overset{convert}{\longrightarrow} Z \sim \mathcal{N}(0, 1)
+$$
+
+All normal distributions would be the same if we measured in units of size $\sigma$ around the mean $\mu$ as center! If $x$ is an observation from a distribution that has mean $\mu$ and standard deviation $\sigma$, the standardized value of $x$ is
+
+$$
+z = \frac{x - \mu}{\sigma}
+$$
+Standardized values are often called *z-scores*.
+
+#### Example: Homework Scores
+
+```{r echo=FALSE, cache=TRUE}
+x <- seq(5, 20, by= 0.1)
+plot(x, dnorm(x, 10, 2), type = "l",
+     xlim = c(5, 15),
+     xlab = "", ylab = "",
+     main = "Distribution of Homework score",
+     sub = "Normal(10, 2)",
+     axes = F)
+abline(h=0)
+axis(1, at = seq(5, 15, by = 2), las = 1)
 ```
 
-Output:
+Professor uploads the distribution of Homework 1 score in ICON as above and anounced that the Homework scores follows Normal distribution with $\mu =10$, $\sigma = 2$. 
 
-```sas
-Analysis Variable : Y
+Q1. You checked your score out and found that your score was 12. What is the *z-score* of your homework score?
 
-   N      Mean   Std Dev    Minimum   Maximum
-------------------------------------------------------------
-1000 2.0142510 0.9967128 -1.3402900 5.3321347
-------------------------------------------------------------
-```
+<details>
+<summary>
+<font color="red"> Answer </font>
+</summary>
 
-## Drawing simple random samples from our population
+$$
+z_{score} = \frac{x_{score} - 10}{2} = \frac{12 - 10}{2} = 1.
+$$
 
-We will use `proc plan` to draw a simple random sample of size $10$ from our “population” of $1000$ values. We can then use `proc means` to get summary statistics for our simple random sample by copying the selected record id’s from the proc plan output into the code for proc means.
+</details>
+<br>
 
-```sas
-proc plan seed = 25;
-factors a = 10 of 1000 ;
-run ;
+Q2. We have 75 people registered in this course. How many people got the homework scores which are below yours? (You can approximate it using the proportion method)
 
-proc means data = symm ;
-var y ;
-where i in(625 253 996 487 44 236 578 298 251 668) ;
-run ;
-```
+<details>
+<summary>
+<font color="red"> Answer </font>
+</summary>
 
-Output:
+Let us denote $X$ by the homework score of students in this class, and we know that it follows Normal distribution according to the professor:
+$$
+X_{score} \sim \mathcal{N}(10, 2)
+$$
 
-```sas
- N      Mean   Std Dev    Minimum   Maximum
---------------------------------------------------------------------
-10 2.1224623 1.1918346 -0.0975871 3.9326700
---------------------------------------------------------------------
-```
+First, we need to figure out what is the proportion of people whose homework score is below 12. We can write it down as follows using statistical notation:
 
-##  Drawing several different samples, and record sample statistics (mean and standard deviation) of each
+$$
+P(X_{score} \le 12) = ?
+$$
+Now, we cannot calculate this proportion directly, since $X_{score}$ does not follow standard Normal distribution rather it follows $\mathcal{N}(10, 2)$. How can we conver this $X$ to $Z$? Standardization formula!
 
-1. Do the following:
+According to standardization formula, we know the following:
 
-    - Draw a simple random sample of size 10 from our simulated “population.” Use a different seed each time so you get different samples.
-    
-    - Calculate the sample mean and the sample standard deviation from the sample and record them in the table in the end of this lab worksheet.
+$$
+Z_{score} = \frac{X_{score} - 12}{2} \sim \mathcal{N}(0, 1)
+$$
 
-2. Sample means from a skewed distribution.
+If you find the *z-score* in the standard Normal table, you will know that
+$$
+P(X_{score} \le 12) \overset{stdardization}{=} P(Z_{score} \le 1) \overset{z-table}{=} 0.8413 
+$$
 
-    - Use the code below to simulate a dataset from a skewed distribution.
-      ```sas
-      data skewed ;
-      seed = 325 ;
-      do i = 1 to 1000 ;
-      y = 2 + rangam(seed, 2) ;
-      output ;
-      end ;
-      drop seed ;
-      run ;
-      ```
-    - Use `proc univariate` to verify that you got a skewed distribution.
-      ```sas
-      proc univariate plot data = skewed ;
-      var y ;
-      run ;
-      ```
-    - Draw a simple random sample of size 10 from the skewed population. Calculate the sample mean and the sample standard deviation from the sample and record them in the table in the end of this lab worksheet.
+Thus, we can conclude that there are 84.13% of people in this class have the homework score below 12, which is your score. So our final answer will be
+
+$$
+75 \times 0.8413 \approx 64
+$$
+
+About 64 students.
+
+</details>
+<br>
+
+**Exercise. How many people got the homework scores which are between 10 and 12?**
+
+<details>
+<summary>
+<emsp><font color="red"> Answer </font>
+</summary>
+$$
+75 \times 0.3413 \approx 26
+$$
+
+About 26 students. Why?
+</details>
+
