@@ -44,7 +44,7 @@ run ;</code></pre>
 <h3>Scatter plots</h3>
 <p>Let us draw the scatter plot in SAS. Here is the syntax of drawing scatter plot:</p>
 <pre class="sas"><code>PROC sgscatter  DATA=DATASET;
-   PLOT VARIABLE_1 * VARIABLE_2
+   PLOT VARIABLE_1 * VARIABLE_2;
 RUN;</code></pre>
 <p>We have many variables in our data set. Let us pick <code>pch</code> and <code>pcgdp</code>.</p>
 <pre class="sas"><code>proc sgscatter data = OECD ;
