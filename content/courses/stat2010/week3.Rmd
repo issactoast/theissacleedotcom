@@ -53,7 +53,7 @@ Let us draw the scatter plot in SAS. Here is the syntax of drawing scatter plot:
 
 ```sas
 PROC sgscatter  DATA=DATASET;
-   PLOT VARIABLE_1 * VARIABLE_2
+   PLOT VARIABLE_1 * VARIABLE_2;
 RUN;
 ```
 
