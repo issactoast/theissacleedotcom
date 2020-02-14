@@ -2,7 +2,7 @@
 date: "2018-09-09T00:00:00Z"
 draft: false
 lastmod: "2018-09-09T00:00:00Z"
-linktitle: STAT:2010 - Statistical Methods and Computing
+linktitle: STAT:2010 - Statistical Methods and Computing (SAS version)
 menu:
   stat2010:
     name: Overview

@@ -211,7 +211,7 @@ About 64 students.
 </details>
 <br>
 
-**Exercise. How many people got the homework scores which are between 10 and 12?**
+**Exercise.** How many people got the homework scores which are between 10 and 12?
 
 <details>
 <summary>
@@ -224,3 +224,21 @@ $$
 About 26 students. Why?
 </details>
 
+**Exercise (Hard but MUST be in the exam).** The professor told you that you have made a top 8% of the class room based on the homework score. Can you guess your homework score?
+
+<details>
+<summary>
+<emsp><font color="red"> Answer </font>
+</summary>
+- Step 1. Find the $z$ score which corresponds to 0.92. (why?)
+  $z$ score is 1.41.
+- Step 2. Convert $z$ score to the homework distribution scale.
+$$
+\begin{align*}
+your\underline{ }score & =\mu+\sigma\times z\\
+ & =10+2\times1.41\\
+ & =12.82
+\end{align*}
+$$
+Your score is around 12.82.
+</details>
