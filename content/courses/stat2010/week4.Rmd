@@ -223,6 +223,7 @@ $$
 
 About 26 students. Why?
 </details>
+<br>
 
 **Exercise (Hard but MUST be in the exam).** The professor told you that you have made a top 8% of the class room based on the homework score. Can you guess your homework score?
 
