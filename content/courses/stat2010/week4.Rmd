@@ -27,7 +27,7 @@ Here are some characteristics of all Normal curves;
     - It can be specified by its mean and standard deviation.
     - Mean is related to center of the distribution.
     - Sd controls the spread of the distribution.
-    - All Normal distribution obey the 68-95-99.7 rule.
+    - All Normal distributions obey the 68-95-99.7 rule.
 
 Our textbook use the following notation for refering a specific normal distribution;
 
@@ -67,9 +67,9 @@ axis(1, at = seq(-4, 4, by = 2), las = 1)
 
 The rule is as follows;
 
-    - Approx. 68% of the obs. fall within one std. range of the mean.
-    - Approx. 95% of the obs. fall within two std. range of the mean.
-    - Approx. 99.7% of the obs. fall within three std. range of the mean.
+    - Approx. 68% of the obs. fall within one std. range from the mean.
+    - Approx. 95% of the obs. fall within two std. range from the mean.
+    - Approx. 99.7% of the obs. fall within three std. range from the mean.
 
 ## The standard Normal distrbituion
 
