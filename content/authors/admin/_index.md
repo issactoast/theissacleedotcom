@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-bio: I believe anyone can learn anything with proper education process.
+bio: I believe anyone can learn anything with a proper education process.
 education:
   courses:
   - course: MS in Actuarial Science
