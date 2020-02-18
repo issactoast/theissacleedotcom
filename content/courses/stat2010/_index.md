@@ -8,7 +8,7 @@ menu:
     name: Overview
     weight: 1
 summary: Methods of data description and analysis using SAS; descriptive statistics, graphical presentation, estimation, hypothesis testing, sample size, power; emphasis on learning statistical methods and concepts through hands-on experience with real data.
-title: Overview
+title: Welcome to STAT:2010
 toc: true
 type: docs
 weight: 1
@@ -17,9 +17,6 @@ weight: 1
 Image credit: [**U of Iowa**](https://stat.uiowa.edu/sites/stat.uiowa.edu/files/styles/feature/public/field/image/home_page12_5.jpg?itok=kZHhEn5I)
 
 ![Image credit](stat2010.jpg) 
-
-
-## Welcome to STAT:2010
 
 ### Instructor
 
