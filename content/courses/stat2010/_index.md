@@ -4,7 +4,7 @@ draft: false
 lastmod: "2018-09-09T00:00:00Z"
 linktitle: STAT:2010 - Statistical Methods and Computing (SAS version)
 menu:
-  stat2010:
+  stat2010: 
     name: Overview
     weight: 1
 summary: Methods of data description and analysis using SAS; descriptive statistics, graphical presentation, estimation, hypothesis testing, sample size, power; emphasis on learning statistical methods and concepts through hands-on experience with real data.
@@ -14,8 +14,10 @@ type: docs
 weight: 1
 ---
 
+Image credit: [**U of Iowa**](https://stat.uiowa.edu/sites/stat.uiowa.edu/files/styles/feature/public/field/image/home_page12_5.jpg?itok=kZHhEn5I)
 
-![](stat2010.jpg)
+![Image credit](stat2010.jpg) 
+
 
 ## Welcome to STAT:2010
 
