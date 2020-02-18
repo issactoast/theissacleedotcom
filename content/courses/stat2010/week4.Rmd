@@ -17,6 +17,16 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+## Class video
+
+The class video is attached here so that you can watch my lecture again when you prepare the exams.
+
+- If you have questions about my lecture, please use **the comment section** at the bottom of this documents.
+
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/T0EjaD8me14" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 ## Normal distribution
 
 From the basic statistics course, we are already familiar with a bell-shape distribution called Normal distribution.
