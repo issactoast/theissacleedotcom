@@ -99,8 +99,8 @@ y_{new} &amp; =\left(\begin{array}{cc}
 \]</span>
 where <span class="math inline">\(\hat{y}_{new}^{old}\)</span> can be interpreted as the prediction value of our new observation, <span class="math inline">\(y_{new}\)</span>, with old information of beta. Thus, using the recursive least square method, <strong>we want to update the estimation of beta by adding the prediction error value for the new observation with the weight of <span class="math inline">\(K\)</span></strong>. So, how do we determine <span class="math inline">\(K\)</span>? Why the recursive least square follow this specific update form?</p>
 </div>
-<div id="unbiasness" class="section level2">
-<h2>Unbiasness</h2>
+<div id="unbiasedness" class="section level2">
+<h2>Unbiasedness</h2>
 <p>First, if we use this form of update equation, we can confirm that our update of the estimate of the beta will be unbiased. Note, our <span class="math inline">\(\hat{\beta_{old}}\)</span> is the least square estimation of beta, which means we assume it is unbiased estimator as follows;</p>
 <p><span class="math display">\[
 \begin{align*}

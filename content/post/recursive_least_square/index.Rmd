@@ -113,7 +113,7 @@ y_{new} & =\left(\begin{array}{cc}
 $$
 where $\hat{y}_{new}^{old}$ can be interpreted as the prediction value of our new observation, $y_{new}$, with old information of beta. Thus, using the recursive least square method, **we want to update the estimation of beta by adding the prediction error value for the new observation with the weight of $K$**. So, how do we determine $K$? Why the recursive least square follow this specific update form?
 
-## Unbiasness
+## Unbiasedness
 
 First, if we use this form of update equation, we can confirm that our update of the estimate of the beta will be unbiased. Note, our $\hat{\beta_{old}}$ is the least square estimation of beta, which means we assume it is unbiased estimator as follows;
 
