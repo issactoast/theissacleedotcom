@@ -18,16 +18,20 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Creating a simulated dataset in SAS
 
-The following code will create a simulated dataset with 1000 observations drawn from a normal distribution with mean $\mu$ = 2 and standard deviation $\sigma$ = 1.
+The following code will create a simulated dataset with 1000 observations drawn from a normal distribution with mean $\mu$ = 2 and standard deviation $\sigma$ = 1. Note that the function `rand()` has a three options for generating the random sample following normal distribution as follows:
+
+```{r eval=FALSE}
+rand("Normal", mu, sigma)
+```
+
+Let us run the following code in SAS;
 
 ```sas
-options linesize = 72 ;
-
-data symm ;
+data symm(keep=y) ;     * only keep y;
 seed = 32542 ;
 
 do i = 1 to 1000 ;
-   y = 2 + rannor(seed) ;
+   y = rand("Normal", 2, 1);
    output ;
 end ;
 
@@ -35,11 +39,11 @@ drop seed ;
 run ;
 ```
 
-We are going to treat this simulated dataset as a population – this is the complete set of items in which we are interested. To display just the first 10 records of this dataset,
+To check the result, we don't need to check the whole data set, instead, we can use the following option in print procedure. 
 
 ```sas
-proc print data = symm (obs=10) ;
-run ;
+proc print data = symm(obs = 10);
+run;
 ```
 
 ## Proc means
@@ -63,33 +67,33 @@ Output:
 ```sas
 Analysis Variable : Y
 
-   N      Mean   Std Dev    Minimum   Maximum
-------------------------------------------------------------
-1000 2.0142510 0.9967128 -1.3402900 5.3321347
-------------------------------------------------------------
+   N       Mean            Std Dev        Minimum          Maximum
+--------------------------------------------------------------------
+1000       2.0250454       0.9787607      -2.5489342       4.9129041
+--------------------------------------------------------------------
 ```
 
 ## Drawing simple random samples from our population
 
-We will use `proc plan` to draw a simple random sample of size $10$ from our “population” of $1000$ values. We can then use `proc means` to get summary statistics for our simple random sample by copying the selected record id’s from the proc plan output into the code for proc means.
+We will use `proc surveyselect` to draw a simple random sample of size $10$ from our “population” data `symm` of $1000$ values. We can then use `proc means` to get summary statistics for our simple random sample.
 
 ```sas
-proc plan seed = 25;
-factors a = 10 of 1000 ;
-run ;
+proc surveyselect 
+  data=symm out=sample_data method=SRS
+  sampsize=100 seed=1234;
+run;
 
-proc means data = symm ;
+proc means data = sample_data ;
 var y ;
-where i in(625 253 996 487 44 236 578 298 251 668) ;
 run ;
 ```
 
 Output:
 
 ```sas
- N      Mean   Std Dev    Minimum   Maximum
+ N        Mean            Std Dev        Minimum          Maximum
 --------------------------------------------------------------------
-10 2.1224623 1.1918346 -0.0975871 3.9326700
+100       1.9783044       1.0317330      -0.1644005       4.2722121
 --------------------------------------------------------------------
 ```
 
@@ -108,7 +112,7 @@ Output:
       data skewed ;
       seed = 325 ;
       do i = 1 to 1000 ;
-      y = 2 + rangam(seed, 2) ;
+      y = rand("Gamma", 2, 1) ;
       output ;
       end ;
       drop seed ;
