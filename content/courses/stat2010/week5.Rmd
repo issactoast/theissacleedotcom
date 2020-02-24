@@ -16,6 +16,16 @@ weight: 5    # related to next page to show
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Class video
+
+The class video is attached here so that you can watch my lecture again when you prepare the exams.
+
+- If you have questions about my lecture, please use **the comment section** at the bottom of this documents.
+
+<div align="center">
+<iframe width="560" height="315" src="https://youtu.be/MHBBGU9Y1cY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 ## Creating a simulated dataset in SAS
 
 The following code will create a simulated dataset with 1000 observations drawn from a normal distribution with mean $\mu$ = 2 and standard deviation $\sigma$ = 1.

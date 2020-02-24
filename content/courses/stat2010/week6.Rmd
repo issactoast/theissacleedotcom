@@ -1,0 +1,21 @@
+---
+date: "2020-02-10T00:00:00+01:00"
+draft: false
+linktitle: Week 6 - TBD
+menu:
+  stat2010:
+    parent: Contents
+    weight: 6
+title: Lab 6 - TBD
+type: docs
+weight: 6    # related to next page to show
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## TBD
+
