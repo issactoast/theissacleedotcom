@@ -26,22 +26,22 @@ weight: 5    # related to next page to show
 </div>
 <div id="creating-a-simulated-dataset-in-sas" class="section level2">
 <h2>Creating a simulated dataset in SAS</h2>
-<p>The following code will create a simulated dataset with 1000 observations drawn from a normal distribution with mean <span class="math inline">\(\mu\)</span> = 2 and standard deviation <span class="math inline">\(\sigma\)</span> = 1.</p>
-<pre class="sas"><code>options linesize = 72 ;
-
-data symm ;
+<p>The following code will create a simulated dataset with 1000 observations drawn from a normal distribution with mean <span class="math inline">\(\mu\)</span> = 2 and standard deviation <span class="math inline">\(\sigma\)</span> = 1. Note that the function <code>rand()</code> has a three options for generating the random sample following normal distribution as follows:</p>
+<pre class="r"><code>rand(&quot;Normal&quot;, mu, sigma)</code></pre>
+<p>Let us run the following code in SAS;</p>
+<pre class="sas"><code>data symm(keep=y) ;     * only keep y;
 seed = 32542 ;
 
 do i = 1 to 1000 ;
-   y = 2 + rannor(seed) ;
+   y = rand(&quot;Normal&quot;, 2, 1);
    output ;
 end ;
 
 drop seed ;
 run ;</code></pre>
-<p>We are going to treat this simulated dataset as a population – this is the complete set of items in which we are interested. To display just the first 10 records of this dataset,</p>
-<pre class="sas"><code>proc print data = symm (obs=10) ;
-run ;</code></pre>
+<p>To check the result, we don’t need to check the whole data set, instead, we can use the following option in print procedure.</p>
+<pre class="sas"><code>proc print data = symm(obs = 10);
+run;</code></pre>
 </div>
 <div id="proc-means" class="section level2">
 <h2>Proc means</h2>
@@ -59,26 +59,26 @@ run ;</code></pre>
 <p>Output:</p>
 <pre class="sas"><code>Analysis Variable : Y
 
-   N      Mean   Std Dev    Minimum   Maximum
-------------------------------------------------------------
-1000 2.0142510 0.9967128 -1.3402900 5.3321347
-------------------------------------------------------------</code></pre>
+   N       Mean            Std Dev        Minimum          Maximum
+--------------------------------------------------------------------
+1000       2.0250454       0.9787607      -2.5489342       4.9129041
+--------------------------------------------------------------------</code></pre>
 </div>
 <div id="drawing-simple-random-samples-from-our-population" class="section level2">
 <h2>Drawing simple random samples from our population</h2>
-<p>We will use <code>proc plan</code> to draw a simple random sample of size <span class="math inline">\(10\)</span> from our “population” of <span class="math inline">\(1000\)</span> values. We can then use <code>proc means</code> to get summary statistics for our simple random sample by copying the selected record id’s from the proc plan output into the code for proc means.</p>
-<pre class="sas"><code>proc plan seed = 25;
-factors a = 10 of 1000 ;
-run ;
+<p>We will use <code>proc surveyselect</code> to draw a simple random sample of size <span class="math inline">\(10\)</span> from our “population” data <code>symm</code> of <span class="math inline">\(1000\)</span> values. We can then use <code>proc means</code> to get summary statistics for our simple random sample.</p>
+<pre class="sas"><code>proc surveyselect 
+  data=symm out=sample_data method=SRS
+  sampsize=100 seed=1234;
+run;
 
-proc means data = symm ;
+proc means data = sample_data ;
 var y ;
-where i in(625 253 996 487 44 236 578 298 251 668) ;
 run ;</code></pre>
 <p>Output:</p>
-<pre class="sas"><code> N      Mean   Std Dev    Minimum   Maximum
+<pre class="sas"><code> N        Mean            Std Dev        Minimum          Maximum
 --------------------------------------------------------------------
-10 2.1224623 1.1918346 -0.0975871 3.9326700
+100       1.9783044       1.0317330      -0.1644005       4.2722121
 --------------------------------------------------------------------</code></pre>
 </div>
 <div id="drawing-several-different-samples-and-record-sample-statistics-mean-and-standard-deviation-of-each" class="section level2">
@@ -95,7 +95,7 @@ run ;</code></pre>
 <pre class="sas"><code>data skewed ;
 seed = 325 ;
 do i = 1 to 1000 ;
-y = 2 + rangam(seed, 2) ;
+y = rand(&quot;Gamma&quot;, 2, 1) ;
 output ;
 end ;
 drop seed ;
