@@ -108,7 +108,7 @@ run;</code></pre>
 <pre class="sas"><code>proc tabulate data = gulan ;
 class group ;                 * class statement identifies qualitative variables ;
 var score ;                   * var statement identifies quantitative variables ;
-tables group , score * (mean stddev) ;
+tables group , score * (N mean stddev) ;
 run ;</code></pre>
 <pre class="sas"><code>---------------------------------------------------------
 |                | score                                |
@@ -124,6 +124,8 @@ run ;</code></pre>
 |----------------+------------+------------+------------|
 |Neither         | 13.00      | 103.92     | 17.71      |
 ---------------------------------------------------------</code></pre>
+<p>There are many options that you can use in <code>proc tabulate</code> as follows:</p>
+<p><img src="week6/tabulate_options.png" /></p>
 </div>
 <div id="one-more-option-in-proc-means" class="section level3">
 <h3>One more option in <code>proc means</code></h3>

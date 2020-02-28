@@ -127,7 +127,7 @@ After you load the data, you can make a table as follows:
 proc tabulate data = gulan ;
 class group ;                 * class statement identifies qualitative variables ;
 var score ;                   * var statement identifies quantitative variables ;
-tables group , score * (mean stddev) ;
+tables group , score * (N mean stddev) ;
 run ;
 ```
 
@@ -147,6 +147,10 @@ run ;
 |Neither         | 13.00      | 103.92     | 17.71      |
 ---------------------------------------------------------
 ```
+
+There are many options that you can use in `proc tabulate` as follows:
+
+![](week6/tabulate_options.png)
 
 ### One more option in `proc means`
 
