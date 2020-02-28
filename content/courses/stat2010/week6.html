@@ -95,7 +95,7 @@ which indicates that we have information about mean and std. only. We don’t kn
 </ul>
 <p>After 4 weeks, each patient was scored on self-efficacy. Self-efficacy was measured on <em>a continuous scale and scores were assumed to be distributed normally</em> in each of the populations of interest. Her results are in the dataset “gulanick.dat.” We wish to produce a table that shows the number of observations and the mean and standard deviation of scores within each of the three groups.</p>
 <pre class="sas"><code>proc format ;
-value grpfmt 1 = ’Teaching and Training’ 2 = ’Teaching’ 3 = ’Neither’ ;
+value grpfmt 1 = &#39;Teaching and Training&#39; 2 = &#39;Teaching&#39; 3 = &#39;Neither&#39; ;
 run ;
 
 filename dataurl url &quot;http://homepage.stat.uiowa.edu/~kcowles/Datasets/gulanick.dat&quot;;
@@ -108,7 +108,7 @@ run;</code></pre>
 <pre class="sas"><code>proc tabulate data = gulan ;
 class group ;                 * class statement identifies qualitative variables ;
 var score ;                   * var statement identifies quantitative variables ;
-tables group , score
+tables group , score ;
 run ;</code></pre>
 <pre class="sas"><code>---------------------------------------------------------
 |                | score                                |
@@ -137,18 +137,18 @@ run ;</code></pre>
 <h3>Billion data</h3>
 <p>Here is the another practice SAS code for <code>billion</code> data.</p>
 <pre class="sas"><code>proc format ;
-value $regfmt ’A’ = ’Asia’ ’E’ = ’Europe’ ’M’ = ’Middle East’
-’O’ = ’Other’ ’U’ = ’US’ ;
-value amtfmt low-&lt;5 = ’&lt;5’ 5-&lt;10 = ’5-&lt;10’ 10-&lt;20 = ’10-&lt;20’ 20-high = ’20+’ ;
+value $regfmt &#39;A&#39; = &#39;Asia&#39; &#39;E&#39; = &#39;Europe&#39; &#39;M&#39; = &#39;Middle East&#39;
+&#39;O&#39; = &#39;Other&#39; &#39;U&#39; = &#39;US&#39; ;
+value amtfmt low-&lt;5 = &#39;&lt;5&#39; 5-&lt;10 = &#39;5-&lt;10&#39; 10-&lt;20 = &#39;10-&lt;20&#39; 20-high = &#39;20+&#39; ;
 run ;
 
-filename url &quot;http://homepage.divms.uiowa.edu/~kcowles/Datasets/billion.dat&quot;;
+filename bill url &quot;http://homepage.divms.uiowa.edu/~kcowles/Datasets/billion.dat&quot;;
 data billion ;
 infile bill;
 input wealth age region $ ;
 format region $regfmt. wealth amtfmt. ;
-label wealth = ’Wealth in Billion $’
-age = ’Age in Years’ ;
+label wealth = &#39;Wealth in Billion $&#39;
+age = &#39;Age in Years&#39; ;
 run ;</code></pre>
 <p>Let us make a summary table using region and age varible.</p>
 <pre class="sas"><code>proc tabulate data = billion ;

@@ -98,7 +98,7 @@ We can see the following things happen via simulator:
 
 ### Gulanick data
 
-Gulanick (Heart and Lung, 1991 ) studied patients who were recovering from heart surgery. She was interested in whether different combinations of supervised exercise or teaching would affect patients’ self-efficacy (or confidence) to perform physical activity.
+Gulanick (Heart and Lung, 1991 ) studied patients who were recovering from heart surgery. She was interested in whether different combinations of supervised exercise or teaching would affect patients' self-efficacy (or confidence) to perform physical activity.
 
 Patients were randomly assigned to one of three groups. 
 
@@ -110,7 +110,7 @@ After 4 weeks, each patient was scored on self-efficacy. Self-efficacy was measu
 
 ```sas
 proc format ;
-value grpfmt 1 = ’Teaching and Training’ 2 = ’Teaching’ 3 = ’Neither’ ;
+value grpfmt 1 = 'Teaching and Training' 2 = 'Teaching' 3 = 'Neither' ;
 run ;
 
 filename dataurl url "http://homepage.stat.uiowa.edu/~kcowles/Datasets/gulanick.dat";
@@ -127,7 +127,7 @@ After you load the data, you can make a table as follows:
 proc tabulate data = gulan ;
 class group ;                 * class statement identifies qualitative variables ;
 var score ;                   * var statement identifies quantitative variables ;
-tables group , score
+tables group , score ;
 run ;
 ```
 
@@ -165,18 +165,18 @@ Here is the another practice SAS code for `billion` data.
 
 ```sas
 proc format ;
-value $regfmt ’A’ = ’Asia’ ’E’ = ’Europe’ ’M’ = ’Middle East’
-’O’ = ’Other’ ’U’ = ’US’ ;
-value amtfmt low-<5 = ’<5’ 5-<10 = ’5-<10’ 10-<20 = ’10-<20’ 20-high = ’20+’ ;
+value $regfmt 'A' = 'Asia' 'E' = 'Europe' 'M' = 'Middle East'
+'O' = 'Other' 'U' = 'US' ;
+value amtfmt low-<5 = '<5' 5-<10 = '5-<10' 10-<20 = '10-<20' 20-high = '20+' ;
 run ;
 
-filename url "http://homepage.divms.uiowa.edu/~kcowles/Datasets/billion.dat";
+filename bill url "http://homepage.divms.uiowa.edu/~kcowles/Datasets/billion.dat";
 data billion ;
 infile bill;
 input wealth age region $ ;
 format region $regfmt. wealth amtfmt. ;
-label wealth = ’Wealth in Billion $’
-age = ’Age in Years’ ;
+label wealth = 'Wealth in Billion $'
+age = 'Age in Years' ;
 run ;
 ```
 
