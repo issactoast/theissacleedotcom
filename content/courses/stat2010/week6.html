@@ -108,7 +108,7 @@ run;</code></pre>
 <pre class="sas"><code>proc tabulate data = gulan ;
 class group ;                 * class statement identifies qualitative variables ;
 var score ;                   * var statement identifies quantitative variables ;
-tables group , score ;
+tables group , score * (mean stddev) ;
 run ;</code></pre>
 <pre class="sas"><code>---------------------------------------------------------
 |                | score                                |

@@ -127,7 +127,7 @@ After you load the data, you can make a table as follows:
 proc tabulate data = gulan ;
 class group ;                 * class statement identifies qualitative variables ;
 var score ;                   * var statement identifies quantitative variables ;
-tables group , score ;
+tables group , score * (mean stddev) ;
 run ;
 ```
 
