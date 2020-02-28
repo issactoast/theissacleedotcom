@@ -150,7 +150,7 @@ run ;
 
 There are many options that you can use in `proc tabulate` as follows:
 
-![](week6/tabulate_options.png)
+![](tabulate_options.png)
 
 ### One more option in `proc means`
 
