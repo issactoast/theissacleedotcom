@@ -17,7 +17,15 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-## Demonstration of the sampling distribution of $\overline{X}$
+The class video is attached here so that you can watch my lecture again when you prepare the exams.
+
+- If you have questions about my lecture, please use **the comment section** at the bottom of this documents.
+
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_cwQH84eP7Q?start=14" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+## The sampling distribution of $\overline{X}$
 
 There is a good website for checking out the distribution of the sample mean $\overline{X}$. Let's click to the link below, then click “Begin” on the upper left corner.
 
