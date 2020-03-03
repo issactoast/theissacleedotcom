@@ -165,7 +165,7 @@ $$
 $$
 where $p_I$ and $p_B$ represent the measurement of the vector $\underline{a}$ in the initial frame and the body frame
 
-
+  
 
 ### Reference
 
