@@ -27,7 +27,7 @@ tags:
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-This article is the introduction to the basic concept in 2D space. The following are the `R` packages used in this post.
+This article is an introduction to the basic concept in 2D space. The following are the `R` packages used in this post.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(knitr)
@@ -55,7 +55,7 @@ ggplot(data = mypoint) +
   ylim(0, 3) + xlim(0, 4) + coord_fixed(ratio = 1)
 ```
 
-Now, if we rotate the vector $\underline{a}$ by a counterclockwise angle $30^\circ$ with respect to the origin, then the result vector $\underline{a}'$ will look like this.
+Now, if we rotate the vector $\underline{a}$ by a counterclockwise angle $30^\circ$ about the origin, then the result vector $\underline{a}'$ will look like this.
 
 ```{r echo=FALSE}
 rotation_mat <- function(theta, degree = FALSE){
@@ -84,19 +84,18 @@ ggplot(data = mypoint) +
 
 ### Rotation matrix 
 
-In high school, we have learned this counter clockwise rotation of a vector by angle $\theta$ (radian) can be represented by the matrix $R$, called a rotation matrix, as follows:
+The matrix $R$, called a rotation matrix, represents the counter-clockwise rotation by angle $\theta$ (radian), which can be written as follows:
 $$
 R_{\theta}=\left(\begin{array}{cc}
 cos\left(\theta\right) & -sin\left(\theta\right)\\
 sin\left(\theta\right) & cos\left(\theta\right)
 \end{array}\right)
 $$
-Also, the rotation process can be written as the multiplication of the rotation vector and the given vector as follows:
+To rotate a vector using the rotation matrix, we need to multiply the rotation matrix by the vector as follows:
 $$
 \underline{a}' = R_{\theta} \underline{a}
 $$
-
-Thus, in the above example, since we have a couter clockwise $30 ^\circ$ rotation, we have the following rotation matrix:
+where $\underline{a}'$ indicates the rotated vector of $\underline{a}$. Thus, in the above example, since we have a counter-clockwise $30 ^\circ$ rotation, we have the following rotation matrix:
 ```{r}
 rotation_mat <- function(theta, degree = FALSE){
   if (degree){
@@ -111,7 +110,7 @@ rmat
 
 ```
 
-Using this rotation matrix, we can calculate the end point of the rotated vector, $\underline{a}'$, as follows:
+Using this rotation matrix, we can calculate the endpoint of the rotated vector, $\underline{a}'$, as follows:
 
 ```{r}
 as.vector(rmat %*% c(3, 1))
@@ -119,7 +118,8 @@ as.vector(rmat %*% c(3, 1))
 
 ## Rotation of frame in 2D space
 
-In the previous section, the rotated object was a vector. However, sometime we have a situation where the coordinate system is rotated rather than the vector. Let us consider the same example that we had in the previous section. We have the same vector $\underline{a}$ on the initial 2D space and we call this coordinate system as a reference frame. In this reference frame, the coordinates of the vector is $(3, 1)$, because the vector $\underline{a}$ can be represented as a linear combination of the basis vector $e_1, e_2$ of the frame as follows:
+In the previous section, the rotated object was a vector. However, sometimes we have a situation where the coordinate system is rotated rather than the vector. Let us consider the same example that we had in the previous section. We have the same vector $\underline{a}$ on the initial 2D space, and we call this coordinate system as a reference frame. In this reference frame, the coordinates of the vector are $(3, 1)$, because the vector $\underline{a}$ can be represented as a linear combination of the basis vector $e_1, e_2$ of the frame as follows:
+
 $$
 \underline{a}=3e_1 + 1e_2,
 $$
@@ -130,7 +130,7 @@ $$
 
 ### Rotating the reference frame
 
-What if the reference frame is rotated by an clockwise angle $\theta$ to another frame? And what will be the coordinates of the vector $\underline{a}$ in the new rotated frame? The following figure shows the situation where the intial frame is rotated by a clockwise $30 ^\circ$. The solid red lines represent the x and y axis in the new frame, called $x'$ and $y'$.
+What if the reference frame is rotated by a clockwise angle $\theta$ to another frame? Furthermore, what will be the coordinates of the vector $\underline{a}$ in the new rotating frame? The following figure shows the situation where the initial frame is rotated by a clockwise $30 ^\circ$. The solid red lines represent the x and y-axis in the new frame, called $x'$ and $y'$.
 
 ```{r echo=FALSE}
 rmat <- rotation_mat(-30, degree = TRUE)
@@ -158,9 +158,9 @@ ggplot(data = mypoint) +
   geom_segment(aes(x = 3, y = 1, xend = p_4[1], yend = p_4[2]), linetype = "dashed", col = "red") +
   ylim(-2, 3) + xlim(0, 4) + coord_fixed(ratio = 1)
 ```
-In this new frame, the coordinates of the vector $\underline{a}$ will be $(2.098076, 2.366025)$, which is the same coordinates we had in the previous vector rotation case. Thus, rotating the initial frame by a clockwise angle $\theta$ has the same effect as the counter clockwise rotation of the vector by an angle $\theta$ when we consider the measurements of the vector. 
+In the new frame, the coordinates of $\underline{a}$ will be $(2.098076, 2.366025)$, which is the same coordinates we had in the previous vector rotation case. Thus, rotating the initial frame by a clockwise angle $\theta$ has the same effect as the counter-clockwise rotation of the vector by an angle $\theta$ when we consider the measurements of the vector. 
 
-Let us define some notations to describe the situation more precisely. Let us denote $I$ and $B$ by the initial frame and the rotated frame (usually called body frame) respectively. Then, the rotating the **frame** $B$ by a counter clockwise angle $\theta$ with respect to the frame $I$ can be denoted by a matrix $C^{B|I}_{\theta}$, which can be written as follows:
+Let us define some notations to describe the situation more precisely. Let us denote $I$ and $B$ by the initial frame and the rotating frame (usually called body frame), respectively. Then, the rotating the **frame** $B$ by a counter-clockwise angle $\theta$ with respect to the frame $I$ can be denoted by a matrix $C^{B|I}_{\theta}$, which can be written as follows:
 $$
 \begin{align*}
 C_{\theta}^{B|I} & =R_{-\theta}\\
@@ -174,7 +174,7 @@ cos\left(\theta\right) & sin\left(\theta\right)\\
 \end{array}\right)
 \end{align*}
 $$
-Note that the first line in the fomula shows that the rotating the frame has the same effect of rotating the objects opposite direction. The defined matrix $C_{\theta}^{B|I}$ called direction cosine matrix (DCM). Why do we call this matrix DCM eventhough we have cos and sin function in the matrix? The answer can be shown with the conversion of sine function to the cosine function using the identities as follows:
+Note that the first line in the formula shows that the rotating the frame has the same effect of rotating the objects opposite direction. The defined matrix $C_{\theta}^{B|I}$ called direction cosine matrix (DCM). Why do we call this matrix DCM even though we have cos and sin function in the matrix? The answer can be shown with the conversion of the sine function to the cosine function using the identities as follows:
 $$
 \begin{align*}
 C_{\theta}^{B|I} & =\left(\begin{array}{cc}
@@ -202,7 +202,7 @@ DCM has also have geometric interpretation of the angles $\theta_{11}, \theta_{1
 - $\theta_{21}$: clockwise angle from $y$-axis to $x'$-axis.
 - $\theta_{22}$: counter clockwise angle from $y$-axis to $y'$-axis.
 
-Thus, in our example, we have the following values for $\theta$s:
+Thus, in our example, we have the following values for $\theta$s in the DCM:
 $$
 \left(\begin{array}{cc}
 cos\left(\theta_{11}\right) & cos\left(\theta_{12}\right)\\
@@ -213,9 +213,7 @@ cos\left(330^{\circ}\right) & cos\left(60^{\circ}\right)\\
 cos\left(120^{\circ}\right) & cos\left(330^{\circ}\right)
 \end{array}\right)
 $$
-
-We can check out the values in the matrix are the same as before.
-
+whose values are the same as before.
 ```{r}
 matrix(c(cos(11*pi / 6), cos(pi / 3), 
           cos(2*pi / 3), cos(11*pi / 6)), ncol = 2, byrow = T)
@@ -223,7 +221,7 @@ matrix(c(cos(11*pi / 6), cos(pi / 3),
 
 ## Transfer coordinates 
 
-To summarize the discussion so far, coordinates of a given vector $\underline{a}$ in the initial frame can be transfer to the rotated frame by using the following matrix multiplication.
+To summarize the discussion so far, coordinates of a given vector $\underline{a}$ in the initial frame can be transferred to the rotating frame by using the following matrix multiplication.
 $$
 \underline{a}_{B} = C^{B|I}_{\theta} \underline{a}_{I}
 $$
