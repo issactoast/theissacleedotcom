@@ -11,15 +11,16 @@ image:
   preview_only: true
 lastmod: "2019-10-01T00:00:00Z"
 projects: [telematics]
-subtitle: 'Rotation matrix'
+subtitle: 'Rotation matrix and DCM'
 summary: Introduction to the concept of rotation in 2D space.
 title: 'Rotations in 2D space'
 categories:
   - telematics
   - mathematics
 tags:
-  - Trigonometric
-  - Linearalgebra
+  - trigonometric
+  - linear algebra
+  - direction cosine matrix
 ---
 
 ```{r setup, include=FALSE}
@@ -159,16 +160,78 @@ ggplot(data = mypoint) +
 ```
 In this new frame, the coordinates of the vector $\underline{a}$ will be $(2.098076, 2.366025)$, which is the same coordinates we had in the previous vector rotation case. Thus, rotating the initial frame by a clockwise angle $\theta$ has the same effect as the counter clockwise rotation of the vector by an angle $\theta$ when we consider the measurements of the vector. 
 
-Let us define some notations to describe the situation more precisely. Let us denote $I$ and $B$ by the initial frame and the rotated frame (usually called body frame) respectively. Then, the rotation matrix $R^{B|I}_{\theta}$ can be defined as a rotation matrix, whose angle $\theta$ represents the angle between the bodyframe and the initial frame where the initial frame is the reference for measuring angle $\theta$. Note that the angle $\theta$ is measured under the right-hand rule. In our example, a counter clockwise corresponds to the positive rotation while the clockwise corresponds to the negative rotation. Then, we can set up the relationship between the measurement of a given vector $\underline{a}$ in the initial frame and the body frame as follows:
+Let us define some notations to describe the situation more precisely. Let us denote $I$ and $B$ by the initial frame and the rotated frame (usually called body frame) respectively. Then, the rotating the **frame** $B$ by a counter clockwise angle $\theta$ with respect to the frame $I$ can be denoted by a matrix $C^{B|I}_{\theta}$, which can be written as follows:
 $$
-\underline{a}_{B} = R^{B|I}_{\theta} \underline{a}_{I}
+\begin{align*}
+C_{\theta}^{B|I} & =R_{-\theta}\\
+ & =\left(\begin{array}{cc}
+cos\left(-\theta\right) & -sin\left(-\theta\right)\\
+sin\left(-\theta\right) & cos\left(-\theta\right)
+\end{array}\right)\\
+ & =\left(\begin{array}{cc}
+cos\left(\theta\right) & sin\left(\theta\right)\\
+-sin\left(\theta\right) & cos\left(\theta\right)
+\end{array}\right)
+\end{align*}
 $$
-where $p_I$ and $p_B$ represent the measurement of the vector $\underline{a}$ in the initial frame and the body frame
+Note that the first line in the fomula shows that the rotating the frame has the same effect of rotating the objects opposite direction. The defined matrix $C_{\theta}^{B|I}$ called direction cosine matrix (DCM). Why do we call this matrix DCM eventhough we have cos and sin function in the matrix? The answer can be shown with the conversion of sine function to the cosine function using the identities as follows:
+$$
+\begin{align*}
+C_{\theta}^{B|I} & =\left(\begin{array}{cc}
+cos\left(\theta\right) & sin\left(\theta\right)\\
+-sin\left(\theta\right) & cos\left(\theta\right)
+\end{array}\right)\\
+ & =\left(\begin{array}{cc}
+cos\left(\theta\right) & cos\left(\frac{\pi}{2}-\theta\right)\\
+cos\left(\frac{\pi}{2}+\theta\right) & cos\left(\theta\right)
+\end{array}\right)\\
+ & =\left(\begin{array}{cc}
+cos\left(\theta_{11}\right) & cos\left(\theta_{12}\right)\\
+cos\left(\theta_{21}\right) & cos\left(\theta_{22}\right)
+\end{array}\right)\\
+ & =\left(\begin{array}{cc}
+C_{11} & C_{12}\\
+C_{21} & C_{22}
+\end{array}\right)
+\end{align*}
+$$
+DCM has also have geometric interpretation of the angles $\theta_{11}, \theta_{12}, \theta_{21}, \theta_{21}$ as follows:
 
-  
+- $\theta_{11}$: counter clockwise angle from $x$-axis to $x'$-axis.
+- $\theta_{12}$: counter clockwise angle from $x$-axis to $y'$-axis.
+- $\theta_{21}$: clockwise angle from $y$-axis to $x'$-axis.
+- $\theta_{22}$: counter clockwise angle from $y$-axis to $y'$-axis.
+
+Thus, in our example, we have the following values for $\theta$s:
+$$
+\left(\begin{array}{cc}
+cos\left(\theta_{11}\right) & cos\left(\theta_{12}\right)\\
+cos\left(\theta_{21}\right) & cos\left(\theta_{22}\right)
+\end{array}\right)
+=	\left(\begin{array}{cc}
+cos\left(330^{\circ}\right) & cos\left(60^{\circ}\right)\\
+cos\left(120^{\circ}\right) & cos\left(330^{\circ}\right)
+\end{array}\right)
+$$
+
+We can check out the values in the matrix are the same as before.
+
+```{r}
+matrix(c(cos(11*pi / 6), cos(pi / 3), 
+          cos(2*pi / 3), cos(11*pi / 6)), ncol = 2, byrow = T)
+```
+
+## Transfer coordinates 
+
+To summarize the discussion so far, coordinates of a given vector $\underline{a}$ in the initial frame can be transfer to the rotated frame by using the following matrix multiplication.
+$$
+\underline{a}_{B} = C^{B|I}_{\theta} \underline{a}_{I}
+$$
+where $\underline{a}_I$ and $\underline{a}_B$ represent the coordinates (or measurement) of the vector $\underline{a}$ in the initial frame and the body frame.
+
 
 ### Reference
 
-[1] Luke Tierney, STAT:7400 Computer Intensive Statistics Note:
-http://homepage.divms.uiowa.edu/~luke/classes/STAT7400/notes.pdf
-  
+[1] Kim, P. (2013). Rigid body dynamics for beginners: euler angles & quaternions.
+
+[2] Green, P. E. (2014). Mathematical tools for applied multivariate analysis. Academic Press.
