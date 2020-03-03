@@ -225,7 +225,7 @@ To summarize the discussion so far, coordinates of a given vector $\underline{a}
 $$
 \underline{a}_{B} = C^{B|I}_{\theta} \underline{a}_{I}
 $$
-where $\underline{a}_I$ and $\underline{a}_B$ represent the coordinates (or measurement) of the vector $\underline{a}$ in the initial frame and the body frame.
+where $\underline{a}_I$ and $\underline{a}_B$ represent the coordinates (or measurement) of the vector $\underline{a}$ in the initial frame and the body frame, respectively.
 
 
 ### Reference
