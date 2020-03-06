@@ -1,12 +1,12 @@
 ---
 date: "2020-02-10T00:00:00+01:00"
 draft: false
-linktitle: Week 7 - C.I. for the mean
+linktitle: Week 7 - C.I. for the mean and prop.
 menu:
   stat2010:
     parent: Contents
     weight: 7
-title: Lab 7 - Confidence Interval for a population mean
+title: Lab 7 - Confidence Interval for a population mean and prop.
 type: docs
 weight: 7    # related to next page to show
 ---
@@ -49,7 +49,7 @@ set.seed(1234)
 paste(round(rnorm(20, 19, 3), digits = 1), "%")
 ```
 
-Issac knows that the std. of his restaurant tip percentage is 3.
+Issac knows that the std. of his restaurant tip percentage, $\sigma$, is 3.
 
 **Question 1**. How can you estimate the average percentage of the tip in his store?
 
@@ -85,16 +85,47 @@ run ;
 
 Using this information, we can construct the 95% confidence interval for the population mean percent of the tip in Issac's restaurant.
 
+### Unknown $\sigma$ (Chap. 18)
+
 **Question 3**. What if Issac does not have any information about the population std. of the tip percentage in his store? How can he construct an interval for estimate the mean percentage with a 95 confidence?
 
 Confidence interval for $\mu$ without the infomation about $\sigma$ can be constructed by
 $$
-from \quad \overline{x} - z^{*}\frac{s}{\sqrt{n}} \quad to \quad \overline{x} + z^{*}\frac{s}{\sqrt{n}}
+from \quad \overline{x} - t^{*}\frac{s}{\sqrt{n}} \quad to \quad \overline{x} + t^{*}\frac{s}{\sqrt{n}}
 $$
-where $s$ indicates the sample std.! This can be done in SAS as follows:
+where $s$ indicates the sample std., $t^*$ in indicates a different distribution (but very similar)! This can be done in SAS as follows:
 
 ```sas
 proc means n mean clm ;
 var percentage;
 run ;
 ```
+
+## Confidence interval for population proportion
+
+We have learned the distribution of sample mean last week. Later chapter, we will learn the distribution of sample proportion!
+
+For large sample size $n$, we can say:
+
+$$
+\hat{p} \sim \mathcal{N}(p, \sqrt{\frac{p(1-p)}{n}})
+$$
+
+How can we use this fact to infer the population mean?
+
+- Estimate for $p$: $\hat{p} = \frac{num. of successes}{n}$
+- C.I. for $p$
+
+$$
+from \quad \hat{p} - z^{*}\sqrt{\frac{p(1-p)}{n}} \quad to \quad \hat{p} + z^{*}\sqrt{\frac{p(1-p)}{n}}
+$$
+
+This does not make any sense, since the whole point of doing this is to figure out what the $p$ is! So, let's just replace $p$ with $\hat{p}$!
+
+$$
+from \quad \hat{p} - z^{*}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \quad to \quad \hat{p} + z^{*}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}
+$$
+
+Check this [page](https://wuhanvirus.kr/) out. Use right click and translate into English. What is the estimate of the death rate in china?
+
+See this [article](https://www.factcheck.org/2020/03/trump-and-the-coronavirus-death-rate/) and consider your opinion about the real death rate.
