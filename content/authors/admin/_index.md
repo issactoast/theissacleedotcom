@@ -10,7 +10,7 @@ education:
     institution: Sungkyunkwan University, 2012
 interests:
 - Pay-How-You-Drive insurance telematics data
-- Replacing nested monte calro simulation in insurance product valuation process.
+- Replacing nested monte carlo simulation in insurance product valuation process.
 - Making compression portfoilo of insurance products
 email: ""
 name: Issac Lee

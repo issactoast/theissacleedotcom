@@ -46,7 +46,7 @@ Issac wants to figure out what is the average percent of the tip in the U of Iow
 
 ```{r echo = FALSE}
 set.seed(1234)
-paste(round(rnorm(20, 19, 3), digits = 1), "%")
+paste(round(rnorm(20, 19, 3), digits = 1))
 ```
 
 Issac knows that the std. of his restaurant tip percentage, $\sigma$, is 3.
