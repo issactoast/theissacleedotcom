@@ -1,0 +1,120 @@
+---
+date: "2020-02-10T00:00:00+01:00"
+draft: false
+linktitle: Week 7 - C.I. for the mean and prop.
+menu:
+  stat2010:
+    parent: Contents
+    weight: 7
+title: Lab 7 - Confidence Interval for a population mean and prop.
+type: docs
+weight: 7    # related to next page to show
+---
+
+
+
+<p>The class video is attached here so that you can watch my lecture again when you prepare the exams.</p>
+<ul>
+<li>If you have questions about my lecture, please use <strong>the comment section</strong> at the bottom of this documents.</li>
+</ul>
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PsmZRADT0W0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
+<div id="confidence-interval-for-population-mean-known-sigma" class="section level2">
+<h2>Confidence interval for population mean (Known <span class="math inline">\(\sigma\)</span>)</h2>
+<p>We have learned that the sampling distribution of <span class="math inline">\(\overline{X}\)</span> follows Normal distribution:
+<span class="math display">\[
+\mathcal{N}(\mu, \frac{\sigma}{\sqrt{n}})
+\]</span>
+where <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>, and <span class="math inline">\(n\)</span> represent the population mean, the population std., and the sample size, respectively.</p>
+<p>Confidence interval for <span class="math inline">\(\mu\)</span> can be constructed by</p>
+<p><span class="math display">\[
+from \quad \overline{x} - z^{*}\frac{\sigma}{\sqrt{n}} \quad to \quad \overline{x} + z^{*}\frac{\sigma}{\sqrt{n}}
+\]</span>
+where <span class="math inline">\(z^{*}\)</span> represents the critical value which depends on the confidence level C as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Confidence Level C</th>
+<th>90%</th>
+<th>95%</th>
+<th>99%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Critical value z</td>
+<td>1.645</td>
+<td>1.960</td>
+<td>2.576</td>
+</tr>
+</tbody>
+</table>
+<div id="example" class="section level3">
+<h3>Example</h3>
+<p>Issac wants to figure out what is the average percent of the tip in the U of Iowa restaurant. Thus, he recorded the percetage of the 20 tips of the total bill from 20 customers in the restaurant as follows:</p>
+<pre><code>##  [1] &quot;15.4 %&quot; &quot;19.8 %&quot; &quot;22.3 %&quot; &quot;12 %&quot;   &quot;20.3 %&quot; &quot;20.5 %&quot; &quot;17.3 %&quot; &quot;17.4 %&quot;
+##  [9] &quot;17.3 %&quot; &quot;16.3 %&quot; &quot;17.6 %&quot; &quot;16 %&quot;   &quot;16.7 %&quot; &quot;19.2 %&quot; &quot;21.9 %&quot; &quot;18.7 %&quot;
+## [17] &quot;17.5 %&quot; &quot;16.3 %&quot; &quot;16.5 %&quot; &quot;26.2 %&quot;</code></pre>
+<p>Issac knows that the std. of his restaurant tip percentage, <span class="math inline">\(\sigma\)</span>, is 3.</p>
+<p><strong>Question 1</strong>. How can you estimate the average percentage of the tip in his store?</p>
+<p><strong>Question 2</strong>. If you really want to make sure about your estimation of the mean percentage, you would rather build an interval. How can you construct an interval for estimate the mean percentage with a 95 confidence?</p>
+</div>
+</div>
+<div id="confidence-interval-for-population-mean-proc-means" class="section level2">
+<h2>Confidence interval for population mean: <code>proc means</code></h2>
+<p>We have learned that <code>proc means</code> provides more compact information than <code>proc univariate</code>. Further SAS <code>proc means</code> computes <strong>confidence intervals for population means</strong> without
+making the unrealistic assumption that we know the the population standard deviation <span class="math inline">\(\sigma\)</span>.</p>
+<pre class="sas"><code>data tips;
+input percentage;
+datalines ;
+23.3
+15.8
+...
+&lt; copy data in here&gt;
+...
+23.8
+15.5
+;
+run ;</code></pre>
+<p>Let us calculate the summary statistics using <code>proc means</code> as follows:</p>
+<pre class="sas"><code>proc means;
+var percentage;
+run ;</code></pre>
+<p>Using this information, we can construct the 95% confidence interval for the population mean percent of the tip in Issac’s restaurant.</p>
+<div id="unknown-sigma-chap.-18" class="section level3">
+<h3>Unknown <span class="math inline">\(\sigma\)</span> (Chap. 18)</h3>
+<p><strong>Question 3</strong>. What if Issac does not have any information about the population std. of the tip percentage in his store? How can he construct an interval for estimate the mean percentage with a 95 confidence?</p>
+<p>Confidence interval for <span class="math inline">\(\mu\)</span> without the infomation about <span class="math inline">\(\sigma\)</span> can be constructed by
+<span class="math display">\[
+from \quad \overline{x} - t^{*}\frac{s}{\sqrt{n}} \quad to \quad \overline{x} + t^{*}\frac{s}{\sqrt{n}}
+\]</span>
+where <span class="math inline">\(s\)</span> indicates the sample std., <span class="math inline">\(t^*\)</span> in indicates a different distribution (but very similar)! This can be done in SAS as follows:</p>
+<pre class="sas"><code>proc means n mean clm ;
+var percentage;
+run ;</code></pre>
+</div>
+</div>
+<div id="confidence-interval-for-population-proportion" class="section level2">
+<h2>Confidence interval for population proportion</h2>
+<p>We have learned the distribution of sample mean last week. Later chapter, we will learn the distribution of sample proportion!</p>
+<p>For large sample size <span class="math inline">\(n\)</span>, we can say:</p>
+<p><span class="math display">\[
+\hat{p} \sim \mathcal{N}(p, \sqrt{\frac{p(1-p)}{n}})
+\]</span></p>
+<p>How can we use this fact to infer the population mean?</p>
+<ul>
+<li>Estimate for <span class="math inline">\(p\)</span>: <span class="math inline">\(\hat{p} = \frac{num. of successes}{n}\)</span></li>
+<li>C.I. for <span class="math inline">\(p\)</span></li>
+</ul>
+<p><span class="math display">\[
+from \quad \hat{p} - z^{*}\sqrt{\frac{p(1-p)}{n}} \quad to \quad \hat{p} + z^{*}\sqrt{\frac{p(1-p)}{n}}
+\]</span></p>
+<p>This does not make any sense, since the whole point of doing this is to figure out what the <span class="math inline">\(p\)</span> is! So, let’s just replace <span class="math inline">\(p\)</span> with <span class="math inline">\(\hat{p}\)</span>!</p>
+<p><span class="math display">\[
+from \quad \hat{p} - z^{*}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \quad to \quad \hat{p} + z^{*}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}
+\]</span></p>
+<p>Check this <a href="https://wuhanvirus.kr/">page</a> out. Use right click and translate into English. What is the estimate of the death rate in china?</p>
+<p>See this <a href="https://www.factcheck.org/2020/03/trump-and-the-coronavirus-death-rate/">article</a> and consider your opinion about the real death rate.</p>
+</div>

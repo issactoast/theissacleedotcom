@@ -1,0 +1,178 @@
+---
+authors:
+- admin
+date: "2020-01-29T00:00:00Z"
+draft: false
+featured: false
+image:
+  caption: 'Image credit: [**Godmother**](https://www.cleanpng.com/png-download-clip-art-yellow-delicious-mango-479812/)'
+  focal_point: ""
+  placement: 2
+  preview_only: false
+lastmod: "2020-01-29T00:00:00Z"
+projects: [statistics]
+subtitle: 'from linear regression to weighted linear regression'
+summary: This is a journey from linear regression to weighted linear regression
+title: 'Weighted Least Squares Estimation'
+categories:
+  - r programming
+  - linear model
+tags:
+  - weighted least square
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Again, Least Squares Estimation
+
+In this article, I want to explain the weighted least square estimation. Before I jump into weighted least square estimation, let us remind of our famous star, the least square estimation method again.
+
+Let us consider a situation that we want to figure out the true weight of a mango that I bought from the grocery store. Well, I saw its weight is 540g from the grocery store. I am a person who always doubts about everything. So I decided to measure its weights seven times using my scale, and I got those measurements for the mango.
+
+```{r echo=FALSE}
+set.seed(1234)
+y <- rnorm(7, 539, 2)
+y
+```
+
+Dang, I knew it! This savvy industry always lies to the customer. Let me confirm that the true weight of the mango with least square estimation method. I denote the true weight of mango by $\beta$. Then, I can think these seven values are the measurements with a random noise of $w$.
+
+$$
+y_k = \beta + w_k,
+$$
+where $k=1, ..., 7$. For a random noise, I assume that its mean is zero, and its standard deviation is 2. In other words, if I check my scale without putting anything on it, it will show the values around zero, but it will vary around zero (a poor student bought a poor scale). 
+
+The least square estimation for $\beta$, $\hat{\beta}$, can be determined by considering the following the summation of the residuals which is the function of $\beta$;
+
+$$
+L(\beta) = \left(y-\underline{1}\beta\right)^{T}\left(y-\underline{1}\beta\right)
+$$
+where $\underline{1}$ represents a vector of length 7 whose elements are all 1. The least square estimation finds the value of $\beta$ by setting the derivative of function $L$ with respect to $\beta$ to be equal to zero.
+
+$$
+\begin{align*}
+\frac{\partial}{\partial\beta}L\left(\beta\right) & =\frac{\partial}{\partial\beta}\left(y^{T}y-y^{T}\underline{1}\beta-\beta\underline{1}^{T}y+\beta^{T}\underline{1}^{T}\underline{1}\beta\right)\\
+ & =-\underline{1}^{T}y-\underline{1}^{T}y+2\underline{1}^{T}\underline{1}\beta\overset{set}{=}0
+\end{align*}
+$$
+
+Thus, the least sqaure estimate of $\beta$ is,
+
+$$
+\begin{align*}
+\hat{\beta} & =\left(\underline{1}^{T}\underline{1}\right)^{-1}\underline{1}^{T}y\\
+ & =\sum_{i=1}^{7}y_{i}
+\end{align*}
+$$
+In my mango case, it was as follows;
+
+```{r}
+y_1 <- c(536.5859, 539.5549, 541.1689, 534.3086, 539.8582, 540.0121, 537.8505)
+mean(y_1)
+```
+
+## Weighted Least Squares Estimation
+
+Now, what if I got another scale which I believe it is more stable accurate than my first scale? Let us assume; this new scale has standard deviation 1 for its measurements, which is half of my original scale.
+
+Note that when we estimate the weight of my mango using the least square method, we don't care about the noise variance of my scale since all of them affected by the same noise. In other words, to me, all of them had the same level of trust. However, after I got the following seven other measurements from my new scale, I have to think about the values I have;
+
+```{r echo=FALSE}
+set.seed(4321)
+y_2 <- rnorm(7, 539, 1)
+y_2
+```
+
+So, for now, I have seven values from my original scale and seven values from my new scale. Should I treat these values equally? No, since I trust the values from the new scale, my estimation method should also consider this fact.
+
+Now, I define a model as follows, my observation vector $y$ consists of two parts, a vector $y_1$ and vector $y_2$ whose elements came from scale 1 and 2, respectively. Each observation vector has a random noise source from each scale, which can represent $w_1$ and $w_2$.
+
+$$
+y=\left(\begin{array}{c}
+\underline{y}_{1}\\
+\underline{y}_{2}
+\end{array}\right),w=\left(\begin{array}{c}
+\underline{w}_{1}\\
+\underline{w}_{2}
+\end{array}\right)
+$$
+
+Note that we assume the random noises are independent of each other; in statistics, we assume the following;
+
+$$
+\begin{align*}
+\mathcal{E}\left[w_{1i}\right]=\mathcal{E}\left[w_{2i}\right] & =0\\
+var\left(w_{1i}\right) & =\sigma_{1i}^{2},\\
+var\left(w_{2i}\right) & =\sigma_{2i}^{2},\\
+cov\left(w_{ki},w_{kj}\right) & =0,\quad where\quad i\ne j
+\end{align*}
+$$
+for $i=1, ..., 7$, $j=1,...,7$ and $k=1,2$. All the information above can be expressed using one matrix called the covariance matrix. In our case, the covariance matrix is a 14 by 14 diagonal matrix whose first half of the elements are $\sigma^2_1$ and the rest half are $\sigma_2^2$;
+
+$$
+\Sigma=diag\left(\sigma_{1}^{2},...,\sigma_{1}^{2},\sigma_{2}^{2},...,\sigma_{2}^{2}\right)
+$$
+
+Thus, when I look at the residuals for each measurement, they are not all the same. More specifically, I would put more weights on the residuals related to my new scale. Thus, before I am summing all residuals, I would give the weights on the residual by dividing residuals with the corresponding variance of random noise. This can be written nicely as following;
+
+$$
+\begin{align*}
+L\left(\beta\right) & =\left(y-\underline{1}\beta\right)^{T}\Sigma^{-1}\left(y-\underline{1}\beta\right)\\
+ & =\left(\begin{array}{c}
+y_{1}-\underline{1}\beta\\
+y_{2}-\underline{1}\beta
+\end{array}\right)^{T}\left(\begin{array}{cccccc}
+\sigma_{1}^{2}\\
+ & \ddots\\
+ &  & \sigma_{1}^{2}\\
+ &  &  & \sigma_{2}^{2}\\
+ &  &  &  & \ddots\\
+ &  &  &  &  & \sigma_{2}^{2}
+\end{array}\right)^{-1}\left(\begin{array}{c}
+y_{1}-\underline{1}\beta\\
+y_{2}-\underline{1}\beta
+\end{array}\right)\\
+ & =\sum_i\frac{\left(y_{1i}-\beta\right)^{2}}{\sigma_{1}^{2}}+\sum_j\frac{\left(y_{2j}-\beta\right)^{2}}{\sigma_{2}^{2}}
+\end{align*}
+$$
+
+Since we assume the new scale is more stable, meaning $\sigma^2_2 < \sigma^2_1$, the residuals for my new scale has more weights than the residuals for my original scale. 
+
+Now, we will do the same thing for estimating $\beta$; take derivative and set it as zero.
+
+$$
+\begin{align*}
+\frac{\partial}{\partial\beta}L\left(\beta\right) & =\frac{\partial}{\partial\beta}\left(y-\underline{1}\beta\right)^{T}\Sigma^{-1}\left(y-\underline{1}\beta\right)\\
+ & =\frac{\partial}{\partial\beta}\left(y^{T}\Sigma^{-1}y-y^{T}\Sigma^{-1}\underline{1}\beta-\beta\underline{1}^{T}\Sigma^{-1}y+\beta^{T}\underline{1}^{T}\Sigma^{-1}\underline{1}\beta\right)\\
+ & =-\underline{1}^{T}\Sigma^{-1}y-\underline{1}^{T}\Sigma^{-1}y+2\underline{1}^{T}\Sigma^{-1}\underline{1}\beta\overset{set}{=}0
+\end{align*}
+$$
+
+Thus, $\hat{\beta}$ can be found as
+
+$$
+\begin{align*}
+\hat{\beta} & =\left(\underline{1}^{T}\Sigma^{-1}\underline{1}\right)^{-1}\underline{1}^{T}\Sigma^{-1}y\\
+ & =\left(\sum_{i}\frac{1}{\sigma_{1}^{2}}+\sum_{i}\frac{1}{\sigma_{2}^{2}}\right)^{-1}\left(\sum\frac{y_{1i}}{\sigma_{1}^{2}}+\sum\frac{y_{1i}}{\sigma_{2}^{2}}\right)
+\end{align*}
+$$
+
+Note that this $\hat{\beta}$ is just a weighted average of measurements from each scale with corresponding weights. So, in our mango case, since we assume $\sigma_1 = 2$ and $\sigma_2 = 1$, we can calculate the weight of mango as follows
+
+```{r}
+y_2 <- c(538.5732, 538.7764, 539.7176, 539.8414, 538.8716, 540.6093, 538.7028)
+
+sigma_1 <- 2
+sigma_2 <- 1
+
+# weights
+weights <- c(rep(1 / sigma_1^2, 7), rep(1 / sigma_2^2, 7)) / (7/sigma_1^2 + 7/sigma_2^2)
+sum(weights)
+
+beta_hat <- sum(c(y_1, y_2) * weights)
+beta_hat
+```
+

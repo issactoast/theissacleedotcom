@@ -1,0 +1,137 @@
+---
+date: "2020-02-10T00:00:00+01:00"
+draft: false
+linktitle: Week 5 - Simulation
+menu:
+  stat2010:
+    parent: Contents
+    weight: 5
+title: Lab 5 - Simulation in SAS
+type: docs
+weight: 5    # related to next page to show
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Class video
+
+The class video is attached here so that you can watch my lecture again when you prepare the exams.
+
+- If you have questions about my lecture, please use **the comment section** at the bottom of this documents.
+
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MHBBGU9Y1cY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+## Creating a simulated dataset in SAS
+
+The following code will create a simulated dataset with 1000 observations drawn from a normal distribution with mean $\mu$ = 2 and standard deviation $\sigma$ = 1. Note that the function `rand()` has a three options for generating the random sample following normal distribution as follows:
+
+```{r eval=FALSE}
+rand("Normal", mu, sigma)
+```
+
+Let us run the following code in SAS;
+
+```sas
+data symm(keep=y) ;     * only keep y;
+seed = 32542 ;
+
+do i = 1 to 1000 ;
+   y = rand("Normal", 2, 1);
+   output ;
+end ;
+
+drop seed ;
+run ;
+```
+
+To check the result, we don't need to check the whole data set, instead, we can use the following option in print procedure. 
+
+```sas
+proc print data = symm(obs = 10);
+run;
+```
+
+## Proc means
+
+We can use `proc means` to get various summary statistics in a more compact format than `proc univariate` provides. The default statistics provided are
+
+- n = number of observations
+- mean
+- std dev = standard deviation
+- minimum
+- maximum
+
+```sas
+proc means data = symm ;
+var y ;
+run ;
+```
+
+Output:
+
+```sas
+Analysis Variable : Y
+
+   N       Mean            Std Dev        Minimum          Maximum
+--------------------------------------------------------------------
+1000       2.0250454       0.9787607      -2.5489342       4.9129041
+--------------------------------------------------------------------
+```
+
+## Drawing simple random samples from our population
+
+We will use `proc surveyselect` to draw a simple random sample of size $10$ from our “population” data `symm` of $1000$ values. We can then use `proc means` to get summary statistics for our simple random sample.
+
+```sas
+proc surveyselect 
+  data=symm out=sample_data method=SRS
+  sampsize=100 seed=1234;
+run;
+
+proc means data = sample_data ;
+var y ;
+run ;
+```
+
+Output:
+
+```sas
+ N        Mean            Std Dev        Minimum          Maximum
+--------------------------------------------------------------------
+100       1.9783044       1.0317330      -0.1644005       4.2722121
+--------------------------------------------------------------------
+```
+
+##  Drawing several different samples, and record sample statistics (mean and standard deviation) of each
+
+1. Do the following:
+
+    - Draw a simple random sample of size 10 from our simulated “population.” Use a different seed each time so you get different samples.
+    
+    - Calculate the sample mean and the sample standard deviation from the sample and record them in the table in the end of this lab worksheet.
+
+2. Sample means from a skewed distribution.
+
+    - Use the code below to simulate a dataset from a skewed distribution.
+      ```sas
+      data skewed ;
+      seed = 325 ;
+      do i = 1 to 1000 ;
+      y = rand("Gamma", 2, 1) ;
+      output ;
+      end ;
+      drop seed ;
+      run ;
+      ```
+    - Use `proc univariate` to verify that you got a skewed distribution.
+      ```sas
+      proc univariate plot data = skewed ;
+      var y ;
+      run ;
+      ```
+    - Draw a simple random sample of size 10 from the skewed population. Calculate the sample mean and the sample standard deviation from the sample and record them in the table in the end of this lab worksheet.

@@ -1,0 +1,510 @@
+---
+abstract: ""
+authors:
+- admin
+- N. D. Shyamalkumar
+date: "2018-08-11T00:00:00Z"
+doi: ""
+featured: true
+image:
+  caption: ''
+  focal_point: ""
+  preview_only: true
+publication: "Actuarial Research Conference 2018"
+publication_short: "ARC2018"
+# Publication type.
+# Legend:
+# 0 = Uncategorized
+# 1 = Conference proceedings
+# 2 = Journal
+# 3 = Work in progress
+# 4 = Technical report
+# 5 = Book
+# 6 = Book chapte
+publication_types:
+- "3"
+publishDate: "2018-08-11T00:00:00Z"
+summary: Insurance regulation relies on the conditional tail expectation(CTE) of a loss random variable for specifying required capital as well as for valuation of liabilities. Hence, understanding statistical inference of the CTE measure is an important aspect of actuarial education.
+tags:
+- CTE
+- Asymtotic Normality
+title: Asymptotic Normality for the Sample CTE Revisited
+# url_code: '#'
+# url_dataset: '#'
+# url_pdf:
+# url_poster: '#'
+# url_project: ""
+# url_slides: ""
+# url_source: '#'
+# url_video: '#'
+---
+
+
+
+<p>Insurance regulation relies on the conditional tail expectation(CTE) of a loss random variable for specifying required capital as well as for valuation of liabilities. Hence, understanding statistical inference of the CTE measure is an important aspect of actuarial education.</p>
+<ul>
+<li><p>A key property of the non-parametric estimator of the CTE is its asymptotic normality, see Manistre and Hancock (2005)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, Ahn and Shyamalkumar (2011)<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p></li>
+<li><p>Traditional proofs of this result relies on various forms of functional delta method<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>, which makes the proof outside the scope of even masters level actuarial education.</p></li>
+<li><p>In this poster, we provide an intuitive proof of this result, which by relying instead on the ordinary delta method makes it accessible to most actuaries and actuarial students.</p></li>
+</ul>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>For a given <span class="math inline">\(nice\)</span> distribution <span class="math inline">\(F\)</span>, the <span class="math inline">\(\alpha\)</span>-th level percentile (VaR), <span class="math inline">\(q_\alpha\)</span>, is defined by</p>
+<p><span class="math display">\[
+Pr\left(X&gt;q_{\alpha}\right)=1-\alpha,
+\]</span></p>
+<p>where <span class="math inline">\(X \sim F\)</span>; the <span class="math inline">\(\alpha\)</span>-th level CTE is defined by</p>
+<p><span class="math display">\[
+CTE_{\alpha}=\mathbb{E}\left[X|X&gt;q_{\alpha}\right].
+\]</span></p>
+<p>In practice, since <span class="math inline">\(F\)</span> is unknown, an estimate of the CTE is required for regulatory and risk management purposes. Typically, a random sample <span class="math inline">\(X_1, ..., X_n\)</span> from <span class="math inline">\(F\)</span> is available for this purpose. The commonly used estimator of the CTE is its empirical counterpart,</p>
+<p><span class="math display">\[
+CTE_{n:\alpha}=\frac{1}{n-\left\lfloor n\alpha\right\rfloor }\sum_{i=\left\lfloor n\alpha\right\rfloor +1}^{n}Y_{i}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+Y_1 \leq Y_2 \leq \cdots \leq Y_n
+\]</span></p>
+<p>are the sample order statistics. The estimation error as well as the confidence interval for CTE rely on the following asymptotic result:</p>
+<p><span class="math display">\[\begin{equation}
+\sqrt{n}\left(CTE_{n:\alpha}-CTE_{\alpha}\right) \overset{d}{\rightarrow} N\left(0,\sigma_\alpha^2\right), \tag{1}
+\label{eqn:mainthm}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\sigma_\alpha^2=\eta_\alpha^2+ \gamma_\alpha^2\)</span> with
+<span class="math display">\[
+\eta_\alpha^2=\frac{Var\left(X|X&gt;q_{\alpha}\right)}{1-\alpha},
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\gamma_\alpha^2=\frac{\alpha}{1-\alpha}\left(\mathbb{E}\left(X|X&gt;q_{\alpha}\right)-q_{\alpha}\right)^{2}
+\]</span></p>
+<p>The lack of an accessible proof prevents a full insight into it for most actuaries. Our proof essentially fixes a straightforward paradoxical argument and thus lends insight into not only this pivotal result in actuarial practice, but more importantly fortifies the intuition of the actuaries into similar such asymptotic results.</p>
+</div>
+<div id="a-paradox" class="section level2">
+<h2>A Paradox</h2>
+<p>In the following <span class="math inline">\(N_{n:x}\)</span> denotes the number of <span class="math inline">\(X_i\)</span>s larger than <span class="math inline">\(x\)</span> and <span class="math inline">\(w(x)\)</span> denotes <span class="math inline">\(\mathbb{E}\left(X|X&gt;x\right)\)</span>. Note that the <span class="math inline">\(N_{n:x}\)</span> observations larger than <span class="math inline">\(x\)</span> form random samples from <span class="math inline">\(F\)</span> left-truncated at <span class="math inline">\(x\)</span>, and their <span class="math inline">\(partially\)</span> normalized mean is given by</p>
+<p><span class="math display">\[
+\sqrt{N_{n:x}}\left(\frac{1}{N_{n:x}}\underset{i=1}{\overset{n}{\Sigma}}X_{i}I_{X_i&gt;x}- w(x)\right).
+\tag{2}
+\label{paradox}
+\]</span></p>
+<p>Now since <span class="math inline">\(N_{n:x}\)</span> approaches infinity with <span class="math inline">\(n\)</span>, the ordinary CLT implies that the expression in <span class="math inline">\(\eqref{paradox}\)</span> converges in limit to a <span class="math inline">\(N\left(0,Var\left(X|X&gt;x\right)\right)\)</span>. Moreover, since <span class="math inline">\(Y_{\lfloor n\alpha\rfloor}\)</span> is consistent for <span class="math inline">\(q_\alpha\)</span>, and
+<span class="math display">\[
+\frac{1}{N_{n,Y_{\lfloor n\alpha\rfloor}}}\underset{i=1}{\overset{n}{\Sigma}}X_{i}I_{X_i&gt;Y_{\left\lfloor n\alpha\right\rfloor}}=CTE_{n,\alpha},
+\]</span>
+it is tempting to argue, albeit erroneously, that
+<span class="math display">\[
+\sqrt{n}\left(CTE_{n:\alpha}-CTE_{\alpha}\right) \overset{d}{\rightarrow} N\left(0,\eta_\alpha^2\right).
+\]</span>
+So what is wrong in the above argument, and how can we fix it to yield the correct conclusion <span class="math inline">\(\eqref{eqn:mainthm}\)</span> - we do this below.</p>
+</div>
+<div id="replacing-x-by-y_lfloor-nalpharfloor-is-a-red-herring-." class="section level2">
+<h2>Replacing <span class="math inline">\(x\)</span> by <span class="math inline">\(Y_{\lfloor n\alpha\rfloor}\)</span> is a <span style="color:red">Red-Herring</span> <img src="https://raw.githubusercontent.com/issactoast/EnBlog/master/static/img/red_herring.png" width="50" height="50" style="float: right; margin: 0px 15px 15px 0px">.</h2>
+<p>In the above, we argued that the expression in <span class="math inline">\(\eqref{paradox}\)</span> has an asymptotic normal limit for any <span class="math inline">\(x\)</span> (in the support of <span class="math inline">\(F\)</span>). This convergence is uniform under mild conditions - Berry-Esseen Theorem. In other words, we can replace <span class="math inline">\(x\)</span> in <span class="math inline">\(\eqref{paradox}\)</span> by <span class="math inline">\(x_n\)</span>, with <span class="math inline">\(\{x_n\}_{n\geq1}\)</span> satisfying <span class="math inline">\(\lim x_n=x\)</span>, and yet maintain the same normal limit.</p>
+<p>Towards replacing <span class="math inline">\(x\)</span> by <span class="math inline">\(Y_{\lfloor n\alpha\rfloor}\)</span>, we note that <span class="math inline">\(N_{n,Y_{\lfloor n\alpha\rfloor}}=n-\lfloor n \alpha \rfloor\)</span> and these <span class="math inline">\(N_{n,Y_{\lfloor n\alpha\rfloor}}\)</span> observations conditioned on <span class="math inline">\(Y_{\lfloor n\alpha\rfloor}\)</span> form a random sample from <span class="math inline">\(F\)</span> left-truncated at <span class="math inline">\(Y_{\lfloor n\alpha\rfloor}\)</span>. Combining these observations with the uniform convergence results in</p>
+<p><span class="math display">\[
+\sqrt{n}\left(CTE_{n:\alpha}-w(Y_{\lfloor n\alpha\rfloor})\right)  \overset{d}{\rightarrow} N\left(0,\eta_\alpha^2\right),
+\tag{3}
+\label{BEeqn}
+\]</span></p>
+<p><a href="#Figure-1">Figure 1</a> demonstrates the uniformity in the convergence alluded to above via simulation.</p>
+<div id="figure-1" class="section level3">
+<h3>Figure 1</h3>
+<details>
+<p><summary>
+R code for Figure 1
+</summary></p>
+<ul class="nav nav-tabs">
+<li class="active">
+<a href="#">app.R</a>
+</li>
+</ul>
+<pre class="r"><code>library(ggplot2)
+library(RColorBrewer)
+library(shinyWidgets)
+library(shiny)
+
+### Figure1
+
+my_color &lt;- brewer.pal(5, &quot;Accent&quot;)
+
+# Prepare empty dataframe for plotting
+dataset1 &lt;- data.frame(z_nx = double(), sample_size = integer())
+# Making data set
+
+for (n in c(100, 200, 500, 1000, 5000)){
+  x &lt;- matrix(rexp(n * 3000), nrow= 3000);
+  x &lt;- apply(x,1,sort);
+  
+  f &lt;- function(k, q_a){ k[which(k &gt; q_a)] }
+  
+  for (alpha in c(0.94, 0.95, 0.96)){
+    if (alpha == 0.95){
+      a &lt;- colMeans(x[floor(n * 0.95):n, ])
+      
+      dataset1 &lt;- rbind.data.frame(dataset1,
+                                  data.frame(z_nx = a,
+                                             k = length(c(floor(n * 0.95):n)),
+                                             alpha_value = &quot;sample q_0.95&quot;,
+                                             exp_q = x[floor(n * 0.95), ] + 1,
+                                             sample_size = n ))
+      
+    } else {
+      result &lt;- apply(x, 2, f, q_a = qexp(alpha))
+      k &lt;- unlist(lapply(result,length))
+      a &lt;- unlist(lapply(result, mean))
+      a &lt;- ifelse(is.nan(a), 0, a)
+      dataset1 &lt;- rbind.data.frame(dataset1,
+                                  data.frame(z_nx = a,
+                                             k = k,
+                                             alpha_value = paste(&quot;q_&quot;, alpha),
+                                             exp_q = qexp(alpha) + 1,
+                                             sample_size = n ))
+    }
+    
+  }
+}
+
+
+
+ui &lt;- pageWithSidebar(
+  headerPanel(&#39;Uniformity a la Berry-Esseen Theorem&#39;),
+  sidebarPanel(
+    sliderTextInput(inputId = &quot;sampleSize1&quot;, 
+                    label = &quot;Sample size n:&quot;,
+                    animate = TRUE,
+                    grid = TRUE,
+                    choices = c(100, 200, 500, 1000, 5000))
+    
+  ),
+  mainPanel(
+    plotOutput(&#39;plot1&#39;)
+  )
+)
+
+
+server &lt;- function(input, output, session) {
+  
+  dataset1_f &lt;- reactive({
+    dataset1[dataset1$sample_size == input$sampleSize1,]
+  })
+  
+  output$plot1 &lt;- renderPlot({
+    
+    p &lt;- ggplot(dataset1_f()) +
+      geom_density(mapping = aes(x =  sqrt(k) *(z_nx - exp_q),
+                                 color = factor(alpha_value)),
+                   size = 1) +
+      # Add pdf of the standard Normal density
+      stat_function(fun = dnorm,
+                    args = list(mean = 0, sd = 1),
+                    size = 0.7,
+                    color = &quot;black&quot;) +
+      geom_hline(yintercept = 0, size = 1) +
+      theme(legend.position=&quot;bottom&quot;, legend.box = &quot;horizontal&quot;,
+            legend.text = element_text(size = 14)) +
+      xlim(-3, 3) +
+      ylim(0, 0.5) +
+      labs(
+        y = &quot;Estimated density&quot;,
+        x = &quot;&quot; ,
+        color = &quot;Threshold values:  &quot;)+
+      scale_color_manual(values=my_color[c(5,1,3)])+
+      scale_colour_manual(labels = expression(q[0.94],
+                                              paste(hat(q)[0.94]),q[0.96]),
+                          values = my_color[c(5,1,3)])
+
+    print(p)
+    
+    
+  }, height=300)
+  
+}
+
+shinyApp(ui, server)
+
+</code></pre>
+</details>
+<iframe id="example1" src="https://issaclee.shinyapps.io/arc2018figure1/" style="border: none; width: 100%; height: 650px" frameborder="0">
+</iframe>
+</div>
+</div>
+<div id="resolving-the-paradox" class="section level2">
+<h2>Resolving the Paradox</h2>
+<p>Towards establishing <span class="math inline">\(\eqref{eqn:mainthm}\)</span> from <span class="math inline">\(\eqref{BEeqn}\)</span> we note that</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sqrt{n}\left(\right.&amp;\left.CTE_{n:\alpha}-CTE_{\alpha}\right) \\
+&amp;=\sqrt{n}\left(CTE_{n:\alpha}-w(Y_{\lfloor n\alpha\rfloor})\right)\\
+&amp;\phantom{=}+ \sqrt{n} \left(w(Y_{\lfloor n\alpha\rfloor }) - \mathbb{E}\left(X|X&gt;q_{\alpha}\right)\right)
+\end{aligned} \tag{4}
+\label{decom}
+\]</span></p>
+<p>The two terms on the right in <span class="math inline">\(\eqref{decom}\)</span> are asymptotically independent. The reason for this being that the first term is asymptotically independent of <span class="math inline">\(Y_{\lfloor n\alpha\rfloor}\)</span> as it only depends on its almost sure limit <span class="math inline">\(q_\alpha\)</span>. This is illustrated in <a href="#Figure-2">Figure 2</a>.</p>
+<div id="figure-2" class="section level3">
+<h3>Figure 2</h3>
+<details>
+<p><summary>
+R code for Figure 2
+</summary></p>
+<ul class="nav nav-tabs">
+<li class="active">
+<a href="#">app.R</a>
+</li>
+</ul>
+<pre class="r"><code>library(ggplot2)
+library(RColorBrewer)
+library(shinyWidgets)
+library(shiny)
+
+
+### Figure2
+
+my_color &lt;- brewer.pal(5, &quot;Accent&quot;)
+
+# Prepare empty dataframe for plotting
+dataset2 &lt;- data.frame(z_nx = double(), sample_size = integer())
+
+# Making data set
+for (n in c(100, 200, 500, 1000, 5000)){
+  x &lt;- matrix(rexp(n * 3000), nrow= 3000);
+  x &lt;- apply(x,1,sort);
+  
+  f_term &lt;-  sqrt(n) * (colMeans(x[floor(n * 0.95):n, ]) - (x[floor(n * 0.95), ] + 1))
+  s_term &lt;- sqrt(n) * ((x[floor(n * 0.95), ] + 1) - (qexp(0.95) + 1))
+  
+  dataset2 &lt;- rbind.data.frame(dataset2,
+                              data.frame(first_t = f_term * sqrt(0.05),
+                                         second_t = s_term * sqrt((0.05 / 0.95)),
+                                         sample_size = n) )
+}
+
+ui &lt;- pageWithSidebar(
+  headerPanel(&#39;Asymptotic Indep. of the Two terms&#39;),
+  sidebarPanel(
+    sliderTextInput(inputId = &quot;sampleSize2&quot;, 
+                    label = &quot;Sample size n:&quot;,
+                    animate = TRUE,
+                    grid = TRUE,
+                    choices = c(100, 200, 500, 1000, 5000))
+    
+  ),
+  mainPanel(
+    plotOutput(&#39;plot2&#39;)
+  )
+)
+
+server &lt;- function(input, output, session) {
+  
+  dataset2_f &lt;- reactive({
+    dataset2[dataset2$sample_size == input$sampleSize2,]
+  })
+  
+  output$plot2 &lt;- renderPlot({
+    q &lt;- ggplot(data = dataset2_f(),
+           aes(x =  first_t, y = second_t)) +
+      theme_light() +
+      # Add estimated density
+      geom_point(fill = &quot;lightgray&quot;,
+                 size = 0.5,
+                 alpha = 0.2) +
+      stat_density_2d(aes(fill = ..level..), geom = &quot;polygon&quot;,
+                      colour=&quot;white&quot;,
+                      alpha = 0.7) +
+      scale_fill_distiller(palette= &quot;Spectral&quot;, direction=-1) +
+      xlim(-4, 4) +
+      ylim(-4, 4) +
+      labs(y = &quot;The second term&quot;,
+           x = &quot;The first term&quot;)
+      theme(strip.text = element_text(size = 15, color = &quot;black&quot;))+
+      theme(legend.position=&quot;bottom&quot;)
+      
+      print(q)
+  }, height=300)
+
+}
+
+shinyApp(ui, server)</code></pre>
+</details>
+<iframe id="example1" src="https://issaclee.shinyapps.io/arc2018figure2/" style="border: none; width: 100%; height: 650px" frameborder="0">
+</iframe>
+<p>Hence all that remains to be derived is the asymptotic distribution of the second term in <span class="math inline">\(\eqref{decom}\)</span>. That this limiting distribution is non-degenerate, in other words this term cannot be ignored, resolves the paradox.</p>
+</div>
+</div>
+<div id="ordinary-delta-method" class="section level2">
+<h2>Ordinary Delta Method</h2>
+<p>The asymptotic distribution of the second term derives from that of <span class="math inline">\(Y_{\lfloor n\alpha \rfloor}\)</span>;</p>
+<p><span class="math display">\[
+\sqrt{n}\left(Y_{\left\lfloor n\alpha\right\rfloor }-q_{\alpha}\right)\overset{d}{\rightarrow}N\left(0,\frac{\alpha\left(1-\alpha\right)}{f^{2}\left(q_{\alpha}\right)}\right) 
+\]</span></p>
+<p>where <span class="math inline">\(f\)</span> is a density function of <span class="math inline">\(X\)</span>. This is so as this term is a smooth function of <span class="math inline">\(Y_{\lfloor n\alpha\rfloor}\)</span>; this function <span class="math inline">\(w(\cdot)\)</span> satisfies</p>
+<p><span class="math display">\[
+\omega\left(x\right)=x+\frac{\int_{x}^{\infty}S\left(z\right)dz}{S\left(x\right)},
+\]</span></p>
+<p>where <span class="math inline">\(S\)</span> is the survival function of <span class="math inline">\(X\)</span>. By the ordinary delta method <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>, we now have
+<span class="math display">\[
+\sqrt{n} \left(w(Y_{\lfloor n\alpha\rfloor})  - \mathbb{E}\left(X|X&gt;q_{\alpha}\right)\right) 
+\overset{d}{\rightarrow} N\left(0,\gamma_\alpha^2\right)
+\]</span></p>
+</div>
+<div id="asymptotic-dist.-of-cte_nalpha" class="section level2">
+<h2>Asymptotic dist. of <span class="math inline">\(CTE_{n:\alpha}\)</span></h2>
+<p>The independence of the two terms in <span class="math inline">\(\eqref{decom}\)</span>and their asymptotic normality together yield <span class="math inline">\(\eqref{eqn:mainthm}\)</span>.
+For the traditional approach in our setting see <a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>, and in the setting of importance sampling see <a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>.</p>
+<div id="figure-3" class="section level3">
+<h3>Figure 3</h3>
+<details>
+<p><summary>
+R code for Figure 3
+</summary></p>
+<ul class="nav nav-tabs">
+<li class="active">
+<a href="#">app.R</a>
+</li>
+</ul>
+<pre class="r"><code>library(ggplot2)
+library(RColorBrewer)
+library(shinyWidgets)
+library(shiny)
+library(markdown)
+library(dplyr)
+library(tidyr)
+
+
+### Figure 3
+
+my_color &lt;- brewer.pal(5, &quot;Accent&quot;)
+
+# Prepare empty dataframe for plotting
+dataset3 &lt;- data.frame(z_nx = double(), sample_size = integer())
+
+# Making data set
+# alpha_value &lt;- 0.95
+n &lt;- 1000
+x &lt;- matrix(rexp(n * 10000), nrow= 10000);
+x &lt;- apply(x,1,sort);
+
+f_term &lt;- sqrt(n) * (colMeans(x[floor(n * 0.95):n, ]) - (x[floor(n * 0.95), ] + 1))
+s_term &lt;- sqrt(n) * ((x[floor(n * 0.95), ] + 1) - (qexp(0.95) + 1))
+
+dataset3 &lt;- rbind.data.frame(dataset3,
+                            data.frame(first_t = f_term,
+                                       second_t = s_term,
+                                       dist = &quot;Exp. dist.&quot;,
+                                       sample_size = n) )
+
+qpareto &lt;- function(p, theta = 2.687376 , alpha = 4){
+  theta * ((1-p)^(-1/alpha) - 1)
+}
+
+cte_pareto &lt;- function(x, theta = 2.687376 , alpha = 4){
+  x + (x + theta) / (alpha - 1)
+}
+
+x &lt;- matrix(qpareto(runif(n * 10000)), nrow= 10000)
+x &lt;- apply(x,1,sort)
+
+f_term &lt;- sqrt(n) * (colMeans(x[floor(n * 0.95):n, ]) -
+                       cte_pareto(x[floor(n * 0.95), ]))
+s_term &lt;- sqrt(n) * (cte_pareto(x[floor(n * 0.95), ]) - 
+                       cte_pareto(qpareto(0.95)))
+
+dataset3 &lt;- rbind.data.frame(dataset3,
+                            data.frame(first_t = f_term,
+                                       second_t = s_term,
+                                       dist = &quot;Pareto dist.&quot;,
+                                       sample_size = n) )
+
+
+dataset_orig &lt;- dataset3 %&gt;% mutate(total = first_t + second_t)
+dataset_orig &lt;- select(dataset_orig, first_t, second_t, total, dist)
+dataset3 &lt;- dataset_orig %&gt;% gather(&#39;first_t&#39;, &#39;second_t&#39;, &#39;total&#39;,
+                                    key = &quot;terms&quot;, value = &quot;values&quot;)
+
+ui &lt;- pageWithSidebar(
+  headerPanel(&#39;Tale of the Tails: Impact on the Terms&#39;),
+  sidebarPanel(
+    # Input: Select the random distribution type ----
+    radioButtons(&quot;dist&quot;, &quot;Distribution type:&quot;,
+                 c(&quot;Exponential (Light tail)&quot; = &quot;Exp. dist.&quot;,
+                   &quot;Pareto (Heavy tail)&quot; = &quot;Pareto dist.&quot;))
+  ),
+  mainPanel(
+    plotOutput(&#39;plot3&#39;)
+  )
+)
+
+server &lt;- function(input, output, session) {
+
+  dataset3_f &lt;- reactive({
+    dataset3[dataset3$dist == input$dist,]
+  })
+
+  dat_text1 &lt;- reactive({
+    data.frame(label = c(paste(&quot;Variance \n 1st: &quot;, 
+                    round(var(dataset_orig$first_t[dataset_orig$dist == input$dist]),2),
+                    &quot;\n  2nd: &quot;,
+                    round(var(dataset_orig$second_t[dataset_orig$dist == input$dist]),2),
+                    &quot;\n  Conv.: &quot;,
+                    round(var(dataset_orig$total[dataset_orig$dist == input$dist]),2)))
+    )
+  })
+  
+  output$plot3 &lt;- renderPlot({
+    
+    # Plotting
+    r &lt;- ggplot(data = dataset3_f()) +
+      theme_light() +
+      # Add estimated density
+      geom_density(mapping = aes(x = values, color = terms),
+                   size = 1) +
+      geom_hline(yintercept = 0, size = 1) +
+      # Draw plots based on the sample_size variable
+      scale_color_manual(values=my_color[c(1,3,5)])+
+      theme(legend.position=&quot;bottom&quot;, legend.box = &quot;horizontal&quot;,
+            legend.text = element_text(size = 14)) +
+      scale_colour_manual(labels = expression(paste(1^&quot;st&quot;, &quot; term&quot;),
+                                              paste(2^&quot;nd&quot;, &quot; term&quot;),
+                                              &quot;Conv.&quot;),
+                          values = my_color[c(1,3,5)]) +
+      labs(
+        y = &quot;Estimated density&quot;,
+        x = &quot;&quot; ,
+        color = &quot;&quot;)+
+      xlim(-35, 35) +
+      ylim(0, 0.1) +
+      theme(strip.text = element_text(size = 19, color = &quot;black&quot;)) +
+      geom_text(
+        data    = dat_text1(),
+        mapping = aes(x = 24, y = 0.08, label = label)
+      )
+    print(r)
+  }, height=300)
+}
+
+shinyApp(ui, server)</code></pre>
+</details>
+<iframe id="example1" src="https://issaclee.shinyapps.io/arc2018figure3/" style="border: none; width: 100%; height: 650px" frameborder="0">
+</iframe>
+</div>
+</div>
+<div id="epilogue" class="section level2">
+<h2>Epilogue</h2>
+<ul>
+<li><p>While we appeal to Berry-Esseen Theorem, which is’nt covered at the MS level, it’s statement as a guarantee of uniform convergence to normality is easily understood.</p></li>
+<li><p>It’s use does require the third moment; while we believe that the line of argument can be executed under finite variance, it is besides the central focus our efforts.</p></li>
+<li><p>This approach was successful with a cohort of seniors and MS students last Spring, providing motivation for this poster.</p></li>
+</ul>
+<!--bibliography section starts from here..-->
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>John Manistre, B., &amp; Hancock, G. H. (2005). Variance of the CTE estimator. North American Actuarial Journal, 9(2), 129-156.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Ahn, J. Y., &amp; Shyamalkumar, N. D. (2011). Large sample behavior of the CTE and VaR estimators under importance sampling. North American Actuarial Journal, 15(3), 393-416.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>John Manistre, B., &amp; Hancock, G. H. (2005). Variance of the CTE estimator. North American Actuarial Journal, 9(2), 129-156.<a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>Klugman, S. A., Panjer, H. H., &amp; Willmot, G. E. (2012). Loss models: from data to decisions (Vol. 715). John Wiley &amp; Sons.<a href="#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>John Manistre, B., &amp; Hancock, G. H. (2005). Variance of the CTE estimator. North American Actuarial Journal, 9(2), 129-156.<a href="#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>Ahn, J. Y., &amp; Shyamalkumar, N. D. (2011). Large sample behavior of the CTE and VaR estimators under importance sampling. North American Actuarial Journal, 15(3), 393-416.<a href="#fnref6" class="footnote-back">↩</a></p></li>
+</ol>
+</div>

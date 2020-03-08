@@ -1,0 +1,170 @@
+---
+date: "2020-02-10T00:00:00+01:00"
+draft: false
+linktitle: Week 6 - Sampling distribution
+menu:
+  stat2010:
+    parent: Contents
+    weight: 6
+title: Lab 6 - Sampling distribution
+type: docs
+weight: 6    # related to next page to show
+---
+
+
+
+<p>The class video is attached here so that you can watch my lecture again when you prepare the exams.</p>
+<ul>
+<li>If you have questions about my lecture, please use <strong>the comment section</strong> at the bottom of this documents.</li>
+</ul>
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_cwQH84eP7Q?start=14" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
+<div id="the-sampling-distribution-of-overlinex" class="section level2">
+<h2>The sampling distribution of <span class="math inline">\(\overline{X}\)</span></h2>
+<p>There is a good website for checking out the distribution of the sample mean <span class="math inline">\(\overline{X}\)</span>. Let’s click to the link below, then click “Begin” on the upper left corner.</p>
+<p><a href="http://onlinestatbook.com/stat_sim/sampling_dist/">Implementing the Sampling Distribution</a></p>
+</div>
+<div id="what-are-the-plots-on-the-screen" class="section level2">
+<h2>What are the plots on the screen</h2>
+<ul>
+<li>The distribution displayed at the top of the screen is the population from which samples are taken.</li>
+<li>The second histogram displays the <code>sample data</code>.</li>
+<li>The third plot is used to display statistics calculated from samples from the population. This is the plot you should focus and understand.</li>
+</ul>
+</div>
+<div id="draw-a-random-sample" class="section level2">
+<h2>Draw a random sample</h2>
+<ul>
+<li><span class="math inline">\(N=5\)</span> means that we want to draw a sample of size 5</li>
+<li>“Mean” button means that we will calculate the sample mean.</li>
+<li>Click the button <code>Animated</code> once. You will see that a random sample of size 5 is drawn from the population.</li>
+<li>The blue bar in the third histogram indicates the calculated sample mean.</li>
+<li>Let us denote the sample mean by <span class="math inline">\(\bar{x}^{(1)}\)</span>, where the superscript <span class="math inline">\((1)\)</span> indicates that this statistic is calculated from the first sample that we draw.</li>
+</ul>
+<div id="repeat-this-100-times" class="section level3">
+<h3>Repeat this 100 times!</h3>
+<ul>
+<li>Click on the button “Animated” a second, a third, and a fourth, … and keep going. - Make sure you wait long enough between clicks in order for the applet to complete the simulation each time.</li>
+<li>If you click the <code>button 5</code> which is located at the right below of <code>Animated</code> button, it will automatically repeat the process five times for you.</li>
+</ul>
+<p><strong>Q1</strong>. How does the center and the spread of the histogram of <span class="math inline">\(\bar{x}^{(1)}, \bar{x}^{(2)}, ..., \bar{x}^{(100)}\)</span> compare to that of the population? That is, compare plot 3 to plot 1.</p>
+<details>
+<p><summary>
+<font color="red"> Answer </font>
+</summary></p>
+<p>The center of the histograms are the same. However, the spread of the sample distribution much narrow.</p>
+</details>
+</div>
+</div>
+<div id="sample-distribution-follows-normal-distribution" class="section level2">
+<h2>Sample distribution follows Normal distribution!</h2>
+<p><strong>This is important to understand.</strong> We can see that the sample distribution in the simulator <strong>always</strong> follows <code>Normal</code> distribution if we draw the enough size of samples from the population distribution. Let us consider a random variable <span class="math inline">\(X\)</span> which follows Normal distribution. Thus,</p>
+<p><span class="math display">\[
+X \sim N(\mu, \sigma)
+\]</span></p>
+<p>then, the sample distribution with size of <span class="math inline">\(n\)</span> follows,</p>
+<p><span class="math display">\[
+\bar{X} \sim N(\mu, \frac{\sigma}{\sqrt{n}})
+\]</span></p>
+<p>One very important and magical thing you should recognize is that</p>
+<ul>
+<li><strong>The sample distribution follows <code>Normal</code> distribution even the population distribution <code>DOES NOT</code> follow <code>Normal</code> distribution!</strong></li>
+</ul>
+<div id="changing-the-population-distribution" class="section level3">
+<h3>Changing the population distribution</h3>
+<p>Note the tab to the right of plot 1. Change “Normal” to “Skewed”. This means we have our population distribution as other distribution which is not Normal distribution.</p>
+<p>I would write like this,</p>
+<p><span class="math display">\[
+X \sim ?(\mu, \sigma)
+\]</span>
+which indicates that we have information about mean and std. only. We don’t know the exact distribution. However, if we have large sample size like larger than 16, then I can say,</p>
+<p><span class="math display">\[
+\bar{X} \sim N(\mu, \frac{\sigma}{\sqrt{n}})
+\]</span></p>
+<p>We can see the following things happen via simulator:</p>
+<ul>
+<li><p>If the samples (of size <span class="math inline">\(N\)</span>) are drawn from a population that has a skewed distribution. Then the sampling distribution is skewed when <span class="math inline">\(N\)</span> is small (<span class="math inline">\(N=2, 5\)</span>).</p></li>
+<li><p>The sampling distribution looks much more symmetric and has an approximately normal distribution when N is large (for eg, when <span class="math inline">\(N=25\)</span>).</p></li>
+</ul>
+</div>
+</div>
+<div id="using-proc-tabulate-to-make-a-table" class="section level2">
+<h2>Using <code>proc tabulate</code> to make a table</h2>
+<div id="gulanick-data" class="section level3">
+<h3>Gulanick data</h3>
+<p>Gulanick (Heart and Lung, 1991 ) studied patients who were recovering from heart surgery. She was interested in whether different combinations of supervised exercise or teaching would affect patients’ self-efficacy (or confidence) to perform physical activity.</p>
+<p>Patients were randomly assigned to one of three groups.</p>
+<ul>
+<li>Group 1 received teaching, treadmill exercise testing, and exercise training three times per week.</li>
+<li>Group 2 received only teaching and exercise testing.</li>
+<li>Group 3 received only routine care without supervised exercise or teaching.</li>
+</ul>
+<p>After 4 weeks, each patient was scored on self-efficacy. Self-efficacy was measured on <em>a continuous scale and scores were assumed to be distributed normally</em> in each of the populations of interest. Her results are in the dataset “gulanick.dat.” We wish to produce a table that shows the number of observations and the mean and standard deviation of scores within each of the three groups.</p>
+<pre class="sas"><code>proc format ;
+value grpfmt 1 = &#39;Teaching and Training&#39; 2 = &#39;Teaching&#39; 3 = &#39;Neither&#39; ;
+run ;
+
+filename dataurl url &quot;http://homepage.stat.uiowa.edu/~kcowles/Datasets/gulanick.dat&quot;;
+data gulan;
+infile dataurl;
+input score group;
+format group grpfmt.;
+run;</code></pre>
+<p>After you load the data, you can make a table as follows:</p>
+<pre class="sas"><code>proc tabulate data = gulan ;
+class group ;                 * class statement identifies qualitative variables ;
+var score ;                   * var statement identifies quantitative variables ;
+tables group , score * (N mean stddev) ;
+run ;</code></pre>
+<pre class="sas"><code>---------------------------------------------------------
+|                | score                                |
+|                |--------------------------------------|
+|                | N          | Mean       |        Std |
+|----------------+------------+------------+------------|
+|group           |            |            |            |
+|----------------+------------+------------+------------|
+|Teaching and    |            |            |            |
+|Training        | 11.00      | 126.82     | 24.25      |
+|----------------+------------+------------+------------|
+|Teaching        | 12.00      | 128.42     | 25.04      |
+|----------------+------------+------------+------------|
+|Neither         | 13.00      | 103.92     | 17.71      |
+---------------------------------------------------------</code></pre>
+<p>There are many options that you can use in <code>proc tabulate</code> as follows:</p>
+<p><img src="tabulate_options.png" /></p>
+</div>
+<div id="one-more-option-in-proc-means" class="section level3">
+<h3>One more option in <code>proc means</code></h3>
+<p>You can also use <code>proc means</code> with <code>where</code> syntax option.</p>
+<pre class="sas"><code>proc means data = gulan ;
+var score ;
+where group eq 1 ;           * restricts to those records with group = 1 ;
+run ;</code></pre>
+</div>
+<div id="billion-data" class="section level3">
+<h3>Billion data</h3>
+<p>Here is the another practice SAS code for <code>billion</code> data.</p>
+<pre class="sas"><code>proc format ;
+value $regfmt &#39;A&#39; = &#39;Asia&#39; &#39;E&#39; = &#39;Europe&#39; &#39;M&#39; = &#39;Middle East&#39;
+&#39;O&#39; = &#39;Other&#39; &#39;U&#39; = &#39;US&#39; ;
+value amtfmt low-&lt;5 = &#39;&lt;5&#39; 5-&lt;10 = &#39;5-&lt;10&#39; 10-&lt;20 = &#39;10-&lt;20&#39; 20-high = &#39;20+&#39; ;
+run ;
+
+filename bill url &quot;http://homepage.divms.uiowa.edu/~kcowles/Datasets/billion.dat&quot;;
+data billion ;
+infile bill;
+input wealth age region $ ;
+format region $regfmt. wealth amtfmt. ;
+label wealth = &#39;Wealth in Billion $&#39;
+age = &#39;Age in Years&#39; ;
+run ;</code></pre>
+<p>Let us make a summary table using region and age varible.</p>
+<pre class="sas"><code>proc tabulate data = billion ;
+class region ;
+var age ;
+tables region, age * (mean stddev) ;
+run ;</code></pre>
+</div>
+</div>

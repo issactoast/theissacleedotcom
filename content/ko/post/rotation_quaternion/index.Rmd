@@ -1,0 +1,235 @@
+---
+authors:
+- admin
+date: "2020-02-29T00:00:00Z"
+draft: false
+featured: false
+image:
+  caption: 'Image credit: [spacecentre](https://www.spacecentre.nz/resources/faq/solar-system/earth/img/earth-rotation.png)'
+  focal_point: ""
+  placement: 2
+  preview_only: true
+lastmod: "2019-10-01T00:00:00Z"
+projects: [telematics]
+subtitle: 'Rotation matrix and DCM'
+summary: Introduction to the concept of rotation in 2D space.
+title: 'Rotations in 2D space'
+categories:
+  - telematics
+  - mathematics
+tags:
+  - trigonometric
+  - linear algebra
+  - direction cosine matrix
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+This article is an introduction to the basic concept in 2D space. The following are the `R` packages used in this post.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(kableExtra)
+library(tibble)
+
+```
+
+```{r message=FALSE, warning=FALSE}
+library(magrittr)
+library(ggplot2)
+theme_set(theme_bw())
+```
+
+## Rotation of a vector in 2D plane
+
+Let us consider a vector $\underline{a} = (3, 1)$ on the 2D plane, then we can visualize the vector as follows;
+
+```{r echo=FALSE}
+mypoint <- data.frame(x = 3, y = 1)
+ggplot(data = mypoint) +
+  geom_segment(aes(x = 0, y = 0, xend = x, yend = y), arrow = arrow(length = unit(0.03, "npc"))) +
+  geom_hline(yintercept = 0) +
+  geom_vline(xintercept = 0) +
+  ylim(0, 3) + xlim(0, 4) + coord_fixed(ratio = 1)
+```
+
+Now, if we rotate the vector $\underline{a}$ by a counterclockwise angle $30^\circ$ about the origin, then the result vector $\underline{a}'$ will look like this.
+
+```{r echo=FALSE}
+rotation_mat <- function(theta, degree = FALSE){
+  if (degree){
+    theta <- theta * pi / 180
+  }
+  rmat <- matrix(c(cos(theta), -sin(theta),
+                   sin(theta), cos(theta)), nrow = 2, byrow = T)
+  return(rmat)
+}
+rmat <- rotation_mat(30, degree = TRUE)
+a_prime <- as.numeric(rmat %*% as.numeric(mypoint))
+
+ggplot(data = mypoint) +
+  geom_segment(aes(x = 0, y = 0, xend = x, yend = y),
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  geom_segment(aes(x = 0, y = 0, xend = a_prime[1], yend = a_prime[2]), 
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  geom_curve(aes(x = x, y = y, xend = a_prime[1], yend = a_prime[2]), linetype = 2, 
+               arrow = arrow(length = unit(0.03, "npc"))) +
+  geom_hline(yintercept = 0) +
+  geom_vline(xintercept = 0) +
+  ylim(0, 3) + xlim(0, 4) + coord_fixed(ratio = 1)
+```
+
+
+### Rotation matrix 
+
+The matrix $R$, called a rotation matrix, represents the counter-clockwise rotation by angle $\theta$ (radian), which can be written as follows:
+$$
+R_{\theta}=\left(\begin{array}{cc}
+cos\left(\theta\right) & -sin\left(\theta\right)\\
+sin\left(\theta\right) & cos\left(\theta\right)
+\end{array}\right)
+$$
+To rotate a vector using the rotation matrix, we need to multiply the rotation matrix by the vector as follows:
+$$
+\underline{a}' = R_{\theta} \underline{a}
+$$
+where $\underline{a}'$ indicates the rotated vector of $\underline{a}$. Thus, in the above example, since we have a counter-clockwise $30 ^\circ$ rotation, we have the following rotation matrix:
+```{r}
+rotation_mat <- function(theta, degree = FALSE){
+  if (degree){
+    theta <- theta * pi / 180
+  }
+  rmat <- matrix(c(cos(theta), -sin(theta),
+                   sin(theta), cos(theta)), nrow = 2, byrow = T)
+  return(rmat)
+}
+rmat <- rotation_mat(30, degree = TRUE)
+rmat
+
+```
+
+Using this rotation matrix, we can calculate the endpoint of the rotated vector, $\underline{a}'$, as follows:
+
+```{r}
+as.vector(rmat %*% c(3, 1))
+```
+
+## Rotation of frame in 2D space
+
+In the previous section, the rotated object was a vector. However, sometimes we have a situation where the coordinate system is rotated rather than the vector. Let us consider the same example that we had in the previous section. We have the same vector $\underline{a}$ on the initial 2D space, and we call this coordinate system as a reference frame. In this reference frame, the coordinates of the vector are $(3, 1)$, because the vector $\underline{a}$ can be represented as a linear combination of the basis vector $e_1, e_2$ of the frame as follows:
+
+$$
+\underline{a}=3e_1 + 1e_2,
+$$
+where $e_1$ and $e_2$ are
+$$
+e_1 = (1, 0)^T, \quad e_2 = (0, 1)^T
+$$
+
+### Rotating the reference frame
+
+What if the reference frame is rotated by a clockwise angle $\theta$ to another frame? Furthermore, what will be the coordinates of the vector $\underline{a}$ in the new rotating frame? The following figure shows the situation where the initial frame is rotated by a clockwise $30 ^\circ$. The solid red lines represent the x and y-axis in the new frame, called $x'$ and $y'$.
+
+```{r echo=FALSE}
+rmat <- rotation_mat(-30, degree = TRUE)
+p_1 <- as.numeric(rmat %*% c(1, 0))
+p_2 <- as.numeric(rmat %*% c(0, 1))
+
+rmat <- rotation_mat(-30, degree = TRUE)
+p_3 <- as.numeric(rmat %*% c(0, 2.366025))
+p_4 <- as.numeric(rmat %*% c(2.098076, 0))
+
+mypoint_1 <- data.frame(x = p_1[1], y = p_1[2])
+mypoint_2 <- data.frame(x = p_2[1], y = p_2[2])
+ggplot(data = mypoint) +
+  geom_segment(aes(x = 0, y = 0, xend = x, yend = y), arrow = arrow(length = unit(0.03, "npc"))) +
+  geom_hline(yintercept = 0) +
+  geom_vline(xintercept = 0) +
+  geom_abline(slope = p_1[2] / p_1[1], intercept = 0, col = "red") +
+  geom_abline(slope = p_2[2] / p_2[1], intercept = 0, col = "red") +
+  annotate("text", x = 2.7, y = 3, label = "Rotated frame", col = "red") +
+  annotate("text", x = 1.5, y = 3, label = "y'", col = "red") +
+  annotate("text", x = 4, y = -2, label = "x'", col = "red") +
+  annotate("text", x = 3.2, y = 1.2, label = "(2.098076, \n                2.366025)", col = "red") +
+  annotate("text", x = 0.7, y = 3, label = "Initial frame", col = "black") +
+  geom_segment(aes(x = 3, y = 1, xend = p_3[1], yend = p_3[2]), linetype = "dashed", col = "red") +
+  geom_segment(aes(x = 3, y = 1, xend = p_4[1], yend = p_4[2]), linetype = "dashed", col = "red") +
+  ylim(-2, 3) + xlim(0, 4) + coord_fixed(ratio = 1)
+```
+In the new frame, the coordinates of $\underline{a}$ will be $(2.098076, 2.366025)$, which is the same coordinates we had in the previous vector rotation case. Thus, rotating the initial frame by a clockwise angle $\theta$ has the same effect as the counter-clockwise rotation of the vector by an angle $\theta$ when we consider the measurements of the vector. 
+
+Let us define some notations to describe the situation more precisely. Let us denote $I$ and $B$ by the initial frame and the rotating frame (usually called body frame), respectively. Then, the rotating the **frame** $B$ by a counter-clockwise angle $\theta$ with respect to the frame $I$ can be denoted by a matrix $C^{B|I}_{\theta}$, which can be written as follows:
+$$
+\begin{align*}
+C_{\theta}^{B|I} & =R_{-\theta}\\
+ & =\left(\begin{array}{cc}
+cos\left(-\theta\right) & -sin\left(-\theta\right)\\
+sin\left(-\theta\right) & cos\left(-\theta\right)
+\end{array}\right)\\
+ & =\left(\begin{array}{cc}
+cos\left(\theta\right) & sin\left(\theta\right)\\
+-sin\left(\theta\right) & cos\left(\theta\right)
+\end{array}\right)
+\end{align*}
+$$
+Note that the first line in the formula shows that the rotating the frame has the same effect of rotating the objects opposite direction. The defined matrix $C_{\theta}^{B|I}$ called direction cosine matrix (DCM). Why do we call this matrix DCM even though we have cos and sin function in the matrix? The answer can be shown with the conversion of the sine function to the cosine function using the identities as follows:
+$$
+\begin{align*}
+C_{\theta}^{B|I} & =\left(\begin{array}{cc}
+cos\left(\theta\right) & sin\left(\theta\right)\\
+-sin\left(\theta\right) & cos\left(\theta\right)
+\end{array}\right)\\
+ & =\left(\begin{array}{cc}
+cos\left(\theta\right) & cos\left(\frac{\pi}{2}-\theta\right)\\
+cos\left(\frac{\pi}{2}+\theta\right) & cos\left(\theta\right)
+\end{array}\right)\\
+ & =\left(\begin{array}{cc}
+cos\left(\theta_{11}\right) & cos\left(\theta_{12}\right)\\
+cos\left(\theta_{21}\right) & cos\left(\theta_{22}\right)
+\end{array}\right)\\
+ & =\left(\begin{array}{cc}
+C_{11} & C_{12}\\
+C_{21} & C_{22}
+\end{array}\right)
+\end{align*}
+$$
+DCM has also have geometric interpretation of the angles $\theta_{11}, \theta_{12}, \theta_{21}, \theta_{21}$ as follows:
+
+- $\theta_{11}$: counter clockwise angle from $x$-axis to $x'$-axis.
+- $\theta_{12}$: counter clockwise angle from $x$-axis to $y'$-axis.
+- $\theta_{21}$: clockwise angle from $y$-axis to $x'$-axis.
+- $\theta_{22}$: counter clockwise angle from $y$-axis to $y'$-axis.
+
+Thus, in our example, we have the following values for $\theta$s in the DCM:
+$$
+\left(\begin{array}{cc}
+cos\left(\theta_{11}\right) & cos\left(\theta_{12}\right)\\
+cos\left(\theta_{21}\right) & cos\left(\theta_{22}\right)
+\end{array}\right)
+=	\left(\begin{array}{cc}
+cos\left(330^{\circ}\right) & cos\left(60^{\circ}\right)\\
+cos\left(120^{\circ}\right) & cos\left(330^{\circ}\right)
+\end{array}\right)
+$$
+whose values are the same as before.
+```{r}
+matrix(c(cos(11*pi / 6), cos(pi / 3), 
+          cos(2*pi / 3), cos(11*pi / 6)), ncol = 2, byrow = T)
+```
+
+## Transfer coordinates 
+
+To summarize the discussion so far, coordinates of a given vector $\underline{a}$ in the initial frame can be transferred to the rotating frame by using the following matrix multiplication.
+$$
+\underline{a}_{B} = C^{B|I}_{\theta} \underline{a}_{I}
+$$
+where $\underline{a}_I$ and $\underline{a}_B$ represent the coordinates (or measurement) of the vector $\underline{a}$ in the initial frame and the body frame, respectively.
+
+
+### Reference
+
+[1] Kim, P. (2013). Rigid body dynamics for beginners: euler angles & quaternions.
+
+[2] Green, P. E. (2014). Mathematical tools for applied multivariate analysis. Academic Press.
