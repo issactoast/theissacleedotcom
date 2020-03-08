@@ -1,0 +1,13 @@
+# Reference site
+# https://sourcethemes.com/academic/docs/customization/#custom-theme
+# Font style metadata
+name = "issaclee font set"
+
+# Optional Google font URL
+google_fonts = "Nanum+Gothic+Coding:400,700|Nanum+Gothic:400,700,800"
+
+# Font families
+heading_font = "Nanum Gothic"
+body_font = "Nanum Gothic"
+nav_font = "Nanum Gothic"
+mono_font = "Nanum Gothic Coding"
