@@ -2,16 +2,6 @@
 authors:
 - admin
 bio: I believe anyone can learn anything with a proper education process.
-education:
-  courses:
-  - course: MS in Actuarial Science
-    institution: Sungkyunkwan University, 2014
-  - course: BS in Statistics & Industrial Engineering
-    institution: Sungkyunkwan University, 2012
-interests:
-- Pay-How-You-Drive insurance telematics data
-- Replacing nested monte carlo simulation in insurance product valuation process.
-- Making compression portfoilo of insurance products
 email: ""
 name: 이삭
 organizations:
@@ -37,6 +27,6 @@ user_groups:
 - Visitors
 ---
 
-Hello! I am Issac Lee who is a PhD candidate of Statistics & Actuarial Science at the University of Iowa. My beloved academic supervisor is [N.D. Shyamalkumar](http://homepage.divms.uiowa.edu/~nshyamal/).
+공부라는 것은 어찌보면 참 고되고 힘든 길 입니다. 하면 할 수록 주변에는 관심이 겹쳐지는 사람이 줄어들고, 결국 몇 안되는 사람들만이 자신과 관심사가 같아지는 힘든 길이죠. 저 역시도 학창시절 같은 것을 공부하고, 깨달으며 얻은 즐거움을 공유하고 싶었던 친구가 필요했던 적이 많았던 것 같습니다.
 
-I am generally interested in many machine learning techniques which can be applied in actuarial science field. More specifically, here are some lists of topics which graped my attention thesedays:
+이 블로그는 제가 공부했던 분야에서 깨달은 것들을 정리해 놓은 공간입니다. 몇몇 사람들에게는 궁금증이 해소되는 유익한 장소가 되고, 저와 같은 혹은 같았던 이들에게는 관심사가 동일한 다른 사람들과의 만남이 장이 되었으면 좋겠습니다.
