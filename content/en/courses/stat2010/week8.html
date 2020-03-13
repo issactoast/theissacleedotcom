@@ -15,7 +15,7 @@ weight: 8    # related to next page to show
 
 <p>The class video is attached here so that you can watch my lecture again when you prepare the exams.</p>
 <ul>
-<li>If you have questions about my lecture, please use <strong>the comment section</strong> at the bottom of this documents.</li>
+<li>If you have questions about my lecture, please use <strong>the comment section</strong> at the bottom of this document.</li>
 </ul>
 <div align="center">
 
@@ -23,7 +23,7 @@ weight: 8    # related to next page to show
 <div id="are-you-a-good-pitcher" class="section level2">
 <h2>Are you a good pitcher?</h2>
 <p><img src="https://ca-times.brightspotcdn.com/dims4/default/cea493c/2147483647/strip/true/crop/2048x1576+0+0/resize/840x646!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F3f%2Fea%2F73843d30656cefde4d6f5c5479af%2Fla-sp-clayton-kershaw-dodgers-wre0037975682-20160421" /></p>
-<p>I have a friend who can throw a ball really fast. But I always doubt about what he said, because he always says,</p>
+<p>I have a friend who can throw a ball really fast. But I always doubt about what he said because he always says,</p>
 <pre><code>I can throw a fastball like 90 mph!</code></pre>
 <p>Well, I don’t buy it, because</p>
 <ol style="list-style-type: decimal">
@@ -31,16 +31,16 @@ weight: 8    # related to next page to show
 <li>After I measured his 20 throws, here is what I got:</li>
 </ol>
 <pre><code>##  [1] 77 80 82 75 80 81 78 78 78 78 79 78 78 80 81 79 78 78 78 84</code></pre>
-<p>Average 79 mph! Oh, common, this is not even close! However, my friend did not admit he is wrong, and say, “Well, today is very unlucky day! But usually my ball speed is around 90 mph!”</p>
+<p>Average 79 mph! Oh, common, this is not even close! However, my friend did not admit he is wrong and say, “Well, today is the very unlucky day! But usually, my ball speed is around 90 mph!”</p>
 <div id="one-side-test" class="section level3">
 <h3>One side test</h3>
-<p>We don’t believe what he is saying because <strong>the probility that the average of the thrown 20 ball speeds is around 79 is very very low, if his opinion is true!</strong></p>
+<p>We don’t believe what he is saying because <strong>the probability that the average of the thrown 20 ball speeds is around 79 is very very low if his opinion is true!</strong></p>
 <p>Let us describe the situation using some statistical notation.</p>
 <p><span class="math display">\[
 H_0: \mu = 90 \ mph \quad vs. \quad H_a: \mu &lt; 90 \ mph
 \]</span>
 <span class="math inline">\(H_0\)</span> is a null hypothesis, which represents what my friend insists about his ball speed. <span class="math inline">\(H_a\)</span> is an alternative hypothesis, which represents my opinion.</p>
-<p>If we assume that the distribution of his pitch speed follows a Normal distribution, with <strong>UNKNOWN</strong> mean <span class="math inline">\(\mu\)</span> and <strong>KNOWN</strong> standard deviation <span class="math inline">\(\sigma\)</span> (in this example 2), we have studied that the distribtuion of <span class="math inline">\(\overline{X}\)</span> follows a Normal distribution as follows:
+<p>If we assume that the distribution of his pitch speed follows a Normal distribution, with <strong>UNKNOWN</strong> mean <span class="math inline">\(\mu\)</span> and <strong>KNOWN</strong> standard deviation <span class="math inline">\(\sigma\)</span> (in this example 2), we have studied that the distribution of <span class="math inline">\(\overline{X}\)</span> follows a Normal distribution as follows:
 <span class="math display">\[
 \overline{X} \sim \mathcal{N} (\mu, \frac{\sigma}{\sqrt{n}} )
 \]</span></p>
@@ -52,24 +52,24 @@ In this situation, what is the probability that I can see the observation like <
 <span class="math display">\[
 P(\overline{X} \le 79) = ?
 \]</span>
-To calculate the probability, I need to convert the number into standard Normal scale, because we can calculate the probablity only on the standard Normal distribution scale. So let me use the standardization formula!
+To calculate the probability, I need to convert the number into the standard Normal scale, because we can calculate the probability only on the standard Normal distribution scale. So let me use the standardization formula!
 <span class="math display">\[
 z = \frac{79 - 90}{2/\sqrt{20}} \approx -24.6
 \]</span>
-Well, now I can clearly see, this is a very very rare event if his real ball speed is 90 mph. Because, in our standard normal table, the probability that corresponds to z score -3.4 was 0.0003, in other words,
+Well, now I can see, this is a very, very rare event if his real ball speed is 90 mph. Because, in our standard Normal table, the probability that corresponds to z score -3.4 was 0.0003, in other words,
 <span class="math display">\[
 P(\overline{X} \le 79) = P(Z \le -24.6) \  \ll  \ P(Z \le -3.4) = 0.0003
 \]</span>
-where I use <span class="math inline">\(\ll\)</span> symbol to say that it is wayyyyy less than right hand side. Thus, I conclude that his opinion is a total non-sense, but I would say it more academical way, so I would say as follow:</p>
+where I use <span class="math inline">\(\ll\)</span> symbol to say that it is wayyyyy less than the right-hand side. Thus, I conclude that his opinion is total nonsense, but I want to say it more academical way, so I would say as follow:</p>
 <p><strong>I can reject <span class="math inline">\(H_0\)</span> (His opinion) based on my sample.</strong></p>
 </div>
 <div id="one-side-test-unknown-sigma" class="section level3">
 <h3>One side test (Unknown <span class="math inline">\(\sigma\)</span>)</h3>
-<p>What if we don’t know about the population <span class="math inline">\(\sigma\)</span>? Remember we used <span class="math inline">\(t\)</span> distribution for the construction of confidence intervals. Similarly, we will use the sample standard deviation <span class="math inline">\(s\)</span> for the <span class="math inline">\(\sigma\)</span> value in the standardization formula! Thus, we have the following conversion value, which I denote <span class="math inline">\(t\)</span>, as follows:
+<p>What if we don’t know about the population <span class="math inline">\(\sigma\)</span>? Remember, we used <span class="math inline">\(t\)</span> distribution for the construction of confidence intervals. Similarly, we will use the sample standard deviation, <span class="math inline">\(s\)</span>, for the <span class="math inline">\(\sigma\)</span> value in the standardization formula! Thus, we have the following conversion value, which I denote <span class="math inline">\(t\)</span>, as follows:
 <span class="math display">\[
 t = \frac{79 - 90}{1.974/\sqrt{20}} \approx -24.92
 \]</span>
-where <span class="math inline">\(1.974\)</span> is a sample standard deviation of my friend’s throwings. This converted value follows <span class="math inline">\(t\)</span> distribution with degree of freedom <span class="math inline">\(19\)</span>, which gives a probility
+where <span class="math inline">\(1.974\)</span> is a sample standard deviation of my friend’s throwings. This converted value follows <span class="math inline">\(t\)</span> distribution with degree of freedom <span class="math inline">\(19\)</span>, which gives a probability
 <span class="math display">\[
 P(T_{19} \le -24.92) \ll P(T\le -3.883)=0.0005 
 \]</span>
@@ -79,7 +79,7 @@ Note that I can not use the notation <span class="math inline">\(Z\)</span> sinc
 <h3>Statistical terms</h3>
 <div id="test-statistic" class="section level4">
 <h4>Test statistic</h4>
-<p>Above, we have calcuated the z-score assumming his opinions (<span class="math inline">\(H_0\)</span>) is true, if I write this down using symbolic notations,
+<p>Above, we have calculated the z-score assuming his opinions (<span class="math inline">\(H_0\)</span>) is true, if I write this down using symbolic notations,
 <span class="math display">\[
 z = \frac{79 - 90}{2/\sqrt{20}} \Longrightarrow  z = \frac{\overline{x} - \mu_0}{\sigma / \sqrt{n}}
 \]</span>
@@ -90,7 +90,7 @@ t = \frac{79 - 90}{1.974/\sqrt{20}} \Longrightarrow  t = \frac{\overline{x} - \m
 </div>
 <div id="p-value" class="section level4">
 <h4>P-value</h4>
-<p>After calculating the test statistic, what we have tried to find was the probability that the observation can happen in the assuming distribution, which was, in our case,
+<p>After calculating the test statistic, what we have tried to find was the probability that the observation <span class="math inline">\(\overline{x}\)</span> can happen in the assuming distribution, which was, in our case,
 <span class="math display">\[
 P(\overline{X} \le 79) \quad when \ \mu = 90
 \]</span>

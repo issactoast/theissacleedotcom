@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The class video is attached here so that you can watch my lecture again when you prepare the exams.
 
-- If you have questions about my lecture, please use **the comment section** at the bottom of this documents.
+- If you have questions about my lecture, please use **the comment section** at the bottom of this document.
 
 <div align="center">
 
@@ -29,7 +29,7 @@ The class video is attached here so that you can watch my lecture again when you
 
 ![](https://ca-times.brightspotcdn.com/dims4/default/cea493c/2147483647/strip/true/crop/2048x1576+0+0/resize/840x646!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F3f%2Fea%2F73843d30656cefde4d6f5c5479af%2Fla-sp-clayton-kershaw-dodgers-wre0037975682-20160421)
 
-I have a friend who can throw a ball really fast. But I always doubt about what he said, because he always says,
+I have a friend who can throw a ball really fast. But I always doubt about what he said because he always says,
 
     I can throw a fastball like 90 mph!
     
@@ -44,11 +44,11 @@ x <- as.integer(rnorm(20, 80, 2))
 x
 ```
 
-Average 79 mph! Oh, common, this is not even close! However, my friend did not admit he is wrong, and say, "Well, today is very unlucky day! But usually my ball speed is around 90 mph!"
+Average 79 mph! Oh, common, this is not even close! However, my friend did not admit he is wrong and say, "Well, today is the very unlucky day! But usually, my ball speed is around 90 mph!"
 
 ### One side test
 
-We don't believe what he is saying because **the probility that the average of the thrown 20 ball speeds is around 79 is very very low, if his opinion is true!**
+We don't believe what he is saying because **the probability that the average of the thrown 20 ball speeds is around 79 is very very low if his opinion is true!**
 
 Let us describe the situation using some statistical notation.
 
@@ -57,7 +57,7 @@ H_0: \mu = 90 \ mph \quad vs. \quad H_a: \mu < 90 \ mph
 $$
 $H_0$ is a null hypothesis, which represents what my friend insists about his ball speed. $H_a$ is an alternative hypothesis, which represents my opinion.
 
-If we assume that the distribution of his pitch speed follows a Normal distribution, with **UNKNOWN** mean $\mu$ and **KNOWN** standard deviation $\sigma$ (in this example 2), we have studied that the distribtuion of $\overline{X}$ follows a Normal distribution as follows:
+If we assume that the distribution of his pitch speed follows a Normal distribution, with **UNKNOWN** mean $\mu$ and **KNOWN** standard deviation $\sigma$ (in this example 2), we have studied that the distribution of $\overline{X}$ follows a Normal distribution as follows:
 $$
 \overline{X} \sim \mathcal{N} (\mu, \frac{\sigma}{\sqrt{n}} )
 $$
@@ -70,25 +70,25 @@ In this situation, what is the probability that I can see the observation like $
 $$
 P(\overline{X} \le 79) = ?
 $$
-To calculate the probability, I need to convert the number into standard Normal scale, because we can calculate the probablity only on the standard Normal distribution scale. So let me use the standardization formula!
+To calculate the probability, I need to convert the number into the standard Normal scale, because we can calculate the probability only on the standard Normal distribution scale. So let me use the standardization formula!
 $$
 z = \frac{79 - 90}{2/\sqrt{20}} \approx -24.6
 $$
-Well, now I can clearly see, this is a very very rare event if his real ball speed is 90 mph. Because, in our standard normal table, the probability that corresponds to z score -3.4 was 0.0003, in other words,
+Well, now I can see, this is a very, very rare event if his real ball speed is 90 mph. Because, in our standard Normal table, the probability that corresponds to z score -3.4 was 0.0003, in other words,
 $$
 P(\overline{X} \le 79) = P(Z \le -24.6) \  \ll  \ P(Z \le -3.4) = 0.0003
 $$
-where I use $\ll$ symbol to say that it is wayyyyy less than right hand side. Thus, I conclude that his opinion is a total non-sense, but I would say it more academical way, so I would say as follow:
+where I use $\ll$ symbol to say that it is wayyyyy less than the right-hand side. Thus, I conclude that his opinion is total nonsense, but I want to say it more academical way, so I would say as follow:
 
 **I can reject $H_0$ (His opinion) based on my sample.**
 
 ### One side test (Unknown $\sigma$)
 
-What if we don't know about the population $\sigma$? Remember we used $t$ distribution for the construction of confidence intervals. Similarly, we will use the sample standard deviation $s$ for the $\sigma$ value in the standardization formula! Thus, we have the following conversion value, which I denote $t$, as follows:
+What if we don't know about the population $\sigma$? Remember, we used $t$ distribution for the construction of confidence intervals. Similarly, we will use the sample standard deviation, $s$, for the $\sigma$ value in the standardization formula! Thus, we have the following conversion value, which I denote $t$, as follows:
 $$
 t = \frac{79 - 90}{1.974/\sqrt{20}} \approx -24.92
 $$
-where $1.974$ is a sample standard deviation of my friend's throwings. This converted value follows $t$ distribution with degree of freedom $19$, which gives a probility
+where $1.974$ is a sample standard deviation of my friend's throwings. This converted value follows $t$ distribution with degree of freedom $19$, which gives a probability
 $$
 P(T_{19} \le -24.92) \ll P(T\le -3.883)=0.0005 
 $$
@@ -98,7 +98,7 @@ Note that I can not use the notation $Z$ since it does not follow the standard N
 
 #### Test statistic
 
-Above, we have calcuated the z-score assumming his opinions ($H_0$) is true, if I write this down using symbolic notations,
+Above, we have calculated the z-score assuming his opinions ($H_0$) is true, if I write this down using symbolic notations,
 $$
 z = \frac{79 - 90}{2/\sqrt{20}} \Longrightarrow  z = \frac{\overline{x} - \mu_0}{\sigma / \sqrt{n}}
 $$
@@ -109,7 +109,7 @@ $$
 
 #### P-value
 
-After calculating the test statistic, what we have tried to find was the probability that the observation can happen in the assuming distribution, which was, in our case,
+After calculating the test statistic, what we have tried to find was the probability that the observation $\overline{x}$ can happen in the assuming distribution, which was, in our case,
 $$
 P(\overline{X} \le 79) \quad when \ \mu = 90
 $$
