@@ -100,7 +100,7 @@ Note that I can not use the notation $Z$ since it does not follow the standard N
 
 Above, we have calcuated the z-score assumming his opinions ($H_0$) is true, if I write this down using symbolic notations,
 $$
-z = \frac{79 - 100}{2/\sqrt{20}} \Longrightarrow  z = \frac{\overline{x} - \mu_0}{\sigma / \sqrt{n}}
+z = \frac{79 - 90}{2/\sqrt{20}} \Longrightarrow  z = \frac{\overline{x} - \mu_0}{\sigma / \sqrt{n}}
 $$
 We call this special standardization formula **$z$ test statistic**, it is special since we use imaginary $\mu$. Likewise, we have **$t$ test statistic**
 $$
