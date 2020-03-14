@@ -1,0 +1,75 @@
+---
+authors:
+- admin
+date: '2020-March-13'
+draft: false
+featured: false
+image:
+  caption: 'Image credit: [scrcpy in action](https://raw.githubusercontent.com/issactoast/theissacleedotcom/master/static/img/scrcpy.png)'
+  focal_point: ""
+  placement: 2
+  preview_only: true
+lastmod: '2020-March-13'
+projects: [linux]
+title: '리눅스에서 scrcpy 설치로 휴대폰화면 띄우기'
+subtitle: 'scrcpy build in terminal'
+summary: scrcpy 설치 삽질기 정리
+categories:
+  - linux mint
+  - education
+tags:
+  - scrcpy
+---
+
+
+
+<div id="scrcpy-설치" class="section level2">
+<h2><code>scrcpy</code> 설치</h2>
+<p>학교에서 온라인 강의를 찍기위해서 고심하던 중 패드를 사용해서 온라인 강의 녹화를 하려던데 화근이 되었다. 장장 하루에 걸쳐 알아낸 너무 간단한 명령어 모음.</p>
+<p>간단히 말하면 두 개의 웹사이트에서 얻어낸 정보를 합쳐야 한다.</p>
+<ul>
+<li><a href="https://www.linuxuprising.com/2019/03/control-android-devices-from-your.html">참고 사이트 1</a></li>
+<li><a href="https://github.com/Genymobile/scrcpy/blob/master/BUILD.md">참고 사이트 2</a></li>
+</ul>
+<div id="설치-과정" class="section level3">
+<h3>설치 과정</h3>
+<ol style="list-style-type: decimal">
+<li>리눅스 distributor에 따른 기반 프로그램 설치</li>
+</ol>
+<ul>
+<li>Debian, Ubuntu or Linux Mint</li>
+</ul>
+<pre class="bash"><code>sudo apt install adb ffmpeg libsdl2-2.0.0 make gcc pkg-config meson ninja-build libavcodec-dev libavformat-dev libavutil-dev libsdl2-dev</code></pre>
+<ul>
+<li>Fedora</li>
+</ul>
+<pre class="bash"><code>sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+
+sudo dnf install android-tools ffmpeg SDL2-devel ffms2-devel meson gcc make</code></pre>
+<ol style="list-style-type: decimal">
+<li>다음의 <a href="https://github.com/Genymobile/scrcpy/releases">링크</a>에서 두 개의 파일을 다운 받고, <code>home</code> 폴더 저장한다. (사실 아무 폴더나 상관없다. 같은 폴더에만 있으면 됨.)
+<ul>
+<li>scrcpy-server-v#.##.#</li>
+<li>scrcpy-#.##.#.tar.gz</li>
+</ul></li>
+<li>첫번째 파일이 미리 빌트된 서버 파일이다. 이 파일의 확장자를 <code>.jar</code>로 바꿔주고 다음의 명령어를 터미널에서 실행.</li>
+</ol>
+<pre class="bash"><code>sudo install scrcpy-server-v*.jar /usr/local/bin/scrcpy-server.jar</code></pre>
+<ol style="list-style-type: decimal">
+<li>두번째 파일의 압축을 풀어주고, 풀어진 결과 폴더의 이름을 <code>scrcpy</code>로 바꿔준다. 다음의 명령어를 차례로 실행한다. 내용은 압축 풀어진 <code>scrcpy</code> 폴더로 이동 후 <code>meson</code> 명령어를 이용해 <code>build</code> 폴더를 생성함. 그 후 <code>build</code> 폴더로 이동 후 설치.</li>
+</ol>
+<pre class="bash"><code>cd scrcpy
+
+meson x --buildtype release --strip -Db_lto=true -Dprebuilt_server=../scrcpy-server-v#.##.#.jar
+
+cd build
+    
+ninja -Cx
+
+sudo ninja -Cx install</code></pre>
+</div>
+<div id="사용-방법" class="section level3">
+<h3>사용 방법</h3>
+<p>마지막 명령어를 실행하면 <code>path</code>에 등록되어서 아무대서나 터미널 열고 <code>scrcpy</code> 치면 실행가능하다. 화면 반영 엄청 빠름. 삼성에서 스크린 미러링 제공 안해서 계속 모비즌을 쓰고 있었는데, 훨씬 빠른 것 같음.</p>
+</div>
+</div>
