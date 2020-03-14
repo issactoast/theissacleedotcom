@@ -69,15 +69,25 @@ sudo install scrcpy-server-v*.jar /usr/local/bin/scrcpy-server.jar
 ```{r, engine = 'bash', eval = FALSE}
 cd scrcpy
 
-meson x --buildtype release --strip -Db_lto=true -Dprebuilt_server=../scrcpy-server-v#.##.#.jar
+meson build --buildtype release --strip -Db_lto=true -Dprebuilt_server=../scrcpy-server-v#.##.#.jar
 
 cd build
     
-ninja -Cx
+ninja
 
-sudo ninja -Cx install
+sudo ninja install
 ```
 
-### 사용 방법
+## `adb` 설치
+
+scrcpy는 adb라는 프로그램을 이용해서 안드로이드랑 연결함. 그래서 추가 프로그램 설치해야함.
+
+```{r, engine = 'bash', eval = FALSE}
+sudo apt install android-tools-adb android-tools-fastboot
+```
+
+만약에 설치가 잘 되었다면 `adb version`에서 결과 확인 가능.
+
+## 사용 방법
 
 마지막 명령어를 실행하면 `path`에 등록되어서 아무대서나 터미널 열고 `scrcpy` 치면 실행가능하다. 화면 반영 엄청 빠름. 삼성에서 스크린 미러링 제공 안해서 계속 모비즌을 쓰고 있었는데, 훨씬 빠른 것 같음.
