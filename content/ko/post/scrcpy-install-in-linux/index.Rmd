@@ -88,6 +88,32 @@ sudo apt install android-tools-adb android-tools-fastboot
 
 만약에 설치가 잘 되었다면 `adb version`에서 결과 확인 가능.
 
+**무선 연결 방법**
+
+[링크 1](https://github.com/Genymobile/scrcpy#wireless)
+[링크 2](https://github.com/Genymobile/scrcpy/issues/92)
+[링크 3](https://automationlab0000.wordpress.com/2019/01/08/how-to-connect-to-multiple-devices-over-wifi-using-adb/)
+
 ## 사용 방법
 
 마지막 명령어를 실행하면 `path`에 등록되어서 아무대서나 터미널 열고 `scrcpy` 치면 실행가능하다. 화면 반영 엄청 빠름. 삼성에서 스크린 미러링 제공 안해서 계속 모비즌을 쓰고 있었는데, 훨씬 빠른 것 같음.
+
+
+**무선 실행**
+```{r, engine = 'bash', eval = FALSE}
+adb devices     # 연결 장치 확인
+```
+
+다음과 같은 결과가 나온다면
+
+```{r, engine = 'bash', eval = FALSE}
+List of devices attached
+192.168.0.190:5556	device
+192.168.0.135:5555	device
+```
+
+두번째 장치 화면 띄우기
+
+```
+scrcpy -s 192.168.0.135:5555
+```
