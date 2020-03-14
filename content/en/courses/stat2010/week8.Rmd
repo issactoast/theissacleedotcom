@@ -114,3 +114,118 @@ $$
 P(\overline{X} \le 79) \quad when \ \mu = 90
 $$
 We call this probability **$p$-value**.
+
+### Testing in SAS
+
+Let us do this in SAS now.
+
+```sas
+data pitch ;
+input speed ;
+datalines;
+* note: copy and paste data in here ;
+;
+run;
+
+proc print data = pitch;
+run;
+
+proc means data = pitch;
+var speed;
+run;
+```
+
+```sas
+                                      The MEANS Procedure
+
+                                  Analysis Variable : speed
+
+               N            Mean         Std Dev         Minimum         Maximum
+              ------------------------------------------------------------------
+              20      79.0000000       1.9735088      75.0000000      84.0000000
+              ------------------------------------------------------------------
+```
+
+#### Z-Test in SAS
+
+Using the above result we hvae the information about the $n$ and $\overline{x}$. Since SAS does not provide the *z-test*, let just make our own code for the test!
+
+```sas
+%let numObs= 20;
+%let smean = 79;
+%let sigma = 2;
+%let mu0   = 90;
+%let Side  = L;
+%let slevel= 0.05;
+title "Test for population mean";
+
+data zTestMean;
+n = &NumObs;
+x_bar = &smean;
+SE = &sigma / sqrt(n);
+z = (x_bar - &mu0) / SE;
+alpha = &slevel;
+
+/* p-Value */
+Side = "&Side";
+if Side="L" then                      /* one-sided, lower tail */
+   pValue = cdf("normal", z);
+   label pValue = "Pr(Z < z)";
+else if Side="U" then                 /* one-sided, upper tail */
+   pValue = 1 - cdf("normal", z);
+   label pValue = "Pr(Z > z)";
+else if Side="2" then
+   pValue = 2*(1-cdf("normal", abs(z))); /* two-sided */
+   label pValue = "Pr(Z > |z|)";
+
+/* Test result */
+length result $ 16;
+if pValue <= alpha then
+   result = "Reject Ho";
+else if pValue > alpha then
+   result = "Cannot reject Ho";
+format pValue PVALUE6.4 z 7.4 result $16.;
+label result = "Test result";
+label alpha = "Sig. level";
+run ;
+
+proc print data = zTestMean label noobs; run;
+run;
+```
+
+The result will be as follows;
+
+```sas
+                             Test for population mean
+
+
+                                      Sig.            Pr(Z >
+  n    x_bar       SE            z    level    Side     |z|)     Test result
+----------------------------------------------------------------------------
+ 20      79     0.44721    -24.597     0.05     L      <.0001    Reject Ho
+----------------------------------------------------------------------------
+
+```
+
+#### t-Test in SAS
+
+I know the z-test in SAS is actually really burdensome, I would rather do it by hand. However, it will be useful for you to have the code for your future usage. For *t-test* SAS provides us with t-test result by using `proc univariate`;
+
+```sas
+proc univariate mu0 = 90 data = pitch;
+var speed;
+run;
+```
+
+```sas
+                                  Tests for Location: Mu0=90
+
+                       Test           -Statistic-    -----p Value------
+
+                       Student's t    t  -24.9269    Pr > |t|    <.0001
+                       Sign           M       -10    Pr >= |M|   <.0001
+                       Signed Rank    S      -105    Pr >= |S|   <.0001
+
+```
+
+Note that SAS will give you two-side test p-value, so you need to adjust the result into your test situation.

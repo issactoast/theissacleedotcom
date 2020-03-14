@@ -97,4 +97,99 @@ P(\overline{X} \le 79) \quad when \ \mu = 90
 We call this probability <strong><span class="math inline">\(p\)</span>-value</strong>.</p>
 </div>
 </div>
+<div id="testing-in-sas" class="section level3">
+<h3>Testing in SAS</h3>
+<p>Let us do this in SAS now.</p>
+<pre class="sas"><code>data pitch ;
+input speed ;
+datalines;
+* note: copy and paste data in here ;
+;
+run;
+
+proc print data = pitch;
+run;
+
+proc means data = pitch;
+var speed;
+run;</code></pre>
+<pre class="sas"><code>                                      The MEANS Procedure
+
+                                  Analysis Variable : speed
+
+               N            Mean         Std Dev         Minimum         Maximum
+              ------------------------------------------------------------------
+              20      79.0000000       1.9735088      75.0000000      84.0000000
+              ------------------------------------------------------------------</code></pre>
+<div id="z-test-in-sas" class="section level4">
+<h4>Z-Test in SAS</h4>
+<p>Using the above result we hvae the information about the <span class="math inline">\(n\)</span> and <span class="math inline">\(\overline{x}\)</span>. Since SAS does not provide the <em>z-test</em>, let just make our own code for the test!</p>
+<pre class="sas"><code>%let numObs= 20;
+%let smean = 79;
+%let sigma = 2;
+%let mu0   = 90;
+%let Side  = L;
+%let slevel= 0.05;
+title &quot;Test for population mean&quot;;
+
+data zTestMean;
+n = &amp;NumObs;
+x_bar = &amp;smean;
+SE = &amp;sigma / sqrt(n);
+z = (x_bar - &amp;mu0) / SE;
+alpha = &amp;slevel;
+
+/* p-Value */
+Side = &quot;&amp;Side&quot;;
+if Side=&quot;L&quot; then                      /* one-sided, lower tail */
+   pValue = cdf(&quot;normal&quot;, z);
+   label pValue = &quot;Pr(Z &lt; z)&quot;;
+else if Side=&quot;U&quot; then                 /* one-sided, upper tail */
+   pValue = 1 - cdf(&quot;normal&quot;, z);
+   label pValue = &quot;Pr(Z &gt; z)&quot;;
+else if Side=&quot;2&quot; then
+   pValue = 2*(1-cdf(&quot;normal&quot;, abs(z))); /* two-sided */
+   label pValue = &quot;Pr(Z &gt; |z|)&quot;;
+
+/* Test result */
+length result $ 16;
+if pValue &lt;= alpha then
+   result = &quot;Reject Ho&quot;;
+else if pValue &gt; alpha then
+   result = &quot;Cannot reject Ho&quot;;
+format pValue PVALUE6.4 z 7.4 result $16.;
+label result = &quot;Test result&quot;;
+label alpha = &quot;Sig. level&quot;;
+run ;
+
+proc print data = zTestMean label noobs; run;
+run;</code></pre>
+<p>The result will be as follows;</p>
+<pre class="sas"><code>                             Test for population mean
+
+
+                                      Sig.            Pr(Z &gt;
+  n    x_bar       SE            z    level    Side     |z|)     Test result
+----------------------------------------------------------------------------
+ 20      79     0.44721    -24.597     0.05     L      &lt;.0001    Reject Ho
+----------------------------------------------------------------------------
+</code></pre>
+</div>
+<div id="t-test-in-sas" class="section level4">
+<h4>t-Test in SAS</h4>
+<p>I know the z-test in SAS is actually really burdensome, I would rather do it by hand. However, it will be useful for you to have the code for your future usage. For <em>t-test</em> SAS provides us with t-test result by using <code>proc univariate</code>;</p>
+<pre class="sas"><code>proc univariate mu0 = 90 data = pitch;
+var speed;
+run;</code></pre>
+<pre class="sas"><code>                                  Tests for Location: Mu0=90
+
+                       Test           -Statistic-    -----p Value------
+
+                       Student&#39;s t    t  -24.9269    Pr &gt; |t|    &lt;.0001
+                       Sign           M       -10    Pr &gt;= |M|   &lt;.0001
+                       Signed Rank    S      -105    Pr &gt;= |S|   &lt;.0001
+</code></pre>
+<p>Note that SAS will give you two-side test p-value, so you need to adjust the result into your test situation.</p>
+</div>
+</div>
 </div>
