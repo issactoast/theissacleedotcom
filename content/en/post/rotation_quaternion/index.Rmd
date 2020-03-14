@@ -33,7 +33,6 @@ This article is an introduction to the basic concept in 2D space. The following 
 library(knitr)
 library(kableExtra)
 library(tibble)
-
 ```
 
 ```{r message=FALSE, warning=FALSE}
