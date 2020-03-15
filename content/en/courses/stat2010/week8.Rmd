@@ -22,7 +22,7 @@ The class video is attached here so that you can watch my lecture again when you
 - If you have questions about my lecture, please use **the comment section** at the bottom of this document.
 
 <div align="center">
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YUW7LzxG1LM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ##  Are you a good pitcher?
