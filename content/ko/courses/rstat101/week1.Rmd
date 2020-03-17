@@ -111,12 +111,7 @@ head(mydata)
 
 혹은 다음과 같이 파일 주소를 직접 입력하셔서 불러오는 방법도 있습니다.
 
-```{r eval=FALSE}
-mydata <- read.csv("https://www.theissaclee.com/ko/courses/rstat101/examscore.csv", header = TRUE)
-head(mydata)
-```
-
-```{r echo=FALSE}
+```{r}
 mydata <- read.csv("https://www.theissaclee.com/ko/courses/rstat101/examscore.csv", header = TRUE)
 head(mydata)
 ```

@@ -1,0 +1,138 @@
+---
+date: "2020-03-17T00:00:00+01:00"
+draft: false
+linktitle: Week 2 - 데이터 시각화
+menu:
+  rstat101:
+    parent: Contents
+    weight: 3
+title: 통계적 데이터 시각화 하기
+type: docs
+weight: 3
+---
+
+
+
+<div id="section" class="section level2">
+<h2></h2>
+<div id="데이터-불러오기" class="section level3">
+<h3>데이터 불러오기</h3>
+<p>저번시간에 불러왔던 데이터를 다시 불러오도록 하자.</p>
+<pre class="r"><code>mydata &lt;- read.csv(&quot;https://www.theissaclee.com/ko/courses/rstat101/examscore.csv&quot;, header = TRUE)
+head(mydata)</code></pre>
+<pre><code>##   student_id gender midterm final
+## 1          1      F      38    46
+## 2          2      M      42    67
+## 3          3      F      53    56
+## 4          4      M      48    54
+## 5          5      M      46    39
+## 6          6      M      51    74</code></pre>
+</div>
+<div id="데이터-열에-접근하기" class="section level3">
+<h3>데이터 열에 접근하기</h3>
+<p><code>$</code> 명령어는 불러온 데이터의 행에 접근 할 수 있도록 해줍니다. 다음은 불러온 <code>mydata</code>의 midterm1 열을 선택하는 코드입니다.</p>
+<pre class="r"><code>mydata$midterm</code></pre>
+<pre><code>##  [1] 38 42 53 48 46 51 48 43 28 38 50 29 27 36 29 34 35 46 39  9 76 15 63 28 49
+## [26] 42 24 52 65 52</code></pre>
+<p>이전에 배웠던 대괄호 명령어 <code>[]</code> 를 사용해도 됩니다. 행과 열에 동시에 접근 할 수 있는 대신에 숫자를 사용해야 합니다.</p>
+<pre class="r"><code>mydata[,3]</code></pre>
+<pre><code>##  [1] 38 42 53 48 46 51 48 43 28 38 50 29 27 36 29 34 35 46 39  9 76 15 63 28 49
+## [26] 42 24 52 65 52</code></pre>
+<pre class="r"><code>mydata[1,] # the data related to the first student in the list</code></pre>
+<pre><code>##   student_id gender midterm final
+## 1          1      F      38    46</code></pre>
+</div>
+<div id="table-함수를-이용한-파이-차트-그리기" class="section level3">
+<h3><code>table</code> 함수를 이용한 파이 차트 그리기</h3>
+<p>파이 차트를 그리기 위해서는, 데이터 안에 몇 개의 데이터 포인트 들이 있는지 세어봐야 합니다. 이 경우 다음과 같이 <code>table</code> 함수를 사용하여 쉽게 데이터 구조를 파악 할 수 있습니다.</p>
+<pre class="r"><code>mytable &lt;- table(mydata$gender)
+mytable</code></pre>
+<pre><code>## 
+##  F  M 
+## 10 20</code></pre>
+<pre class="r"><code>names(mytable)</code></pre>
+<pre><code>## [1] &quot;F&quot; &quot;M&quot;</code></pre>
+<p>위에서와 같이 <code>table</code> 함수의 결과값은 숫자와 그에 대응하는 열이름이 나오는 것을 확인 할 수 있는데, 이것을 이용하여 파이 차트의 변수명을 설정할 수 있습니다.</p>
+<pre class="r"><code>pie(mytable, 
+    labels = names(mytable),
+    main=&quot;Pie Chart of the gender variable&quot;)</code></pre>
+<p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>아니면, 다음과 같이 우리가 정하고 싶은 이름으로 설정할 수도 있습니다.</p>
+<pre class="r"><code>pie(mytable, 
+    labels = c(&quot;여자&quot;, &quot;남자&quot;),
+    main=&quot;데이터 안의 성별 분포&quot;)</code></pre>
+<p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>또한, 위의 <code>labels</code>의 옵션 안에 글자를 쓰면 파이차트 변수별로 이름이 정해지는 것을 이용하면, 다음과 같이 <code>mytable</code>의 정보를 추가 할 수도 있습니다.</p>
+<pre class="r"><code>pie(mytable, 
+    labels = c(&quot;여자&quot;, &quot;남자&quot;),
+    main=&quot;데이터 안의 성별 분포&quot;)
+text(0.3, 0.3, &quot;33.33 %&quot;)
+text(-0.3, -0.3, &quot;66.67 %&quot;)</code></pre>
+<p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+</div>
+<div id="줄기-잎-그래프-stem-and-leaf-plot" class="section level2">
+<h2>줄기-잎 그래프 (Stem and leaf plot)</h2>
+<p><code>R</code>에서 제공하는 <code>stem</code>이라는 함수를 이용하여 줄기-잎 그래프를 그릴 수 있다.</p>
+<pre class="r"><code>stem(mydata$midterm)</code></pre>
+<pre><code>## 
+##   The decimal point is 1 digit(s) to the right of the |
+## 
+##   0 | 9
+##   1 | 5
+##   2 | 478899
+##   3 | 456889
+##   4 | 22366889
+##   5 | 01223
+##   6 | 35
+##   7 | 6</code></pre>
+<p>위의 그래프는 줄기 단위가 10인 그래프인데, <code>scale</code> 옵션을 통하여 주어진 그래프의 줄기 단위를 바꿀 수 있다.</p>
+<pre class="r"><code>stem(mydata$midterm, scale = 0.5)</code></pre>
+<pre><code>## 
+##   The decimal point is 1 digit(s) to the right of the |
+## 
+##   0 | 95
+##   2 | 478899456889
+##   4 | 2236688901223
+##   6 | 356</code></pre>
+<pre class="r"><code>stem(mydata$midterm, scale = 2)</code></pre>
+<pre><code>## 
+##   The decimal point is 1 digit(s) to the right of the |
+## 
+##   0 | 9
+##   1 | 
+##   1 | 5
+##   2 | 4
+##   2 | 78899
+##   3 | 4
+##   3 | 56889
+##   4 | 223
+##   4 | 66889
+##   5 | 01223
+##   5 | 
+##   6 | 3
+##   6 | 5
+##   7 | 
+##   7 | 6</code></pre>
+</div>
+<div id="히스토그램-histogram" class="section level2">
+<h2>히스토그램 (Histogram)</h2>
+<pre class="r"><code>hist(mydata$midterm)</code></pre>
+<p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>위의 그래프는 기본적으로 주어진 기본 단위 (기둥의 너비)가 10을 기준으로 하고 있습니다. 기본 단위를 <code>breaks</code> 옵션을 이용하여 우리가 원하는 방식으로 조정 할 수 있습니다.</p>
+<pre class="r"><code>hist(mydata$midterm, breaks= c(0:4)*20) # or</code></pre>
+<p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code>hist(mydata$midterm, breaks= c(0:20)*4)</code></pre>
+<p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+<p>제목과 축 제목을 다음과 같이 설정할 수 있습니다.</p>
+<pre class="r"><code>hist(mydata$midterm, breaks= c(0:8)*10,
+     xlab = &quot;중간고사 성적&quot;,
+     ylab = &quot;빈도&quot;,
+     main = &quot;중간고사 성적 분포&quot;)</code></pre>
+<p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><code>mean</code> 과 <code>median</code> 함수를 사용하여 평균과 중앙값을 계산 할 수 있습니다.</p>
+<pre class="r"><code>mean(mydata$midterm)</code></pre>
+<pre><code>## [1] 41.16667</code></pre>
+<pre class="r"><code>median(mydata$midterm)</code></pre>
+<pre><code>## [1] 42</code></pre>
+</div>
