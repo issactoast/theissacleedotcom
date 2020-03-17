@@ -74,7 +74,7 @@ text(-0.3, -0.3, "66.67 %")
 ```
 
 
-## 줄기-잎 그래프 (Stem and leaf plot)
+### 줄기-잎 그래프 (Stem and leaf plot)
 
 `R`에서 제공하는 `stem`이라는 함수를 이용하여 줄기-잎 그래프를 그릴 수 있다.
 
@@ -89,7 +89,7 @@ stem(mydata$midterm, scale = 0.5)
 stem(mydata$midterm, scale = 2)
 ```
 
-## 히스토그램 (Histogram)
+### 히스토그램 (Histogram)
 
 ```{r}
 hist(mydata$midterm)
@@ -111,10 +111,55 @@ hist(mydata$midterm, breaks= c(0:8)*10,
      main = "중간고사 성적 분포")
 ```
 
-`mean` 과 `median` 함수를 사용하여 평균과 중앙값을 계산 할 수 있습니다.
+### 산점도 (Scatter plot)
+
+산점도는두 개의 변수의 분포를 잘 살펴볼 수 있는 유용한 도구입니다. 
 
 ```{r}
-mean(mydata$midterm)
-median(mydata$midterm)
+plot(mydata$midterm, mydata$final,
+     xlab = "중간고사", 
+     ylab = "기말고사",
+     main = "시험점수 산점도")
 ```
 
+그래프를 그릴 때에는 항상 X축과 Y축의 비율이 똑같은지를 확인해야 합니다. 비율이 맞지 않을 경우 해석에 오류가 날 수 있습니다. 그래프의 비율을 다음과 같이 `asp` 옵션을 사용하여 맞출 수 있습니다.
+
+```{r}
+plot(mydata$midterm, mydata$final, asp = 1,
+     xlab = "중간고사", 
+     ylab = "기말고사",
+     main = "시험점수 산점도")
+```
+
+### 상자 그림 (Box plot)
+
+박스 플롯은, 한글로는 상자 그림이라고 번역이 되어 있습니다, 주어진 변수의 분포를 잘 보여주는 직관적인 그래프입니다. R에서는 `boxplot`이라는 함수를 통하여 그려낼 수 있습니다.
+
+```{r}
+boxplot(mydata$midterm,
+        main="중간고사 점수 분포",
+        xlab="점수",
+        horizontal = TRUE)
+```
+
+중간고사 점수 중 하나는 바꾸어 아웃라이어(outlier)를 만들어보도록 하자.
+
+```{r}
+mydata$midterm[1] <- 100 # what does this mean?
+
+boxplot(mydata$midterm,
+        main="중간고사 점수 분포",
+        xlab="점수",
+        horizontal = TRUE)
+```
+
+여러개의 상자그림을 한번에 그릴수도 있습니다. 
+
+```{r}
+boxplot(mydata$midterm, mydata$final,
+        main="시험 점수 분포도",
+        names = c("중간고사", "기말고사"),
+        xlab="점수",
+        ylab="시험", 
+        horizontal = TRUE)
+```

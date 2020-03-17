@@ -70,9 +70,8 @@ text(0.3, 0.3, &quot;33.33 %&quot;)
 text(-0.3, -0.3, &quot;66.67 %&quot;)</code></pre>
 <p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
-</div>
-<div id="줄기-잎-그래프-stem-and-leaf-plot" class="section level2">
-<h2>줄기-잎 그래프 (Stem and leaf plot)</h2>
+<div id="줄기-잎-그래프-stem-and-leaf-plot" class="section level3">
+<h3>줄기-잎 그래프 (Stem and leaf plot)</h3>
 <p><code>R</code>에서 제공하는 <code>stem</code>이라는 함수를 이용하여 줄기-잎 그래프를 그릴 수 있다.</p>
 <pre class="r"><code>stem(mydata$midterm)</code></pre>
 <pre><code>## 
@@ -115,8 +114,8 @@ text(-0.3, -0.3, &quot;66.67 %&quot;)</code></pre>
 ##   7 | 
 ##   7 | 6</code></pre>
 </div>
-<div id="히스토그램-histogram" class="section level2">
-<h2>히스토그램 (Histogram)</h2>
+<div id="히스토그램-histogram" class="section level3">
+<h3>히스토그램 (Histogram)</h3>
 <pre class="r"><code>hist(mydata$midterm)</code></pre>
 <p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>위의 그래프는 기본적으로 주어진 기본 단위 (기둥의 너비)가 10을 기준으로 하고 있습니다. 기본 단위를 <code>breaks</code> 옵션을 이용하여 우리가 원하는 방식으로 조정 할 수 있습니다.</p>
@@ -130,9 +129,45 @@ text(-0.3, -0.3, &quot;66.67 %&quot;)</code></pre>
      ylab = &quot;빈도&quot;,
      main = &quot;중간고사 성적 분포&quot;)</code></pre>
 <p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p><code>mean</code> 과 <code>median</code> 함수를 사용하여 평균과 중앙값을 계산 할 수 있습니다.</p>
-<pre class="r"><code>mean(mydata$midterm)</code></pre>
-<pre><code>## [1] 41.16667</code></pre>
-<pre class="r"><code>median(mydata$midterm)</code></pre>
-<pre><code>## [1] 42</code></pre>
+</div>
+<div id="산점도-scatter-plot" class="section level3">
+<h3>산점도 (Scatter plot)</h3>
+<p>산점도는두 개의 변수의 분포를 잘 살펴볼 수 있는 유용한 도구입니다.</p>
+<pre class="r"><code>plot(mydata$midterm, mydata$final,
+     xlab = &quot;중간고사&quot;, 
+     ylab = &quot;기말고사&quot;,
+     main = &quot;시험점수 산점도&quot;)</code></pre>
+<p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>그래프를 그릴 때에는 항상 X축과 Y축의 비율이 똑같은지를 확인해야 합니다. 비율이 맞지 않을 경우 해석에 오류가 날 수 있습니다. 그래프의 비율을 다음과 같이 <code>asp</code> 옵션을 사용하여 맞출 수 있습니다.</p>
+<pre class="r"><code>plot(mydata$midterm, mydata$final, asp = 1,
+     xlab = &quot;중간고사&quot;, 
+     ylab = &quot;기말고사&quot;,
+     main = &quot;시험점수 산점도&quot;)</code></pre>
+<p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+<div id="상자-그림-box-plot" class="section level3">
+<h3>상자 그림 (Box plot)</h3>
+<p>박스 플롯은, 한글로는 상자 그림이라고 번역이 되어 있습니다, 주어진 변수의 분포를 잘 보여주는 직관적인 그래프입니다. R에서는 <code>boxplot</code>이라는 함수를 통하여 그려낼 수 있습니다.</p>
+<pre class="r"><code>boxplot(mydata$midterm,
+        main=&quot;중간고사 점수 분포&quot;,
+        xlab=&quot;점수&quot;,
+        horizontal = TRUE)</code></pre>
+<p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>중간고사 점수 중 하나는 바꾸어 아웃라이어(outlier)를 만들어보도록 하자.</p>
+<pre class="r"><code>mydata$midterm[1] &lt;- 100 # what does this mean?
+
+boxplot(mydata$midterm,
+        main=&quot;중간고사 점수 분포&quot;,
+        xlab=&quot;점수&quot;,
+        horizontal = TRUE)</code></pre>
+<p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>여러개의 상자그림을 한번에 그릴수도 있습니다.</p>
+<pre class="r"><code>boxplot(mydata$midterm, mydata$final,
+        main=&quot;시험 점수 분포도&quot;,
+        names = c(&quot;중간고사&quot;, &quot;기말고사&quot;),
+        xlab=&quot;점수&quot;,
+        ylab=&quot;시험&quot;, 
+        horizontal = TRUE)</code></pre>
+<p><img src="/ko/courses/rstat101/week2_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
 </div>
