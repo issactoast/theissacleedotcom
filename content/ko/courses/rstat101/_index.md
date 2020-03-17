@@ -3,11 +3,6 @@ date: "2019-05-05T00:00:00+01:00"
 draft: false
 lastmod: "2019-05-05T00:00:00+01:00"
 linktitle: RSTAT:101 - Elementary Statistics with R
-image:
-  caption: 'Image credit: [**issactaost**](https://avatars3.githubusercontent.com/u/13303749?s=460&u=d29a6523a929a0a45f10439554242259185610e2&v=4)'
-  focal_point: ""
-  placement: 2
-  preview_only: false
 menu:
   rstat101:
     name: Overview
@@ -19,7 +14,7 @@ type: docs
 weight: 1
 ---
 
-![](https://avatars3.githubusercontent.com/u/13303749?s=460&u=d29a6523a929a0a45f10439554242259185610e2&v=4)
+![](./rstat101.png)
 
 이 강의는 통계를 대학교에서 한번쯤 들어보셨을 분들께 가장 좋은 강의 같다고 생각합니다. 하지만 처음 통계를 들으시는 분들 역시 얻어가는 것은 많을 것이라 생각되나, 프로그램 수업이기 때문에 아마 통계와 프로그래밍을 둘 다 하기에는 시간이 조금 걸릴 것이라 생각합니다. 
 
