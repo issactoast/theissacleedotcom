@@ -102,7 +102,7 @@ a[1:3,1:2]
 
 ### 데이터 불러오기
 
-데이터 셋을 다음의 [링크](https://www.theissaclee.com/post/stat2010/)에서 다운받아 봅니다. 그리고 `examscore.csv`이라는 파일명으로 폴더에 저장합니다. 파일을 저장할 때 꼭 자신의 `working directory`에 저장하셔야 합니다.
+데이터 셋을 다음의 [링크](https://www.theissaclee.com/ko/courses/rstat101/examscore.csv)에서 다운받아 봅니다. 그리고 `examscore.csv`이라는 파일명으로 폴더에 저장합니다. 파일을 저장할 때 꼭 자신의 `working directory`에 저장하셔야 합니다.
 
 ```{r eval=FALSE}
 mydata <- read.csv("examscore.csv", header = TRUE)
@@ -112,12 +112,12 @@ head(mydata)
 혹은 다음과 같이 파일 주소를 직접 입력하셔서 불러오는 방법도 있습니다.
 
 ```{r eval=FALSE}
-mydata <- read.csv("https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/stat2010/examscore2.csv", header = TRUE)
+mydata <- read.csv("https://www.theissaclee.com/ko/courses/rstat101/examscore.csv", header = TRUE)
 head(mydata)
 ```
 
 ```{r echo=FALSE}
-mydata <- read.csv("https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/stat2010/examscore.csv", header = TRUE)
+mydata <- read.csv("https://www.theissaclee.com/ko/courses/rstat101/examscore.csv", header = TRUE)
 head(mydata)
 ```
 
