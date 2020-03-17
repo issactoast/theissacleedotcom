@@ -3,6 +3,6 @@ header:
   caption: ""
   image: ""
 layout: docs
-title: Courses
+title: 강의모음
 ---
 

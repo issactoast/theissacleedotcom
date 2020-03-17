@@ -19,13 +19,13 @@ date_format = "Jan 2006"
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 
 [[item]]
-  organization = "The University of Iowa"
+  organization = "Anyone can learn anything"
   organization_url = ""
-  title = "[STAT:2010 - Statistical Methods and Computing (SAS version)](/ko/courses/stat2010/)"
+  title = "[RSTAT:101 - Elementary Statistics with R](/ko/courses/rstat101/)"
   url = ""
   certificate_url = ""
-  date_start = "2020-01-26"
+  date_start = "2020-03-16"
   date_end = ""
-  description = """Methods of data description and analysis using SAS; descriptive statistics, graphical presentation, estimation, hypothesis testing, sample size, power; emphasis on learning statistical methods and concepts through hands-on experience with real data."""
+  description = """통계에서 기초가 되는 지식을 차근차근 쌓아나가는 코스입니다. 통계 이론을 통계 프로그램 중 하나인 R을 통해서 직접 느껴보는 강의입니다."""
 
 +++

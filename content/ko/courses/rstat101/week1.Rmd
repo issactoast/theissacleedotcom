@@ -1,0 +1,124 @@
+---
+date: "2019-05-05T00:00:00+01:00"
+draft: false
+linktitle: Week 1 - 데이터 불러오기
+menu:
+  rstat101:
+    parent: Contents
+    weight: 2
+title: R 기초 및 데이터 불러오기
+type: docs
+weight: 2
+---
+
+## 
+
+이번 강의는 기초 `R`코드와 어떻게 데이터를 시스템에 불러오는가에 대하여 알아봅니다.
+
+### R 기초
+
+`R` 프로그램은 하나의 계산기라고 생각하시면 됩니다. 아주 멋들어진 계산기이기도 하죠.
+
+```{r eval=FALSE}
+2 + 1
+3 - 2
+2 * 3
+4 / 2
+4^2
+sqrt(4) # 4^0.5
+9 %% 4  # mod
+9 %/% 4 # value
+```
+
+`variable`에 값을 저장할 때에는 `<-` 기호를 사용합니다. 
+
+```{r eval=FALSE}
+a <- 4
+a
+```
+
+```{r eval=FALSE}
+b <- 2
+b
+```
+
+```{r eval=FALSE}
+b <- 3
+b
+```
+
+```{r eval=FALSE}
+a+b
+```
+
+`Variable` 꼭 하나의 숫자만을 담을 수 있는 것이 아니라 여러개의 숫자를 한꺼번에 담을 수 도 있습니다. `c()` 기호는 숫자가 묶여진 벡터(vector)를 만드는데 사용됩니다. 
+
+```{r eval=FALSE}
+a <- c(1, 2, 3)
+b <- c(4, 5, 6)
+a
+b
+```
+
+한국인들은 성격이 급하니, 숫자가 아주 많은 벡터를 생성할 때는 `:` 명령어가 아주 유용합니다.
+
+```{r eval=FALSE}
+a <- c(1:10)
+a
+```
+
+벡터를 정의 할 때, 저는 주로 `seq` 명령어를 사용하는데, 이 함수의 옵션인 `by` 와 `length.out` 옵션을 잘 기억해 두세요.
+
+```{r eval=FALSE}
+seq(0, 1, by = 0.01)
+seq(0, 1, length.out = 4)
+```
+
+대괄호(braket), `[]`, 명령어는 우리가 정의한 벡터들의 원소들에 접근할 수 있게 만들어 줍니다.
+
+```{r eval=FALSE}
+a <- c(10, 50, 40, 20)
+a[3]
+a[1:3]
+```
+
+통계에서 아주 중요한 행렬(matrix)를 정의하는 방법은 다음과 같습니다.
+
+```{r eval=FALSE}
+matrix(c(1:16), 4, 4)
+matrix(c(1:16), 4, 4, byrow = TRUE) # try this too
+```
+
+`[]` 명령어는 정의된 행렬에서도 사용이 가능합니다. 행렬도 우리가 정의한 객체(object) 중 하나니까요.
+
+```{r eval=FALSE}
+a <- matrix(c(1:16), 4, 4)
+a[1,2]
+a[1:3,2]
+a[1:4,3]
+a[,3]
+a[1:3,1:2]
+```
+
+### 데이터 불러오기
+
+데이터 셋을 다음의 [링크](https://www.theissaclee.com/post/stat2010/)에서 다운받아 봅니다. 그리고 `examscore.csv`이라는 파일명으로 폴더에 저장합니다. 파일을 저장할 때 꼭 자신의 `working directory`에 저장하셔야 합니다.
+
+```{r eval=FALSE}
+mydata <- read.csv("examscore.csv", header = TRUE)
+head(mydata)
+```
+
+혹은 다음과 같이 파일 주소를 직접 입력하셔서 불러오는 방법도 있습니다.
+
+```{r eval=FALSE}
+mydata <- read.csv("https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/stat2010/examscore2.csv", header = TRUE)
+head(mydata)
+```
+
+```{r echo=FALSE}
+mydata <- read.csv("https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/stat2010/examscore.csv", header = TRUE)
+head(mydata)
+```
+
+만약 이제까지 잘 따라오셨다면 위의 결과를 볼 수 있을 것입니다.
