@@ -83,7 +83,11 @@ sudo ninja install</code></pre>
 <h2>사용 방법</h2>
 <p>마지막 명령어를 실행하면 <code>path</code>에 등록되어서 아무대서나 터미널 열고 <code>scrcpy</code> 치면 실행가능하다. 화면 반영 엄청 빠름. 삼성에서 스크린 미러링 제공 안해서 계속 모비즌을 쓰고 있었는데, 훨씬 빠른 것 같음.</p>
 <p><strong>무선 실행</strong></p>
-<pre class="bash"><code>adb devices     # 연결 장치 확인</code></pre>
+<pre class="bash"><code>adb devices     # 연결 장치 확인
+adb tcpip 5555
+adb connect device_wifi_ip:5555
+scrcpy</code></pre>
+<p><strong>여러 기기로 무선 실행</strong></p>
 <p>다음과 같은 결과가 나온다면</p>
 <pre class="bash"><code>List of devices attached
 192.168.0.190:5556  device
