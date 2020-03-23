@@ -102,7 +102,13 @@ sudo apt install android-tools-adb android-tools-fastboot
 **무선 실행**
 ```{r, engine = 'bash', eval = FALSE}
 adb devices     # 연결 장치 확인
+adb tcpip 5555
+adb connect device_wifi_ip:5555
+scrcpy
 ```
+
+
+**여러 기기로 무선 실행**
 
 다음과 같은 결과가 나온다면
 
