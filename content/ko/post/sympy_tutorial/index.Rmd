@@ -1,0 +1,180 @@
+---
+authors:
+- admin
+date: "2020-03-22T00:00:00Z"
+draft: false
+featured: false
+image:
+  caption: 'Image credit: [SymPywiki](https://commons.wikimedia.org/wiki/File:Sympy_logo.svg)'
+  focal_point: ""
+  placement: 2
+  preview_only: false
+lastmod: "2020-03-22T00:00:00Z"
+projects: [python]
+subtitle: 'SymPy 튜토리얼'
+summary: 개인적으로 유용한 SymPy 함수들 모음집입니다.
+title: '나만의 SymPy 튜토리얼'
+categories:
+  - python
+tags:
+  - sympy
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+## `SymPy` 설치
+
+설치과정은 다음의 링크로 대체한다. 
+
+SymPy 공식 설치 안내 링크 : https://docs.sympy.org/latest/install.html#installation
+
+### R에서 python 사용을 위한 패키지 불러오기
+
+```{r}
+library(reticulate)
+use_virtualenv("r-reticulate")
+```
+
+### 변수 정의하기
+
+```{python}
+from sympy import *
+x, y = symbols('x y')
+```
+
+### 사칙 연산
+
+다음과 같이 정의된 변수에 다음과 같이 사칙 연산이 가능하다.
+
+```{python}
+x + y
+x - y
+x * y
+x / y
+```
+
+### 제곱과 제곱근
+
+```{python}
+x ** y
+sqrt(x)
+```
+
+### 전개하기
+
+```{python}
+expr = x * (x + y)
+expand(expr)
+```
+
+### 묶어내기
+
+```{python}
+factor(x**2 + x**3 * y)
+```
+
+### 지수함수
+
+```{python}
+exp(x)
+```
+
+
+### 삼각함수
+
+```{python}
+sin(x)
+cos(y)
+tan(x)
+```
+
+### 간단하게 만들기 `simplify`
+
+하지만 이게 잘 안 될 경우, `factor` 혹은 `trigsimp` (삼각함수 전용) 시도할 것.
+
+```{python}
+
+simplify(x**2 + x**3 * y)
+simplify(sin(x)**2 +cos(x)**2)
+simplify(sin(x)/cos(x))
+simplify(2*sin(x)*cos(x))
+```
+
+### 미분, 적분
+
+```{python}
+diff(sin(x) * exp(x), x)
+```
+
+```{python}
+integrate(sin(x) + cos(y), x)
+```
+
+### 극한
+
+```{python}
+limit(sin(x) / x, x, 0)
+```
+
+### 방정식 풀기
+
+$$
+x^2 - 2 = x
+$$
+```{python}
+solve(x**2 - 2 - x, x)
+```
+
+### 행렬
+
+단위 행렬
+
+```{python}
+eye(3)
+```
+
+사용자 정의 행렬
+
+```{python}
+A = Matrix([[ 1, -2, 3],
+            [-2,  2, 1],
+            [ 3,  1, 4]])
+
+# 벡터 정의            
+B = Matrix([[ x, y, x]])
+
+# 행렬 만들기 (transpose)
+B = B.T * B
+```
+
+행렬 덧셈
+
+```{python}
+C = A + B
+```
+
+Eigen values
+
+```{python}
+D = Matrix([[ 1, -2],
+            [-2,  2]])
+D.eigenvals()
+```
+
+### 결과 Latex으로 표시
+
+```{python}
+latex(Integral(sin(x) + cos(y), x))
+```
+
+### Latex 결과 R markdown으로 보내기
+
+`chunk option`을 다음과 같이 설정함.
+
+     echo=TRUE, results='asis', fig.align ='center'
+
+```{python echo=TRUE, results='asis', fig.align ='center'}
+print('$' + latex(Integral(sin(x) + cos(y), x)) + '$')
+```

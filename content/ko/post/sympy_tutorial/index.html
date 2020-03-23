@@ -1,0 +1,154 @@
+---
+authors:
+- admin
+date: "2020-03-22T00:00:00Z"
+draft: false
+featured: false
+image:
+  caption: 'Image credit: [SymPywiki](https://commons.wikimedia.org/wiki/File:Sympy_logo.svg)'
+  focal_point: ""
+  placement: 2
+  preview_only: false
+lastmod: "2020-03-22T00:00:00Z"
+projects: [python]
+subtitle: 'SymPy 튜토리얼'
+summary: 개인적으로 유용한 SymPy 함수들 모음집입니다.
+title: '나만의 SymPy 튜토리얼'
+categories:
+  - python
+tags:
+  - sympy
+---
+
+
+
+<div id="sympy-설치" class="section level2">
+<h2><code>SymPy</code> 설치</h2>
+<p>설치과정은 다음의 링크로 대체한다.</p>
+<p>SymPy 공식 설치 안내 링크 : <a href="https://docs.sympy.org/latest/install.html#installation" class="uri">https://docs.sympy.org/latest/install.html#installation</a></p>
+<div id="r에서-python-사용을-위한-패키지-불러오기" class="section level3">
+<h3>R에서 python 사용을 위한 패키지 불러오기</h3>
+<pre class="r"><code>library(reticulate)
+use_virtualenv(&quot;r-reticulate&quot;)</code></pre>
+</div>
+<div id="변수-정의하기" class="section level3">
+<h3>변수 정의하기</h3>
+<pre class="python"><code>from sympy import *
+x, y = symbols(&#39;x y&#39;)</code></pre>
+</div>
+<div id="사칙-연산" class="section level3">
+<h3>사칙 연산</h3>
+<p>다음과 같이 정의된 변수에 다음과 같이 사칙 연산이 가능하다.</p>
+<pre class="python"><code>x + y
+## x + y
+x - y
+## x - y
+x * y
+## x*y
+x / y
+## x/y</code></pre>
+</div>
+<div id="제곱과-제곱근" class="section level3">
+<h3>제곱과 제곱근</h3>
+<pre class="python"><code>x ** y
+## x**y
+sqrt(x)
+## sqrt(x)</code></pre>
+</div>
+<div id="전개하기" class="section level3">
+<h3>전개하기</h3>
+<pre class="python"><code>expr = x * (x + y)
+expand(expr)
+## x**2 + x*y</code></pre>
+</div>
+<div id="묶어내기" class="section level3">
+<h3>묶어내기</h3>
+<pre class="python"><code>factor(x**2 + x**3 * y)
+## x**2*(x*y + 1)</code></pre>
+</div>
+<div id="지수함수" class="section level3">
+<h3>지수함수</h3>
+<pre class="python"><code>exp(x)
+## exp(x)</code></pre>
+</div>
+<div id="삼각함수" class="section level3">
+<h3>삼각함수</h3>
+<pre class="python"><code>sin(x)
+## sin(x)
+cos(y)
+## cos(y)
+tan(x)
+## tan(x)</code></pre>
+</div>
+<div id="간단하게-만들기-simplify" class="section level3">
+<h3>간단하게 만들기 <code>simplify</code></h3>
+<p>하지만 이게 잘 안 될 경우, <code>factor</code> 혹은 <code>trigsimp</code> (삼각함수 전용) 시도할 것.</p>
+<pre class="python"><code>
+simplify(x**2 + x**3 * y)
+## x**2*(x*y + 1)
+simplify(sin(x)**2 +cos(x)**2)
+## 1
+simplify(sin(x)/cos(x))
+## tan(x)
+simplify(2*sin(x)*cos(x))
+## sin(2*x)</code></pre>
+</div>
+<div id="미분-적분" class="section level3">
+<h3>미분, 적분</h3>
+<pre class="python"><code>diff(sin(x) * exp(x), x)
+## exp(x)*sin(x) + exp(x)*cos(x)</code></pre>
+<pre class="python"><code>integrate(sin(x) + cos(y), x)
+## x*cos(y) - cos(x)</code></pre>
+</div>
+<div id="극한" class="section level3">
+<h3>극한</h3>
+<pre class="python"><code>limit(sin(x) / x, x, 0)
+## 1</code></pre>
+</div>
+<div id="방정식-풀기" class="section level3">
+<h3>방정식 풀기</h3>
+<p><span class="math display">\[
+x^2 - 2 = x
+\]</span></p>
+<pre class="python"><code>solve(x**2 - 2 - x, x)
+## [-1, 2]</code></pre>
+</div>
+<div id="행렬" class="section level3">
+<h3>행렬</h3>
+<p>단위 행렬</p>
+<pre class="python"><code>eye(3)
+## Matrix([
+## [1, 0, 0],
+## [0, 1, 0],
+## [0, 0, 1]])</code></pre>
+<p>사용자 정의 행렬</p>
+<pre class="python"><code>A = Matrix([[ 1, -2, 3],
+            [-2,  2, 1],
+            [ 3,  1, 4]])
+
+# 벡터 정의            
+B = Matrix([[ x, y, x]])
+
+# 행렬 만들기 (transpose)
+B = B.T * B</code></pre>
+<p>행렬 덧셈</p>
+<pre class="python"><code>C = A + B</code></pre>
+<p>Eigen values</p>
+<pre class="python"><code>D = Matrix([[ 1, -2],
+            [-2,  2]])
+D.eigenvals()
+## {3/2 - sqrt(17)/2: 1, 3/2 + sqrt(17)/2: 1}</code></pre>
+</div>
+<div id="결과-latex으로-표시" class="section level3">
+<h3>결과 Latex으로 표시</h3>
+<pre class="python"><code>latex(Integral(sin(x) + cos(y), x))
+## &#39;\\int \\left(\\sin{\\left(x \\right)} + \\cos{\\left(y \\right)}\\right)\\, dx&#39;</code></pre>
+</div>
+<div id="latex-결과-r-markdown으로-보내기" class="section level3">
+<h3>Latex 결과 R markdown으로 보내기</h3>
+<p><code>chunk option</code>을 다음과 같이 설정함.</p>
+<pre><code> echo=TRUE, results=&#39;asis&#39;, fig.align =&#39;center&#39;</code></pre>
+<pre class="python"><code>print(&#39;$&#39; + latex(Integral(sin(x) + cos(y), x)) + &#39;$&#39;)</code></pre>
+<p><span class="math inline">\(\int \left(\sin{\left(x \right)} + \cos{\left(y \right)}\right)\, dx\)</span></p>
+</div>
+</div>
