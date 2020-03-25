@@ -1,7 +1,7 @@
 ---
 date: "2020-03-25T00:00:00+01:00"
 draft: false
-linktitle: Week 6 - 회귀분석 기초 다지기
+linktitle: Week 6 - 회귀분석 기초
 menu:
   rstat101:
     parent: Contents
