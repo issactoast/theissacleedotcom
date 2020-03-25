@@ -6,7 +6,7 @@ menu:
   rstat101:
     parent: Contents
     weight: 6
-title: 상관 계수(correlation coefficient)에 대하여
+title: 상관 계수 시각화
 type: docs
 weight: 6
 header:
