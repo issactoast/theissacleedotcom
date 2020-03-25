@@ -10,7 +10,7 @@ title: 상관 계수 시각화
 type: docs
 weight: 6
 header:
-  image: "red_herring.png"
+  image: "vis_corr.png"
 ---
 
 ## 
