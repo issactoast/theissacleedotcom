@@ -1,0 +1,78 @@
+---
+authors:
+- admin
+date: "2020-03-26T00:00:00Z"
+draft: false
+featured: false
+image:
+  caption: ''
+  focal_point: ""
+  placement: 2
+  preview_only: true
+lastmod: "2020-03-26T00:00:00Z"
+projects: [rpython]
+subtitle: 'R과 Python의 애증의 관계'
+summary: Python 3D array를 R로 변환 할 경우 주의점.
+title: 'R과 Python의 행렬'
+categories:
+  - python
+tags:
+  - reticulate
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+```{r}
+library(reticulate)
+```
+
+
+## R에서 array 정의 하기
+
+3차원 array의 경우 R에서는 (행, 열, 쌓여있는 갯수) 이런식으로 정의가 됨.
+
+```{r}
+# R
+arr1 <- array(1:24, c(3,4,2))
+arr1
+```
+문제는 3 by 4 행렬의 원소를 채우는 방식을 가로방향으로 채우고 싶은 것. 이걸 행렬처럼 byrow로 정의하고 싶은데 R에는 그런 명령어가 없음 (아시는분 알려주세요). 그래서 다음과 같이 할 수 있음. 
+
+```{r}
+arr2 <- array(1:24, c(4, 3, 2))
+arr2 <- aperm(arr2, c(2, 1, 3))
+arr2
+```
+
+### R에서 array를 Python으로 보내기 (미해결)
+
+여기서 문제는 이 arr2를 Python으로 보내고 싶은데, 그걸 또 어떻게 하는지 모르겠음. 아시는분 알려주세요.
+
+## Python에서 array 정의 하기
+
+Python의 array는 (쌓여있는 갯수, 행, 열) 이런식으로 정의가 됨.
+
+```{python}
+# Python
+import numpy as np
+
+m1 = np.reshape(np.arange(1,25), (2, 4, 3), "C")
+m1
+```
+
+이걸 R로 불러오면 우리가 생각하는 array가 아님. [Index차이](https://rstudio.github.io/reticulate/articles/arrays.html) 때문에 이렇게 됨.
+
+```{r}
+py$m1
+```
+
+이걸 `aperm`을 이용해서 잘 바꿔주면, 원하는 행렬을 얻게 됨.
+
+```{r}
+m1 <- aperm(py$m1, c(2, 3, 1))
+m1
+```
+
