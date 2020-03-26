@@ -16,6 +16,10 @@ weight: 1
 
 ![](./rstat101.png)
 
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tJN7qQcpk4o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 이 강의는 통계를 대학교에서 한번쯤 들어보셨을 분들께 가장 좋은 강의 같다고 생각합니다. 하지만 처음 통계를 들으시는 분들 역시 얻어가는 것은 많을 것이라 생각되나, 통계 프로그램을 사용하는 수업이기 때문에 아마 통계와 프로그래밍을 둘 다 하기에는 시간이 조금 걸릴 것이라 생각합니다. 
 
 ### 통계 수업입니다.

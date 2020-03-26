@@ -39,6 +39,10 @@ mydata[1,] # the data related to the first student in the list
 
 ### `table` 함수를 이용한 파이 차트 그리기
 
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XNPXlwkXvLY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 파이 차트를 그리기 위해서는, 데이터 안에 몇 개의 데이터 포인트 들이 있는지 세어봐야 합니다. 이 경우 다음과 같이 `table` 함수를 사용하여 쉽게 데이터 구조를 파악 할 수 있습니다.
 
 ```{r}
@@ -76,6 +80,11 @@ text(-0.3, -0.3, "66.67 %")
 
 ### 줄기-잎 그래프 (Stem and leaf plot)
 
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/i8vNsuab0nU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+
 `R`에서 제공하는 `stem`이라는 함수를 이용하여 줄기-잎 그래프를 그릴 수 있다.
 
 ```{r}
@@ -90,6 +99,10 @@ stem(mydata$midterm, scale = 2)
 ```
 
 ### 히스토그램 (Histogram)
+
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MLNSSxMK02A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ```{r}
 hist(mydata$midterm)
@@ -113,6 +126,10 @@ hist(mydata$midterm, breaks= c(0:8)*10,
 
 ### 산점도 (Scatter plot)
 
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FAn_PHB6hF4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 산점도는두 개의 변수의 분포를 잘 살펴볼 수 있는 유용한 도구입니다. 
 
 ```{r}
@@ -132,6 +149,10 @@ plot(mydata$midterm, mydata$final, asp = 1,
 ```
 
 ### 상자 그림 (Box plot)
+
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gWxjCO-FyzQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 박스 플롯은, 한글로는 상자 그림이라고 번역이 되어 있습니다, 주어진 변수의 분포를 잘 보여주는 직관적인 그래프입니다. R에서는 `boxplot`이라는 함수를 통하여 그려낼 수 있습니다.
 

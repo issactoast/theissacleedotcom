@@ -25,6 +25,10 @@ head(mydata)
 
 ### 분포의 중간 지점을 나타내는 평균과 중앙값
 
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nmljb3L9DVg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 #### 평균 (mean)
 
 우리가 갖고 있는 데이터를 가장 잘 대표하는 값 하나를 뽑으라면 평균이라고 생각합니다. 평균을 구하는 방법은 각각의 데이터를 더한 후, 데이터의 갯수만큼으로 나줘주면 됩니다. 
@@ -97,6 +101,10 @@ abline(v = median(mydata$midterm), col = "blue")
 
 ### 분포의 산포된 정도를 나타내주는 분위수 (quantile)와 분산 (variance)
 
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AJoFHkNya_E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 #### 분위수들 (Quantiles)
 
 `R`에는 `quantile`이라는 함수가 자료의 사분위수를 계산하는데에 쓰입니다. `quantile` 함수는 사분위수와 함께 통계에서 유명한 다섯가지 숫자를 통하여 분포의 특성을 요약해 줍니다.
@@ -121,6 +129,14 @@ quantile(mydata$midterm1)[4]
 `25%`와 `75%`에 대응하는 숫자들을 각각 제 1 사분위수와 제 3 사분위수라고 부르며, 제 2 사분위수는 중앙값을 의미합니다.
 
 ### 분산 (variance) 과 표준편차 (standard deviation)
+
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3m6F_PGV1Os" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/BYYlrF4YzBA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 분산은 평균과 함께 통계 전체를 대표하는 값이라고 해도 무방합니다. 분산의 제곱근을 표준편차라고 부르며, 분포가 얼마나 퍼져있는지를 나타내주는 지표입니다.
 
