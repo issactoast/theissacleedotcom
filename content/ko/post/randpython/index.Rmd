@@ -20,12 +20,13 @@ tags:
   - reticulate
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
+knitr::opts_chunk$set(comment = "#result>>")
 ```
 
 ```{r}
+# R
 library(reticulate)
 ```
 
@@ -39,17 +40,39 @@ library(reticulate)
 arr1 <- array(1:24, c(3,4,2))
 arr1
 ```
+
 문제는 3 by 4 행렬의 원소를 채우는 방식을 가로방향으로 채우고 싶은 것. 이걸 행렬처럼 byrow로 정의하고 싶은데 R에는 그런 명령어가 없음 (아시는분 알려주세요). 그래서 다음과 같이 할 수 있음. 
 
 ```{r}
+# R
 arr2 <- array(1:24, c(4, 3, 2))
 arr2 <- aperm(arr2, c(2, 1, 3))
 arr2
 ```
 
-### R에서 array를 Python으로 보내기 (미해결)
+### R에서 array를 Python으로 보내기
 
-여기서 문제는 이 arr2를 Python으로 보내고 싶은데, 그걸 또 어떻게 하는지 모르겠음. 아시는분 알려주세요.
+`arr2`를 python에서 불러보면 이렇게 뜸.
+
+
+```{python}
+# python
+r.arr2
+```
+
+[Index 차이](https://rstudio.github.io/reticulate/articles/arrays.html) 때문에 이렇게 됨. 이 문제를 해결하기 위해서는 다시 어레이 디멘젼을 바꿔서 파이썬에 피드해주는 수밖에 없음. 
+
+```{r}
+# R
+arr3 <- aperm(arr2, c(3, 1, 2))
+```
+
+이 `arr3`를 python에서 불러보면, 우리가 생각하는 행렬이 됨.
+
+```{python}
+# python
+r.arr3
+```
 
 ## Python에서 array 정의 하기
 
@@ -59,13 +82,14 @@ Python의 array는 (쌓여있는 갯수, 행, 열) 이런식으로 정의가 됨
 # Python
 import numpy as np
 
-m1 = np.reshape(np.arange(1,25), (2, 4, 3), "C")
+m1 = np.reshape(np.arange(1,25), (2, 3, 4), "C")
 m1
 ```
 
-이걸 R로 불러오면 우리가 생각하는 array가 아님. [Index차이](https://rstudio.github.io/reticulate/articles/arrays.html) 때문에 이렇게 됨.
+이걸 R로 불러오면 우리가 생각하는 array가 아님.
 
 ```{r}
+# R
 py$m1
 ```
 
@@ -75,4 +99,3 @@ py$m1
 m1 <- aperm(py$m1, c(2, 3, 1))
 m1
 ```
-
