@@ -24,7 +24,7 @@ date_format = "Jan 2006"
   title = "[RSTAT:101 - Elementary Statistics with R](/ko/courses/rstat101/)"
   url = ""
   certificate_url = ""
-  date_start = "2020-03-16"
+  date_start = "2020-03-02"
   date_end = ""
   description = """통계에서 기초가 되는 지식을 차근차근 쌓아나가는 코스입니다. 통계 이론을 통계 프로그램 중 하나인 R을 통해서 직접 느껴보는 강의입니다."""
 

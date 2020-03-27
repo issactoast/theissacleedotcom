@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R to Python 코드 변환사전 | Issac Lee</title>
+    <link>/ko/courses/bebilingual/</link>
+      <atom:link href="/ko/courses/bebilingual/index.xml" rel="self" type="application/rss+xml" />
+    <description>R to Python 코드 변환사전</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>ko</language><copyright>Issac Lee © 2020</copyright><lastBuildDate>Thu, 05 Mar 2020 00:00:00 +0100</lastBuildDate>
+    <image>
+      <url>/img/portrait.jpg</url>
+      <title>R to Python 코드 변환사전</title>
+      <link>/ko/courses/bebilingual/</link>
+    </image>
+    
+    <item>
+      <title>Vectors - Python vs. R</title>
+      <link>/ko/courses/bebilingual/vectorbasic/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/ko/courses/bebilingual/vectorbasic/</guid>
+      <description>
+
+
+&lt;div id=&#34;section&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;/h2&gt;
+&lt;div id=&#34;python-setup&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Python setup&lt;/h3&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import numpy as np&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;vector-define&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Vector Define&lt;/h3&gt;
+&lt;p&gt;Method 1&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+a = np.array([1, 2, 3])
+a&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; array([1, 2, 3])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R
+a &amp;lt;- c(1, 2, 3)
+a&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 1 2 3&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Method 2&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+a = np.arange(5)
+a&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; array([0, 1, 2, 3, 4])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R
+a &amp;lt;- 0:4
+a&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 0 1 2 3 4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Method 3&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+a = np.arange(start = 1, stop = 5)
+a&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; array([1, 2, 3, 4])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R
+a &amp;lt;- seq(1, 5)
+a&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 1 2 3 4 5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note! If you use &lt;code&gt;step&lt;/code&gt; or &lt;code&gt;by&lt;/code&gt;, &lt;strong&gt;DIFFERENT&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+a = np.arange(start = 1, stop = 5, step = 0.5)
+a&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; array([1. , 1.5, 2. , 2.5, 3. , 3.5, 4. , 4.5])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R
+a &amp;lt;- seq(1, 4.5, by = 0.5)
+a&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;dimension&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Dimension&lt;/h4&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+a.shape&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; (8,)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R
+length(a)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 8&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;access&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Access&lt;/h4&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+a[0]; a[3]; a[4]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; 1.0
+#result&amp;gt;&amp;gt; 2.5
+#result&amp;gt;&amp;gt; 3.0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R
+a[1]; a[4]; a[5]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 2.5&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 3&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;types&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Types&lt;/h4&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+a.dtype&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; dtype(&amp;#39;float64&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R
+mode(a)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] &amp;quot;numeric&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There is no distinguish between &lt;code&gt;integer&lt;/code&gt; and &lt;code&gt;float&lt;/code&gt; in R&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+a = np.arange(10, dtype = &amp;#39;i&amp;#39;)
+b = np.arange(10, dtype = &amp;#39;f&amp;#39;)
+a; b&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], dtype=int32)
+#result&amp;gt;&amp;gt; array([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.], dtype=float32)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R
+a &amp;lt;- 0:9
+b &amp;lt;- 0:9
+a; b&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt;  [1] 0 1 2 3 4 5 6 7 8 9&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt;  [1] 0 1 2 3 4 5 6 7 8 9&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;slicing&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Slicing&lt;/h3&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+a[3:7]; a[3:]; a[:7]; a[:8:2]; a[::-1]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; array([3, 4, 5, 6], dtype=int32)
+#result&amp;gt;&amp;gt; array([3, 4, 5, 6, 7, 8, 9], dtype=int32)
+#result&amp;gt;&amp;gt; array([0, 1, 2, 3, 4, 5, 6], dtype=int32)
+#result&amp;gt;&amp;gt; array([0, 2, 4, 6], dtype=int32)
+#result&amp;gt;&amp;gt; array([9, 8, 7, 6, 5, 4, 3, 2, 1, 0], dtype=int32)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R
+a[4:7]; tail(a, -3); head(a, 7); a[seq(1, 8, by = 2)]; rev(a)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 3 4 5 6&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 3 4 5 6 7 8 9&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 0 1 2 3 4 5 6&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 0 2 4 6&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt;  [1] 9 8 7 6 5 4 3 2 1 0&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Matrixces - Python vs. R</title>
+      <link>/ko/courses/bebilingual/matrixbasic/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/ko/courses/bebilingual/matrixbasic/</guid>
+      <description>
+
+
+&lt;div id=&#34;section&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;/h2&gt;
+&lt;div id=&#34;matrix&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Matrix&lt;/h3&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+import numpy as np&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;define&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Define&lt;/h4&gt;
+&lt;p&gt;Method 1&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+m = np.array([[4, 6, 9],
+              [1, 3, 4],
+              [1, 2, 3]])
+m              &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; array([[4, 6, 9],
+#result&amp;gt;&amp;gt;        [1, 3, 4],
+#result&amp;gt;&amp;gt;        [1, 2, 3]])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R
+m &amp;lt;- rbind(c(4, 6, 9),
+           c(1, 3, 4),
+           c(1, 2, 3))
+m&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt;      [,1] [,2] [,3]
+#result&amp;gt;&amp;gt; [1,]    4    6    9
+#result&amp;gt;&amp;gt; [2,]    1    3    4
+#result&amp;gt;&amp;gt; [3,]    1    2    3&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Method 2&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+m = np.array([np.arange(5), 
+              np.arange(5)])
+m&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; array([[0, 1, 2, 3, 4],
+#result&amp;gt;&amp;gt;        [0, 1, 2, 3, 4]])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R
+m &amp;lt;- rbind(0:4, 0:4)
+m&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt;      [,1] [,2] [,3] [,4] [,5]
+#result&amp;gt;&amp;gt; [1,]    0    1    2    3    4
+#result&amp;gt;&amp;gt; [2,]    0    1    2    3    4&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Method 3&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+m = np.array([4, 6, 9,
+              1, 3, 4, 
+              1, 2, 3]).reshape(3, 3)
+m&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; array([[4, 6, 9],
+#result&amp;gt;&amp;gt;        [1, 3, 4],
+#result&amp;gt;&amp;gt;        [1, 2, 3]])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R
+m &amp;lt;- matrix(c(4, 6, 9,
+              1, 3, 4,
+              1, 2, 3), 3, 3, byrow = T)
+m&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt;      [,1] [,2] [,3]
+#result&amp;gt;&amp;gt; [1,]    4    6    9
+#result&amp;gt;&amp;gt; [2,]    1    3    4
+#result&amp;gt;&amp;gt; [3,]    1    2    3&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;dimension&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Dimension&lt;/h4&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+m.shape&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; (3, 3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R
+dim(m)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 3 3&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;access&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Access&lt;/h4&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;# Python
+m[0, 0]; m[0, 1]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; 4
+#result&amp;gt;&amp;gt; 6&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;m[1, 0]; m[1, 1]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; 1
+#result&amp;gt;&amp;gt; 3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# R
+m[1, 1]; m[1, 2]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 6&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;m[2, 1]; m[2, 2]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#result&amp;gt;&amp;gt; [1] 3&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
