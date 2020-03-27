@@ -12,6 +12,8 @@ title: Dictionary for bilingual coders
 toc: true
 type: docs
 weight: 1
+header:
+  image: "r-vs-python.jpg"
 ---
 
 ![](./r-vs-python.jpg)
