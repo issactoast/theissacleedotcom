@@ -6,7 +6,7 @@ menu:
   bebilingual:
     parent: Contents
     weight: 3
-title: Matrices
+title: Matrices - R vs. Python
 type: docs
 weight: 3    # related to next page to show
 header:
