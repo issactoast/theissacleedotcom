@@ -10,7 +10,7 @@ title: R에서 회귀분석 함수 사용하기
 type: docs
 weight: 8
 header:
-  image: "regression_line.png"
+  image: "fitted-residual.png"
 ---
 
 ## 
