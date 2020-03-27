@@ -21,7 +21,7 @@ knitr::opts_chunk$set(comment = "#result>>")
 
 ### Python setup
 
-The python codes below written in numpy python package, so import numpy before we run them.
+The python codes below are written using the NumPy python package, so import NumPy before we run them.
 
 ```{python}
 import numpy as np
