@@ -7,7 +7,7 @@ menu:
   bebilingual:
     name: Overview
     weight: 1
-summary: 통계에서 기초가 되는 지식을 차근차근 쌓아나가는 코스입니다. 통계 이론을 통계 프로그램 중 하나인 R을 통해서 직접 느껴보는 강의입니다.
+summary: "Codes collection: R  <==> Python NumPy, Panda"
 title: Dictionary for bilingual coders
 toc: true
 type: docs
