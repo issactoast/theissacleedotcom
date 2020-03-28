@@ -1,0 +1,130 @@
+---
+date: "2020-02-10T00:00:00+01:00"
+draft: false
+linktitle: Dataframe
+menu:
+  bebilingual:
+    parent: Contents
+    weight: 4
+title: Dataframe - R vs. Python
+type: docs
+weight: 4    # related to next page to show
+header:
+  image: "r-vs-python.jpg"
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(comment = "#result>>")
+```
+
+## 
+
+### Python setup
+
+The python codes below are written using the NumPy python package, so import NumPy before we run them.
+
+```{python}
+# Python
+import numpy as np
+import pandas as pd
+```
+
+### Define
+
+#### By code
+
+```{python}
+# Python
+mydata = pd.DataFrame({'x': [1, 2, 3],
+                       'y': [3, 4, 5]})
+mydata
+```
+
+```{r}
+# R
+mydata <- data.frame(x = c(1, 2, 3), 
+                     y = c(3, 4, 5))
+mydata
+```
+
+
+#### From `csv` file
+
+```{python}
+furl = 'https://www.theissaclee.com/ko/courses/rstat101/examscore.csv'
+mydata = pd.read_csv(furl, sep=',', header=0) # header 0
+mydata.head(6)
+```
+
+
+```{r}
+# R
+furl <- "https://www.theissaclee.com/ko/courses/rstat101/examscore.csv"
+mydata <- read.csv(furl, header = TRUE)
+head(mydata)
+```
+
+#### Selection
+
+Single column
+
+```{python}
+# Python
+mydata[['midterm']].head()
+```
+
+```{r}
+# R
+head(mydata$midterm)
+```
+
+Multiple columns
+
+```{python}
+# Python
+mydata[['midterm', 'final']].head()
+```
+
+```{r}
+# R
+head(mydata[c("midterm", "final")])
+```
+
+Multiple successive columns names
+
+```{python}
+# Python
+mydata.loc[:, 'gender':'final'].head()
+```
+
+Base `R` does not have this funtion to my knowledge. This functions are in `dplyr` package.
+
+```{r eval=FALSE}
+# R
+N/A
+```
+
+Multiple successive columns names using vector
+
+```{python}
+# Python
+mydata[mydata.columns[1:4]].head()
+```
+
+```{r}
+# R
+head(mydata[names(mydata)[2:4]])
+```
+
+Multiple columns by postion
+
+```{python}
+# Python
+mydata.iloc[:,1:4].head()
+```
+
+```{r}
+# R
+head(mydata[, 2:4])
+```
+

@@ -1,0 +1,154 @@
+---
+date: "2020-02-10T00:00:00+01:00"
+draft: false
+linktitle: Dataframe
+menu:
+  bebilingual:
+    parent: Contents
+    weight: 4
+title: Dataframe - R vs. Python
+type: docs
+weight: 4    # related to next page to show
+header:
+  image: "r-vs-python.jpg"
+---
+
+
+
+<div id="section" class="section level2">
+<h2></h2>
+<div id="python-setup" class="section level3">
+<h3>Python setup</h3>
+<p>The python codes below are written using the NumPy python package, so import NumPy before we run them.</p>
+<pre class="python"><code># Python
+import numpy as np
+import pandas as pd</code></pre>
+</div>
+<div id="define" class="section level3">
+<h3>Define</h3>
+<div id="by-code" class="section level4">
+<h4>By code</h4>
+<pre class="python"><code># Python
+mydata = pd.DataFrame({&#39;x&#39;: [1, 2, 3],
+                       &#39;y&#39;: [3, 4, 5]})
+mydata</code></pre>
+<pre><code>#result&gt;&gt;    x  y
+#result&gt;&gt; 0  1  3
+#result&gt;&gt; 1  2  4
+#result&gt;&gt; 2  3  5</code></pre>
+<pre class="r"><code># R
+mydata &lt;- data.frame(x = c(1, 2, 3), 
+                     y = c(3, 4, 5))
+mydata</code></pre>
+<pre><code>#result&gt;&gt;   x y
+#result&gt;&gt; 1 1 3
+#result&gt;&gt; 2 2 4
+#result&gt;&gt; 3 3 5</code></pre>
+</div>
+<div id="from-csv-file" class="section level4">
+<h4>From <code>csv</code> file</h4>
+<pre class="python"><code>furl = &#39;https://www.theissaclee.com/ko/courses/rstat101/examscore.csv&#39;
+mydata = pd.read_csv(furl, sep=&#39;,&#39;, header=0) # header 0
+mydata.head(6)</code></pre>
+<pre><code>#result&gt;&gt;    student_id gender  midterm  final
+#result&gt;&gt; 0           1      F       38     46
+#result&gt;&gt; 1           2      M       42     67
+#result&gt;&gt; 2           3      F       53     56
+#result&gt;&gt; 3           4      M       48     54
+#result&gt;&gt; 4           5      M       46     39
+#result&gt;&gt; 5           6      M       51     74</code></pre>
+<pre class="r"><code># R
+furl &lt;- &quot;https://www.theissaclee.com/ko/courses/rstat101/examscore.csv&quot;
+mydata &lt;- read.csv(furl, header = TRUE)
+head(mydata)</code></pre>
+<pre><code>#result&gt;&gt;   student_id gender midterm final
+#result&gt;&gt; 1          1      F      38    46
+#result&gt;&gt; 2          2      M      42    67
+#result&gt;&gt; 3          3      F      53    56
+#result&gt;&gt; 4          4      M      48    54
+#result&gt;&gt; 5          5      M      46    39
+#result&gt;&gt; 6          6      M      51    74</code></pre>
+</div>
+<div id="selection" class="section level4">
+<h4>Selection</h4>
+<p>Single column</p>
+<pre class="python"><code># Python
+mydata[[&#39;midterm&#39;]].head()</code></pre>
+<pre><code>#result&gt;&gt;    midterm
+#result&gt;&gt; 0       38
+#result&gt;&gt; 1       42
+#result&gt;&gt; 2       53
+#result&gt;&gt; 3       48
+#result&gt;&gt; 4       46</code></pre>
+<pre class="r"><code># R
+head(mydata$midterm)</code></pre>
+<pre><code>#result&gt;&gt; [1] 38 42 53 48 46 51</code></pre>
+<p>Multiple columns</p>
+<pre class="python"><code># Python
+mydata[[&#39;midterm&#39;, &#39;final&#39;]].head()</code></pre>
+<pre><code>#result&gt;&gt;    midterm  final
+#result&gt;&gt; 0       38     46
+#result&gt;&gt; 1       42     67
+#result&gt;&gt; 2       53     56
+#result&gt;&gt; 3       48     54
+#result&gt;&gt; 4       46     39</code></pre>
+<pre class="r"><code># R
+head(mydata[c(&quot;midterm&quot;, &quot;final&quot;)])</code></pre>
+<pre><code>#result&gt;&gt;   midterm final
+#result&gt;&gt; 1      38    46
+#result&gt;&gt; 2      42    67
+#result&gt;&gt; 3      53    56
+#result&gt;&gt; 4      48    54
+#result&gt;&gt; 5      46    39
+#result&gt;&gt; 6      51    74</code></pre>
+<p>Multiple successive columns names</p>
+<pre class="python"><code># Python
+mydata.loc[:, &#39;gender&#39;:&#39;final&#39;].head()</code></pre>
+<pre><code>#result&gt;&gt;   gender  midterm  final
+#result&gt;&gt; 0      F       38     46
+#result&gt;&gt; 1      M       42     67
+#result&gt;&gt; 2      F       53     56
+#result&gt;&gt; 3      M       48     54
+#result&gt;&gt; 4      M       46     39</code></pre>
+<p>Base <code>R</code> does not have this funtion to my knowledge. This functions are in <code>dplyr</code> package.</p>
+<pre class="r"><code># R
+N/A</code></pre>
+<p>Multiple successive columns names using vector</p>
+<pre class="python"><code># Python
+mydata[mydata.columns[1:4]].head()</code></pre>
+<pre><code>#result&gt;&gt;   gender  midterm  final
+#result&gt;&gt; 0      F       38     46
+#result&gt;&gt; 1      M       42     67
+#result&gt;&gt; 2      F       53     56
+#result&gt;&gt; 3      M       48     54
+#result&gt;&gt; 4      M       46     39</code></pre>
+<pre class="r"><code># R
+head(mydata[names(mydata)[2:4]])</code></pre>
+<pre><code>#result&gt;&gt;   gender midterm final
+#result&gt;&gt; 1      F      38    46
+#result&gt;&gt; 2      M      42    67
+#result&gt;&gt; 3      F      53    56
+#result&gt;&gt; 4      M      48    54
+#result&gt;&gt; 5      M      46    39
+#result&gt;&gt; 6      M      51    74</code></pre>
+<p>Multiple columns by postion</p>
+<pre class="python"><code># Python
+mydata.iloc[:,1:4].head()</code></pre>
+<pre><code>#result&gt;&gt;   gender  midterm  final
+#result&gt;&gt; 0      F       38     46
+#result&gt;&gt; 1      M       42     67
+#result&gt;&gt; 2      F       53     56
+#result&gt;&gt; 3      M       48     54
+#result&gt;&gt; 4      M       46     39</code></pre>
+<pre class="r"><code># R
+head(mydata[, 2:4])</code></pre>
+<pre><code>#result&gt;&gt;   gender midterm final
+#result&gt;&gt; 1      F      38    46
+#result&gt;&gt; 2      M      42    67
+#result&gt;&gt; 3      F      53    56
+#result&gt;&gt; 4      M      48    54
+#result&gt;&gt; 5      M      46    39
+#result&gt;&gt; 6      M      51    74</code></pre>
+</div>
+</div>
+</div>
