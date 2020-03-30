@@ -1,0 +1,173 @@
+---
+date: "2020-02-10T00:00:00+01:00"
+draft: false
+linktitle: Week 9 - Two sample t-test
+menu:
+  stat2010:
+    parent: Contents
+    weight: 9
+title: Lab 9 - Two sample t-tests
+type: docs
+weight: 9    # related to next page to show
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = "")
+```
+
+
+The class video is attached here so that you can watch my lecture again when you prepare the exams.
+
+- If you have questions about my lecture, please use **the comment section** at the bottom of this document.
+
+<div align="center">
+TBA
+</div>
+
+##  Two types of two sample t-test
+
+We have two types of t-test in our course:
+
+- Paired-sample: this is just one sample t-test disguised as a two sample t-test
+- Independent sample: the real two sample t-test
+
+### Paired-sample data
+
+Let us consider we have 20 people who are willing to participate the research about the impact of smoking on the lung performance.
+
+What we will do is that we measure the performance of their lung before smoking. After that we let them be a smoker for a while and gether them again and measure the performance of their lung again. 
+
+The `FEV1` represents the forced expiratory volume in 1 second, which measures how much air a person can blow out in 1 second and is considered a measure of lung function.
+
+Here are the data set:
+
+```{r echo=FALSE}
+# mydata <- read.csv("http://homepage.stat.uiowa.edu/~kcowles/Datasets/smoke.dat", sep = " ", header = F)
+# mydata <- mydata[,c(1, 3)]
+# head(mydata)
+# mean(mydata[mydata$V1 =="N",]$V3)
+# sd(mydata[mydata$V1 =="N",]$V3)
+# mean(mydata[mydata$V1 =="H",]$V3)
+# sd(mydata[mydata$V1 =="H",]$V3)
+```
+
+```{r echo=FALSE}
+set.seed(1234)
+mydata <- data.frame(FEV1_before = round(rnorm(20, 4, 0.5), 2),
+                     FEV1_after  = round(rnorm(20, 3.5, 0.4), 2) )
+print(mydata, row.names = FALSE)
+```
+
+#### Our goal
+
+We want to evaluate that, 
+
+$$
+H_0: \mu_1 = \mu_2 \quad vs. \quad H_1: \mu_1 \ne \mu_2
+$$
+where $\mu_1$ indicates the mean of FEV1 values for non-smokers and $\mu_2$ indicates the mean of FEV1 values for smokers. Note that we can rewrite this as follows:
+$$
+H_0: \mu_1 - \mu_2 = 0 \quad vs. \quad H_1: \mu_1-\mu_2 \ne 0
+$$
+What is the observation for $\mu_1 - \mu_2$? It is the difference between FEV1 values for before and after measurements! Thus, we can use sample t-test in SAS as follows:
+
+```sas
+data smoking ;
+input before after ;
+diff = after - before ;
+datalines ;
+* note: copy and paste data in here ;
+;
+run ;
+
+proc univariate data = smoking;
+var diff;
+run;
+```
+
+Alternative method will be:
+
+```sas
+proc ttest data = smoking ;
+paired after*before ;
+run ;
+```
+
+### Independent two-sample data
+
+#### What is ice seeding?
+
+I just attached this just for fun.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bU4z8ZiX_eA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+Our data is about cloud seeding with silver nitrate. Does it really work? Here is the data set.
+
+```{r echo=F}
+mydata <- read.table("http://homepage.stat.uiowa.edu/~kcowles/Datasets/cloud.dat", header = F)
+names(mydata) <- c("rainfall", "seeded")
+set.seed(1234)
+print(mydata[sample(1:52, 30),], row.names = F)
+```
+
+#### Our goal
+
+Using this data, we want to ditermine, that silver nitrate actaully makes a difference when it comes to rainfall.
+
+$$
+H_0: \mu_s = \mu_u \quad vs. \quad H_1: \mu_s \ne \mu_u
+$$
+where $\mu_s$ and $\mu_u$ represents the mean of the amount of rainfall from the seeded clouds and unseeded clouds respectively. 
+
+Note that the null hypothesis is set as the silver nitrate does not work, in other words, $\mu_s = \mu_u$.
+
+#### Load the data set in SAS
+
+Let us load this data to SAS:
+
+```sas
+data cloud ;
+input rainfall seeded $ ;
+lograin = log(rainfall) ;
+datalines;
+/* paste your data here */
+;
+run;
+```
+
+`lograin = log(rainfall)` means we are making another variable using log function. Let us check out the data set we made.
+
+```sas
+proc print data = cloud;
+run;
+```
+
+You can sort the data using seede variable as follows:
+
+```sas
+proc sort data=cloud;
+by seeded;
+run;
+```
+
+#### Two-sample test in SAS
+
+The `proc ttest` will give you the beautiful plots and test results.
+
+```sas
+proc ttest ;
+class seeded ;
+var lograin ;
+run;
+```
+
+Among many tables we have from the above code, we need to focus on the following part:
+
+```sas
+Method   Variances   DF   t Value   Pr > |t| 
+Pooled   Equal       28   1.79      0.0841 
+```
+
+Under the assumption that the two groups have the equal variance, we can not reject the null hypothesis. In other words, we cannot say that the silver nitrate affects to the amount of rainfall.

@@ -1,0 +1,165 @@
+---
+date: "2020-02-10T00:00:00+01:00"
+draft: false
+linktitle: Week 9 - Two sample t-test
+menu:
+  stat2010:
+    parent: Contents
+    weight: 9
+title: Lab 9 - Two sample t-tests
+type: docs
+weight: 9    # related to next page to show
+---
+
+
+
+<p>The class video is attached here so that you can watch my lecture again when you prepare the exams.</p>
+<ul>
+<li>If you have questions about my lecture, please use <strong>the comment section</strong> at the bottom of this document.</li>
+</ul>
+<div align="center">
+<p>TBA</p>
+</div>
+<div id="two-types-of-two-sample-t-test" class="section level2">
+<h2>Two types of two sample t-test</h2>
+<p>We have two types of t-test in our course:</p>
+<ul>
+<li>Paired-sample: this is just one sample t-test disguised as a two sample t-test</li>
+<li>Independent sample: the real two sample t-test</li>
+</ul>
+<div id="paired-sample-data" class="section level3">
+<h3>Paired-sample data</h3>
+<p>Let us consider we have 20 people who are willing to participate the research about the impact of smoking on the lung performance.</p>
+<p>What we will do is that we measure the performance of their lung before smoking. After that we let them be a smoker for a while and gether them again and measure the performance of their lung again.</p>
+<p>The <code>FEV1</code> represents the forced expiratory volume in 1 second, which measures how much air a person can blow out in 1 second and is considered a measure of lung function.</p>
+<p>Here are the data set:</p>
+<pre><code> FEV1_before FEV1_after
+        3.40       3.55
+        4.14       3.30
+        4.54       3.32
+        2.83       3.68
+        4.21       3.22
+        4.25       2.92
+        3.71       3.73
+        3.73       3.09
+        3.72       3.49
+        3.55       3.13
+        3.76       3.94
+        3.50       3.31
+        3.61       3.22
+        4.03       3.30
+        4.48       2.85
+        3.94       3.03
+        3.74       2.63
+        3.54       2.96
+        3.58       3.38
+        5.21       3.31</code></pre>
+<div id="our-goal" class="section level4">
+<h4>Our goal</h4>
+<p>We want to evaluate that,</p>
+<p><span class="math display">\[
+H_0: \mu_1 = \mu_2 \quad vs. \quad H_1: \mu_1 \ne \mu_2
+\]</span>
+where <span class="math inline">\(\mu_1\)</span> indicates the mean of FEV1 values for non-smokers and <span class="math inline">\(\mu_2\)</span> indicates the mean of FEV1 values for smokers. Note that we can rewrite this as follows:
+<span class="math display">\[
+H_0: \mu_1 - \mu_2 = 0 \quad vs. \quad H_1: \mu_1-\mu_2 \ne 0
+\]</span>
+What is the observation for <span class="math inline">\(\mu_1 - \mu_2\)</span>? It is the difference between FEV1 values for before and after measurements! Thus, we can use sample t-test in SAS as follows:</p>
+<pre class="sas"><code>data smoking ;
+input before after ;
+diff = after - before ;
+datalines ;
+* note: copy and paste data in here ;
+;
+run ;
+
+proc univariate data = smoking;
+var diff;
+run;</code></pre>
+<p>Alternative method will be:</p>
+<pre class="sas"><code>proc ttest data = smoking ;
+paired after*before ;
+run ;</code></pre>
+</div>
+</div>
+<div id="independent-two-sample-data" class="section level3">
+<h3>Independent two-sample data</h3>
+<div id="what-is-ice-seeding" class="section level4">
+<h4>What is ice seeding?</h4>
+<p>I just attached this just for fun.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bU4z8ZiX_eA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<p>Our data is about cloud seeding with silver nitrate. Does it really work? Here is the data set.</p>
+<pre><code> rainfall seeded
+   1697.8      S
+     29.0      U
+     17.3      U
+    274.7      S
+    118.3      S
+     40.6      S
+     95.0      U
+    321.2      U
+    255.0      S
+      7.7      S
+    345.5      U
+    334.1      S
+    242.5      S
+     17.5      S
+      1.0      U
+    244.3      U
+     36.6      U
+     41.1      U
+    302.8      S
+    129.6      S
+    430.0      S
+     21.7      U
+    147.8      U
+     24.4      U
+      4.9      U
+    372.4      U
+    489.1      S
+    115.3      S
+    830.1      U
+    274.7      S</code></pre>
+</div>
+<div id="our-goal-1" class="section level4">
+<h4>Our goal</h4>
+<p>Using this data, we want to ditermine, that silver nitrate actaully makes a difference when it comes to rainfall.</p>
+<p><span class="math display">\[
+H_0: \mu_s = \mu_u \quad vs. \quad H_1: \mu_s \ne \mu_u
+\]</span>
+where <span class="math inline">\(\mu_s\)</span> and <span class="math inline">\(\mu_u\)</span> represents the mean of the amount of rainfall from the seeded clouds and unseeded clouds respectively.</p>
+<p>Note that the null hypothesis is set as the silver nitrate does not work, in other words, <span class="math inline">\(\mu_s = \mu_u\)</span>.</p>
+</div>
+<div id="load-the-data-set-in-sas" class="section level4">
+<h4>Load the data set in SAS</h4>
+<p>Let us load this data to SAS:</p>
+<pre class="sas"><code>data cloud ;
+input rainfall seeded $ ;
+lograin = log(rainfall) ;
+datalines;
+/* paste your data here */
+;
+run;</code></pre>
+<p><code>lograin = log(rainfall)</code> means we are making another variable using log function. Let us check out the data set we made.</p>
+<pre class="sas"><code>proc print data = cloud;
+run;</code></pre>
+<p>You can sort the data using seede variable as follows:</p>
+<pre class="sas"><code>proc sort data=cloud;
+by seeded;
+run;</code></pre>
+</div>
+<div id="two-sample-test-in-sas" class="section level4">
+<h4>Two-sample test in SAS</h4>
+<p>The <code>proc ttest</code> will give you the beautiful plots and test results.</p>
+<pre class="sas"><code>proc ttest ;
+class seeded ;
+var lograin ;
+run;</code></pre>
+<p>Among many tables we have from the above code, we need to focus on the following part:</p>
+<pre class="sas"><code>Method   Variances   DF   t Value   Pr &gt; |t| 
+Pooled   Equal       28   1.79      0.0841 </code></pre>
+<p>Under the assumption that the two groups have the equal variance, we can not reject the null hypothesis. In other words, we cannot say that the silver nitrate affects to the amount of rainfall.</p>
+</div>
+</div>
+</div>
