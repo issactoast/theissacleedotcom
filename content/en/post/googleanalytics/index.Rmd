@@ -1,0 +1,78 @@
+---
+authors:
+- admin
+date: "2020-03-30T00:00:00Z"
+draft: false
+featured: false
+image:
+  caption: 'Image credit: [googleanalytics](https://developers.google.com/analytics/terms/branding-policy)'
+  focal_point: ""
+  placement: 2
+  preview_only: false
+lastmod: "2020-03-22T00:00:00Z"
+projects: [blogdown]
+subtitle: 'Adjust header file in Hugo'
+summary: Blogdown google analytics register summary
+title: 'Academic theme google analytics registration'
+categories:
+  - blogdown
+tags:
+  - googleanalytics, google search console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+## Google analytics
+
+Google provides a convenient tool for analyzing the website's traffic.
+
+[Google analytics official website](https://analytics.google.com/analytics)
+
+To register our website on the analytics page, we need to do the followings:
+
+[Google's official guidelines for registering analytics](https://support.google.com/analytics/answer/1008015?hl=en)
+
+This article is about step 4. add the tracking code to our blog, especially the blogs built by Hugo's academic theme using r `blogdown`.
+
+[Getting the tracking code](https://support.google.com/analytics/answer/1008080)
+
+The code looks like this:
+
+```html
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=yourIDhere"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'yourIDhere');
+</script>
+```
+
+To register our website on the analytics tool, we need to put this code in the header of every web page we have.
+
+### How the blogdown build the website
+
+The blogdown uses the layout when it serve the site which is located in the folder
+
+	themes>hugo-academic>layouts
+
+In this folder, we have `marketing` folder. In the folder we have two files related to google analytics, but to be honest, I don't know that this code mean. All I want to do is to the tracking code in my header, so here is what I did:
+
+1. make another file, like `analytics.html` in the marketing folder and copy and paste the tracking code.
+2. Open the `site_head.html` in the `layouts` folder add the following:
+```js
+{{ partial "marketing/analytics" . }}
+```
+3. I commented out the two code related to google marketing as follows:
+```html
+<!-- {{ partial "marketing/google_analytics" . }} -->
+<!-- {{ partial "marketing/google_tag_manager" . }} -->
+```
+
+After you serve the site, you can check out the code is working by looking into the source file of your blogdown main page. Also, you can check google analytics out working properly when you access your website in real time.
+
+Using this method, we can actually put any code to the every header in your blogdown pages.
