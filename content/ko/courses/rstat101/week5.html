@@ -45,7 +45,7 @@ r=\frac{1}{n-1}\sum_{i=1}^{n}\left(\frac{x_{i}-\bar{x}}{s_{x}}\right)\left(\frac
 <p><code>R</code>에서는 <code>cor</code>이라는 함수를 상관계수를 구할 때 사용할 수 있습니다.</p>
 <pre class="r"><code>my_corr &lt;- cor(mydata$midterm, mydata$final)
 my_corr</code></pre>
-<pre><code>## [1] 0.6770075</code></pre>
+<pre><code>&gt;&gt; [1] 0.6770075</code></pre>
 <p><code>cor</code>함수가 정말 위의 공식을 사용해서 값을 구하는지 확인해 보기 위하여, 배운 공식을 그대로 사용하여 상관계수를 구해보면 다음과 같습니다.</p>
 <pre class="r"><code>n &lt;- length(mydata$midterm)
 x_bar &lt;- mean(mydata$midterm)
@@ -55,7 +55,7 @@ s_y &lt;- sd(mydata$final)
 z_x &lt;- (mydata$midterm - x_bar) / s_x
 z_y &lt;- (mydata$final - y_bar) / s_y
 sum(z_x * z_y) / (n - 1)</code></pre>
-<pre><code>## [1] 0.6770075</code></pre>
+<pre><code>&gt;&gt; [1] 0.6770075</code></pre>
 <p>우리가 week 2에서 배운 시각화를 통하여 두 변수의 분포를 시각화 시켜보자.</p>
 <pre class="r"><code>plot(mydata$midterm, mydata$final, asp = 1,
      xlab = &quot;중간고사&quot;, 
@@ -64,7 +64,7 @@ sum(z_x * z_y) / (n - 1)</code></pre>
 title(sub = paste(&quot;상관계수: &quot;, round(my_corr, 4)), adj = 1, col.sub = &quot;red&quot;)
 abline(v = x_bar)
 abline(h = y_bar)</code></pre>
-<p><img src="/ko/courses/rstat101/week5_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/ko/courses/rstat101/week5_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>두 변수의 분포가 우상향하는 것을 알 수 있고, 이러한 분포는 상관계수값 0.6과 상응하는 것입니다. 또한, 중간고사 점수의 평균과 기말고사의 평균을 각각 수직선과 수평선으로 나타내었는데, 이것을 통해 우리는 데이터가 두 변수의 평균을 새로운 좌표축으로 생각했을때 1사분면과 3사분면에 많이 분포하고 있다는 것을 나타냅니다.</p>
 <p>이것은 상관계수가 내포하는 의미를 좀 생각해보기 위해서 앞에서 구했던 <code>z_x</code>와 <code>z_y</code>들을 나타내보도록 하겠습니다. <code>z_x</code>와 <code>z_y</code>는 각각 중간, 기말 고사 점수를 표준화 시켰던 값들이었습니다.</p>
 <pre class="r"><code>plot(z_x, z_y, asp = 1,
@@ -74,19 +74,19 @@ abline(h = y_bar)</code></pre>
 title(sub = paste(&quot;상관계수: &quot;, round(my_corr, 4)), adj = 1, col.sub = &quot;red&quot;)
 abline(v = 0)
 abline(h = 0)</code></pre>
-<p><img src="/ko/courses/rstat101/week5_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/ko/courses/rstat101/week5_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>위에서 살펴본 상관계수 식을 뜯어보면, 우리는 두 표준화된 점수를 곱한 값을 더해서 나줘주는 것을 알 수 있죠. 우리가 1, 2, 3, 4 사분면에 위치한 점들의 <span class="math inline">\(x, y\)</span> 값을 곱한 값을 생각했을 경우, 1, 3 사분면에 위치한 점들은 양수가, 2, 4 사분면에 위치한 점들은 음수가 나올 것입니다. 다음과 같이 말이죠.</p>
 <pre class="r"><code>z_x * z_y</code></pre>
-<pre><code>##  [1]  0.055356131  0.049164984  0.224095213  0.079635135 -0.207706885
-##  [6]  0.830827538 -0.368312500  0.048072429  1.237136681 -0.094566723
-## [11] -0.347432556  0.301302447  1.331096429  0.429010012  0.168374897
-## [16]  0.307979174 -0.139240092  0.619600198  0.274595542  2.085202312
-## [21]  3.577389937  3.697449615  2.083259992 -0.201394343  0.205400379
-## [26]  0.003641851 -0.137540561  0.599691414  2.360890410  0.560238032</code></pre>
+<pre><code>&gt;&gt;  [1]  0.055356131  0.049164984  0.224095213  0.079635135 -0.207706885
+&gt;&gt;  [6]  0.830827538 -0.368312500  0.048072429  1.237136681 -0.094566723
+&gt;&gt; [11] -0.347432556  0.301302447  1.331096429  0.429010012  0.168374897
+&gt;&gt; [16]  0.307979174 -0.139240092  0.619600198  0.274595542  2.085202312
+&gt;&gt; [21]  3.577389937  3.697449615  2.083259992 -0.201394343  0.205400379
+&gt;&gt; [26]  0.003641851 -0.137540561  0.599691414  2.360890410  0.560238032</code></pre>
 <p><code>sign</code> 함수를 이용하여 이 수들의 부호만 따로 정리를 해보도록 하겠습니다.</p>
 <pre class="r"><code>sign(z_x * z_y)</code></pre>
-<pre><code>##  [1]  1  1  1  1 -1  1 -1  1  1 -1 -1  1  1  1  1  1 -1  1  1  1  1  1  1 -1  1
-## [26]  1 -1  1  1  1</code></pre>
+<pre><code>&gt;&gt;  [1]  1  1  1  1 -1  1 -1  1  1 -1 -1  1  1  1  1  1 -1  1  1  1  1  1  1 -1  1
+&gt;&gt; [26]  1 -1  1  1  1</code></pre>
 <p>이 부호를 이용하면 다음과 같은 그래프가 완성됩니다.</p>
 <pre class="r"><code>plot(z_x, z_y, asp = 1,
      xlab = &quot;표준 중간고사 점수&quot;, 
@@ -96,14 +96,14 @@ abline(h = 0)</code></pre>
 title(sub = paste(&quot;상관계수: &quot;, round(my_corr, 4)), adj = 1, col.sub = &quot;red&quot;)
 abline(v = 0)
 abline(h = 0)</code></pre>
-<p><img src="/ko/courses/rstat101/week5_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/ko/courses/rstat101/week5_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>즉, 위의 그래프에서 빨간 점들은 양의 상관관계가 나오도록 도와주는(?) 데이터들이고, 파란 점들은 음의 상관관계가 나오도록 도와주는 데이터 들이라고 생각하면 좋습니다. 하지만, 부호만이 이렇게 상관관계에 영향을 미칠까요? 아닙니다. 한가지 요소가 더 있습니다. 바로 표준 점수들의 곱의 절대값 크기죠!</p>
 <pre class="r"><code>abs(z_x * z_y)</code></pre>
-<pre><code>##  [1] 0.055356131 0.049164984 0.224095213 0.079635135 0.207706885 0.830827538
-##  [7] 0.368312500 0.048072429 1.237136681 0.094566723 0.347432556 0.301302447
-## [13] 1.331096429 0.429010012 0.168374897 0.307979174 0.139240092 0.619600198
-## [19] 0.274595542 2.085202312 3.577389937 3.697449615 2.083259992 0.201394343
-## [25] 0.205400379 0.003641851 0.137540561 0.599691414 2.360890410 0.560238032</code></pre>
+<pre><code>&gt;&gt;  [1] 0.055356131 0.049164984 0.224095213 0.079635135 0.207706885 0.830827538
+&gt;&gt;  [7] 0.368312500 0.048072429 1.237136681 0.094566723 0.347432556 0.301302447
+&gt;&gt; [13] 1.331096429 0.429010012 0.168374897 0.307979174 0.139240092 0.619600198
+&gt;&gt; [19] 0.274595542 2.085202312 3.577389937 3.697449615 2.083259992 0.201394343
+&gt;&gt; [25] 0.205400379 0.003641851 0.137540561 0.599691414 2.360890410 0.560238032</code></pre>
 <p>이 값을 점의 크기로 대체하여 봅시다.</p>
 <pre class="r"><code>plot(z_x, z_y, asp = 1,
      xlab = &quot;표준 중간고사 점수&quot;, 
@@ -114,7 +114,7 @@ abline(h = 0)</code></pre>
 title(sub = paste(&quot;상관계수: &quot;, round(my_corr, 4)), adj = 1, col.sub = &quot;red&quot;)
 abline(v = 0)
 abline(h = 0)</code></pre>
-<p><img src="/ko/courses/rstat101/week5_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/ko/courses/rstat101/week5_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>위의 그래프는 상관계수의 계산 과정을 시각화 한 그래프라고 생각하면 좋을것 같습니다. 상관계수는 그래프의 모든 점들을 더 한 후에 데이터의 개수 (-1) 만큼 나눠준 값이니까요.</p>
 <p>값을 보면, 빨간 큰 점들이 많이 보이니, 당연히 작은 파란색 점들의 상관계수에 대한 영향력은 줄어 들 것입니다. 오늘은 여기까지 마치도록 하겠습니다.</p>
 </div>

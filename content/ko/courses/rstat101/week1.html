@@ -23,63 +23,113 @@ weight: 2
 <div id="r-기초" class="section level3">
 <h3>R 기초</h3>
 <p><code>R</code> 프로그램은 하나의 계산기라고 생각하시면 됩니다. 아주 멋들어진 계산기이기도 하죠.</p>
-<pre class="r"><code>2 + 1
-3 - 2
-2 * 3
-4 / 2
-4^2
-sqrt(4) # 4^0.5
-9 %% 4  # mod
-9 %/% 4 # value</code></pre>
+<pre class="r"><code>2 + 1</code></pre>
+<pre><code>&gt;&gt; [1] 3</code></pre>
+<pre class="r"><code>3 - 2</code></pre>
+<pre><code>&gt;&gt; [1] 1</code></pre>
+<pre class="r"><code>2 * 3</code></pre>
+<pre><code>&gt;&gt; [1] 6</code></pre>
+<pre class="r"><code>4 / 2</code></pre>
+<pre><code>&gt;&gt; [1] 2</code></pre>
+<pre class="r"><code>4^2</code></pre>
+<pre><code>&gt;&gt; [1] 16</code></pre>
+<pre class="r"><code>sqrt(4) # 4^0.5</code></pre>
+<pre><code>&gt;&gt; [1] 2</code></pre>
+<pre class="r"><code>9 %% 4  # mod</code></pre>
+<pre><code>&gt;&gt; [1] 1</code></pre>
+<pre class="r"><code>9 %/% 4 # value</code></pre>
+<pre><code>&gt;&gt; [1] 2</code></pre>
 <p><code>variable</code>에 값을 저장할 때에는 <code>&lt;-</code> 기호를 사용합니다.</p>
 <pre class="r"><code>a &lt;- 4
 a</code></pre>
+<pre><code>&gt;&gt; [1] 4</code></pre>
 <pre class="r"><code>b &lt;- 2
 b</code></pre>
+<pre><code>&gt;&gt; [1] 2</code></pre>
 <pre class="r"><code>b &lt;- 3
 b</code></pre>
+<pre><code>&gt;&gt; [1] 3</code></pre>
 <pre class="r"><code>a+b</code></pre>
+<pre><code>&gt;&gt; [1] 7</code></pre>
 <p><code>Variable</code> 꼭 하나의 숫자만을 담을 수 있는 것이 아니라 여러개의 숫자를 한꺼번에 담을 수 도 있습니다. <code>c()</code> 기호는 숫자가 묶여진 벡터(vector)를 만드는데 사용됩니다.</p>
 <pre class="r"><code>a &lt;- c(1, 2, 3)
 b &lt;- c(4, 5, 6)
-a
-b</code></pre>
+a</code></pre>
+<pre><code>&gt;&gt; [1] 1 2 3</code></pre>
+<pre class="r"><code>b</code></pre>
+<pre><code>&gt;&gt; [1] 4 5 6</code></pre>
 <p>한국인들은 성격이 급하니, 숫자가 아주 많은 벡터를 생성할 때는 <code>:</code> 명령어가 아주 유용합니다.</p>
 <pre class="r"><code>a &lt;- c(1:10)
 a</code></pre>
+<pre><code>&gt;&gt;  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <p>벡터를 정의 할 때, 저는 주로 <code>seq</code> 명령어를 사용하는데, 이 함수의 옵션인 <code>by</code> 와 <code>length.out</code> 옵션을 잘 기억해 두세요.</p>
-<pre class="r"><code>seq(0, 1, by = 0.01)
-seq(0, 1, length.out = 4)</code></pre>
+<pre class="r"><code>seq(0, 1, by = 0.01)</code></pre>
+<pre><code>&gt;&gt;   [1] 0.00 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.10 0.11 0.12 0.13 0.14
+&gt;&gt;  [16] 0.15 0.16 0.17 0.18 0.19 0.20 0.21 0.22 0.23 0.24 0.25 0.26 0.27 0.28 0.29
+&gt;&gt;  [31] 0.30 0.31 0.32 0.33 0.34 0.35 0.36 0.37 0.38 0.39 0.40 0.41 0.42 0.43 0.44
+&gt;&gt;  [46] 0.45 0.46 0.47 0.48 0.49 0.50 0.51 0.52 0.53 0.54 0.55 0.56 0.57 0.58 0.59
+&gt;&gt;  [61] 0.60 0.61 0.62 0.63 0.64 0.65 0.66 0.67 0.68 0.69 0.70 0.71 0.72 0.73 0.74
+&gt;&gt;  [76] 0.75 0.76 0.77 0.78 0.79 0.80 0.81 0.82 0.83 0.84 0.85 0.86 0.87 0.88 0.89
+&gt;&gt;  [91] 0.90 0.91 0.92 0.93 0.94 0.95 0.96 0.97 0.98 0.99 1.00</code></pre>
+<pre class="r"><code>seq(0, 1, length.out = 4)</code></pre>
+<pre><code>&gt;&gt; [1] 0.0000000 0.3333333 0.6666667 1.0000000</code></pre>
 <p>대괄호(braket), <code>[]</code>, 명령어는 우리가 정의한 벡터들의 원소들에 접근할 수 있게 만들어 줍니다.</p>
 <pre class="r"><code>a &lt;- c(10, 50, 40, 20)
-a[3]
-a[1:3]</code></pre>
+a[3]</code></pre>
+<pre><code>&gt;&gt; [1] 40</code></pre>
+<pre class="r"><code>a[1:3]</code></pre>
+<pre><code>&gt;&gt; [1] 10 50 40</code></pre>
 <p>통계에서 아주 중요한 행렬(matrix)를 정의하는 방법은 다음과 같습니다.</p>
-<pre class="r"><code>matrix(c(1:16), 4, 4)
-matrix(c(1:16), 4, 4, byrow = TRUE) # try this too</code></pre>
+<pre class="r"><code>matrix(c(1:16), 4, 4)</code></pre>
+<pre><code>&gt;&gt;      [,1] [,2] [,3] [,4]
+&gt;&gt; [1,]    1    5    9   13
+&gt;&gt; [2,]    2    6   10   14
+&gt;&gt; [3,]    3    7   11   15
+&gt;&gt; [4,]    4    8   12   16</code></pre>
+<pre class="r"><code>matrix(c(1:16), 4, 4, byrow = TRUE) # try this too</code></pre>
+<pre><code>&gt;&gt;      [,1] [,2] [,3] [,4]
+&gt;&gt; [1,]    1    2    3    4
+&gt;&gt; [2,]    5    6    7    8
+&gt;&gt; [3,]    9   10   11   12
+&gt;&gt; [4,]   13   14   15   16</code></pre>
 <p><code>[]</code> 명령어는 정의된 행렬에서도 사용이 가능합니다. 행렬도 우리가 정의한 객체(object) 중 하나니까요.</p>
 <pre class="r"><code>a &lt;- matrix(c(1:16), 4, 4)
-a[1,2]
-a[1:3,2]
-a[1:4,3]
-a[,3]
-a[1:3,1:2]</code></pre>
+a[1,2]</code></pre>
+<pre><code>&gt;&gt; [1] 5</code></pre>
+<pre class="r"><code>a[1:3,2]</code></pre>
+<pre><code>&gt;&gt; [1] 5 6 7</code></pre>
+<pre class="r"><code>a[1:4,3]</code></pre>
+<pre><code>&gt;&gt; [1]  9 10 11 12</code></pre>
+<pre class="r"><code>a[,3]</code></pre>
+<pre><code>&gt;&gt; [1]  9 10 11 12</code></pre>
+<pre class="r"><code>a[1:3,1:2]</code></pre>
+<pre><code>&gt;&gt;      [,1] [,2]
+&gt;&gt; [1,]    1    5
+&gt;&gt; [2,]    2    6
+&gt;&gt; [3,]    3    7</code></pre>
 </div>
 <div id="데이터-불러오기" class="section level3">
 <h3>데이터 불러오기</h3>
 <p>데이터 셋을 다음의 <a href="https://www.theissaclee.com/ko/courses/rstat101/examscore.csv">링크</a>에서 다운받아 봅니다. 그리고 <code>examscore.csv</code>이라는 파일명으로 폴더에 저장합니다. 파일을 저장할 때 꼭 자신의 <code>working directory</code>에 저장하셔야 합니다.</p>
 <pre class="r"><code>mydata &lt;- read.csv(&quot;examscore.csv&quot;, header = TRUE)
 head(mydata)</code></pre>
+<pre><code>&gt;&gt;   student_id gender midterm final
+&gt;&gt; 1          1      F      38    46
+&gt;&gt; 2          2      M      42    67
+&gt;&gt; 3          3      F      53    56
+&gt;&gt; 4          4      M      48    54
+&gt;&gt; 5          5      M      46    39
+&gt;&gt; 6          6      M      51    74</code></pre>
 <p>혹은 다음과 같이 파일 주소를 직접 입력하셔서 불러오는 방법도 있습니다.</p>
 <pre class="r"><code>mydata &lt;- read.csv(&quot;https://www.theissaclee.com/ko/courses/rstat101/examscore.csv&quot;, header = TRUE)
 head(mydata)</code></pre>
-<pre><code>##   student_id gender midterm final
-## 1          1      F      38    46
-## 2          2      M      42    67
-## 3          3      F      53    56
-## 4          4      M      48    54
-## 5          5      M      46    39
-## 6          6      M      51    74</code></pre>
+<pre><code>&gt;&gt;   student_id gender midterm final
+&gt;&gt; 1          1      F      38    46
+&gt;&gt; 2          2      M      42    67
+&gt;&gt; 3          3      F      53    56
+&gt;&gt; 4          4      M      48    54
+&gt;&gt; 5          5      M      46    39
+&gt;&gt; 6          6      M      51    74</code></pre>
 <p>만약 이제까지 잘 따라오셨다면 위의 결과를 볼 수 있을 것입니다.</p>
 </div>
 </div>

@@ -28,7 +28,7 @@ with(mydata,
           ylab = &quot;기말고사&quot;,
           main = &quot;시험점수 분포&quot;)
 )</code></pre>
-<p><img src="/ko/courses/rstat101/week7_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="/ko/courses/rstat101/week7_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>간단한 몸풀기(?) <code>with</code> 구문을 써서 그래프를 그려보았습니다. <code>$</code>을 통해 <code>mydata</code>의 칼럼에 접근하는 것을 <code>with</code> 구문을 사용하여 생략할 수 있습니다. ‘나 이제부터 mydata를 사용할거니까 못찾겠으면 mydata 찾아봐~’ 라고 R에게 알려주는 것이라 생각하면 되겠네요.</p>
 <p>지난 시간에 데이터의 경향성을 하나의 직선으로 나타낸 것들 중 RSS (residual sum of square) 값을 가장 작에 만드는 선을 회귀분석 선으로 채택한다는 것을 알아봤습니다. 이 직선을 구하는 이유는 데이터의 변수들끼리의 관계를 알고 있을때, 하나 변수의 정보를 가지고 다른 변수의 값을 예측하는데에 있습니다.</p>
 <div id="회귀분석-모델" class="section level4">
@@ -54,44 +54,44 @@ Y (\text{final score})= slope \times x (\text{midterm score}) + intercept + nois
 <p>다음과 같이 회귀 분석을 해달라고 <code>R</code>에게 부탁한 후, 결과를 <code>result</code> 변수에 저장합니다. <code>result</code> 변수에 어떤 값들이 들어있는지 보도록 하죠.</p>
 <pre class="r"><code>result &lt;- lm(final ~ midterm, data = mydata)
 attributes(result)</code></pre>
-<pre><code>## $names
-##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
-##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
-##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;        
-## 
-## $class
-## [1] &quot;lm&quot;</code></pre>
+<pre><code>&gt;&gt; $names
+&gt;&gt;  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
+&gt;&gt;  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
+&gt;&gt;  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;        
+&gt;&gt; 
+&gt;&gt; $class
+&gt;&gt; [1] &quot;lm&quot;</code></pre>
 <p>위의 결과를 보면, <code>result</code> 변수는 <code>lm</code>이라는 클래스 (지금은 모르셔도 됩니다. lm 함수의 결과를 따로 묶어서 이름을 지어줬다고 생각하면 됩니다.)에 속하며, 가지고 있는 결과값이 12개나 되네요. 제일 첫번째가 당연히 우리가 구하는 회귀분석 직선의 기울기와 절편입니다.</p>
 <pre class="r"><code>result$coefficients</code></pre>
-<pre><code>## (Intercept)     midterm 
-##  13.8866022   0.8966817</code></pre>
+<pre><code>&gt;&gt; (Intercept)     midterm 
+&gt;&gt;  13.8866022   0.8966817</code></pre>
 <p>이 정보를 가지고 산점도에 쉽게 회귀 직선을 추가할 수 있습니다.</p>
 <pre class="r"><code>plot(mydata$midterm, mydata$final, asp = 1,
      xlab = &quot;중간고사&quot;, 
      ylab = &quot;기말고사&quot;,
      main = &quot;시험점수 산점도&quot;)
 abline(result$coefficients) # coefficients에 기울기, 절편 정보가 들어있음</code></pre>
-<p><img src="/ko/courses/rstat101/week7_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/ko/courses/rstat101/week7_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>우리가 가진 result 변수의 정보가 어떤 것들이 있는지 정리해서 보여주는 <code>summary</code>함수를 사용해보죠.</p>
 <pre class="r"><code>summary(result)</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = final ~ midterm, data = mydata)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -32.857 -11.175   2.281  10.057  30.866 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  13.8866     8.0195   1.732   0.0943 .  
-## midterm       0.8967     0.1842   4.868 3.98e-05 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 14.28 on 28 degrees of freedom
-## Multiple R-squared:  0.4583, Adjusted R-squared:  0.439 
-## F-statistic: 23.69 on 1 and 28 DF,  p-value: 3.984e-05</code></pre>
+<pre><code>&gt;&gt; 
+&gt;&gt; Call:
+&gt;&gt; lm(formula = final ~ midterm, data = mydata)
+&gt;&gt; 
+&gt;&gt; Residuals:
+&gt;&gt;     Min      1Q  Median      3Q     Max 
+&gt;&gt; -32.857 -11.175   2.281  10.057  30.866 
+&gt;&gt; 
+&gt;&gt; Coefficients:
+&gt;&gt;             Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;&gt; (Intercept)  13.8866     8.0195   1.732   0.0943 .  
+&gt;&gt; midterm       0.8967     0.1842   4.868 3.98e-05 ***
+&gt;&gt; ---
+&gt;&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;&gt; 
+&gt;&gt; Residual standard error: 14.28 on 28 degrees of freedom
+&gt;&gt; Multiple R-squared:  0.4583, Adjusted R-squared:  0.439 
+&gt;&gt; F-statistic: 23.69 on 1 and 28 DF,  p-value: 3.984e-05</code></pre>
 <p>앞으로의 통계 공부는 위의 결과를 완전히 이해하는 것에 있다고 해도 과언이 아닐 정도로 한글자 한글자가 무엇을 의미하는지 아셔야 하지만, 그건 아직 나~중에 일이니 겁먹지 마세요! 저 정보를 다 이해 위해서는 상당히 많은 시간 최소 2년 정도는 잡고 공부하셔야 하니, 마음 급하게 먹고 체하시면 안됩니다.</p>
 </div>
 <div id="얻을-수-있는-결과값들" class="section level4">
@@ -101,54 +101,55 @@ abline(result$coefficients) # coefficients에 기울기, 절편 정보가 들어
 <li>입력한 코드 공식</li>
 </ol>
 <pre class="r"><code>result$call</code></pre>
-<pre><code>## lm(formula = final ~ midterm, data = mydata)</code></pre>
+<pre><code>&gt;&gt; lm(formula = final ~ midterm, data = mydata)</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>구한 직선 정보</li>
 </ol>
 <p><code>Coefficients</code> 테이블에는 우리가 구한 기울기, 절편값이 들어있는 것을 알 수 있습니다. 오른쪽에 있는 칼럼들은 지금은 넘어가도록 합시다!</p>
 <pre class="r"><code>result$coefficients</code></pre>
-<pre><code>## (Intercept)     midterm 
-##  13.8866022   0.8966817</code></pre>
+<pre><code>&gt;&gt; (Intercept)     midterm 
+&gt;&gt;  13.8866022   0.8966817</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>직선을 사용한 예측값, <span class="math inline">\(\hat{\text{final}}\)</span></li>
 </ol>
 <p>데이터의 중간고사 점수를 직선 방정식에 넣었을 때의 값들에 대한 정보입니다.</p>
 <pre class="r"><code>head(result$fitted.values) # 처음 6개</code></pre>
-<pre><code>##        1        2        3        4        5        6 
-## 47.96051 51.54723 61.41073 56.92733 55.13396 59.61737</code></pre>
+<pre><code>&gt;&gt;        1        2        3        4        5        6 
+&gt;&gt; 47.96051 51.54723 61.41073 56.92733 55.13396 59.61737</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>잔차 정보.</li>
 </ol>
 <p>직선을 구하기 위해서 구했던 에러값들, 잔차 (residuals),에 대한 정보</p>
 <pre class="r"><code>summary(result$residuals)</code></pre>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-## -32.857 -11.175   2.281   0.000  10.057  30.866</code></pre>
+<pre><code>&gt;&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+&gt;&gt; -32.857 -11.175   2.281   0.000  10.057  30.866</code></pre>
 <p>잔차는 다음과 같이 구해집니다.</p>
 <p><span class="math display">\[
 y_i - \hat{y}_i \quad i=1,...,n
 \]</span></p>
 <p>다음의 코드가 위의 식을 말해줍니다.</p>
 <pre class="r"><code>head(mydata$final - result$fitted.values)</code></pre>
-<pre><code>##          1          2          3          4          5          6 
-##  -1.960508  15.452765  -5.410734  -2.927325 -16.133962  14.382630</code></pre>
+<pre><code>&gt;&gt;          1          2          3          4          5          6 
+&gt;&gt;  -1.960508  15.452765  -5.410734  -2.927325 -16.133962  14.382630</code></pre>
 <pre class="r"><code>head(result$residuals)</code></pre>
-<pre><code>##          1          2          3          4          5          6 
-##  -1.960508  15.452765  -5.410734  -2.927325 -16.133962  14.382630</code></pre>
+<pre><code>&gt;&gt;          1          2          3          4          5          6 
+&gt;&gt;  -1.960508  15.452765  -5.410734  -2.927325 -16.133962  14.382630</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li>여러 회귀 분석에 관한 그래프</li>
 </ol>
 <p><code>result</code> 변수를 <code>plot</code> 함수에 집어넣으면, <code>R</code>에서 기본적으로 제공하는 네 개의 회귀분석 관련 그래프를 볼 수 있습니다.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> 네 개의 그래프 모두 잔차에 관한 그래프인데, 이 그래프를 사용하여 우리가 생각하는 회귀분석 직선을 이용한 예측이 잘 작동하는지를 판단할 수 있기 때문입니다.</p>
 <pre class="r"><code>par(mfrow = c(2,2))
 plot(result)</code></pre>
-<p><img src="/ko/courses/rstat101/week7_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>뭔가 복잡해 보입니다. 하지만 지금 우리가 알아야 할 그래프는 제일 처음 나온 그래프 <code>Residuals vs. Fitted values</code> 입니다. 만약 우리가 기말고사 예측값이 실제 데이터의 기말고사 점수를 모두 정확하게 예측한다면, 에러값(잔차)은 얼마일까요? 0 이겠죠? 이렇게 완벽하게 회귀직선으로 완벽하게 예측할 수 있는 상황은 데이터가 다음과 같이 분포되어 있는 경우 입니다.</p>
 <p><img src="/ko/courses/rstat101/week7_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>뭔가 복잡해 보입니다. 하지만 지금 우리가 알아야 할 그래프는 제일 처음 나온 그래프 <code>Residuals vs. Fitted values</code> 입니다. 만약 우리가 기말고사 예측값이 실제 데이터의 기말고사 점수를 모두 정확하게 예측한다면, 에러값(잔차)은 얼마일까요? 0 이겠죠? 이렇게 완벽하게 회귀직선으로 완벽하게 예측할 수 있는 상황은 데이터가 다음과 같이 분포되어 있는 경우 입니다.</p>
+<p><img src="/ko/courses/rstat101/week7_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>이런 경우는 없겠죠? 왜냐면, 바로 우리가 앞에서 생각했던 기말고사 점수 <span class="math inline">\(y\)</span>는 잡음 (noise)이 들어있는 것들이기 때문입니다. 그리고 바로 <code>Residuals vs. Fitted values</code> 그래프가 그 잡음들이 각 데이터 포인트 별로 어떻게 분포가 되어 있는지를 보여주는 것입니다.</p>
 <p>즉, 잔차들이(residuals) 특정한 패턴이 없이 0 근처로 모여있으면 모여있을수록 좋겠죠? 0 근처로 모여있다는 것은 우리의 예측 값들이 회귀분석 직선을 중심으로 위아래로 잘 퍼져있다는 것이며, 특정 예측값들에 영향을 받지 않고 골로구 분포하고 있을 수록 우리가 생각한 회귀분석 식이 잘 작동한다는 것을 나타냅니다.</p>
 </div>
 <div id="마치며" class="section level4">
 <h4>마치며</h4>
-<p>이러한 잡음(noise)는 어떠한 특성을 갖고 있어야 좋을까요? 좋은 잡음의 조건을 생각해보면 자연스럽게 통계에서 가장 유명한 분포인 정규분포 (Normal distribution)에 만나게 됩니다. 오늘은 이만 마치겠습니다.</p>
+<p>이번 시간에 배운 모델처럼 독립 변수(우리의 경우 midterm) 하나를 사용하여 어떤 다른 변수를 예측하는 경우, 우리는 이것을 단순 회귀 (simple regression) 분석을 한다고 말합니다.</p>
+<p>꼭 하나만 사용해서 예측을 해야할까요? 만약 주어진 정보가 여러개라면, 그 정보들을 동시에 고려해서 분석해야할 것입니다. 이렇게 고려하는 변수가 여러개가 있는 경우, 우리는 이것을 다중 회귀 (multiple regression) 분석을 한다고 말합니다. 다음 시간에는 다중 회귀에 대하여 알아보겠습니다.</p>
 </div>
 </div>
 </div>

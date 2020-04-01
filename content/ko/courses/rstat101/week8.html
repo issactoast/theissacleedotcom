@@ -1,0 +1,287 @@
+---
+date: "2020-03-25T00:00:00+01:00"
+draft: false
+linktitle: Week 8 - 다중 회귀분석 기초
+menu:
+  rstat101:
+    parent: Contents
+    weight: 9
+title: 범주형 데이터를 이용한 회귀분석
+type: docs
+weight: 9
+header:
+  image: "fitted-residual.png"
+---
+
+
+
+<div id="section" class="section level2">
+<h2></h2>
+<div id="범주형categorical-변수-시각화" class="section level3">
+<h3>범주형(categorical) 변수 시각화</h3>
+<p>지난 시간에는 <code>R</code>에서 회귀분석을 어떻게 실행하는지 대하여 알아보았습니다. 오늘은 자료가 범주형(categorical) 변수를 포함하고 있을 경우 할 수 있는 회귀분석 대하여 알아봅시다. 일단 우리의 데이터를 불러옵니다.</p>
+<pre class="r"><code>mydata &lt;- read.csv(&quot;https://www.theissaclee.com/ko/courses/rstat101/examscore.csv&quot;, header = TRUE)
+
+with(mydata,
+     plot(midterm, final, asp = 1,
+          xlab = &quot;중간고사&quot;, 
+          ylab = &quot;기말고사&quot;,
+          main = &quot;시험점수 분포&quot;)
+)</code></pre>
+<p><img src="/ko/courses/rstat101/week8_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>위의 그래프는 우리의 데이터 중 중간고사, 기말고사 점수를 가지고 나타낸 것이었죠.</p>
+<pre class="r"><code>head(mydata)</code></pre>
+<pre><code>&gt;&gt;   student_id gender midterm final
+&gt;&gt; 1          1      F      38    46
+&gt;&gt; 2          2      M      42    67
+&gt;&gt; 3          3      F      53    56
+&gt;&gt; 4          4      M      48    54
+&gt;&gt; 5          5      M      46    39
+&gt;&gt; 6          6      M      51    74</code></pre>
+<div id="범례활용과-pch-옵션" class="section level4">
+<h4>범례활용과 <code>pch</code> 옵션</h4>
+<p>데이터 중에 성별을 나타내는 <code>gender</code> 변수가 있는데, 이 정보도 포함해서 시각화를 시켜보도록 합시다.</p>
+<pre class="r"><code>with(data = mydata, 
+    plot(midterm, final, asp = 1,
+         pch = c(16, 17)[gender],
+         col = c(&quot;red&quot;, &quot;blue&quot;)[gender],
+         main = &quot;성별에 따른 시험성적 분포도&quot;,
+         xlab = &quot;중간고사&quot;, ylab = &quot;기말고사&quot;)     
+)
+legend(-20, 80, legend = c(&quot;여자&quot;, &quot;남자&quot;),
+       col = c(&quot;red&quot;, &quot;blue&quot;), pch = c(16, 17))</code></pre>
+<p><img src="/ko/courses/rstat101/week8_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>위 그래프에서 점들의 모양을 <code>pch</code> 옵션을 사용하여 지정해줬습니다. 다음의 그림에서와 같이 여러가지 모양이 있으니 참고하시면 됩니다.</p>
+<p><img src="/ko/courses/rstat101/week8_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>그리고 <code>legend</code> 함수는 범례를 추가하는 함수로서 앞의 두 숫자는 범례가 나타나는 위치를 의미합니다. 위의 그래프에서는 (-20, 80)에 위치해 있습니다.</p>
+</div>
+</div>
+<div id="성별에-따른-회귀분석" class="section level3">
+<h3>성별에 따른 회귀분석</h3>
+<p>그래프를 보다보면, 문득 성별이 다르면 회귀직선도 달라야하는 것이 아닌가 하는 생각을 하실 수 있습니다. 뭔가 여자 그룹이 좀 더 위에 위치하고 있는 느낌적인 느낌이죠? 그럴때 어떻게 해야할까요? 우리는 <code>week4-데이터 다루기</code> 시간에 필터링에 대하여 배웠습니다.</p>
+<pre class="r"><code>data_male   &lt;- mydata[mydata$gender == &quot;M&quot;,]
+data_female &lt;- mydata[mydata$gender == &quot;F&quot;,]
+head(data_male, 3); head(data_female, 3)</code></pre>
+<pre><code>&gt;&gt;   student_id gender midterm final
+&gt;&gt; 2          2      M      42    67
+&gt;&gt; 4          4      M      48    54
+&gt;&gt; 5          5      M      46    39</code></pre>
+<pre><code>&gt;&gt;    student_id gender midterm final
+&gt;&gt; 1           1      F      38    46
+&gt;&gt; 3           3      F      53    56
+&gt;&gt; 11         11      F      50    40</code></pre>
+<p>이렇게 나눈 데이터를 가지고 회귀식을 그려보면 어떨까요?</p>
+<pre class="r"><code># regression for each group
+model1 &lt;- lm(final~midterm, data_male)
+model2 &lt;- lm(final~midterm, data_female)
+
+# coeff.
+print(&quot;male&quot;);   model1$coefficients # male</code></pre>
+<pre><code>&gt;&gt; [1] &quot;male&quot;</code></pre>
+<pre><code>&gt;&gt; (Intercept)     midterm 
+&gt;&gt;   9.6282664   0.9473853</code></pre>
+<pre class="r"><code>print(&quot;female&quot;); model2$coefficients # female</code></pre>
+<pre><code>&gt;&gt; [1] &quot;female&quot;</code></pre>
+<pre><code>&gt;&gt; (Intercept)     midterm 
+&gt;&gt;  27.8529412   0.6724662</code></pre>
+<p>결과를 보면 성별에 따른 회귀직선이 다르게 나온다는 것을 알 수 있습니다. 특히, <code>intercept</code>값이 많이 차이가 난다는 것을 알 수 있습니다.</p>
+<pre class="r"><code>with(data = mydata, 
+    plot(midterm, final, asp = 1,
+         pch = c(16, 17)[gender],
+         col = c(&quot;red&quot;, &quot;blue&quot;)[gender],
+         main = &quot;성별에 따른 시험성적 분포도&quot;,
+         xlab = &quot;중간고사&quot;, ylab = &quot;기말고사&quot;)     
+)
+legend(-20, 80, legend = c(&quot;여자&quot;, &quot;남자&quot;),
+       col = c(&quot;red&quot;, &quot;blue&quot;), pch = c(16, 17))
+abline(model1$coefficients, col = &quot;blue&quot;)
+abline(model2$coefficients, col = &quot;red&quot;)</code></pre>
+<p><img src="/ko/courses/rstat101/week8_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div id="회귀식의-예측---predict-함수" class="section level4">
+<h4>회귀식의 예측 - <code>predict</code> 함수</h4>
+<p>자, 그럼 만약 우리가 중간고사를 40점을 맞은 여학생의 기말고사 점수를 예측하고 싶다면 어떻게 해야할까요? 여학생의 기말고사를 예측하고 싶으니, <code>model2</code>를 사용해야 할 것입니다. 새로운 데이터를 가지고 예측하고 싶을땐, <code>predict</code> 함수를 사용하면 됩니다. 단, 데이터를 입력할때 <code>data.frame</code>을 이용해서 변수명을 맞춰줘야합니다. 우리는 model2를 만들때 midterm이라는 변수명을 사용했으므로 다음과 같이 해줍니다.</p>
+<pre class="r"><code>predict(model2, data.frame(midterm = 40))</code></pre>
+<pre><code>&gt;&gt;        1 
+&gt;&gt; 54.75159</code></pre>
+<p>위의 예측값은 다음과 같이도 얻을 수 있겠죠?</p>
+<pre class="r"><code># 레이블 제거
+param &lt;- as.numeric(model2$coefficients)
+
+# 직선 식을 이용한 예측
+param[1] + 40 * param[2] </code></pre>
+<pre><code>&gt;&gt; [1] 54.75159</code></pre>
+<p>만약 우리가 중간고사를 40점을 맞은 남학생의 기말고사 점수를 예측하고 싶다면 어떻게 해야할까요? 이번에는 예측에 사용하는 모델을 남학생 모델로 바꿔주면 될 것 입니다.</p>
+<pre class="r"><code>predict(model1, data.frame(midterm = 40))</code></pre>
+<pre><code>&gt;&gt;        1 
+&gt;&gt; 47.52368</code></pre>
+</div>
+<div id="다중-회귀분석을-이용한-모델-합치기" class="section level4">
+<h4>다중 회귀분석을 이용한 모델 합치기</h4>
+<p>그렇다면 한꺼번에 모델을 하나로 쓰는 방법을 없을까요? 일일이 모델을 바꿔주는 것이 아닌 우리가 가진 데이터 포맷을 그대로 사용하면서 성별에 따른 회귀직선을 딱! 알아서 정해줬으면 좋겠는데 말이죠.</p>
+<p>다음의 식을 살펴 봅시다.</p>
+<pre class="r"><code>model3 &lt;- lm(final~midterm + gender, mydata)
+model3</code></pre>
+<pre><code>&gt;&gt; 
+&gt;&gt; Call:
+&gt;&gt; lm(formula = final ~ midterm + gender, data = mydata)
+&gt;&gt; 
+&gt;&gt; Coefficients:
+&gt;&gt; (Intercept)      midterm      genderM  
+&gt;&gt;     18.9774       0.8808      -6.6563</code></pre>
+<p>회귀분석 식을 입력하는 첫번째 입력변수에 <code>+</code> 기호를 사용해서 변수를 하나 더 추가해 줬네요! 위의 식을 통계식으로 써본다면, 우리는 다음과 같은 모델을 가정하고 있는 것입니다.</p>
+<p><span class="math display">\[
+Y = intercept + {coef}_{1} \times x_1 + {coef}_{2} \times x_2 + noise
+\]</span></p>
+<p>위 식에서 <span class="math inline">\(Y\)</span>는 기말고사 점수를, <span class="math inline">\(x_1\)</span>은 중간고사 점수를 <span class="math inline">\(x_2\)</span>는 성별을 나타내는 변수를 의미할 것입니다. 그런데 분명 성별을 나타내는 변수는 <code>F, M</code>과 같이 문자였는데 어떻게 수식에 넣을까요? 당연히 문자를 수식에 넣을 수 없으니, 숫자로 바꿔주는 과정을 거칩니다. 다음과 같이 말이죠.</p>
+<pre class="r"><code>c(0, 1)[mydata$gender]</code></pre>
+<pre><code>&gt;&gt;  [1] 0 1 0 1 1 1 1 1 1 1 0 0 1 1 1 0 0 0 1 1 1 1 1 1 1 1 0 0 0 1</code></pre>
+<p>즉, 우리 데이터에서는 여자의 경우는 <code>0</code>으로, 남자의 경우는 <code>1</code>로 바꿔줘서 데이터를 만드는 것이죠. 그렇다면, 과연 <span class="math inline">\(coef_2\)</span>가 의미하는 것은 무엇일까요? 위의 결과 값은 다음의 식을 가지고 우리가 기말고사 점수를 예측 할 수 있다는 것을 의미합니다.</p>
+<p><span class="math display">\[
+\widehat{기말고사} = 18.9774 + 0.8808 \times 중간고사 + (-6.6563) \times 성별
+\]</span>
+식에서 기말고사 점수의 예측값이라는 의미로 “<span class="math inline">\(\widehat{기말고사}\)</span>” 기호를 사용했습니다.</p>
+<p>중간 고사 40점을 맞은 여학생의 점수를 예측하려면 어떻게 해야할까요? 중간고사 점수는 40이고, 여학생이니까 <span class="math inline">\(x_2\)</span>의 자리에 0을 넣어주면 됩니다.</p>
+<p><span class="math display">\[
+\widehat{기말고사} = 18.9774 + 0.8808 \times 40
+\]</span>
+즉, 다음과 같을 것 입니다.</p>
+<pre class="r"><code>par &lt;- as.numeric(model3$coefficients)
+final_hat &lt;- par[1] + par[2] * 40 + par[3] * 0
+final_hat</code></pre>
+<pre><code>&gt;&gt; [1] 54.20989</code></pre>
+<pre class="r"><code>predict(model3, newdata = data.frame(midterm = 40,
+                                     gender = &quot;F&quot;))</code></pre>
+<pre><code>&gt;&gt;        1 
+&gt;&gt; 54.20989</code></pre>
+<p>중간고사 40점을 맞은 남학생의 경우는 어떨까요? 이번엔 성별 변수에 1이 들어가므로 예측식은 다음과 같습니다.</p>
+<p><span class="math display">\[
+\begin{align}
+\widehat{기말고사} &amp; = 18.9774 + 0.8808 \times 중간고사 + (-6.6563) \times 1 \\
+&amp; = (18.9774 - 6.6563) + 0.8808 \times 중간고사 \\
+&amp; = 12.3211 + 0.8808 \times 중간고사
+\end{align}
+\]</span></p>
+<p>오.. 남학생일때는 intercept가 변하는군요!</p>
+<pre class="r"><code># 남학생 중간고사 40점
+final_hat &lt;- par[1] + par[2] * 40 + par[3] * 1
+final_hat</code></pre>
+<pre><code>&gt;&gt; [1] 47.55363</code></pre>
+<pre class="r"><code>predict(model3, newdata = data.frame(midterm = 40,
+                                     gender = &quot;M&quot;))</code></pre>
+<pre><code>&gt;&gt;        1 
+&gt;&gt; 47.55363</code></pre>
+</div>
+<div id="model3-시각화" class="section level4">
+<h4>model3 시각화</h4>
+<p>이것을 이용해서 model3의 회귀직선을 그래프에 표시할 수 있습니다.</p>
+<pre class="r"><code>with(data = mydata, 
+    plot(midterm, final, asp = 1,
+         pch = c(16, 17)[gender],
+         col = c(&quot;red&quot;, &quot;blue&quot;)[gender],
+         main = &quot;성별에 따른 시험성적 분포도&quot;,
+         xlab = &quot;중간고사&quot;, ylab = &quot;기말고사&quot;)     
+)
+legend(-20, 80, legend = c(&quot;여자&quot;, &quot;남자&quot;),
+       col = c(&quot;red&quot;, &quot;blue&quot;), pch = c(16, 17))
+# model 3 coefficients in &#39;par&#39; variable
+abline(par[1], par[2], col = &quot;red&quot;)
+abline(par[1] + par[3], par[2], col = &quot;blue&quot;)</code></pre>
+<p><img src="/ko/courses/rstat101/week8_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>위의 그래프를 보면, 우리가 설정한 model3는 두 그룹이 다른 intercept를 가질 수 있도록 설계가 되어 있는 것을 알 수 있습니다. 뭔가 찝찝하죠? 우리가 생각하기엔 기울기도 그룹마다 다를것 같은데요. 기울기까지 바꿀 수 있는 방법은 없을까요?</p>
+</div>
+<div id="교차항을-이용한-회귀분석" class="section level4">
+<h4>교차항을 이용한 회귀분석</h4>
+<p>두 그룹을 동시에 생각한다는 측면에서 세번째 모델은 우리에게 획기적이었지만, 우리의 기대에는 미치지 못했습니다. 기울기가 달라져야 우리가 생각했던 모델이 나올텐데 말이죠. 다음의 코드를 살펴봅시다.</p>
+<pre class="r"><code>model4 &lt;- lm(final~midterm + gender + midterm * gender, mydata)
+model4</code></pre>
+<pre><code>&gt;&gt; 
+&gt;&gt; Call:
+&gt;&gt; lm(formula = final ~ midterm + gender + midterm * gender, data = mydata)
+&gt;&gt; 
+&gt;&gt; Coefficients:
+&gt;&gt;     (Intercept)          midterm          genderM  midterm:genderM  
+&gt;&gt;         27.8529           0.6725         -18.2247           0.2749</code></pre>
+<p>아니, 슨생님! 이게 무슨 일이래요? 곱하기라뇨! 신기방기! 수식에 곱하기를 썼는데 코드가 작동하다니! 회귀분석은 수식에 더하기만 쓰는 줄 알았는데! 기가 막히고 코가 막히죠? 호흡을 가다듬고, 우리가 입력한 모델식을 살펴 봅시다.</p>
+<p><span class="math display">\[
+\begin{align}
+Y &amp; = intercept + {coef}_{1} \times x_1 + {coef}_{2} \times x_2 + {coef}_{3} \times (x_1 * x_2) + noise \\
+  &amp; = intercept + {coef}_{1} \times x_1 + {coef}_{2} \times x_2 + {coef}_{3} \times x_3 + noise
+\end{align}
+\]</span></p>
+<p>위의 식에서 우리는 <span class="math inline">\(x_1\)</span>과 <span class="math inline">\(x_2\)</span>를 사용해서 (곱해서) <span class="math inline">\(x_3\)</span>이라는 변수를 하나 더 만들었다고 생각하면 됩니다. 우리가 가진 데이터에 열을 하나 추가 했다고 생각하셔도 좋겠네요!</p>
+<pre class="r"><code>c(0, 1)[mydata$gender] * mydata$midterm</code></pre>
+<pre><code>&gt;&gt;  [1]  0 42  0 48 46 51 48 43 28 38  0  0 27 36 29  0  0  0 39  9 76 15 63 28 49
+&gt;&gt; [26] 42  0  0  0 52</code></pre>
+<pre class="r"><code>mydata$gen_and_mid &lt;- c(0, 1)[mydata$gender] * mydata$midterm</code></pre>
+<p>즉, 우리의 데이터가 이러한 칼럼들을 가지고 있다고 생각할 수 있을 것입니다.</p>
+<pre class="r"><code>head(mydata)</code></pre>
+<pre><code>&gt;&gt;   student_id gender midterm final gen_and_mid
+&gt;&gt; 1          1      F      38    46           0
+&gt;&gt; 2          2      M      42    67          42
+&gt;&gt; 3          3      F      53    56           0
+&gt;&gt; 4          4      M      48    54          48
+&gt;&gt; 5          5      M      46    39          46
+&gt;&gt; 6          6      M      51    74          51</code></pre>
+<p>이러면 무슨 이점이 있을까요? 중간 고사 40점을 맞은 여학생의 기말고사 점수를 예측 해 보도록 합시다. 예측식에 중간고사(<span class="math inline">\(x_1\)</span>) 40점, 여학생(<span class="math inline">\(x_2\)</span>)이니까 0을 넣으면 되겠죠?</p>
+<p><span class="math display">\[
+\begin{align}
+\widehat{기말고사} &amp; = intercept + {coef}_{1} \times 중간고사 + {coef}_{2} \times 성별 + {coef}_{3} \times (중간고사 * 성별) \\
+&amp; = intercept + {coef}_{1} \times 40 + {coef}_{2} \times 0 + {coef}_{3} \times (40 \times 0) \\
+&amp; = intercept + {coef}_{1} \times 40
+\end{align}
+\]</span></p>
+<p>앞에서 봤던 회귀 직선 식이 되었습니다. 계수 값을 확인해볼까요?</p>
+<pre class="r"><code>model4$coefficients[1:2]</code></pre>
+<pre><code>&gt;&gt; (Intercept)     midterm 
+&gt;&gt;  27.8529412   0.6724662</code></pre>
+<p>이 숫자들 뭔가 익숙하지 않으신가요..? 여학생만 따로 모아서 회귀직선을 구했던 <code>model2</code>의 계수를 확인해보면, <code>model4</code>에서 여학생의 점수를 예측할 때 <code>model2</code>와 똑같은 직선을 사용한다는 것을 알 수 있습니다.</p>
+<pre class="r"><code>model2$coefficients</code></pre>
+<pre><code>&gt;&gt; (Intercept)     midterm 
+&gt;&gt;  27.8529412   0.6724662</code></pre>
+<p>중간 고사 40점을 맞은 남학생의 경우는 어떨까요? 예측식에 중간고사(<span class="math inline">\(x_1\)</span>) 40점, 남학생(<span class="math inline">\(x_2\)</span>)이니까 1을 넣으면 되겠죠?</p>
+<p><span class="math display">\[
+\begin{align}
+\widehat{기말고사} &amp; = intercept + {coef}_{1} \times 중간고사 + {coef}_{2} \times 성별 + {coef}_{3} \times (중간고사 * 성별) \\
+&amp; = intercept + {coef}_{1} \times 40 + {coef}_{2} \times 1 + {coef}_{3} \times (40 \times 1) \\
+&amp; = (intercept + {coef}_{2}) + ({coef}_{1} + {coef}_{3}) \times 40
+\end{align}
+\]</span></p>
+<p>남학생의 예측식을 보면,</p>
+<p>{{% alert note %}}
+회귀식의 <code>coef_2</code> 와 <code>coef_3</code>가 여학생 모델에서 사용했던 절편과 기울기값을 각각 조정해주는 것을 알 수 있습니다.
+{{% /alert %}}</p>
+<p>남학생 모델은 어떤 절편과 기울기값을 갖게 되었을까요?</p>
+<pre class="r"><code>par &lt;- model4$coefficients
+
+# intercept for male
+sum(par[c(1, 3)])</code></pre>
+<pre><code>&gt;&gt; [1] 9.628266</code></pre>
+<pre class="r"><code># slope for male
+sum(par[c(2, 4)])</code></pre>
+<pre><code>&gt;&gt; [1] 0.9473853</code></pre>
+<p>이 결과 역시 앞에서 구했던 남학생만 따로 모아서 회귀분석을 했던 model1의 직선식과 같다는 것을 알 수 있습니다.</p>
+<pre class="r"><code>model1$coefficients</code></pre>
+<pre><code>&gt;&gt; (Intercept)     midterm 
+&gt;&gt;   9.6282664   0.9473853</code></pre>
+<p>즉, 우리가 설정한 model4가 model1과 model2를 동시에 포함하고 있다는 것이죠! 따라서 model4의 회귀직선을 그래프에 나타낸다면 다음과 같이 두 개의 직선이 될 것입니다.</p>
+<pre class="r"><code>with(data = mydata, 
+    plot(midterm, final, asp = 1,
+         pch = c(16, 17)[gender],
+         col = c(&quot;red&quot;, &quot;blue&quot;)[gender],
+         main = &quot;성별에 따른 시험성적 분포도&quot;,
+         xlab = &quot;중간고사&quot;, ylab = &quot;기말고사&quot;)     
+)
+legend(-20, 80, legend = c(&quot;여자&quot;, &quot;남자&quot;),
+       col = c(&quot;red&quot;, &quot;blue&quot;), pch = c(16, 17))
+
+par &lt;- model4$coefficients
+abline(c(sum(par[c(1, 3)]), sum(par[c(2, 4)])), col = &quot;blue&quot;)
+abline(c(par[1], par[2]), col = &quot;red&quot;)</code></pre>
+<p><img src="/ko/courses/rstat101/week8_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+</div>
+<div id="마치며" class="section level4">
+<h4>마치며</h4>
+<p>우리가 이제까지 회귀분석을 이야기 하면서 이야기 하지 않은 항이 하나 있습니다. 바로 잡음(noise)항 입니다. 우리가 모델을 구성할 때 사용한 잡음은 어떠한 특성을 갖고 있어야 좋을까요? 좋은 잡음의 조건을 생각해보면 자연스럽게 통계에서 가장 유명한 분포인 정규분포 (Normal distribution)에 만나게 됩니다.</p>
+</div>
+</div>
+</div>
