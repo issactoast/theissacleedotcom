@@ -17,7 +17,9 @@ title: '3D GPS visulaization'
 categories:
   - telematics
 tags:
-  - rgl, gps data, 3d plots
+  - rgl
+  - gps data
+  - 3D plot 
 ---
 
 ```{r setup, include=FALSE}
