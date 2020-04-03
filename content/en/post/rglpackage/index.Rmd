@@ -36,11 +36,22 @@ I use the same that [I posted before](https://www.theissaclee.com/en/post/gpsvis
 
 ![](https://www.theissaclee.com/en/post/gpsvisulization/myanimation.gif)
 
+However, it is a 2d plot; it does not show the altitude information. The reason why I choose this route is that the course has turns, flat road, and inclined path at the same time. 
 
+To show this, I decide to use [rgl](https://cran.r-project.org/web/packages/rgl/vignettes/rgl.html) R package which can draw the 3D plot of GPS path.
 
-### 데이터 불러오기
+## Load package
 
+```{r include=FALSE}
+library(knitr)
+library(kableExtra)
+```
 
+```{r}
+library(rgl)
+```
+
+## Load data
 
 ```{r}
 mytelematics <- read.csv("https://raw.githubusercontent.com/issactoast/theissacleedotcom/master/static/data/sampletrip.csv", header = TRUE, fill = TRUE)
@@ -50,11 +61,17 @@ colnames(gps_data) <- c("Timestamp", "x", "y", "z")
 head(gps_data)
 ```
 
+GPS data is relatively straight forward. We have location information(longitude, latitude, and altitude) at each time step.
 
+```{r results = "asis", echo=FALSE}
+kable(head(gps_data, 100), format = "html") %>% 
+  kable_styling() %>% 
+  scroll_box(width = "100%", height = "300px")
+```
 
-## rgl 
+### Route in 3D space
 
-
+`rgl` R package is a useful tool for visualizing 3D data. To draw the graph, we need to open a pallet as like `par()` in the base plot as follows:
 
 ```{r}
 library(rgl)
@@ -62,12 +79,17 @@ open3d()
 mfrow3d(1, 1, sharedMouse = TRUE)
 ```
 
-
+If you want to draw multiple 3d plots, you can adjust `mfrow3d` just like `mfrow` in the base plot. Plotting is also very straight forward; the same syntax but adds the suffix `3d` to the `plot` function.
 
 ```{r webgl = TRUE}
 plot3d(gps_data[,2:4], col = "red", size = 5, type = "l")
 ```
 
+The generated plot is 3d and also you can rotate the object using your mouse; drag it! Note, this function is not available in mobile.. :(
+
+As we can see, the route looks like a square from the top, but we can see that it has uphill and down-hill from the side. If you magnify it, we can see the beginning, and the endpoint of the route does not match, which I conclude that the GPS altitude information is not that accurate than the latitude and longitude information.
+
+Don't forget to clear the plot after you draw the plot. :)
 
 ```{r}
 clear3d()
