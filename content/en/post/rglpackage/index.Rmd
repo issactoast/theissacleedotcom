@@ -1,0 +1,73 @@
+---
+authors:
+- admin
+date: "2020-03-26T00:00:00Z"
+draft: false
+featured: false
+image:
+  caption: ''
+  focal_point: ""
+  placement: 2
+  preview_only: true
+lastmod: "2020-03-26T00:00:00Z"
+projects: [telematics]
+subtitle: 'rgl package for 3D plotting'
+summary: rgl
+title: 'GPS 3D visualization'
+categories:
+  - telematics
+  - visualization
+tags:
+  - rgl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+knitr::opts_chunk$set(rgl = TRUE)
+knitr::knit_hooks$set(webgl = rgl::hook_webgl)
+knitr::opts_chunk$set(comment = ">>")
+```
+
+### The sample route on Google map
+
+
+
+![](https://www.theissaclee.com/en/post/gpsvisulization/myanimation.gif)
+
+
+
+### 데이터 불러오기
+
+
+
+```{r}
+mytelematics <- read.csv("https://raw.githubusercontent.com/issactoast/theissacleedotcom/master/static/data/sampletrip.csv", header = TRUE, fill = TRUE)
+
+gps_data <- subset(mytelematics, select = c(Timestamp, Long, Lat, Alt.m.))
+colnames(gps_data) <- c("Timestamp", "x", "y", "z")
+head(gps_data)
+```
+
+
+
+## rgl 
+
+
+
+```{r}
+library(rgl)
+open3d()
+mfrow3d(1, 1, sharedMouse = TRUE)
+```
+
+
+
+```{r webgl = TRUE}
+plot3d(gps_data[,2:4], col = "red", size = 5, type = "l")
+```
+
+
+```{r}
+clear3d()
+```
+
