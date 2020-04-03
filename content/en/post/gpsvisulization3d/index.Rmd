@@ -24,6 +24,8 @@ tags:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(rgl = TRUE)
+knitr::knit_hooks$set(webgl = rgl::hook_webgl)
 ```
 
 ### My test route in google map
@@ -75,9 +77,8 @@ open3d()
 
 If you want to draw multiple 3d plots, you can adjust `mfrow3d` just like `mfrow` in the base plot. Plotting is also very straight forward; the same syntax but adds the suffix `3d` to the `plot` function.
 
-```{r message = FALSE}
+```{r webgl=TRUE, message = FALSE}
 plot3d(gps_data[,2:4], col = "red", size = 5, type = "l")
-rglwidget()
 ```
 
 The generated plot is 3d and also you can rotate the object using your mouse; drag it!
@@ -86,7 +87,7 @@ As we can see, the route looks like a square from the top, but we can see that i
 
 Don't forget to clear the plot after you draw the plot. :)
 
-```{r eval = FALSE}
+```{r}
 clear3d()
 ```
 

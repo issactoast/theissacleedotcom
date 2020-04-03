@@ -63,3 +63,7 @@ open3d()
 plot3d(gps_data[,2:4], col = "red", size = 5, type = "l")
 ```
 
+```{r}
+clear3d()
+```
+
