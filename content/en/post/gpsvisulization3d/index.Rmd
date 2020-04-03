@@ -75,7 +75,7 @@ open3d()
 
 If you want to draw multiple 3d plots, you can adjust `mfrow3d` just like `mfrow` in the base plot. Plotting is also very straight forward; the same syntax but adds the suffix `3d` to the `plot` function.
 
-```{r webgl = TRUE, message = FALSE}
+```{r message = FALSE}
 plot3d(gps_data[,2:4], col = "red", size = 5, type = "l")
 rglwidget()
 ```
