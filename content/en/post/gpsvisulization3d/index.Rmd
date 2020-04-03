@@ -71,8 +71,6 @@ kable(head(gps_data, 100), format = "html") %>%
 
 ```{r message=FALSE}
 open3d()
-clear3d() # initialize: clean the space
-mfrow3d(1, 1, sharedMouse = TRUE)
 ```
 
 If you want to draw multiple 3d plots, you can adjust `mfrow3d` just like `mfrow` in the base plot. Plotting is also very straight forward; the same syntax but adds the suffix `3d` to the `plot` function.
