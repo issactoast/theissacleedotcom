@@ -41,9 +41,9 @@ library(kableExtra)</code></pre>
 <p>GPS is probably the most popular data format, which has information about the position of the device. At the beginning of my research, I tried to use it to record my test route. To record the telematics data, I attached my phone to my vehicle and recorded the position of my vehicle per second using a smartphone sensor app.</p>
 <p>Here is the sample sensor data that contains the information of my commute route data.</p>
 <ul>
-<li><a href="https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/telematics/sampletrip.csv">sampletrip.csv</a></li>
+<li><a href="https://raw.githubusercontent.com/issactoast/theissacleedotcom/master/static/data/sampletrip.csv">sampletrip.csv</a></li>
 </ul>
-<pre class="r"><code>mytelematics &lt;- read.csv(&quot;https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/telematics/sampletrip.csv&quot;, header = TRUE, fill = TRUE)</code></pre>
+<pre class="r"><code>mytelematics &lt;- read.csv(&quot;https://raw.githubusercontent.com/issactoast/theissacleedotcom/master/static/data/sampletrip.csv&quot;, header = TRUE, fill = TRUE)</code></pre>
 <div id="selecting-gps-data-from-raw-telematics-data" class="section level3">
 <h3>Selecting GPS data from raw telematics data</h3>
 <pre class="r"><code>kable(head(mytelematics, 100), format = &quot;html&quot;) %&gt;% 

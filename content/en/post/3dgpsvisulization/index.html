@@ -5,10 +5,10 @@ date: "2020-04-04T00:00:00Z"
 draft: false
 featured: false
 image:
-  caption: 'Image credit: [googleanalytics](https://developers.google.com/analytics/terms/branding-policy)'
+  caption: 'Image credit: [3dplotwithrgl](https://cran.r-project.org/web/packages/rgl/vignettes/rgl.html)'
   focal_point: ""
   placement: 2
-  preview_only: false
+  preview_only: true
 lastmod: "2020-03-22T00:00:00Z"
 projects: [telematics]
 subtitle: 'using rgl'
@@ -23,14 +23,20 @@ tags:
 <script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
 
 
+<div id="my-test-route-in-google-map" class="section level3">
+<h3>My test route in google map</h3>
+<p>I use the same that <a href="https://www.theissaclee.com/en/post/gpsvisulization/">I posted before</a>. The sample test route is square as follows:</p>
+<p><img src="https://www.theissaclee.com/en/post/gpsvisulization/myanimation.gif" /></p>
+<p>However, it is a 2d plot; it does not show the altitude information. The reason why I choose this route is that the course has turns, flat road, and inclined path at the same time.</p>
+<p>To show this, I decide to use <a href="https://cran.r-project.org/web/packages/rgl/vignettes/rgl.html">rgl</a> R package which can draw the 3D plot of GPS path.</p>
+</div>
 <div id="load-package" class="section level2">
 <h2>Load package</h2>
-<pre class="r"><code>library(ikhyd)
-library(rgl)</code></pre>
+<pre class="r"><code>library(rgl)</code></pre>
 </div>
 <div id="load-data" class="section level2">
 <h2>Load data</h2>
-<pre class="r"><code>mytelematics &lt;- read.csv(&quot;https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/telematics/sampletrip.csv&quot;, header = TRUE, fill = TRUE)
+<pre class="r"><code>mytelematics &lt;- read.csv(&quot;https://raw.githubusercontent.com/issactoast/theissacleedotcom/master/static/data/sampletrip.csv&quot;, header = TRUE, fill = TRUE)
 
 gps_data &lt;- subset(mytelematics, select = c(Timestamp, Long, Lat, Alt.m.))
 colnames(gps_data) &lt;- c(&quot;Timestamp&quot;, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;)</code></pre>
@@ -1457,15 +1463,14 @@ z
 </tbody>
 </table>
 </div>
-<div id="test-route-in-google-map" class="section level3">
-<h3>Test route in google map</h3>
-<p>I use the same that <a href="https://www.theissaclee.com/en/post/gpsvisulization/">I posted before</a>. The sample test route is square as follows:</p>
-<p><img src="https://www.theissaclee.com/en/post/gpsvisulization/myanimation.gif" /></p>
-<p>However, it is a 2d plot; it does not show the altitude information. The reason why I choose this route is that the course has turns, flat road, and inclined path at the same time. We will see check this out once we draw the plot.</p>
-</div>
-<div id="test-route-in-3d-space" class="section level3">
-<h3>Test route in 3D space</h3>
+<div id="route-in-3d-space" class="section level3">
+<h3>Route in 3D space</h3>
 <p><code>rgl</code> R package is a useful tool for visualizing 3D data. To draw the graph, we need to open a pallet as like <code>par()</code> in the base plot as follows:</p>
+<pre class="r"><code>open3d()</code></pre>
+<pre><code>## glX 
+##   1</code></pre>
+<pre class="r"><code>clear3d() # initialize: clean the space
+mfrow3d(1, 1, sharedMouse = TRUE)</code></pre>
 <p>If you want to draw multiple 3d plots, you can adjust <code>mfrow3d</code> just like <code>mfrow</code> in the base plot. Plotting is also very straight forward; the same syntax but adds the suffix <code>3d</code> to the <code>plot</code> function.</p>
 <pre class="r"><code>plot3d(gps_data[,2:4], col = &quot;red&quot;, size = 5, type = &quot;l&quot;)</code></pre>
 <script>/*
@@ -5840,7 +5845,8 @@ You must enable Javascript to view this page properly.
 </p>
 <script>unnamed_chunk_6rgl.start();</script>
 <p>The generated plot is 3d and also you can rotate the object using your mouse; drag it!</p>
-<p>As we can see, the rout looks like a square from the top, but we can see that it has uphill and down-hill from the side. If you magnify it, we can see the beginning, and the endpoint of the route does not match, which I conclude that the GPS altitude information is not that accurate than the latitude and longitude information.</p>
-<p>Don’t forget to clear the plot after we draw the plot. :)</p>
+<p>As we can see, the route looks like a square from the top, but we can see that it has uphill and down-hill from the side. If you magnify it, we can see the beginning, and the endpoint of the route does not match, which I conclude that the GPS altitude information is not that accurate than the latitude and longitude information.</p>
+<p>Don’t forget to clear the plot after you draw the plot. :)</p>
+<pre class="r"><code>clear3d()</code></pre>
 </div>
 </div>

@@ -5,10 +5,10 @@ date: "2020-04-04T00:00:00Z"
 draft: false
 featured: false
 image:
-  caption: 'Image credit: [googleanalytics](https://developers.google.com/analytics/terms/branding-policy)'
+  caption: 'Image credit: [3dplotwithrgl](https://cran.r-project.org/web/packages/rgl/vignettes/rgl.html)'
   focal_point: ""
   placement: 2
-  preview_only: false
+  preview_only: true
 lastmod: "2020-03-22T00:00:00Z"
 projects: [telematics]
 subtitle: 'using rgl'
@@ -25,6 +25,16 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::knit_hooks$set(webgl = rgl::hook_webgl)
 ```
 
+### My test route in google map
+
+I use the same that [I posted before](https://www.theissaclee.com/en/post/gpsvisulization/). The sample test route is square as follows:
+
+![](https://www.theissaclee.com/en/post/gpsvisulization/myanimation.gif)
+
+However, it is a 2d plot; it does not show the altitude information. The reason why I choose this route is that the course has turns, flat road, and inclined path at the same time. 
+
+To show this, I decide to use [rgl](https://cran.r-project.org/web/packages/rgl/vignettes/rgl.html) R package which can draw the 3D plot of GPS path.
+
 ## Load package
 
 ```{r include=FALSE}
@@ -33,14 +43,13 @@ library(kableExtra)
 ```
 
 ```{r}
-library(ikhyd)
 library(rgl)
 ```
 
 ## Load data
 
 ```{r}
-mytelematics <- read.csv("https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/telematics/sampletrip.csv", header = TRUE, fill = TRUE)
+mytelematics <- read.csv("https://raw.githubusercontent.com/issactoast/theissacleedotcom/master/static/data/sampletrip.csv", header = TRUE, fill = TRUE)
 
 gps_data <- subset(mytelematics, select = c(Timestamp, Long, Lat, Alt.m.))
 colnames(gps_data) <- c("Timestamp", "x", "y", "z")
@@ -53,21 +62,14 @@ kable(head(gps_data, 100), format = "html") %>%
   kable_styling() %>% 
   scroll_box(width = "100%", height = "300px")
 ```
-### Test route in google map
 
-I use the same that [I posted before](https://www.theissaclee.com/en/post/gpsvisulization/). The sample test route is square as follows:
-
-![](https://www.theissaclee.com/en/post/gpsvisulization/myanimation.gif)
-
-However, it is a 2d plot; it does not show the altitude information. The reason why I choose this route is that the course has turns, flat road, and inclined path at the same time. We will see check this out once we draw the plot.
-
-### Test route in 3D space
+### Route in 3D space
 
 `rgl` R package is a useful tool for visualizing 3D data. To draw the graph, we need to open a pallet as like `par()` in the base plot as follows:
 
-```{r include=FALSE}
+```{r message=FALSE}
 open3d()
-clear3d()
+clear3d() # initialize: clean the space
 mfrow3d(1, 1, sharedMouse = TRUE)
 ```
 
@@ -79,12 +81,11 @@ plot3d(gps_data[,2:4], col = "red", size = 5, type = "l")
 
 The generated plot is 3d and also you can rotate the object using your mouse; drag it!
 
-As we can see, the rout looks like a square from the top, but we can see that it has uphill and down-hill from the side. If you magnify it, we can see the beginning, and the endpoint of the route does not match, which I conclude that the GPS altitude information is not that accurate than the latitude and longitude information.
+As we can see, the route looks like a square from the top, but we can see that it has uphill and down-hill from the side. If you magnify it, we can see the beginning, and the endpoint of the route does not match, which I conclude that the GPS altitude information is not that accurate than the latitude and longitude information.
 
-Don't forget to clear the plot after we draw the plot. :)
+Don't forget to clear the plot after you draw the plot. :)
 
-```{r echo=FALSE}
+```{r}
 clear3d()
 ```
-
 

@@ -50,10 +50,10 @@ GPS is probably the most popular data format, which has information about the po
 
 Here is the sample sensor data that contains the information of my commute route data.
 
-- [sampletrip.csv](https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/telematics/sampletrip.csv)
+- [sampletrip.csv](https://raw.githubusercontent.com/issactoast/theissacleedotcom/master/static/data/sampletrip.csv)
 
 ```{r}
-mytelematics <- read.csv("https://raw.githubusercontent.com/issactoast/EnBlog/master/static/files/telematics/sampletrip.csv", header = TRUE, fill = TRUE)
+mytelematics <- read.csv("https://raw.githubusercontent.com/issactoast/theissacleedotcom/master/static/data/sampletrip.csv", header = TRUE, fill = TRUE)
 ```
 
 ### Selecting GPS data from raw telematics data
