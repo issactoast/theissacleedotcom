@@ -24,7 +24,6 @@ tags:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::knit_hooks$set(webgl = rgl::hook_webgl)
 ```
 
 ### My test route in google map
@@ -68,4 +67,26 @@ kable(head(gps_data, 100), format = "html") %>%
 ### Route in 3D space
 
 `rgl` R package is a useful tool for visualizing 3D data. To draw the graph, we need to open a pallet as like `par()` in the base plot as follows:
+
+
+```{r message=FALSE}
+open3d()
+```
+
+If you want to draw multiple 3d plots, you can adjust `mfrow3d` just like `mfrow` in the base plot. Plotting is also very straight forward; the same syntax but adds the suffix `3d` to the `plot` function.
+
+```{r webgl = TRUE, message = FALSE}
+plot3d(gps_data[,2:4], col = "red", size = 5, type = "l")
+rglwidget()
+```
+
+The generated plot is 3d and also you can rotate the object using your mouse; drag it!
+
+As we can see, the route looks like a square from the top, but we can see that it has uphill and down-hill from the side. If you magnify it, we can see the beginning, and the endpoint of the route does not match, which I conclude that the GPS altitude information is not that accurate than the latitude and longitude information.
+
+Don't forget to clear the plot after you draw the plot. :)
+
+```{r eval = FALSE}
+clear3d()
+```
 
