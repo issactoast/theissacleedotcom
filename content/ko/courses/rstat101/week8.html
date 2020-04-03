@@ -48,12 +48,18 @@ with(mydata,
          main = &quot;성별에 따른 시험성적 분포도&quot;,
          xlab = &quot;중간고사&quot;, ylab = &quot;기말고사&quot;)     
 )
-legend(-20, 80, legend = c(&quot;여자&quot;, &quot;남자&quot;),
-       col = c(&quot;red&quot;, &quot;blue&quot;), pch = c(16, 17))</code></pre>
+legend(-20, 80, 
+       legend = c(&quot;여자&quot;, &quot;남자&quot;),
+       col = c(&quot;red&quot;, &quot;blue&quot;), 
+       pch = c(16, 17))</code></pre>
 <p><img src="/ko/courses/rstat101/week8_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>위 그래프에서 점들의 모양을 <code>pch</code> 옵션을 사용하여 지정해줬습니다. 다음의 그림에서와 같이 여러가지 모양이 있으니 참고하시면 됩니다.</p>
+<p>위 그래프에서 점들의 모양을 <code>pch</code> 옵션을 사용하여 지정해줬습니다. 다음의 그림에서와 같이 <code>pch</code> 값에 대응되는 여러가지 모양이 있으니 참고하시면 됩니다. 예를 들어, 그래프에서는 동그라미와 세모를 선택하기 위해서 16과 17을 사용했습니다.</p>
 <p><img src="/ko/courses/rstat101/week8_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p>그리고 <code>legend</code> 함수는 범례를 추가하는 함수로서 앞의 두 숫자는 범례가 나타나는 위치를 의미합니다. 위의 그래프에서는 (-20, 80)에 위치해 있습니다.</p>
+<p>plot함수 아래쪽에 사용된 <code>legend</code> 함수는 그려진 그래프에 범례를 추가하는 함수입니다.</p>
+<pre class="r"><code>?legend</code></pre>
+<p>위의 명령어를 콘솔창에서 실행하면 도움말을 불러올 수 있는데, 함수의 첫 두 숫자는 범례가 나타나는 위치를 의미합니다. 위의 그래프에서는 (-20, 80)위치에 범례를 위치 시키기 위하여 -20과 80을 처음 두 값으로 지정하였습니다.</p>
+<p>그 다음으로 legend 값으로 우리가 보여줄 항목 이름을 적어주시고, 각 항목에 대응하는 정보들을 <code>col</code>과 <code>pch</code>를 통하여 지정해 줬습니다.</p>
+<p>’여자’가 legend 값의 첫 항목이므로, <code>col</code>와 <code>pch</code>의 첫 항목의 값을 각각 ’red’와 동그라미를 나타내는 ’16’으로 설정해줬습니다.</p>
 </div>
 </div>
 <div id="성별에-따른-회귀분석" class="section level3">
@@ -70,7 +76,9 @@ head(data_male, 3); head(data_female, 3)</code></pre>
 &gt;&gt; 1           1      F      38    46
 &gt;&gt; 3           3      F      53    56
 &gt;&gt; 11         11      F      50    40</code></pre>
-<p>이렇게 나눈 데이터를 가지고 회귀식을 그려보면 어떨까요?</p>
+<p>이렇게 나눈 데이터를 가지고 회귀식을 그려보면 어떨까요? 회귀분석을 할 때 사용하는 <code>lm</code> 함수는 다음과 같은 문법을 가지고 있습니다.</p>
+<pre class="r"><code>lm(종속변수 ~ 독립변수, 사용데이터)</code></pre>
+<p>즉, <code>lm</code> 함수의 첫 입력값은 모델식을 나타내는 것이고, 두번째 입력값은 회귀분석시 사용되는 데이터를 집어넣어주는 것입니다. 따라서 우리의 회귀분석 코드는 다음과 같이 됩니다.</p>
 <pre class="r"><code># regression for each group
 model1 &lt;- lm(final~midterm, data_male)
 model2 &lt;- lm(final~midterm, data_female)
@@ -96,7 +104,7 @@ legend(-20, 80, legend = c(&quot;여자&quot;, &quot;남자&quot;),
        col = c(&quot;red&quot;, &quot;blue&quot;), pch = c(16, 17))
 abline(model1$coefficients, col = &quot;blue&quot;)
 abline(model2$coefficients, col = &quot;red&quot;)</code></pre>
-<p><img src="/ko/courses/rstat101/week8_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/ko/courses/rstat101/week8_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <div id="회귀식의-예측---predict-함수" class="section level4">
 <h4>회귀식의 예측 - <code>predict</code> 함수</h4>
 <p>자, 그럼 만약 우리가 중간고사를 40점을 맞은 여학생의 기말고사 점수를 예측하고 싶다면 어떻게 해야할까요? 여학생의 기말고사를 예측하고 싶으니, <code>model2</code>를 사용해야 할 것입니다. 새로운 데이터를 가지고 예측하고 싶을땐, <code>predict</code> 함수를 사용하면 됩니다. 단, 데이터를 입력할때 <code>data.frame</code>을 이용해서 변수명을 맞춰줘야합니다. 우리는 model2를 만들때 midterm이라는 변수명을 사용했으므로 다음과 같이 해줍니다.</p>
@@ -186,7 +194,7 @@ legend(-20, 80, legend = c(&quot;여자&quot;, &quot;남자&quot;),
 # model 3 coefficients in &#39;par&#39; variable
 abline(par[1], par[2], col = &quot;red&quot;)
 abline(par[1] + par[3], par[2], col = &quot;blue&quot;)</code></pre>
-<p><img src="/ko/courses/rstat101/week8_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="/ko/courses/rstat101/week8_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>위의 그래프를 보면, 우리가 설정한 model3는 두 그룹이 다른 intercept를 가질 수 있도록 설계가 되어 있는 것을 알 수 있습니다. 뭔가 찝찝하죠? 우리가 생각하기엔 기울기도 그룹마다 다를것 같은데요. 기울기까지 바꿀 수 있는 방법은 없을까요?</p>
 </div>
 <div id="교차항을-이용한-회귀분석" class="section level4">
@@ -201,14 +209,14 @@ model4</code></pre>
 &gt;&gt; Coefficients:
 &gt;&gt;     (Intercept)          midterm          genderM  midterm:genderM  
 &gt;&gt;         27.8529           0.6725         -18.2247           0.2749</code></pre>
-<p>아니, 슨생님! 이게 무슨 일이래요? 곱하기라뇨! 신기방기! 수식에 곱하기를 썼는데 코드가 작동하다니! 회귀분석은 수식에 더하기만 쓰는 줄 알았는데! 기가 막히고 코가 막히죠? 호흡을 가다듬고, 우리가 입력한 모델식을 살펴 봅시다.</p>
+<p>아니, 수식에 곱하기를 썼는데 코드가 작동하다니! 회귀분석은 수식에 더하기만 쓰는 줄 알았는데 신기한 일이 벌어졌네요. 어떤 것들이 달라졌는지 알아보기 위하여 앞에서 입력한 모델식을 살펴 봅시다.</p>
 <p><span class="math display">\[
 \begin{align}
 Y &amp; = intercept + {coef}_{1} \times x_1 + {coef}_{2} \times x_2 + {coef}_{3} \times (x_1 * x_2) + noise \\
   &amp; = intercept + {coef}_{1} \times x_1 + {coef}_{2} \times x_2 + {coef}_{3} \times x_3 + noise
 \end{align}
 \]</span></p>
-<p>위의 식에서 우리는 <span class="math inline">\(x_1\)</span>과 <span class="math inline">\(x_2\)</span>를 사용해서 (곱해서) <span class="math inline">\(x_3\)</span>이라는 변수를 하나 더 만들었다고 생각하면 됩니다. 우리가 가진 데이터에 열을 하나 추가 했다고 생각하셔도 좋겠네요!</p>
+<p>위의 식에서 우리는 <span class="math inline">\(x_1\)</span>과 <span class="math inline">\(x_2\)</span>를 사용해서 (곱해서) <span class="math inline">\(x_3\)</span>이라는 변수를 하나 더 만들었다고 생각하면 됩니다. 우리가 가진 데이터에 열을 하나 추가 했다고 생각하셔도 됩니다.</p>
 <pre class="r"><code>c(0, 1)[mydata$gender] * mydata$midterm</code></pre>
 <pre><code>&gt;&gt;  [1]  0 42  0 48 46 51 48 43 28 38  0  0 27 36 29  0  0  0 39  9 76 15 63 28 49
 &gt;&gt; [26] 42  0  0  0 52</code></pre>
@@ -277,7 +285,7 @@ legend(-20, 80, legend = c(&quot;여자&quot;, &quot;남자&quot;),
 par &lt;- model4$coefficients
 abline(c(sum(par[c(1, 3)]), sum(par[c(2, 4)])), col = &quot;blue&quot;)
 abline(c(par[1], par[2]), col = &quot;red&quot;)</code></pre>
-<p><img src="/ko/courses/rstat101/week8_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="/ko/courses/rstat101/week8_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 <div id="마치며" class="section level4">
 <h4>마치며</h4>
