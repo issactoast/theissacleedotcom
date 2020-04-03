@@ -12,7 +12,7 @@ image:
 lastmod: "2020-03-22T00:00:00Z"
 projects: [telematics]
 subtitle: 'using rgl'
-summary: rgl provides 3d plots which can be rotated by users
+summary: 'rgl provides 3d plots which can be rotated by users'
 title: '3D GPS visulaization'
 categories:
   - telematics
