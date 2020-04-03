@@ -10,9 +10,9 @@ image:
   placement: 2
   preview_only: true
 lastmod: "2020-03-26T00:00:00Z"
-projects: [rpython]
+projects: [telematics]
 subtitle: 'rgl을 이용한 3D plot 그리기'
-summary: Python 3D array를 R로 변환 할 경우 주의점.
+summary: rgl패키지를 이용하여 3D 그래프를 그려보자.
 title: '3차원 GPS 그래프 그리기'
 categories:
   - telematics
