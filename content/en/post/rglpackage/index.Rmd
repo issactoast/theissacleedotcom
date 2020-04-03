@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-date: "2020-03-26T00:00:00Z"
+date: "2020-04-03T00:00:00Z"
 draft: false
 featured: false
 image:
@@ -9,16 +9,18 @@ image:
   focal_point: ""
   placement: 2
   preview_only: true
-lastmod: "2020-03-26T00:00:00Z"
+lastmod: "2020-04-03T00:00:00Z"
 projects: [telematics]
 subtitle: 'rgl package for 3D plotting'
-summary: rgl
+summary: 'rgl provides 3d plots which can be rotated by users'
 title: 'GPS 3D visualization'
 categories:
   - telematics
   - visualization
 tags:
   - rgl
+  - gps data
+  - 3D plot 
 ---
 
 ```{r setup, include=FALSE}
@@ -30,7 +32,7 @@ knitr::opts_chunk$set(comment = ">>")
 
 ### The sample route on Google map
 
-
+I use the same that [I posted before](https://www.theissaclee.com/en/post/gpsvisulization/). The sample test route is square as follows:
 
 ![](https://www.theissaclee.com/en/post/gpsvisulization/myanimation.gif)
 
