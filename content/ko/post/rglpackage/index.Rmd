@@ -26,9 +26,8 @@ knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(comment = "#result>>")
 ```
 
-```{r}
-# R
-```
+### 구글 맵에서의 루트 나타내기
 
+필자가 예전에 [GPS 데이터를 구글맵에서 나타낸 적](https://www.theissaclee.com/en/post/gpsvisulization/)이 있는데, 똑같은 데이터를 사용하기로 하자. 다음과 같이 사각형의 길을 운전한 데이터이다.
 
-## Test
+![](https://www.theissaclee.com/en/post/gpsvisulization/myanimation.gif)
