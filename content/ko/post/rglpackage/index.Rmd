@@ -56,4 +56,6 @@ head(gps_data)
 ```{r}
 library(rgl)
 open3d()
+plot3d(gps_data[,2:4], col = "red", size = 5, type = "l")
+rglwidget()
 ```
