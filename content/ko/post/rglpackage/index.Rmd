@@ -23,8 +23,9 @@ tags:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
-knitr::opts_chunk$set(comment = "#result>>")
 knitr::opts_chunk$set(rgl = TRUE)
+knitr::knit_hooks$set(webgl = rgl::hook_webgl)
+knitr::opts_chunk$set(comment = ">>")
 ```
 
 ### 구글 맵에서의 루트 나타내기
@@ -56,6 +57,9 @@ head(gps_data)
 ```{r}
 library(rgl)
 open3d()
-plot3d(gps_data[,2:4], col = "red", size = 5, type = "l")
-rglwidget()
 ```
+
+```{r webgl = TRUE}
+plot3d(gps_data[,2:4], col = "red", size = 5, type = "l")
+```
+
