@@ -58,7 +58,6 @@ mytelematics <- read.csv("https://raw.githubusercontent.com/issactoast/theissacl
 
 gps_data <- subset(mytelematics, select = c(Timestamp, Long, Lat, Alt.m.))
 colnames(gps_data) <- c("Timestamp", "x", "y", "z")
-head(gps_data)
 ```
 
 GPS data is relatively straight forward. We have location information(longitude, latitude, and altitude) at each time step.

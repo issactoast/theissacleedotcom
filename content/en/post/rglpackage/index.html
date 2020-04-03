@@ -42,15 +42,7 @@ tags:
 <pre class="r"><code>mytelematics &lt;- read.csv(&quot;https://raw.githubusercontent.com/issactoast/theissacleedotcom/master/static/data/sampletrip.csv&quot;, header = TRUE, fill = TRUE)
 
 gps_data &lt;- subset(mytelematics, select = c(Timestamp, Long, Lat, Alt.m.))
-colnames(gps_data) &lt;- c(&quot;Timestamp&quot;, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;)
-head(gps_data)
-&gt;&gt;                  Timestamp         x        y        z
-&gt;&gt; 1 24-May-2019 18:11:23.018 -91.53799 41.66253 197.2922
-&gt;&gt; 2 24-May-2019 18:11:23.056 -91.53799 41.66253 197.2922
-&gt;&gt; 3 24-May-2019 18:11:23.097 -91.53799 41.66253 197.2821
-&gt;&gt; 4 24-May-2019 18:11:23.138 -91.53799 41.66253 197.2821
-&gt;&gt; 5 24-May-2019 18:11:23.171 -91.53799 41.66253 197.2821
-&gt;&gt; 6 24-May-2019 18:11:23.212 -91.53799 41.66253 197.2821</code></pre>
+colnames(gps_data) &lt;- c(&quot;Timestamp&quot;, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;)</code></pre>
 <p>GPS data is relatively straight forward. We have location information(longitude, latitude, and altitude) at each time step.</p>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
 <table class="table" style="margin-left: auto; margin-right: auto;">
