@@ -24,6 +24,7 @@ tags:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(comment = "#result>>")
+knitr::opts_chunk$set(rgl = TRUE)
 ```
 
 ### 구글 맵에서의 루트 나타내기
@@ -52,6 +53,7 @@ head(gps_data)
 
  [rgl](https://cran.r-project.org/web/packages/rgl/vignettes/rgl.html) 패키지는 3d 그래프를 그려주는 도구로 사용하기 아주 유용하다. 왜냐하면 결과로 얻는 그래프를 마우스로 돌려볼 수 있기 때문이다.
 
-```{r rgl=TRUE}
+```{r}
 library(rgl)
+open3d()
 ```
