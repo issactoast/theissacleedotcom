@@ -31,3 +31,27 @@ knitr::opts_chunk$set(comment = "#result>>")
 필자가 예전에 [GPS 데이터를 구글맵에서 나타낸 적](https://www.theissaclee.com/en/post/gpsvisulization/)이 있는데, 똑같은 데이터를 사용하기로 하자. 다음과 같이 사각형의 길을 운전한 데이터이다.
 
 ![](https://www.theissaclee.com/en/post/gpsvisulization/myanimation.gif)
+
+위에서 내려다보면 사각형이지만, 경사진 도로가 포함되어 있는데, 이것을 2D 그래프에서는 나타낼 수 없었다. 따라서 `rgl` 패키지를 이용하여 3D 그래프를 그리기로 결정했다.
+
+### 데이터 불러오기
+
+필자가 직접 만든 운전 데이터를 다운받고, GSP 정보만을 따와서 `gps_data`에 저장한다. 
+
+```{r}
+mytelematics <- read.csv("https://raw.githubusercontent.com/issactoast/theissacleedotcom/master/static/data/sampletrip.csv", header = TRUE, fill = TRUE)
+
+gps_data <- subset(mytelematics, select = c(Timestamp, Long, Lat, Alt.m.))
+colnames(gps_data) <- c("Timestamp", "x", "y", "z")
+head(gps_data)
+```
+
+위도와 경도, 그리고 높이에 대한 정보가 담겨있는 것을 확인 할 수 있다.
+
+## rgl 패키지
+
+ [rgl](https://cran.r-project.org/web/packages/rgl/vignettes/rgl.html) 패키지는 3d 그래프를 그려주는 도구로 사용하기 아주 유용하다. 왜냐하면 결과로 얻는 그래프를 마우스로 돌려볼 수 있기 때문이다.
+
+```{r}
+library(rgl)
+```
