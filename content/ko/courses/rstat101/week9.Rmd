@@ -10,7 +10,7 @@ title: 잡음(Noise)과 불규칙성(randomness)에 대한 모델링
 type: docs
 weight: 10
 header:
-  image: "categ_regression.png"
+  image: "randomness.jpg"
 ---
 
 ```{r include=FALSE}

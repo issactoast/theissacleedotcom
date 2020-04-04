@@ -10,7 +10,7 @@ title: 잡음(Noise)과 불규칙성(randomness)에 대한 모델링
 type: docs
 weight: 10
 header:
-  image: "categ_regression.png"
+  image: "randomness.jpg"
 ---
 
 
@@ -103,7 +103,7 @@ abline(20, 3, lty = 2)</code></pre>
 <pre class="r"><code>## print with possibly greater accuracy:
 options(digits.secs = 6)
 Sys.time()</code></pre>
-<pre><code>&gt;&gt; [1] &quot;2020-04-03 22:17:32.303431 CDT&quot;</code></pre>
+<pre><code>&gt;&gt; [1] &quot;2020-04-03 22:23:19.78566 CDT&quot;</code></pre>
 <p><code>Sys.time</code> 함수의 옵션을 이용하면, 현재의 시간을 컴퓨터가 측정할 수 있는 시간을 최대한 정확하게 측정해줍니다. 소수점 6자리까지 측정된 이 시간 결과 값은 제가 이 글을 쓰는 시간과 여러분이 이 글을 보면서 같은 코드를 실행했을 때의 시간이 다르므로 당연히 다른 값을 같게 되겠죠. 위의 소수점 6자리까지 측정된 결과값의 마지막자리 4개의 숫자를 가져와서 잡음으로 쓰면 어떨까요? 즉, 0.001초에서 0.00001초 단위 값들을 가져오는 것이죠.</p>
 <div id="시간을-통한-불규칙성-모델링" class="section level4">
 <h4>시간을 통한 불규칙성 모델링</h4>
@@ -112,12 +112,12 @@ Sys.time()</code></pre>
 n &lt;- nchar(current_time)
 time_decimal &lt;- substr(current_time, n-3, n)
 current_time; time_decimal</code></pre>
-<pre><code>&gt;&gt; [1] &quot;2020-04-03 22:17:32.309402&quot;</code></pre>
-<pre><code>&gt;&gt; [1] &quot;9402&quot;</code></pre>
+<pre><code>&gt;&gt; [1] &quot;2020-04-03 22:23:19.791043&quot;</code></pre>
+<pre><code>&gt;&gt; [1] &quot;1043&quot;</code></pre>
 <p><code>nchar</code> 함수는 문자열의 글자 숫자를 세어주는 함수이고, <code>substr</code> 함수는 subset of string을 나타내는 뜻으로서, 주어진 문자열의 부분을 가져오는 함수 입니다. 즉, 위의 코드는 <code>current_time</code> 문자열의 마지막 4개 글자를 가져와 <code>time_decimal</code>에 저장하게 됩니다.</p>
 <p>위에서 구한 <code>time_decimal</code>의 4개의 숫자 정보를 다음과 같이 0에서 1사이의 숫자로 바꿀 수 있습니다.</p>
 <pre class="r"><code>as.integer(time_decimal) / 10000</code></pre>
-<pre><code>&gt;&gt; [1] 0.9402</code></pre>
+<pre><code>&gt;&gt; [1] 0.1043</code></pre>
 <p>위의 과정을 함수로 만들어 봅시다.</p>
 <pre class="r"><code>random_0to1 &lt;- function(){
   options(digits.secs = 6)
@@ -128,11 +128,11 @@ current_time; time_decimal</code></pre>
 }</code></pre>
 <p>위에서 정의한 <code>random_0to1</code> 함수는 이제 실행을 시킬때마다 소수점 네자리의 숫자를 우리들에게 알려줍니다.</p>
 <pre class="r"><code>random_0to1()</code></pre>
-<pre><code>&gt;&gt; [1] 0.5517</code></pre>
+<pre><code>&gt;&gt; [1] 0.6865</code></pre>
 <pre class="r"><code>random_0to1()</code></pre>
-<pre><code>&gt;&gt; [1] 0.2894</code></pre>
+<pre><code>&gt;&gt; [1] 0.141</code></pre>
 <pre class="r"><code>random_0to1()</code></pre>
-<pre><code>&gt;&gt; [1] 0.4268</code></pre>
+<pre><code>&gt;&gt; [1] 0.8154</code></pre>
 <p>만약 우리가 이 함수를 정말 빠르게, 0.00001초마다 실행을 시킨다면, 연속해서 증가하는 숫자들을 볼 수 있겠지만, 우리가 인지하는 시간속에서 방금 우리가 만든 함수의 값은 완벽하게 불규칙적인 값을 갖게 됩니다. 또한, 0에서 1사이의 값들 중 어떤 값이 자주 나오는 일이 없이 균일하게 나온다고 합리적으로 가정할 수 있습니다.</p>
 </div>
 <div id="runif-함수" class="section level4">
@@ -140,13 +140,13 @@ current_time; time_decimal</code></pre>
 <p>앞에서 작성한 <code>random_0to1</code>의 고급버전이 바로 R에서 <code>runif()</code> 함수입니다. 이 함수는 0에서 1사이의 값들을 균일한 빈도로 무작위하게 뽑아서 우리에게 전해 줍니다. 발생하고 싶은 숫자 갯수를 입력값으로 넣으면 됩니다.</p>
 <pre class="r"><code># 3개의 0~1 사이의 무작위 숫자 발생
 runif(3)</code></pre>
-<pre><code>&gt;&gt; [1] 0.9961996 0.5600737 0.3743115</code></pre>
+<pre><code>&gt;&gt; [1] 0.1145952 0.9746140 0.7618959</code></pre>
 <p>이러한 <code>runif()</code> 함수를 사용하면, 어떤 범위의 값이든 불규칙한 값을 발생시킬 수 있습니다.</p>
 <p>-5에서 5사이의 숫자를 무작위로 11개 발생 시켜보도록 합시다.</p>
 <pre class="r"><code>r_noise &lt;- runif(11) * 10 - 5
 r_noise</code></pre>
-<pre><code>&gt;&gt;  [1] -2.3272652  4.2365685  1.0148219 -0.7066073  0.1545493 -3.4267014
-&gt;&gt;  [7] -2.5594222 -1.1632988 -3.4850577 -4.5246781 -1.2019024</code></pre>
+<pre><code>&gt;&gt;  [1] -4.14821607  4.94184152 -1.27862839 -4.49604961 -3.50152147 -0.02377412
+&gt;&gt;  [7]  2.57466637 -3.50951455 -0.27056415 -4.71289135  1.96511136</code></pre>
 <p>0에서 1사이의 숫자들에 10를 곱하면 최소로 나올 수 있는 값은0, 최대로 나올 수 있는 값은 10이 나올 수 있을 것입니다. 이러한 숫자들에 5을 빼버리면, 최소로 나올 수 있는 값은 -5, 최대로 나올 수 있는 값은 5이 될 것입니다. 즉, <code>r_noise</code>는 -5에서 5까지의 무작위 숫자를 10개를 담고 있는 벡터가 될 것입니다.</p>
 </div>
 <div id="잡음이-석인-직선" class="section level4">
