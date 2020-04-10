@@ -1,0 +1,167 @@
+---
+date: "2020-02-10T00:00:00+01:00"
+draft: false
+linktitle: Week 10 - Testing for the proportion
+menu:
+  stat2010:
+    parent: Contents
+    weight: 10
+title: Lab 10 - Testing for the proportion
+type: docs
+weight: 10    # related to next page to show
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = "")
+```
+
+
+The class video is attached here so that you can watch my lecture again when you prepare the exams.
+
+- If you have questions about my lecture, please use **the comment section** at the bottom of this document.
+
+<div align="center">
+
+</div>
+
+## Test for proportion data
+
+#### Assumptions
+
+- The data are a simple random sample (SRS) from the population of interest.
+- The population is at least 10 times as large as the sample.
+- For a test of $H_0: p = p_0$ , the sample size $n$ is large enough that
+
+    $np_0 \ge 10$
+    
+    $n(1-p_0) \ge 10$
+
+- For a confidence interval, $n$ is large enough that
+
+    $n\hat{p} ≥ 10$
+    
+    $n(1-\hat{p}) ≥ 10$
+
+
+
+#### Point estimation and sample distribution
+
+$$
+\hat{p} = \frac{\text{number of successes in sample}}{\text{number of observations in sample}}
+$$
+
+By considering the rules of thumbs, we can say this $\hat{p}$ follows the normal distribution,
+$$
+\mathcal{N}(p, \sqrt{\frac{p(1-p)}{n}})
+$$
+
+#### Test procedure for $p$
+
+- Hypothesis
+
+  - $H_0$: $p = p_0$ vs. $H_A$: $p > p_0$
+
+    or
+    
+  - $H_0$: $p = p_0$ vs. $H_A$: $p < p_0$
+  
+    or
+    
+  - $H_0$: $p = p_0$ vs. $H_A$: $p \ne p_0$
+
+- Test statistic
+
+$$
+z = \frac{\hat{p}-p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}
+$$
+
+- $p$-value for each $H_A$
+
+  - $H_A$: $p > p_0$ -> $P(Z \ge z)$
+  - $H_A$: $p < p_0$ -> $P(Z \le z)$
+  - $H_A$: $p \ne p_0$ -> $2 P(Z \ge |z|)$
+
+- Decision w.r.t. the significant level $\alpha$
+
+  - if $p$-value is less than the $\alpha$, reject $H_0$
+  - if $p$-value is larger than the $\alpha$, cannot reject $H_0$
+
+## Example: Death rate of COVID-19 in USA
+
+We have remembered that Tedros Adhanom, the head of CDC, announced that [the mortality rate for the COVID-19 is 3.4%](https://www.factcheck.org/2020/03/trump-and-the-coronavirus-death-rate/) on march 5, 2020.
+
+Now, we are in April, here is the new stats for COVID-19 in US. (you can check out the latest information in this [site](https://www.worldometers.info/coronavirus/?utm_campaign=homeAdvegas1?))
+
+![](covid19-april2020.png)
+
+Using the stats for USA, our goal is to test wheather the death rate (proportion) of the COVID 19 is 0.034 or higher. Thus, the hypothesis for this testing will be
+
+$$
+H_0: p = 0.034 \quad vs. \quad H_A: p > 0.034
+$$
+
+Let us assume our significance level is 0.001.
+
+Before we start the testing, we need to check the assumption first.
+
+- Both $np$ and $n(1-p)$ should equal at least 10
+
+    42619 $\times$ 0.034 = 1449
+    
+    42619 $\times$ (1 - 0.034) = 41169
+    
+- The population must be at least 10 times as large as the sample.
+
+    The number of the total cases is $469,421$.
+
+Thus, we can apply the proportion test that we have learn from the lecture.
+
+Q1. What is $\hat{p}$?
+
+$$
+\hat{p}_{usa} = \frac{16691}{16691 + 25928} = 0.3916
+$$
+
+Q2. What is the test statistic for this test?
+
+$$
+z = \frac{0.3916 - 0.034}{\sqrt{\frac{0.034(1-0.034)}{42619}}} = 407.3532
+$$
+
+Q3. What is the $p$-value?
+
+Since $H_A$: $p > p_0$, $p$-value is as follows:
+$$
+P(Z \ge z) = P(Z \ge 407.35) < 0.001
+$$
+
+Q4. What is our decision for the null hypothesis?
+
+Since our $p$-value is less than the $\alpha = 0.001$, we can reject the null hypothesis.
+
+```sas
+data covid19;
+input status $ count;
+datalines;
+death 16691
+recovered 25928
+;
+proc freq data = covid19 ;
+tables status / binomial (p = 0.034) ;
+exact binomial ;
+weight count ;
+run ;
+```
+
+#### Result
+
+```
+The FREQ Procedure
+
+status   Frequency Percent Cumulative Cumulative
+                           Frequency  Percent 
+death    16691     39.16   16691      39.16 
+recovere 25928     60.84   42619      100.00 
+```

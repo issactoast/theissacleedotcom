@@ -1,0 +1,133 @@
+---
+date: "2020-02-10T00:00:00+01:00"
+draft: false
+linktitle: Week 10 - Testing for the proportion
+menu:
+  stat2010:
+    parent: Contents
+    weight: 10
+title: Lab 10 - Testing for the proportion
+type: docs
+weight: 10    # related to next page to show
+---
+
+
+
+<p>The class video is attached here so that you can watch my lecture again when you prepare the exams.</p>
+<ul>
+<li>If you have questions about my lecture, please use <strong>the comment section</strong> at the bottom of this document.</li>
+</ul>
+<div align="center">
+
+</div>
+<div id="test-for-proportion-data" class="section level2">
+<h2>Test for proportion data</h2>
+<div id="assumptions" class="section level4">
+<h4>Assumptions</h4>
+<ul>
+<li>The data are a simple random sample (SRS) from the population of interest.</li>
+<li>The population is at least 10 times as large as the sample.</li>
+<li><p>For a test of <span class="math inline">\(H_0: p = p_0\)</span> , the sample size <span class="math inline">\(n\)</span> is large enough that</p>
+<p><span class="math inline">\(np_0 \ge 10\)</span></p>
+<p><span class="math inline">\(n(1-p_0) \ge 10\)</span></p></li>
+<li><p>For a confidence interval, <span class="math inline">\(n\)</span> is large enough that</p>
+<p><span class="math inline">\(n\hat{p} ≥ 10\)</span></p>
+<p><span class="math inline">\(n(1-\hat{p}) ≥ 10\)</span></p></li>
+</ul>
+</div>
+<div id="point-estimation-and-sample-distribution" class="section level4">
+<h4>Point estimation and sample distribution</h4>
+<p><span class="math display">\[
+\hat{p} = \frac{\text{number of successes in sample}}{\text{number of observations in sample}}
+\]</span></p>
+<p>By considering the rules of thumbs, we can say this <span class="math inline">\(\hat{p}\)</span> follows the normal distribution,
+<span class="math display">\[
+\mathcal{N}(p, \sqrt{\frac{p(1-p)}{n}})
+\]</span></p>
+</div>
+<div id="test-procedure-for-p" class="section level4">
+<h4>Test procedure for <span class="math inline">\(p\)</span></h4>
+<ul>
+<li><p>Hypothesis</p>
+<ul>
+<li><p><span class="math inline">\(H_0\)</span>: <span class="math inline">\(p = p_0\)</span> vs. <span class="math inline">\(H_A\)</span>: <span class="math inline">\(p &gt; p_0\)</span></p>
+<p>or</p></li>
+<li><p><span class="math inline">\(H_0\)</span>: <span class="math inline">\(p = p_0\)</span> vs. <span class="math inline">\(H_A\)</span>: <span class="math inline">\(p &lt; p_0\)</span></p>
+<p>or</p></li>
+<li><p><span class="math inline">\(H_0\)</span>: <span class="math inline">\(p = p_0\)</span> vs. <span class="math inline">\(H_A\)</span>: <span class="math inline">\(p \ne p_0\)</span></p></li>
+</ul></li>
+<li><p>Test statistic</p></li>
+</ul>
+<p><span class="math display">\[
+z = \frac{\hat{p}-p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(p\)</span>-value for each <span class="math inline">\(H_A\)</span></p>
+<ul>
+<li><span class="math inline">\(H_A\)</span>: <span class="math inline">\(p &gt; p_0\)</span> -&gt; <span class="math inline">\(P(Z \ge z)\)</span></li>
+<li><span class="math inline">\(H_A\)</span>: <span class="math inline">\(p &lt; p_0\)</span> -&gt; <span class="math inline">\(P(Z \le z)\)</span></li>
+<li><span class="math inline">\(H_A\)</span>: <span class="math inline">\(p \ne p_0\)</span> -&gt; <span class="math inline">\(2 P(Z \ge |z|)\)</span></li>
+</ul></li>
+<li><p>Decision w.r.t. the significant level <span class="math inline">\(\alpha\)</span></p>
+<ul>
+<li>if <span class="math inline">\(p\)</span>-value is less than the <span class="math inline">\(\alpha\)</span>, reject <span class="math inline">\(H_0\)</span></li>
+<li>if <span class="math inline">\(p\)</span>-value is larger than the <span class="math inline">\(\alpha\)</span>, cannot reject <span class="math inline">\(H_0\)</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="example-death-rate-of-covid-19-in-usa" class="section level2">
+<h2>Example: Death rate of COVID-19 in USA</h2>
+<p>We have remembered that Tedros Adhanom, the head of CDC, announced that <a href="https://www.factcheck.org/2020/03/trump-and-the-coronavirus-death-rate/">the mortality rate for the COVID-19 is 3.4%</a> on march 5, 2020.</p>
+<p>Now, we are in April, here is the new stats for COVID-19 in US. (you can check out the latest information in this <a href="https://www.worldometers.info/coronavirus/?utm_campaign=homeAdvegas1?">site</a>)</p>
+<p><img src="covid19-april2020.png" /></p>
+<p>Using the stats for USA, our goal is to test wheather the death rate (proportion) of the COVID 19 is 0.034 or higher. Thus, the hypothesis for this testing will be</p>
+<p><span class="math display">\[
+H_0: p = 0.034 \quad vs. \quad H_A: p &gt; 0.034
+\]</span></p>
+<p>Let us assume our significance level is 0.001.</p>
+<p>Before we start the testing, we need to check the assumption first.</p>
+<ul>
+<li><p>Both <span class="math inline">\(np\)</span> and <span class="math inline">\(n(1-p)\)</span> should equal at least 10</p>
+<p>42619 <span class="math inline">\(\times\)</span> 0.034 = 1449</p>
+<p>42619 <span class="math inline">\(\times\)</span> (1 - 0.034) = 41169</p></li>
+<li><p>The population must be at least 10 times as large as the sample.</p>
+<p>The number of the total cases is <span class="math inline">\(469,421\)</span>.</p></li>
+</ul>
+<p>Thus, we can apply the proportion test that we have learn from the lecture.</p>
+<p>Q1. What is <span class="math inline">\(\hat{p}\)</span>?</p>
+<p><span class="math display">\[
+\hat{p}_{usa} = \frac{16691}{16691 + 25928} = 0.3916
+\]</span></p>
+<p>Q2. What is the test statistic for this test?</p>
+<p><span class="math display">\[
+z = \frac{0.3916 - 0.034}{\sqrt{\frac{0.034(1-0.034)}{42619}}} = 407.3532
+\]</span></p>
+<p>Q3. What is the <span class="math inline">\(p\)</span>-value?</p>
+<p>Since <span class="math inline">\(H_A\)</span>: <span class="math inline">\(p &gt; p_0\)</span>, <span class="math inline">\(p\)</span>-value is as follows:
+<span class="math display">\[
+P(Z \ge z) = P(Z \ge 407.35) &lt; 0.001
+\]</span></p>
+<p>Q4. What is our decision for the null hypothesis?</p>
+<p>Since our <span class="math inline">\(p\)</span>-value is less than the <span class="math inline">\(\alpha = 0.001\)</span>, we can reject the null hypothesis.</p>
+<pre class="sas"><code>data covid19;
+input status $ count;
+datalines;
+death 16691
+recovered 25928
+;
+proc freq data = covid19 ;
+tables status / binomial (p = 0.034) ;
+exact binomial ;
+weight count ;
+run ;</code></pre>
+<div id="result" class="section level4">
+<h4>Result</h4>
+<pre><code>The FREQ Procedure
+
+status   Frequency Percent Cumulative Cumulative
+                           Frequency  Percent 
+death    16691     39.16   16691      39.16 
+recovere 25928     60.84   42619      100.00 </code></pre>
+</div>
+</div>
