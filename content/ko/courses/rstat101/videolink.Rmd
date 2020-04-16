@@ -1,0 +1,44 @@
+---
+date: "2019-05-05T00:00:00+01:00"
+draft: false
+linktitle: 비디오 강의모음
+menu:
+  rstat101:
+    parent: Contents
+    weight: 99
+title: 비디오 강의 링크 모음
+type: docs
+weight: 99
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(comment = ">>")
+```
+
+## 
+
+본 수업과 관련한 유튜브 기초통계 강의 링크 입니다.
+
+### Week 1: 데이터 불러오기
+
+- [R 기초강의](https://youtu.be/KEkaCrwgLrQ)
+    
+
+### Week 2: 데이터 시각화
+
+- [$ 연산자에 대하여](https://youtu.be/oGwXUClvik4)
+- [파이차트](https://youtu.be/XNPXlwkXvLY)
+- [줄기 잎 그래프](https://youtu.be/i8vNsuab0nU)
+- [히스토그램 - breaks 옵션](https://youtu.be/MLNSSxMK02A)
+- [산점도 - aps 옵션](https://youtu.be/FAn_PHB6hF4)
+- [상자그림](https://youtu.be/nmljb3L9DVg)
+
+    
+### Week 3: 분포를 나타내는 지표
+### Week 4: 데이터 다루기
+### Week 5: 상관계수
+### Week 6: 회귀분석 기초
+### Week 7: 회귀분석 실습
+### Week 8: 다중 회귀분석 기초
+### Week 9: 잡음과 불규칙성
+### Week 10: 확률론 기초
