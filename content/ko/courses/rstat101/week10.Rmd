@@ -222,7 +222,7 @@ $$
 $$
 \begin{align}
 P(\{"앞면", "뒷면"\}) = 1 \\
-P(\phi) = 1
+P(\phi) = 0
 \end{align}
 $$
 
