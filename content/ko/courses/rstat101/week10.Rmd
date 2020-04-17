@@ -6,7 +6,7 @@ menu:
   rstat101:
     parent: Contents
     weight: 11
-title: 동전, 그리고 확률에 대하여
+title: 확률공간에 대하여
 type: docs
 weight: 11
 header:
