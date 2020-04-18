@@ -1,0 +1,308 @@
+---
+date: "2020-02-10T00:00:00+01:00"
+draft: false
+linktitle: Week 11 - Two sample proportion tests
+menu:
+  stat2010:
+    parent: Contents
+    weight: 11
+title: Lab 11 - Two sample proportion tests
+type: docs
+weight: 11    # related to next page to show
+---
+
+
+
+<p>The class video is attached here so that you can watch my lecture again when you prepare the exams.</p>
+<ul>
+<li>If you have questions about my lecture, please use <strong>the comment section</strong> at the bottom of this document.</li>
+</ul>
+<div align="center">
+
+</div>
+<div id="two-sample-proportions-test" class="section level2">
+<h2>Two sample proportions test</h2>
+<p>We can use z-test to compare the difference between the population proportions of the two different groups.</p>
+<div id="covid-19-data" class="section level4">
+<h4>COVID 19 data</h4>
+<p>As of April. 17, 2020, unfortunately, USA has the largest number of death from COVID 19 in the world. The second largest death ocurrs in Italy. Here is the information from the worldoemeters website:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>USA</th>
+<th>Italy</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Death</td>
+<td>36,922</td>
+<td>22,745</td>
+<td>59,667</td>
+</tr>
+<tr class="even">
+<td>Recovered</td>
+<td>59,158</td>
+<td>42,727</td>
+<td>101,885</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>96,080</td>
+<td>65,472</td>
+<td>161,552</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="hypothesis" class="section level4">
+<h4>Hypothesis</h4>
+<p>Our goal is to <strong>determine whether the death rate COVID 19 from each country are the same or not</strong> with significance level 0.001. Thus, we can set our null hypothesis as follows:</p>
+<p><span class="math display">\[
+H_0: p_1 - p_2 = 0 \quad vs. \quad H_A: p_1 - p_2 \ne 0
+\]</span>
+where <span class="math inline">\(p_1\)</span> represents the death rate of COVID 19 in USA and <span class="math inline">\(p_2\)</span> represents the death rate of COVID 19 in Italy.</p>
+</div>
+<div id="estimate-of-population-proportion" class="section level4">
+<h4>Estimate of population proportion</h4>
+<p>The estimates of the <span class="math inline">\(p_1\)</span> and <span class="math inline">\(p_2\)</span> are,</p>
+<p><span class="math display">\[
+\begin{align}
+\hat{p_1} = \frac{36,922}{96,080} = 0.3843 \\
+\hat{p_2} = \frac{22,745}{65,472} = 0.3474
+\end{align}
+\]</span></p>
+</div>
+<div id="standard-error" class="section level4">
+<h4>Standard Error</h4>
+<p>We have learned that the standard deviation of the difference of the proportions is as follows:
+<span class="math display">\[
+\sqrt{\frac{p_{1}\left(1-p_{1}\right)}{n_{1}}+\frac{p_{1}\left(1-p_{2}\right)}{n_{2}}}
+\]</span></p>
+<p>However, under the null hypothesis, we assume that the death rates in both countries are the same, let say <span class="math inline">\(p\)</span>. Then, the above standard equation becomes as follows:</p>
+<p><span class="math display">\[
+\sqrt{p\left(1-p\right)\left(\frac{1}{n_{1}}+\frac{1}{n_{2}}\right)}
+\]</span>
+Now, how can we estimate the <span class="math inline">\(p\)</span> then? We should use all the information that we can use for calculating the death rate of COVID 19. Thus, the estimate of <span class="math inline">\(p\)</span> can be obtained by</p>
+<p><span class="math display">\[
+\hat{p} = \frac{\text{# of death from both countries}}{\text{# of total observations}} = \frac{59,667}{161,552} = 0.3693
+\]</span></p>
+<p>Thus, the standard serror will be as follows:</p>
+<p><span class="math display">\[
+\begin{align}
+SE &amp; = \sqrt{\hat{p}\left(1-\hat{p}\right)\left(\frac{1}{n_{1}}+\frac{1}{n_{2}}\right)} \\
+&amp; = \sqrt{0.3693\left(0.6307\right)\left(\frac{1}{96,080}+\frac{1}{65,472}\right)} \\
+&amp; = 0.002446
+\end{align}
+\]</span></p>
+</div>
+<div id="test-statistic" class="section level4">
+<h4>Test statistic</h4>
+<p>Now, test statistic <span class="math inline">\(z\)</span> can be obtained as follows:
+<span class="math display">\[
+z=\frac{\hat{p}_{1}-\hat{p}_{2}}{SE}=\frac{0.3843-0.3474}{0.002446}=15.085
+\]</span></p>
+</div>
+<div id="p-value" class="section level4">
+<h4>p-value</h4>
+<p>We can determine the p-value based on the form of the test. <a href="https://www.theissaclee.com/en/courses/stat2010/week10/#test-procedure-for-p-1">See here</a> if you don’t remember. Since our hypothesis has the two side test form, the <em>p-value</em> will be
+<span class="math display">\[
+\begin{align}
+\text{p-value} &amp; = 2 P(Z \ge |z|) \\
+&amp; = 2 P(Z \ge 15.085) \le 0.0001
+\end{align}
+\]</span></p>
+</div>
+<div id="sas-code" class="section level3">
+<h3>SAS code</h3>
+<p>We can load the data into the SAS system as follows:</p>
+<pre class="sas"><code>data covid19 ;
+input country $ status $ count ;
+datalines ;
+USA Death 36922
+USA Recovered 59158
+Italy Death 22745
+Italy Recovered 42727
+;
+run ;</code></pre>
+<p>To do the two sample proportion test, we can use <code>riskdiff(equal var = null)</code> option. In SAS, binomial proportions are called “risks,” so a “risk difference” is a difference in proportions. Thus, the following SAS code will do the test</p>
+<pre class="sas"><code>proc freq data = covid19 ;
+  weight count ;
+  tables country * status / riskdiff(equal var = null);
+run ;</code></pre>
+<p><strong>Result</strong></p>
+<pre class="sas"><code>The FREQ Procedure
+
+                                  Table of country by status
+
+                              country     status
+
+                              Frequency‚
+                              Percent  ‚
+                              Row Pct  ‚
+                              Col Pct  ‚Death   ‚Recovere‚  Total
+                              ---------ˆ--------ˆ--------ˆ
+                              Italy    ‚  22745 ‚  42727 ‚  65472
+                                       ‚  14.08 ‚  26.45 ‚  40.53
+                                       ‚  34.74 ‚  65.26 ‚
+                                       ‚  38.12 ‚  41.94 ‚
+                              ---------ˆ--------ˆ--------ˆ
+                              USA      ‚  36922 ‚  59158 ‚  96080
+                                       ‚  22.85 ‚  36.62 ‚  59.47
+                                       ‚  38.43 ‚  61.57 ‚
+                                       ‚  61.88 ‚  58.06 ‚
+                              ---------ˆ--------ˆ--------ˆ
+                              Total       59667   101885   161552
+                                          36.93    63.07   100.00</code></pre>
+<p>Among the tables you have, you can see the following result:</p>
+<pre class="sas"><code>                                     Risk Difference Test
+                                H0: P1 - P2 = 0    Wald Method
+
+                                Risk Difference        -0.0369
+                                ASE (H0)                0.0024
+                                Z                     -15.0803
+                                One-sided Pr &lt;  Z       &lt;.0001
+                                Two-sided Pr &gt; |Z|      &lt;.0001
+
+                                  Column 1 (status = Death)
+</code></pre>
+<p>Based on the <code>Two-sided Pr &gt; |Z| &lt;.0001</code>, we can reject the null hypothesis. Thus, staticstically, the death rate of COVID 19 is different from countries. Do you think why?</p>
+</div>
+</div>
+<div id="two-sample-proportion-test---the-chi-square-test" class="section level2">
+<h2>Two sample proportion test - The Chi-square test</h2>
+<p>Using Chi-square test, we can also do the same test: compairing the difference between the population proportions of the two different groups. Let us do this in SAS using the same data.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>USA</th>
+<th>Italy</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Death</td>
+<td>36,922</td>
+<td>22,745</td>
+<td>59,667</td>
+</tr>
+<tr class="even">
+<td>Recovered</td>
+<td>59,158</td>
+<td>42,727</td>
+<td>101,885</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>96,080</td>
+<td>65,472</td>
+<td>161,552</td>
+</tr>
+</tbody>
+</table>
+<p>Here is the steps for Chi-square test.</p>
+<p>Step 1: Draw the 2-way table</p>
+<p>2-way table looks like this. However, for some problems, we need to make this table from what you read in the problem.</p>
+<p>Step 2: Calculate expected counts for each cell</p>
+<p><span class="math display">\[
+\text{Expected count} = \frac{\text{row total}\times \text{column total}}{\text{table total}}
+\]</span></p>
+<p>We can draw the table and expected number table at the same time in SAS using the following code:</p>
+<pre class="sas"><code>data covid19 ;
+input country $ status $ count ;
+datalines ;
+USA Death 36922
+USA Recovered 59158
+Italy Death 22745
+Italy Recovered 42727
+;
+run ;
+
+proc freq data = covid19 ;
+  weight count ;
+  tables country * status / expected ;
+run ;</code></pre>
+<p><strong>Result</strong></p>
+<pre class="sas"><code>
+                                  Table of country by status
+
+                              country     status
+
+                              Frequency‚
+                              Expected ‚
+                              Percent  ‚
+                              Row Pct  ‚
+                              Col Pct  ‚Death   ‚Recovere‚  Total
+                              ---------ˆ--------ˆ--------ˆ
+                              Italy    ‚  22745 ‚  42727 ‚  65472
+                                       ‚  24181 ‚  41291 ‚
+                                       ‚  14.08 ‚  26.45 ‚  40.53
+                                       ‚  34.74 ‚  65.26 ‚
+                                       ‚  38.12 ‚  41.94 ‚
+                              ---------ˆ--------ˆ--------ˆ
+                              USA      ‚  36922 ‚  59158 ‚  96080
+                                       ‚  35486 ‚  60594 ‚
+                                       ‚  22.85 ‚  36.62 ‚  59.47
+                                       ‚  38.43 ‚  61.57 ‚
+                                       ‚  61.88 ‚  58.06 ‚
+                              ---------ˆ--------ˆ--------ˆ
+                              Total       59667   101885   161552
+                                          36.93    63.07   100.00
+</code></pre>
+<p>The first and second number in each cell represent the observations and expected number. However, <code>these numbers are rounded at the first decimal</code> so the numbers are approximated. Since the expected numbers in the all cells are larger than <span class="math inline">\(5\)</span>, we can use Chi-square test.</p>
+<p>Step 3: Calculate Chi-square statistic</p>
+<p><span class="math display">\[
+\mathcal{\chi}^2 = \sum^{rc}_{i=1} \frac{(obs_i - exp_i)^2}{exp_i}
+\]</span></p>
+<p>In our problem,</p>
+<p><span class="math display">\[
+\begin{align}
+\mathcal{\chi}^2 \approx \frac{(22745 - 24181)^2}{24181} + \frac{(42727 - 41291)^2}{41291} +\\
+\frac{(36922 - 35486)^2}{35486} + \frac{(59158 - 60594)^2}{60594} = 227.3596
+\end{align}
+\]</span></p>
+<p>This obtained Chi-square statistics follows <em>Chi-square distribtuion</em> with <code>degree of freedom</code>:
+<span class="math display">\[
+d.f. = (\text{# of rows in the table})  \times (\text{# of colums in the table})
+\]</span>
+in our case, it follows Chi-square distribtuion* with df 1.</p>
+<p>Step 4: calculate p-value</p>
+<p>p-value can be calculated by the Chisqaure table, or SAS</p>
+<pre class="sas"><code>proc freq data = covid19 ;
+  weight count ;
+  tables country * status / chisq;
+run ;</code></pre>
+<p><strong>Result</strong></p>
+<pre class="sas"><code>
+                           Statistics for Table of country by status
+
+                    Statistic                     DF       Value      Prob
+                    ------------------------------------------------------
+                    Chi-Square                     1    227.4160    &lt;.0001
+                    Likelihood Ratio Chi-Square    1    228.0910    &lt;.0001
+                    Continuity Adj. Chi-Square     1    227.2577    &lt;.0001
+                    Mantel-Haenszel Chi-Square     1    227.4146    &lt;.0001
+                    Phi Coefficient                      -0.0375
+                    Contingency Coefficient               0.0375
+                    Cramer&#39;s V                           -0.0375
+
+
+                                     Fisher&#39;s Exact Test
+                              ----------------------------------
+                              Cell (1,1) Frequency (F)     22745
+                              Left-sided Pr &lt;= F          &lt;.0001
+                              Right-sided Pr &gt;= F         1.0000
+
+                              Table Probability (P)       &lt;.0001
+                              Two-sided Pr &lt;= P           &lt;.0001
+
+                                     Sample Size = 161552
+</code></pre>
+<p>Note SAS gives the almost same Chi-square statistic that we have calculated, 227.4160. Verify this number, using your calculator.</p>
+<p>Note that if one of the expected numbers is less than 5, then you should check out the Fisher’s exact test which will give you more accurate p-value when there is a small number of samples.</p>
+<p>In our case, we are safe to use Chi-sqaure p-value which is less than 0.0001. Thus, we can reject the null hypothesis again.</p>
+</div>
