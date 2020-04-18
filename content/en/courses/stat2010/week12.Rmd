@@ -145,8 +145,122 @@ run ;
 
 ```
 
-Q. We want to test whether the two variables affects to each other. What is the Chi-square test statistic? **Ans**: 3.4099
+Q. We want to test whether the two variables affects to each other. What is the Chi-square test statistic?
 
-Q. What is d.f.? **Ans**: 2 because we have 2 columns and 3 rows, so $(2-1) \times (3-1) = 2$
+**Ans**: 3.4099
 
-Q. If we use $\alpha = 0.05$, what is the decision? **Ans**: p-value is 0.1818 which is larger than the significance level. Thus, we cannot reject the null hypothesis.
+Q. What is d.f.?
+
+**Ans**: 2 because we have 2 columns and 3 rows, so $(2-1) \times (3-1) = 2$
+
+Q. If we use $\alpha = 0.05$, what is the decision? 
+
+**Ans**: p-value is 0.1818 which is larger than the significance level. Thus, we cannot reject the null hypothesis.
+
+## ANOVA: Analysis of Variance
+
+Let us compare the population means under three different situations.
+
+### Corndogs data
+
+Let us load data from [the prof. Cowles' website](https://homepage.divms.uiowa.edu/~kcowles/Datasets/) directly this time. We will feed the url of the data from our professor’s data set site as follows;
+
+The `hotdogs` dataset contains data on the sodium and calories contained in each
+of 54 major corndog brands. 
+
+The variables are:
+
+- type: Beef, Meat, or Poultry
+- calories per corn dog
+- sodium per corn dog
+
+There are many other brands of hotdogs on the market besides those included in
+this dataset. We are interested in **determining whether the mean of the calories
+per hotdog is the same** in all of the three types of hotdogs.
+
+#### Data load
+
+```sas
+filename mydata url "http://homepage.divms.uiowa.edu/~kcowles/Datasets/hotdogs.dat";
+data corndog;
+infile mydata;
+input type $ calories sodium ;
+run ;
+```
+
+#### Check the assumption for ANOVA
+
+- I independent simple random samples
+- Each population $i$ has a normal distribution with unknown mean $μ_i$.
+- All of the populations have the same standard deviation $\sigma$ (unknown)
+
+```sas
+proc univariate plot data = corndog ;
+var calories ;
+by type;
+
+proc means data = corndog ;
+var calories ;
+by type ;
+run ;
+```
+
+#### ANOVA test in SAS
+
+```sas
+proc anova data = corndog ;
+class type ;
+model calories = type  ;
+means type / bon alpha = .05 ;
+run ;
+```
+
+**Result**
+
+```sas
+
+                                      The ANOVA Procedure
+
+                                Dependent Variable: calories
+
+                                              Sum of
+      Source                      DF         Squares     Mean Square    F Value    Pr > F
+
+      Model                        2     17692.19510      8846.09755      16.07    <.0001
+
+      Error                       51     28067.13824       550.33604
+
+      Corrected Total             53     45759.33333
+
+
+
+                                      The ANOVA Procedure
+
+                            Bonferroni (Dunn) t Tests for calories
+
+ NOTE: This test controls the Type I experimentwise error rate, but it generally has a higher
+                 Type II error rate than Tukey's for all pairwise comparisons.
+
+
+                               Alpha                        0.05
+                               Error Degrees of Freedom       51
+                               Error Mean Square         550.336
+                               Critical Value of t       2.47551
+
+
+                Comparisons significant at the 0.05 level are indicated by ***.
+
+
+                                        Difference
+                         type              Between     Simultaneous 95%
+                      Comparison             Means    Confidence Limits
+
+                   Meat    - Beef            1.856     -17.302   21.013
+                   Meat    - Poultry        39.941      20.022   59.860  ***
+                   Beef    - Meat           -1.856     -21.013   17.302
+                   Beef    - Poultry        38.085      18.928   57.243  ***
+                   Poultry - Meat          -39.941     -59.860  -20.022  ***
+                   Poultry - Beef          -38.085     -57.243  -18.928  ***
+
+```
+
