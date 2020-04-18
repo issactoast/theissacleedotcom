@@ -1,0 +1,181 @@
+---
+date: "2020-02-10T00:00:00+01:00"
+draft: false
+linktitle: Week 12 - Beyond the two categories
+menu:
+  stat2010:
+    parent: Contents
+    weight: 12
+title: Lab 12 - Chi-square and ANOVA
+type: docs
+weight: 12    # related to next page to show
+---
+
+
+
+<p>The class video is attached here so that you can watch my lecture again when you prepare the exams.</p>
+<ul>
+<li>If you have questions about my lecture, please use <strong>the comment section</strong> at the bottom of this document.</li>
+</ul>
+<div align="center">
+
+</div>
+<div id="chi-square-more-than-2-proportions" class="section level2">
+<h2>Chi-square more than 2 proportions</h2>
+<p>We can use Chi-square test more than two categories.</p>
+<div id="the-usage-of-instagram" class="section level3">
+<h3>The usage of Instagram</h3>
+<p>Let us assume we have the following data:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Freshmen</th>
+<th>Non-Freshmen</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Do not use</td>
+<td>30</td>
+<td>40</td>
+<td>70</td>
+</tr>
+<tr class="even">
+<td>Often</td>
+<td>180</td>
+<td>180</td>
+<td>360</td>
+</tr>
+<tr class="odd">
+<td>Everyday</td>
+<td>400</td>
+<td>350</td>
+<td>750</td>
+</tr>
+<tr class="even">
+<td>———–</td>
+<td>———</td>
+<td>————–</td>
+<td>——-</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>610</td>
+<td>570</td>
+<td>1180</td>
+</tr>
+</tbody>
+</table>
+<p>This table is about two variables: School year and Instagram usage.</p>
+<p>The Instagram usage variable has three categories:</p>
+<ul>
+<li>Do not use (D)</li>
+<li>Often (O)</li>
+<li>Everyday (E)</li>
+</ul>
+<p>Our goal is to test whether the usage distribution of Instagram defer from the school year. We can test this by looking the data as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>prop. F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Do not use</td>
+<td>30/70</td>
+</tr>
+<tr class="even">
+<td>Often</td>
+<td>180/360</td>
+</tr>
+<tr class="odd">
+<td>Everyday</td>
+<td>400/750</td>
+</tr>
+</tbody>
+</table>
+<p>If we assume that the population proportion of being a freshmen <span class="math inline">\(p\)</span>, then <span class="math inline">\(p\)</span> should not differ from each category when the two variables are indenpendent. Thus, our null hypothesis looks like this:</p>
+<p><span class="math display">\[
+H_0: p_D = p_O = p_E
+\]</span>
+which can be interpreted as follows:
+the proportion of being a freshmen is not changed by each usage category.</p>
+<div id="data-load-in-sas" class="section level4">
+<h4>Data load in SAS</h4>
+<pre class="sas"><code>data instagram ;
+input schoolyear $ frequency $ count ;
+datalines ;
+F D 30
+F O 180
+F E 400
+S D 40
+S O 180
+S E 350
+;
+run ;</code></pre>
+</div>
+<div id="chi-square-test-in-sas" class="section level4">
+<h4>Chi-square test in SAS</h4>
+<p>You can use <code>expected chisq</code> option at the same time.</p>
+<pre class="sas"><code>proc freq data = instagram ;
+  weight count ;
+  tables schoolyear * frequency / expected chisq;
+run ;</code></pre>
+<p><strong>Result</strong></p>
+<pre class="sas"><code>                                      The FREQ Procedure
+
+                               Table of frequency by schoolyear
+
+                              frequency     schoolyear
+
+                              Frequency‚
+                              Expected ‚
+                              Percent  ‚
+                              Row Pct  ‚
+                              Col Pct  ‚F       ‚S       ‚  Total
+                              ---------ˆ--------ˆ--------ˆ
+                              D        ‚     30 ‚     40 ‚     70
+                                       ‚ 36.186 ‚ 33.814 ‚
+                                       ‚   2.54 ‚   3.39 ‚   5.93
+                                       ‚  42.86 ‚  57.14 ‚
+                                       ‚   4.92 ‚   7.02 ‚
+                              ---------ˆ--------ˆ--------ˆ
+                              E        ‚    400 ‚    350 ‚    750
+                                       ‚ 387.71 ‚ 362.29 ‚
+                                       ‚  33.90 ‚  29.66 ‚  63.56
+                                       ‚  53.33 ‚  46.67 ‚
+                                       ‚  65.57 ‚  61.40 ‚
+                              ---------ˆ--------ˆ--------ˆ
+                              O        ‚    180 ‚    180 ‚    360
+                                       ‚  186.1 ‚  173.9 ‚
+                                       ‚  15.25 ‚  15.25 ‚  30.51
+                                       ‚  50.00 ‚  50.00 ‚
+                                       ‚  29.51 ‚  31.58 ‚
+                              ---------ˆ--------ˆ--------ˆ
+                              Total         610      570     1180
+                                          51.69    48.31   100.00
+
+
+                        Statistics for Table of frequency by schoolyear
+
+                    Statistic                     DF       Value      Prob
+                    ------------------------------------------------------
+                    Chi-Square                     2      3.4099    0.1818
+                    Likelihood Ratio Chi-Square    2      3.4131    0.1815
+                    Mantel-Haenszel Chi-Square     1      0.0001    0.9929
+                    Phi Coefficient                       0.0538
+                    Contingency Coefficient               0.0537
+                    Cramer&#39;s V                            0.0538
+
+                                      Sample Size = 1180
+</code></pre>
+<p>Q. We want to test whether the two variables affects to each other. What is the Chi-square test statistic? <strong>Ans</strong>: 3.4099</p>
+<p>Q. What is d.f.? <strong>Ans</strong>: 2 because we have 2 columns and 3 rows, so <span class="math inline">\((2-1) \times (3-1) = 2\)</span></p>
+<p>Q. If we use <span class="math inline">\(\alpha = 0.05\)</span>, what is the decision? <strong>Ans</strong>: p-value is 0.1818 which is larger than the significance level. Thus, we cannot reject the null hypothesis.</p>
+</div>
+</div>
+</div>

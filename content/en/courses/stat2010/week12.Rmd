@@ -1,0 +1,152 @@
+---
+date: "2020-02-10T00:00:00+01:00"
+draft: false
+linktitle: Week 12 - Beyond the two categories
+menu:
+  stat2010:
+    parent: Contents
+    weight: 12
+title: Lab 12 - Chi-square and ANOVA
+type: docs
+weight: 12    # related to next page to show
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = "")
+```
+
+
+The class video is attached here so that you can watch my lecture again when you prepare the exams.
+
+- If you have questions about my lecture, please use **the comment section** at the bottom of this document.
+
+<div align="center">
+
+</div>
+
+## Chi-square more than 2 proportions
+
+We can use Chi-square test more than two categories.
+
+### The usage of Instagram
+
+Let us assume we have the following data:
+
+|           | Freshmen| Non-Freshmen | Total |
+|-----------|---------|--------------|-------|
+| Do not use| 30      | 40           |   70  |
+| Often     | 180     | 180          |  360  |
+| Everyday  | 400     | 350          |  750  |
+|-----------|---------|--------------|-------|
+| Total     | 610     | 570          | 1180  |
+
+This table is about two variables: School year and Instagram usage. 
+
+The Instagram usage variable has three categories:
+
+- Do not use (D)
+- Often (O)
+- Everyday (E)
+
+Our goal is to test whether the usage distribution of Instagram defer from the school year. We can test this by looking the data as follows:
+
+|           | prop. F |
+|-----------|---------|
+| Do not use| 30/70   |
+| Often     | 180/360 |
+| Everyday  | 400/750 |
+
+If we assume that the population proportion of being a freshmen $p$, then $p$ should not differ from each category when the two variables are indenpendent. Thus, our null hypothesis looks like this:
+
+$$
+H_0: p_D = p_O = p_E
+$$
+which can be interpreted as follows:
+the proportion of being a freshmen is not changed by each usage category.
+
+#### Data load in SAS
+
+```sas
+data instagram ;
+input schoolyear $ frequency $ count ;
+datalines ;
+F D 30
+F O 180
+F E 400
+S D 40
+S O 180
+S E 350
+;
+run ;
+```
+
+#### Chi-square test in SAS
+
+You can use `expected chisq` option at the same time.
+
+```sas
+proc freq data = instagram ;
+  weight count ;
+  tables schoolyear * frequency / expected chisq;
+run ;
+```
+
+**Result**
+
+```sas
+                                      The FREQ Procedure
+
+                               Table of frequency by schoolyear
+
+                              frequency     schoolyear
+
+                              Frequency‚
+                              Expected ‚
+                              Percent  ‚
+                              Row Pct  ‚
+                              Col Pct  ‚F       ‚S       ‚  Total
+                              ---------ˆ--------ˆ--------ˆ
+                              D        ‚     30 ‚     40 ‚     70
+                                       ‚ 36.186 ‚ 33.814 ‚
+                                       ‚   2.54 ‚   3.39 ‚   5.93
+                                       ‚  42.86 ‚  57.14 ‚
+                                       ‚   4.92 ‚   7.02 ‚
+                              ---------ˆ--------ˆ--------ˆ
+                              E        ‚    400 ‚    350 ‚    750
+                                       ‚ 387.71 ‚ 362.29 ‚
+                                       ‚  33.90 ‚  29.66 ‚  63.56
+                                       ‚  53.33 ‚  46.67 ‚
+                                       ‚  65.57 ‚  61.40 ‚
+                              ---------ˆ--------ˆ--------ˆ
+                              O        ‚    180 ‚    180 ‚    360
+                                       ‚  186.1 ‚  173.9 ‚
+                                       ‚  15.25 ‚  15.25 ‚  30.51
+                                       ‚  50.00 ‚  50.00 ‚
+                                       ‚  29.51 ‚  31.58 ‚
+                              ---------ˆ--------ˆ--------ˆ
+                              Total         610      570     1180
+                                          51.69    48.31   100.00
+
+
+                        Statistics for Table of frequency by schoolyear
+
+                    Statistic                     DF       Value      Prob
+                    ------------------------------------------------------
+                    Chi-Square                     2      3.4099    0.1818
+                    Likelihood Ratio Chi-Square    2      3.4131    0.1815
+                    Mantel-Haenszel Chi-Square     1      0.0001    0.9929
+                    Phi Coefficient                       0.0538
+                    Contingency Coefficient               0.0537
+                    Cramer's V                            0.0538
+
+                                      Sample Size = 1180
+
+```
+
+Q. We want to test whether the two variables affects to each other. What is the Chi-square test statistic? **Ans**: 3.4099
+
+Q. What is d.f.? **Ans**: 2 because we have 2 columns and 3 rows, so $(2-1) \times (3-1) = 2$
+
+Q. If we use $\alpha = 0.05$, what is the decision? **Ans**: p-value is 0.1818 which is larger than the significance level. Thus, we cannot reject the null hypothesis.

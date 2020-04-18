@@ -318,3 +318,24 @@ Note that if one of the expected numbers is less than 5, then you should check o
 
 
 In our case, we are safe to use Chi-sqaure p-value which is less than 0.0001. Thus, we can reject the null hypothesis again.
+
+### Hands-on example - The usage of Instagram
+
+Let us assume we have the following data
+
+|           | Freshmen| Senior | Total |
+|-----------|---------|--------|-------|
+| Do not use| 30      | 40     |   70  |
+| Often     | 180     | 180    |  360  |
+| Everyday  | 400     | 350    |  750  |
+|-----------|---------|--------|-------|
+| Total     | 610     | 570    | 1180  |
+
+
+Q1. What is the expected number for each cell?
+
+Q2. Can we apply Chi-square test to this data?
+
+Q3. We want to test whether the two variables(School year and Instagram usage) affects to each other. What is the Chi-square test statistic?
+
+Q4. If we use $\alpha = 0.05$, what is the decision?
