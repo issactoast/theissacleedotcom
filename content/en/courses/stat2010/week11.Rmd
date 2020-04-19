@@ -23,7 +23,7 @@ The class video is attached here so that you can watch my lecture again when you
 - If you have questions about my lecture, please use **the comment section** at the bottom of this document.
 
 <div align="center">
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MoS_Sp3_xX8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ## Two sample proportions test
@@ -177,6 +177,11 @@ Among the tables you have, you can see the following result:
 Based on the `Two-sided Pr > |Z| <.0001`, we can reject the null hypothesis. Thus, staticstically, the death rate of COVID 19 is different from countries. Do you think why?
 
 ## Two sample proportion test - The Chi-square test
+
+<div align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/z7A6c-AbuoI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 
 Using Chi-square test, we can also do the same test: compairing the difference between the population proportions of the two different groups. Let us do this in SAS using the same data.
 
