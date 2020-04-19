@@ -64,7 +64,7 @@ $$
 
 We have learned that the standard deviation of the difference of the proportions is as follows:
 $$
-\sqrt{\frac{p_{1}\left(1-p_{1}\right)}{n_{1}}+\frac{p_{1}\left(1-p_{2}\right)}{n_{2}}}
+\sqrt{\frac{p_{1}\left(1-p_{1}\right)}{n_{1}}+\frac{p_{2}\left(1-p_{2}\right)}{n_{2}}}
 $$
 
 However, under the null hypothesis, we assume that the death rates in both countries are the same, let say $p$. Then, the above standard equation becomes as follows:
